@@ -1,0 +1,29 @@
+----------------------------------------------------------------------
+FPGA SmartXplorer (tm) Version 12.3
+
+----------------------------------------------------------------------
+ Strategy : MapGlobOptIOReg
+----------------------------------------------------------------------
+ Run index                           : run3
+ Map options                         : -ol high -global_opt speed -pr b -w 
+ Par options                         : -ol high -xe n 
+ Number of Luts                      : 642 (2%)
+ Number of Slice Registers           : 554 (1%)
+ Status                              : Done
+ Achieved Timing Score               : 0
+ Current Best (Lowest) Timing Score  : 0
+ Current Best Strategy               : MapGlobOptIOReg
+----------------------------------------------------------------------
+######################################################################
+ BestStrategy : MapGlobOptIOReg
+######################################################################
+ Run index                           : run3
+ Map options                         : -ol high -global_opt speed -pr b -w 
+ Par options                         : -ol high -xe n 
+ Number of Luts                      : 642 (2%)
+ Number of Slice Registers           : 554 (1%)
+ Achieved Timing Score               : 0
+######################################################################
+
+Total Real Time:1300.0(secs)
+SmartXplorer Done

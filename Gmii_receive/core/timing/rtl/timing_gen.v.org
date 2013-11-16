@@ -1,0 +1,95 @@
+`timescale 1 ns / 1 ps
+
+module timing_gen
+  (
+  input  wire        clk,
+  input  wire        reset,
+  input	wire			hvsync_polarity,
+  input  wire        fifo_wr_en,
+  
+  output wire [10:0] hcount,
+  output wire        hsync,
+  
+  output wire [10:0] vcount,
+  output wire        vsync,
+  output wire			de
+  );
+  
+  
+  reg v_sync;
+  reg front_porch_en;
+  
+  reg [15:0]front_porch_cnt;
+  reg active_en, active_en_q;
+  reg [10:0]h_counter,v_counter;
+  
+  always@(posedge clk)begin
+	if(reset)begin
+		v_sync 				<= 1'b0;
+		front_porch_en 	<= 1'b0;
+		front_porch_cnt	<= 16'd0;
+		active_en 			<=1'b0;
+	end else begin
+		if(front_porch_en)
+			front_porch_cnt <= front_porch_cnt + 16'd1;
+		if(front_porch_cnt == 16'd32999)begin
+			front_porch_en <= 1'b0;
+			active_en <= 1'b1;
+			front_porch_cnt <= 16'd0;
+		end
+		
+		if(v_counter == 11'd720 && h_counter == 11'd0)begin
+			v_sync <= 1'b1;
+			active_en <= 1'b0;
+		end
+		if(fifo_wr_en & ~active_en & ~front_porch_en)begin
+			v_sync 		<= 1'b0;
+			front_porch_en  <= 1'b1;
+		end
+	end
+  end
+	
+ always@(posedge clk)
+	if(reset)begin
+		h_counter <= 11'd0;
+		v_counter <= 11'd0;
+		active_en_q <= 1'b0;
+	end else begin
+		active_en_q <= active_en;
+		if({active_en,active_en_q} == 2'b10)begin
+			h_counter <= 11'd0;
+			v_counter <= 11'd0;
+		end
+		if(h_counter == 11'd1649)begin
+			h_counter <= 11'd0;
+			v_counter <= v_counter + 11'd1;
+		end else
+			h_counter <= h_counter + 11'd1;
+	end
+	
+  wire h_blnk = (h_counter >= 1280);
+  wire v_blnk = (v_counter >= 720);
+  wire de_active = !h_blnk && !v_blnk;
+  wire h_sync = (h_counter >= 1390 && h_counter < 1430);
+	
+  reg active_q;
+  reg VGA_HSYNC, VGA_VSYNC;
+  reg de_q,hsync_q,vsync_q;
+  
+  always @ (posedge clk)
+   begin
+	 hsync_q <= h_sync ^ hvsync_polarity ;
+    vsync_q <= v_sync ^ hvsync_polarity ;
+    VGA_HSYNC <= hsync_q;
+    VGA_VSYNC <= vsync_q;
+    active_q <= de_active;
+    de_q <= active_q;
+   end
+	
+	assign vsync	= VGA_VSYNC;
+	assign hsync	= VGA_HSYNC;
+	assign hcount	= h_counter;
+	assign vcount 	= v_counter;
+	assign de 		= de_q;	
+
+endmodule

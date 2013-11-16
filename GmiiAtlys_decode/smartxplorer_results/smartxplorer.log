@@ -1,0 +1,61 @@
+
+Release 12.3 SmartXplorer
+Copyright(c) 1995-2010 Xilinx, Inc. All rights reserved.
+"C:\Xilinx\12.3\ISE_DS\ISE\bin\nt\smartxplorer.exe" -p xc6slx45-csg324-3 -b -wd smartxplorer_results vtc_demo.ngd -to "-v 3 -s 3 -n 3 -fastpaths -xml vtc_demo.twx -ucf gmii_atlys.ucf" -host_list hostlistfile.txt -max_runs 7 -best_n_runs 7
+
+SmartXplorer Settings: 
+
+designName=C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\vtc_demo.ngd 
+write_dir=C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results 
+host_list=C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\hostlistfile.txt 
+part=xc6slx45-csg324-3 
+strategy_file=None 
+notify=None 
+source_dir=C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode 
+batch_mode=True 
+run_all_strategies=False 
+list_all_strategies=False 
+remote_command=rsh
+area_report="lut;slice_reg"
+power_options=off
+trce_options="-v 3 -s 3 -n 3 -fastpaths -xml vtc_demo.twx -ucf gmii_atlys.ucf"
+max_runs=7
+best_n_runs=7
+
+Starting SmartXplorer...
+See file 'smartxplorer.html' for real-time report.
+
+
+Running SmartXplorer strategies...
+
+
+
+INFO: Timing Met... Stopping remaining jobs
+*************************************************************************
+SmartXplorer will save the following strategies and delete the remaining
+SmartXplorer will not delete the strategies which did not run successfully
+*************************************************************************
+MapRunTime                          run 1
+MapGlobOptLogOptRegDup              run 2
+MapGlobOptIOReg                     run 3
+MapRegDup                           run 4
+MapExtraEffortIOReg                 run 5
+MapLogOptRegDup                     run 6
+MapExtraEffort2                     run 7
+*************************************************************************
+######################################################################
+ BestStrategy : MapGlobOptIOReg
+######################################################################
+ Run index                           : run3
+ Map options                         : -ol high -global_opt speed -pr b -w 
+ Par options                         : -ol high -xe n 
+ Number of Luts                      : 642 (2%)
+ Number of Slice Registers           : 554 (1%)
+ Achieved Timing Score               : 0
+######################################################################
+
+Total Real Time:1300.0(secs)
+SmartXplorer Done
+
+
+SmartXplorer Done. See file 'smartxplorer.txt' for detailed report.

@@ -1,0 +1,33 @@
+Running: C:\Xilinx\12.3\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/tb_fifo_isim_beh.exe -prj C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/tb_fifo_beh.prj work.tb_fifo work.glbl 
+ISim M.70d (signature 0x36e8438f)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Analyzing Verilog file \"C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/test/FIFO_GENERATOR_V7_2.v\" into library work
+Analyzing Verilog file \"C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/gmii2fifo48/rtl/gmii_rec.v\" into library work
+Analyzing Verilog file \"C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/fifo/rtl/fifo_gen48.v\" into library work
+Analyzing Verilog file \"C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/timing.v\" into library work
+Analyzing Verilog file \"C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/apple_out.v\" into library work
+Analyzing Verilog file \"C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/test/tb_fifo.v\" into library work
+Analyzing Verilog file \"C:/Xilinx/12.3/ISE_DS/ISE//verilog/src/glbl.v\" into library work
+Starting static elaboration
+WARNING:HDLCompiler:189 - "C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/test/tb_fifo.v" Line 100: Size mismatch in connection of port <i_vcnt>. Formal port size is 12-bit while actual signal size is 11-bit.
+WARNING:HDLCompiler:189 - "C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/test/tb_fifo.v" Line 101: Size mismatch in connection of port <i_hcnt>. Formal port size is 12-bit while actual signal size is 11-bit.
+Completed static elaboration
+Fuse Memory Usage: 118424 KB
+Fuse CPU Usage: 249 ms
+Compiling module timing
+Compiling module fifo_generator_v7_2_bhv_ver_as(C...
+Compiling module FIFO_GENERATOR_V7_2_CONV_VER(C_C...
+Compiling module FIFO_GENERATOR_V7_2(C_DATA_COUNT...
+Compiling module fifo_gen48
+Compiling module gmii2fifo24
+Compiling module apple_out_gmii
+Compiling module tb_fifo
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 3 sub-compilation(s) to finish...
+Compiled 9 Verilog Units
+Built simulation executable C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/tb_fifo_isim_beh.exe
+Fuse Memory Usage: 125768 KB
+Fuse CPU Usage: 436 ms

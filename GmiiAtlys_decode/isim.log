@@ -1,0 +1,21 @@
+ISim log file
+Running: C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\tb_fifo_isim_beh.exe -gui -tclbatch isim.cmd -wdb C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/tb_fifo_isim_beh.wdb 
+ISim M.70d (signature 0x36e8438f)
+----------------------------------------------------------------------
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
+WARNING: File "C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/test/tb_fifo.v" Line 64.  For instance tb_fifo/fifo/, width 12 of formal port i_vcnt is not equal to width 11 of actual signal bgnd_vcount.
+WARNING: File "C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/test/tb_fifo.v" Line 61.  For instance tb_fifo/fifo/, width 12 of formal port i_hcnt is not equal to width 11 of actual signal bgnd_hcount.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+WARNING: Behavioral models for independent clock FIFO configurations do not model synchronization delays. The behavioral models are functionally correct, and will represent the behavior of the configured FIFO. See the FIFO Generator User Guide for more information.
+WARNING: No file found 
+request.memFinished circuit initialization process.
+# run all
+Stopped at time : 44598781352 ns : File "C:/cygwin/home/tokusashi/newPart/Xilinx_Project412.3/Atlys/GmiiAtlys_decode/core/common/test/tb_fifo.v" Line 25

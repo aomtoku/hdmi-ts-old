@@ -1,0 +1,49 @@
+strategySpecString = ':ocurly:squotemap:squote:colon:space:squote:space:dashol:spacehigh:space:dashxe:spacen:space:dashglobal_opt:spacespeed:space:dashlogic_opt:spaceon:space:dashregister_duplication:spaceon:space:dashw:space:squote:comma:space:squotepower:squote:colon:space:squoteoff:squote:comma:space:squotebitgen:squote:colon:space:squoteon:squote:comma:space:squotesynplify:squote:colon:space:squote:squote:comma:space:squotengdbuild:squote:colon:space:squote:dashsd:spaceC:coloncolon:colonbackslashcygwin:colonbackslashhome:colonbackslashtokusashi:colonbackslashnewPart:colonbackslashXilinx_Project412.3:colonbackslashAtlys:colonbackslashGmiiAtlys_decode:space:dashp:spacexc6slx45:dashcsg324:dash3:squote:comma:space:squotetrce:squote:colon:space:squote:dashv:space3:space:dashs:space3:space:dashn:space3:space:dashfastpaths:space:dashxml:spacevtc_demo.twx:space:dashucf:spacegmii_atlys.ucf:squote:comma:space:squotemax_score:squote:colon:spaceNone:comma:space:squoteindex:squote:colon:space2:comma:space:squotepar:squote:colon:space:squote:space:dashol:spacehigh:space:dashxe:spacen:space:squote:comma:space:squotename:squote:colon:space:squoteMapGlobOptLogOptRegDup:squote:comma:space:squotexst:squote:colon:space:squote:squote:comma:space:squotearea:squote:colon:space:osquare:squotelut:squote:comma:space:squoteslice_reg:squote:csquare:comma:space:squoteversion:squote:colon:space:squote12.3:squote:comma:space:squoteenv:squote:colon:space:squote:ocurly:ccurly:squote:comma:space:squotesxLaunchDir:squote:colon:space:squoteC:colon:backslash:backslashcygwin:backslash:backslashhome:backslash:backslashtokusashi:backslash:backslashnewPart:backslash:backslashXilinx_Project412.3:backslash:backslashAtlys:backslash:backslashGmiiAtlys_decode:squote:ccurly'
+Xilinx Environment Variables:
+
+{'XILINX': 'C:\\Xilinx\\12.3\\ISE_DS\\ISE\\'
+'PATH': 'C:\\Xilinx\\12.3\\ISE_DS\\ISE\\\\lib\\nt;C:\\Xilinx\\12.3\\ISE_DS\\ISE\\\\bin\\nt;C:\\Xilinx\\12.3\\ISE_DS\\PlanAhead\\bin;C:\\Xilinx\\12.3\\ISE_DS\\ISE\\bin\\nt;C:\\Xilinx\\12.3\\ISE_DS\\ISE\\lib\\nt;C:\\Xilinx\\12.3\\ISE_DS\\EDK\\bin\\nt;C:\\Xilinx\\12.3\\ISE_DS\\EDK\\lib\\nt;C:\\Xilinx\\12.3\\ISE_DS\\common\\bin\\nt;C:\\Xilinx\\12.3\\ISE_DS\\common\\lib\\nt;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\windows\\system32;C:\\windows;C:\\windows\\System32\\Wbem;C:\\windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Softex\\OmniPass;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files\\Common Files\\Roxio Shared\\10.0\\DLLShared\\;c:\\Program Files\\Common Files\\Ulead Systems\\MPEG;C:\\Program Files\\QuickTime\\QTSystem\\;C:\\Program Files\\Windows Live\\Shared;C:\\Program Files\\IVI Foundation\\VISA\\WinNT\\Bin;C:\\OpenCV2.3.1\\build\\x86\\vc\\bin;C:\\OpenCV2.3.1\\build\\common\\tbb\\ia32\\vc10'
+'XILINX_PLANAHEAD': 'C:\\Xilinx\\12.3\\ISE_DS\\PlanAhead'
+'XILINX_DSP': 'C:\\Xilinx\\12.3\\ISE_DS\\ISE'
+'XILINX_EDK': 'C:\\Xilinx\\12.3\\ISE_DS\\EDK'}
+envDict = {}
+tokusashi-PC_1.stat:C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\.smartxplorer\.sx.keepAlive.tokusashi-PC_1
+INFO: total number of threads running this host None
+...searching for file: mapgloboptlogoptregdup.xds
+Creating XDS file ... mapgloboptlogoptregdup.xds
+###################################
+
+      <property name = "Map:Placer Effort Level"
+               value = "High" />
+      <property name = "Map:Placer Extra Effort"
+               value = "Normal" />
+      <property name = "Map:Global Optimization"
+               value = "Speed" />
+      <property name = "Map:Combinatorial Logic Optimization"
+               value = "true" />
+      <property name = "Map:Register Duplication"
+               value = "On" />
+      <property name = "Place &amp; Route:Place &amp; Route Effort Level (Overall)"
+               value = "High" />
+      <property name = "Place &amp; Route:Extra Effort (Highest PAR level only)"
+               value = "Normal" />
+      <property name = "Generate Post-Place &amp; Route Static Timing:Number of Paths in Error/Verbose Report"
+               value = "3" />
+      <property name = "Generate Post-Place &amp; Route Static Timing:Report Type"
+               value = "Verbose Report" />
+      <property name = "Generate Post-Place &amp; Route Static Timing:Change Device Speed To"
+               value = "-3" />
+      <property name = "Generate Post-Place &amp; Route Static Timing:Report Paths by Endpoint"
+               value = "3" />
+      <property name = "Generate Post-Place &amp; Route Static Timing:Report Fastest Path(s) in Each Constraint"
+               value = "true" />
+###################################
+launching map with options  -ol high -xe n -global_opt speed -logic_opt on -register_duplication on -w  -p xc6slx45-csg324-3 -o vtc_demo_map.ncd  C:colon:backslashcygwin:backslashhome:backslashtokusashi:backslashnewPart:backslashXilinx_Project412.3:backslashAtlys:backslashGmiiAtlys_decode:backslashsmartxplorer_results:backslashrun2:backslashvtc_demo.pcf...
+runTask: map vtc_demo.ngd -ol high -xe n -global_opt speed -logic_opt on -register_duplication on -w -p xc6slx45-csg324-3 -o vtc_demo_map.ncd C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\run2\vtc_demo.pcf
+args = ['map', 'vtc_demo.ngd', '-ol', 'high', '-xe', 'n', '-global_opt', 'speed', '-logic_opt', 'on', '-register_duplication', 'on', '-w', '-p', 'xc6slx45-csg324-3', '-o', 'vtc_demo_map.ncd', 'C:\\cygwin\\home\\tokusashi\\newPart\\Xilinx_Project412.3\\Atlys\\GmiiAtlys_decode\\smartxplorer_results\\run2\\vtc_demo.pcf']
+launching par with options  -ol high -xe n  -w vtc_demo.ncd  C:colon:backslashcygwin:backslashhome:backslashtokusashi:backslashnewPart:backslashXilinx_Project412.3:backslashAtlys:backslashGmiiAtlys_decode:backslashsmartxplorer_results:backslashrun2:backslashvtc_demo.pcf...
+runTask: par vtc_demo_map.ncd -ol high -xe n -w vtc_demo.ncd C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\run2\vtc_demo.pcf
+args = ['par', 'vtc_demo_map.ncd', '-ol', 'high', '-xe', 'n', '-w', 'vtc_demo.ncd', 'C:\\cygwin\\home\\tokusashi\\newPart\\Xilinx_Project412.3\\Atlys\\GmiiAtlys_decode\\smartxplorer_results\\run2\\vtc_demo.pcf']
+launching trce...
+runTask: trce C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\run2\vtc_demo.ncd C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\run2\vtc_demo.pcf -xml C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\run2\vtc_demo.twx -v 3 -s 3 -n 3 -fastpaths -ucf gmii_atlys.ucf -o C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\run2\vtc_demo.twr
+args = ['trce', 'C:\\cygwin\\home\\tokusashi\\newPart\\Xilinx_Project412.3\\Atlys\\GmiiAtlys_decode\\smartxplorer_results\\run2\\vtc_demo.ncd', 'C:\\cygwin\\home\\tokusashi\\newPart\\Xilinx_Project412.3\\Atlys\\GmiiAtlys_decode\\smartxplorer_results\\run2\\vtc_demo.pcf', '-xml', 'C:\\cygwin\\home\\tokusashi\\newPart\\Xilinx_Project412.3\\Atlys\\GmiiAtlys_decode\\smartxplorer_results\\run2\\vtc_demo.twx', '-v', '3', '-s', '3', '-n', '3', '-fastpaths', '-ucf', 'gmii_atlys.ucf', '-o', 'C:\\cygwin\\home\\tokusashi\\newPart\\Xilinx_Project412.3\\Atlys\\GmiiAtlys_decode\\smartxplorer_results\\run2\\vtc_demo.twr']

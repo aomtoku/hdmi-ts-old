@@ -1,0 +1,11 @@
+Storage Target: Xilinx Flash/PROM
+Storage Family: Platform Flash
+xcf08p          [8 M]
+FF
+gmii_display
+/home/aom/Work/ver/Atlys/Gmii_send
+
+MCS
+Yes
+1
+No

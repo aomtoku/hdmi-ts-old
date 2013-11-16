@@ -1,0 +1,16 @@
+# Output products list for <fifo_gen48>
+_xmsgs\pn_parser.xmsgs
+fifo_gen48.asy
+fifo_gen48.gise
+fifo_gen48.ngc
+fifo_gen48.sym
+fifo_gen48.v
+fifo_gen48.veo
+fifo_gen48.vhd
+fifo_gen48.vho
+fifo_gen48.xco
+fifo_gen48.xise
+fifo_gen48_flist.txt
+fifo_gen48_xmdf.tcl
+fifo_generator_readme.txt
+fifo_generator_ug175.pdf

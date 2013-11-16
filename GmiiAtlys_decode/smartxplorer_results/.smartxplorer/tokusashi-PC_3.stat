@@ -1,0 +1,20 @@
+START:Strategy:4:MapRegDup
+REMOTE_PID:5000
+RUNNING:5000:5952:MapRegDup:map:vtc_demo.ngd: -ol high -xe n -register_duplication on -w  -p xc6slx45-csg324-3 -o vtc_demo_map.ncd  C:colon:backslashcygwin:backslashhome:backslashtokusashi:backslashnewPart:backslashXilinx_Project412.3:backslashAtlys:backslashGmiiAtlys_decode:backslashsmartxplorer_results:backslashrun4:backslashvtc_demo.pcf
+STATUS:MapRegDup:map:Score:None:lut:None:slice_reg:736 (1%):slice:None:bram:None:dsp48:None:mult18x18:None:Power:None:Time:125.64 secs 
+STATUS:MapRegDup:map:Score:None:lut:1,046 (3%):slice_reg:736 (1%):slice:None:bram:None:dsp48:None:mult18x18:None:Power:None:Time:125.64 secs 
+STATUS:MapRegDup:map:Score:None:lut:1,046 (3%):slice_reg:736 (1%):slice:407 (5%):bram:None:dsp48:None:mult18x18:None:Power:None:Time:125.64 secs 
+STATUS:MapRegDup:map:Score:None:lut:1,046 (3%):slice_reg:736 (1%):slice:407 (5%):bram:43:dsp48:None:mult18x18:None:Power:None:Time:125.64 secs 
+STATUS:MapRegDup:map:Score:None:lut:1,046 (3%):slice_reg:736 (1%):slice:407 (5%):bram:43:dsp48:None:mult18x18:None:Power:None:Time:125.64 secs 
+STATUS:MapRegDup:map:Score:None:lut:1,046 (3%):slice_reg:736 (1%):slice:407 (5%):bram:43:dsp48:0 (0%):mult18x18:None:Power:None:Time:125.64 secs 
+DONE:map:0
+RUNNING:5000:7860:MapRegDup:par:vtc_demo_map.ncd: -ol high -xe n  -w vtc_demo.ncd  C:colon:backslashcygwin:backslashhome:backslashtokusashi:backslashnewPart:backslashXilinx_Project412.3:backslashAtlys:backslashGmiiAtlys_decode:backslashsmartxplorer_results:backslashrun4:backslashvtc_demo.pcf
+STATUS:MapRegDup:par:Score:2564:lut:None:slice_reg:None:slice:None:bram:None:dsp48:None:mult18x18:None:Power:None:Time:243.86 secs 
+STATUS:MapRegDup:par:Score:2415:lut:None:slice_reg:None:slice:None:bram:None:dsp48:None:mult18x18:None:Power:None:Time:354.09 secs 
+STATUS:MapRegDup:par:Score:409:lut:None:slice_reg:None:slice:None:bram:None:dsp48:None:mult18x18:None:Power:None:Time:354.09 secs 
+STATUS:MapRegDup:par:Score:362:lut:None:slice_reg:None:slice:None:bram:None:dsp48:None:mult18x18:None:Power:None:Time:359.10 secs 
+DONE:par:0
+RUNNING:5000:5848:MapRegDup:trce:C:\cygwin\home\tokusashi\newPart\Xilinx_Project412.3\Atlys\GmiiAtlys_decode\smartxplorer_results\run4\vtc_demo.ncd:C:colon:backslashcygwin:backslashhome:backslashtokusashi:backslashnewPart:backslashXilinx_Project412.3:backslashAtlys:backslashGmiiAtlys_decode:backslashsmartxplorer_results:backslashrun4:backslashvtc_demo.pcf -xml C:colon:backslashcygwin:backslashhome:backslashtokusashi:backslashnewPart:backslashXilinx_Project412.3:backslashAtlys:backslashGmiiAtlys_decode:backslashsmartxplorer_results:backslashrun4:backslashvtc_demo.twx -v 3 -s 3 -n 3 -fastpaths   -ucf gmii_atlys.ucf -o C:colon:backslashcygwin:backslashhome:backslashtokusashi:backslashnewPart:backslashXilinx_Project412.3:backslashAtlys:backslashGmiiAtlys_decode:backslashsmartxplorer_results:backslashrun4:backslashvtc_demo.twr
+STATUS:MapRegDup:trce:Score:362:lut:None:slice_reg:None:slice:None:bram:None:dsp48:None:mult18x18:None:Power:None:Time:426.75 secs 
+DONE:trce:0
+DONE:Xplorer
