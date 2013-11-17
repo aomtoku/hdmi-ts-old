@@ -1,9 +1,25 @@
-SRC = tb_gmiirecv.v ../rtl/gmii_rec.v
+SOURCES=$(wildcard *.v) \
+	$(wildcard ../rtl/gmii_rec.v) 
 
-tb_system: $(SRC)
-	iverilog -o tb_system $(SRC)
+#all: cversim
+all: phy_rx.hex isim
 
-clean: 
+gtk: all
+	gtkwave test.vcd
+
+isim: tb_system
+	./tb_system
+
+cversim: $(SOURCES)
+	cver $(SOURCES)
+
+clean:
 	rm -f tb_system verilog.log test.vcd
 
-.PHONY: clean isim wave
+phy_rx.hex: make_data
+	./make_data >phy_rx.hex
+
+tb_system: $(SOURCES)
+	iverilog -o tb_system $(SOURCES)
+
+.PHONY: clean isim cversim gtk

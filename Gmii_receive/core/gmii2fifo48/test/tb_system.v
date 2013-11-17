@@ -1,6 +1,6 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 
-module tb_gmiirecv();
+module tb_system();
 
 
 //
@@ -16,20 +16,19 @@ always #8 sys_clk = ~sys_clk;
 //
 reg sys_rst;
 reg rx_dv;
-reg [7:0]rxd;
+reg [7:0] rxd;
+wire [28:0] datain;
+wire recv_en;
+wire packet_en;
 
-gmii2fifo24 recv(
+gmii2fifo24 gmiififo24_inst (
 	.clk125(sys_clk),
 	.sys_rst(sys_rst),
 	.rxd(rxd),
 	.rx_dv(rx_dv),
-	.datain(),
-	.recv_en()
-	//.txd(),
-	//.tx_en(),
-	//.tx_clk(),
-	//.LED(),
-	//.SW()
+	.datain(datain),
+	.recv_en(recv_en),
+	.packet_en(packet_en)
 );
 
 //
@@ -38,7 +37,7 @@ gmii2fifo24 recv(
 task waitclock;
 begin
 	@(posedge sys_clk);
-	#1;
+//	#1;
 end
 endtask
 
@@ -46,19 +45,19 @@ endtask
 // Scinario
 //
 
-reg [8:0] rom [0:1320];
-reg [11:0]counter = 12'd0;
+reg [8:0] rom [0:65535];
+reg [15:0] counter = 16'd0;
 
-always@(posedge sys_clk)begin
+always @(posedge sys_clk) begin
 	{rx_dv, rxd} 	<= rom[counter];
-	counter			<= counter + 12'd1;
+	counter		<= counter + 16'd1;
 end
 
 
 initial begin
 	$dumpfile("./test.vcd");
-	$dumpvars(0, tb_gmiirecv);
-	$readmemh("request.mem", rom);
+	$dumpvars(0, tb_system);
+	$readmemh("phy_rx.hex", rom);
 	sys_rst = 1'b1;
 	counter = 0;
 	
