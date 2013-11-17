@@ -52,6 +52,8 @@ module gmii_tx#(
 	output wire	 rd_en,
 	input wire	 wr_en,
 	
+	input wire 	 sw,
+	
 	/*** Ethernet PHY GMII ***/
 	input wire	 tx_clk,
 	output reg	 tx_en,
@@ -361,19 +363,17 @@ always @(posedge tx_clk )begin
 								count <= count + 11'h1;
 								casex(cnt3)
 									2'b1x: begin
-`ifndef DEBUG
-											txd <= /*dout[31:24]*/dout[15:8]; // Green
-`else
-											txd <= dout[45:38]; // Y
-`endif
+											if(sw)
+												txd <= /*dout[31:24]*/dout[15:8]; // Green
+											else
+												txd <= dout[45:38]; // Y
 											cnt3 <= 2'd1;
 										end
 									2'b01: begin
-`ifndef DEBUG
-											txd <= /*{4'd0,dout[35:32]}*/dout[23:16];  // Red
-`else
-											txd <= {dout[24], count[10:3]};  // X
-`endif
+											if(sw)
+												txd <= /*{4'd0,dout[35:32]}*/dout[23:16];  // Red
+											else
+												txd <= {dout[24], count[10:4]};  // X
 											cnt3 <= 2'd2;
 								       		end
 									//default: tx_en <= 1'b0;

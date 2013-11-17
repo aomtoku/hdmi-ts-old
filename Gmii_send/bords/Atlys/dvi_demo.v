@@ -65,7 +65,7 @@ module dvi_demo (
   output	wire 		  TXEN,
   output wire [7:0] TXD,
 
-  input  wire [3:0] SW,
+  input  wire [4:0] SW,
   output wire [1:0] PMOD,
 
   output wire [7:0] LED
@@ -231,6 +231,7 @@ fifo48_8k asfifo(
 	.full(full),
 	.rd_en(rd_en),
 	.wr_en(video_en),
+	.sw(SW[4]),
 	
 	/*** Ethernet PHY GMII ***/
 	.tx_clk(gmii_tx_clk),

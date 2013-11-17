@@ -47,6 +47,7 @@ NET "SW<0>"         LOC = "A10" | IOSTANDARD = LVCMOS33;
 NET "SW<1>"         LOC = "D14" | IOSTANDARD = LVCMOS33;
 NET "SW<2>"         LOC = "C14" | IOSTANDARD = LVCMOS33 ;
 NET "SW<3>"         LOC = "P15" | IOSTANDARD = LVCMOS33 ;
+NET "SW<4>"         LOC = "P12" | IOSTANDARD = LVCMOS33 ;
 
 ############################################
 # TMDS pairs for Atlys top OUT: J2 - Bank 0

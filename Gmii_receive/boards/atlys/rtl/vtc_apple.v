@@ -126,12 +126,12 @@ wire clk_125M, clk_125M_90;
 wire clk125;
 assign GTXCLK = clk_125M;
 
-clk125 clk125_gen(// Clock in ports
+clk_wiz_v3_6 clk125_gen(// Clock in ports
   .CLK_IN1(sysclk),
   // Clock out ports
-  .CLK_OUT1(),
-  .CLK_OUT2(clk_125M),
-  .CLK_OUT3(clk_125M_90),
+  .CLK_OUT1(clk_125M),
+  .CLK_OUT2(),
+
   // Status and control signals
   .RESET(RSTBTN),
   .LOCKED()
@@ -159,6 +159,10 @@ always @(posedge RXCLK)
 assign RESET = coldsys_rst10ms;
 
 
+ reg tx_en = 1'd0;
+ reg tx_er = 1'd0;
+ assign TXEN = tx_en;
+ assign TXER = tx_en;
  wire [28:0]fifo_din;
  wire [10:0]y_din = fifo_din[26:16];
  wire [ 1:0]x_din = fifo_din[28:27];

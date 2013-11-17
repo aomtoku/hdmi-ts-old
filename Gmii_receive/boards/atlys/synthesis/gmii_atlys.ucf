@@ -1,4 +1,4 @@
-	##############################################################################
+##############################################################################
 ## Copyright (c) 2009 Xilinx, Inc.
 ## This design is confidential and proprietary of Xilinx, All Rights Reserved.
 ##############################################################################
@@ -153,12 +153,12 @@ NET "TMDSB(3)"  LOC = "A6" | IOSTANDARD = TMDS_33 ;
 #
 #  made on 13th, Aug
 ################################################################
-//    PIN "clk125_gen/clkout1_buf.O" CLOCK_DEDICATED_ROUTE = FALSE; 
-PIN "clk125_gen/clkout2_buf.O" CLOCK_DEDICATED_ROUTE = FALSE;
+PIN "clk125_gen/clkout1_buf.O" CLOCK_DEDICATED_ROUTE = FALSE; 
+#PIN "clk125_gen/clkout2_buf.O" CLOCK_DEDICATED_ROUTE = FALSE;
 
 
-NET "clk125_gen/clkout2_buf.O" TNM_NET = "TNM_CLK_125M";
-TIMESPEC "TS_CLK_125M" = PERIOD "TNM_CLK_125M" 125 MHz HIGH 50 % PRIORITY 0 ;
+#NET "clk125_gen/clkout2_buf.O" TNM_NET = "TNM_CLK_125M";
+#TIMESPEC "TS_CLK_125M" = PERIOD "TNM_CLK_125M" 125 MHz HIGH 50 % PRIORITY 0 ;
 
 #NET "MDIO"		LOC = "N17" | IOSTANDARD = LVCMOS33;
 #NET "MDC"		LOC = "F16" | IOSTANDARD = LVCMOS33;
