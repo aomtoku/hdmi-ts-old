@@ -14,7 +14,7 @@ cversim: $(SOURCES)
 	cver $(SOURCES)
 
 clean:
-	rm -f tb_system verilog.log test.vcd
+	rm -f tb_system verilog.log test.vcd phy_rx.hex
 
 phy_rx.hex: make_data
 	./make_data >phy_rx.hex
