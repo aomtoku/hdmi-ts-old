@@ -5,17 +5,13 @@ module frame_check(
 	input wire clk125m,
 	input wire reset,
 	input wire fifo_wr_en,
-	input wire [10:0]y_din,
-	input wire [1:0]x_din,
-	input wire [7:0]din1,
-	input wire [7:0]din2,
+	input wire [28:0]din,
 	input wire [1:0]sw,
 	input wire [7:0]dipsw,
 	output wire [7:0]signal,
 	output wire [15:0]error_q,
 	output wire frame
 );
-
 
 reg [10:0]y_din_q,y_din_qq;
 reg [7:0]frame_cnt,frame_cnt_q;
@@ -29,20 +25,21 @@ always@(posedge clk125m)begin
 	end else begin
 		y_din_qq <= y_din_q;
 		if(fifo_wr_en)
-			y_din_q 	<= y_din; 
+			y_din_q 	<= din[26:16]; 
 			if(y_din_q < y_din_qq)begin
 				frame_cnt  <= frame_cnt + 8'd1;
 			end
 	end
 end
 
-assign error_q = ecnt;
+
 reg empty;
 reg [28:0]next;
 reg [10:0]pcnt;
 reg lerror;
 reg [1:0]state;
 reg [15:0]ecnt;
+assign error_q = ecnt;
 
 parameter IDLE = 2'b00;
 parameter WAIT = 2'b10;
@@ -61,17 +58,17 @@ always@(posedge clk125m)begin
 			case(state)
 				IDLE : state <= WAIT;
 				WAIT : begin
-							if(y_din == 11'd719 && pcnt == 11'd1279)begin
+							if(din[26:16] == 11'd719 && pcnt == 11'd1279)begin
 								next[26:16] <= 11'd0;
 								next[7] <= 1'b0;
 								state <= COMP;
 								pcnt <= 11'd0;
-							end else if(y_din == 11'd719)
+							end else if(din[26:16] == 11'd719)
 								pcnt <= pcnt + 11'd1;
 						 end
 				COMP : begin
 							//CHECK
-							if(next[7] != din1[7])
+							if(next[7] != din[7])
 								ecnt <= ecnt + 16'd1;
 							// Counting
 							if(pcnt == 11'd639)
@@ -85,7 +82,7 @@ always@(posedge clk125m)begin
 									next[26:16] <= next[26:16] + 11'd1;
 							end else
 								pcnt <= pcnt + 11'd1;
-							if(next[26:16] != y_din)begin
+							if(next[26:16] != din[26:16])begin
 								state <= WAIT;
 								lerror <= 1'b1;
 							end
