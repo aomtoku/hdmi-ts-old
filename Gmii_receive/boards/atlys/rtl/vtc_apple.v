@@ -68,7 +68,7 @@ module vtc_demo (
   
   output wire [3:0] TMDS,
   output wire [3:0] TMDSB,
-  output reg [7:0] LED,
+  output wire [7:0] LED,
   output wire [2:0] JA
 );
 
@@ -207,11 +207,11 @@ assign RESET = coldsys_rst10ms;
 	.reset(reset),
 	.fifo_wr_en(fifo_wr_en),
 	.din(fifo_din),
-	.sw(),
-	.led(led_frame_check)
+	.sw(DEBUG_SW),
+	.led(LED)
  );
 `endif
-
+/*
 always@* begin
 	//sw_dip <= DEBUG_SW;
 	case(DEBUG_SW)
@@ -219,17 +219,17 @@ always@* begin
 		//4'b1000 : LED <= {4'b0,full,empty,2'b0};
 		//4'b0001 : LED <= error[7:0];
 		//4'b0010 : LED <= {5'd0,error[10:8]};
-		/*4'b0011 : LED <= fifo_din[23:16];
+		4'b0011 : LED <= fifo_din[23:16];
 		4'b0100 : LED <= fifo_din[31:24];
 		4'b0101 : LED <= fifo_din[39:32];
 		4'b0110 : LED <= fifo_din[47:40];
 		4'b0111 : LED <= dout[7:0];
 		4'b1000 : LED <= dout[15:8];
 		4'b1001 : LED <= dout[23:16];
-		4'b1010 : LED <= {4'd0,dout[27:24]};*/
+		4'b1010 : LED <= {4'd0,dout[27:24]};
 	endcase
 end
-
+*/
   //////////////////////////////////////
   /// Switching screen formats
   //////////////////////////////////////
