@@ -12,7 +12,7 @@ module frame_check(
 	input wire [1:0]sw,
 	input wire [7:0]dipsw,
 	output wire [7:0]signal,
-	output wire [10:0]error_q,
+	output wire [15:0]error_q,
 	output wire frame
 );
 
@@ -36,16 +36,11 @@ always@(posedge clk125m)begin
 	end
 end
 
-reg [10:0]error,error_buf;
-reg right;
-reg [3:0]yc; // same ydin?
-reg xc;
-wire err = (yc > 2'd1);
-reg error_pos;
-assign error_q = error_buf;
+assign error_q = ecnt;
 reg empty;
 reg [28:0]next;
-reg [9:0]pcnt;
+reg [10:0]pcnt;
+reg lerror;
 reg [1:0]state;
 reg [15:0]ecnt;
 
@@ -57,7 +52,8 @@ always@(posedge clk125m)begin
 	if(reset)begin
 		next <= 29'd0;
 		empty <= 1'd1;
-		pcnt <= 10'd0;
+		lerror <= 1'b0;
+		pcnt <= 11'd0;
 		ecnt <= 16'd0;
 		state <= IDLE;
 	end else
@@ -65,72 +61,36 @@ always@(posedge clk125m)begin
 			case(state)
 				IDLE : state <= WAIT;
 				WAIT : begin
-							if(y_din == 11'd719 && pcnt == 1279)begin
+							if(y_din == 11'd719 && pcnt == 11'd1279)begin
+								next[26:16] <= 11'd0;
+								next[7] <= 1'b0;
 								state <= COMP;
-								pcnt <= 10'd0;
+								pcnt <= 11'd0;
 							end else if(y_din == 11'd719)
-								pcnt <= pcnt + 10'd1;
+								pcnt <= pcnt + 11'd1;
 						 end
 				COMP : begin
-						//CHECK
-							if(next[7] == din1[7])
-								next[7] <= ~din1[7];
-							else begin
+							//CHECK
+							if(next[7] != din1[7])
 								ecnt <= ecnt + 16'd1;
-								state <= WAIT;
-							end
-						// Count
-							if(pcnt == 10'd639)begin
-								pcnt <= 10'd0;
+							// Counting
+							if(pcnt == 11'd639)
+								next[7] <= 1'b1;
+							if(pcnt == 11'd1279)begin
+								pcnt <= 11'd0;
+								next[7] <= 1'b0;
 								if(next[26:16] == 11'd719)
 									next[26:16] <= 11'd0;
 								else
 									next[26:16] <= next[26:16] + 11'd1;
 							end else
-								pcnt <= pcnt + 10'd1;
+								pcnt <= pcnt + 11'd1;
 							if(next[26:16] != y_din)begin
-								state <= 2'b10;
-								error;
+								state <= WAIT;
+								lerror <= 1'b1;
 							end
 						end
 			endcase
-			
-			//
-			// Not Empty
-			//
-			/*if(~empty)begin
-				if(y_din == next[26:16])
-					if(x_din[0] == next[27] && x_din[0] == 1)begin
-						next[27] <=  1'd0;
-						if(next[26:16] == 11'd719)
-							next[26:16] <= 11'd0;
-						else
-							next[26:16] <= next[26:16] + 11'd1;
-					end else if(x_din[0] == next[27] && x_din[0] == 0)
-						next[27] <=  1'd1;
-				else begin
-					error_buf <= next;
-					error_pos <= 1'd1;
-				end
-			end else begin
-				//
-				// EMPTY 
-				//
-				emtpy <= 1'd0;
-				if(x_din[0] == 1)begin
-					next[27] <=  1'd0;
-					if(next[26:16] == 11'd719)
-						next[26:16] <= 11'd0;
-					else
-						next[26:16] <= next[26:16] + 11'd1;
-				end else if(x_din[0] == 0)begin
-					next[27] <=  1'd1;
-					if(next[26:16] == 11'd719)
-						next[26:16] <= 11'd0;
-					else
-						next[26:16] <= next[26:16] + 11'd1;
-				end
-			end*/
 end
 
 
