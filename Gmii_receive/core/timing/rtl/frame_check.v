@@ -1,96 +1,88 @@
 `timescale 1 ns / 1 ps
 
 module frame_check(
-	input wire clk100m,
 	input wire clk125m,
 	input wire reset,
 	input wire fifo_wr_en,
-	input wire [28:0]din,
-	input wire [1:0]sw,
-	input wire [7:0]dipsw,
-	output wire [7:0]signal,
-	output wire [15:0]error_q,
-	output wire frame
+	input wire [28:0] din,
+	input wire [2:0] sw,
+	output wire [7:0] led,
 );
 
-reg [10:0]y_din_q,y_din_qq;
-reg [7:0]frame_cnt,frame_cnt_q;
-reg over,over_q;
-assign frame = frame_cnt[0];
+reg  [28:0] din_q;
+wire [10:0] din_y, din_q_y;
+wire [1:0]  din_x, din_q_x;
+wire [15:0] din_data, din_q_data;
+assign din_x      = din[28:27];
+assign din_y      = din[26:16];
+assign din_data   = din[15: 0];
+assign din_q_x    = din_q[28:27];
+assign din_q_y    = din_q[26:16];
+assign din_q_data = din_q[15: 0];
+
+parameter INIT  = 2'h0;
+parameter WAIT  = 2'h1;
+parameter CHECK = 2'h2;
+reg [1:0] state = IDLE;
+reg [10:0] count;
+reg [1:0]  next_x;
+reg [10:0] next_y;
+reg skip1 = 1'b0;
+
+reg [28:0] led_din, led_din_q;
+reg [10:0] led_count;
 
 always@(posedge clk125m)begin
 	if(reset)begin
-	    y_din_q 	<= 11'b0;
-	    y_din_qq 	<= 11'b0;
+		din_q <= 28'b0;
+		count <= 11'h0;
+		skip1 <= 1'b0;
+		state <= INIT;
 	end else begin
-		y_din_qq <= y_din_q;
-		if(fifo_wr_en)
-			y_din_q 	<= din[26:16]; 
-			if(y_din_q < y_din_qq)begin
-				frame_cnt  <= frame_cnt + 8'd1;
-			end
+		if (fifo_wr_en == 1'b1) begin
+			din_q <= din;
+			case (state)
+				INIT: begin
+					state <= WAIT;
+				end
+				WAIT: begin
+					if ( {din_x,din_y} != {din_q_x,din_q_y} )	// if din_xy != din_q_xy then CHECK
+						state <= CHECK;
+					skip1 <= 1'b1;
+					count <= 11'd0;
+				end
+				CHECK: begin
+					skip1 <= 1'b0;
+					if ((( din_x != next_x ) || ( din_y != next_y )) && skip1 == 1'b0) begin
+						led_din   <= din;
+						led_din_q <= din_q;
+						led_count <= count;
+					end
+					if (count != 11'd640) begin
+						count <= count + 11'd1;
+						next_x <= din_x;
+						next_y <= din_y;
+					end else begin
+						count <= 11'd0;
+						if (din_x == 1'b1) begin
+							if (din_y != 11'd719)
+								next_y <= din_y + 11'd1;
+							else
+								next_y <= 11'd0;
+						end
+						next_x <= !din_x;
+					end
+				end
+			endcase
+		end
 	end
 end
 
-
-reg empty;
-reg [28:0]next;
-reg [10:0]pcnt;
-reg lerror;
-reg [1:0]state;
-reg [15:0]ecnt;
-assign error_q = ecnt;
-
-parameter IDLE = 2'b00;
-parameter WAIT = 2'b10;
-parameter COMP = 2'b11; 
-
-always@(posedge clk125m)begin
-	if(reset)begin
-		next <= 29'd0;
-		empty <= 1'd1;
-		lerror <= 1'b0;
-		pcnt <= 11'd0;
-		ecnt <= 16'd0;
-		state <= IDLE;
-	end else
-		if(fifo_wr_en)
-			case(state)
-				IDLE : state <= WAIT;
-				WAIT : begin
-							if(din[26:16] == 11'd719 && pcnt == 11'd1279)begin
-								next[26:16] <= 11'd0;
-								next[7] <= 1'b0;
-								state <= COMP;
-								pcnt <= 11'd0;
-							end else if(din[26:16] == 11'd719)
-								pcnt <= pcnt + 11'd1;
-						 end
-				COMP : begin
-							//CHECK
-							if(next[7] != din[7])
-								ecnt <= ecnt + 16'd1;
-							// Counting
-							if(pcnt == 11'd639)
-								next[7] <= 1'b1;
-							if(pcnt == 11'd1279)begin
-								pcnt <= 11'd0;
-								next[7] <= 1'b0;
-								if(next[26:16] == 11'd719)
-									next[26:16] <= 11'd0;
-								else
-									next[26:16] <= next[26:16] + 11'd1;
-							end else
-								pcnt <= pcnt + 11'd1;
-							if(next[26:16] != din[26:16])begin
-								state <= WAIT;
-								lerror <= 1'b1;
-							end
-						end
-			endcase
-end
-
-
-assign signal[7:0] = frame_cnt_q[7:0];
+assign led =	 (sw[2:0] == 3'h0) ? led_din  [23:16] :
+		 (sw[2:0] == 3'h1) ? led_din  [28:24] :
+		 (sw[2:0] == 3'h2) ? led_din_q[23:16] :
+		 (sw[2:0] == 3'h3) ? led_din_q[28:24] :
+		 (sw[2:0] == 3'h4) ? led_count[ 7: 0] :
+		 (sw[2:0] == 3'h5) ? led_count[10: 8] ;
 
 endmodule
