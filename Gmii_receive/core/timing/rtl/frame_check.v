@@ -24,7 +24,7 @@ parameter INIT  = 2'h0;
 parameter WAIT  = 2'h1;
 parameter CHECK = 2'h2;
 parameter STOP = 2'h3;
-reg [1:0] state = IDLE;
+reg [1:0] state = INIT;
 reg [10:0] count;
 reg [1:0]  next_x;
 reg [10:0] next_y;
