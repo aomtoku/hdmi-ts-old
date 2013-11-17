@@ -1,7 +1,8 @@
 #!/usr/bin/php
 <?php
-for ($y=10; $y<19; $y++){
-	for ($x=0; $x<2; $x++){
+for ($s=0; $s<2; $s++){
+	for ($y=0; $y<720; $y++){
+		for ($x=0; $x<2; $x++){
 print '0_00
 0_00
 0_00
@@ -66,23 +67,24 @@ print '0_00
 1_00	// below is PAYLOAD (2 byte length and 1280 byte YUV-DATA)';
 print "\n";
 
-		$tmp = sprintf("%02X", $y & 255);
-		print("1_".$tmp."\t// Y=".$y."\n");
+			$tmp = sprintf("%02X", $y & 255);
+			print("1_".$tmp."\t// Y=".$y."\n");
 
-		$tmp = sprintf("%02X", ((($y >> 8) & 15) | (($x & 15) << 4)));
-		print("1_".$tmp."\t// X=".$x."\n");
+			$tmp = sprintf("%02X", ((($y >> 8) & 15) | (($x & 15) << 4)));
+			print("1_".$tmp."\t// X=".$x."\n");
 
-		for ($count=0; $count<640; $count++){
-			$num = ($count + $x * 640) + 4096;
-			$tmp = sprintf("%02X", ($num >> 8));
-			print ("1_".$tmp."\n");
-			$tmp = sprintf("%02X", ($num & 255));
-			print ("1_".$tmp."\n");
+			for ($count=0; $count<640; $count++){
+				$num = ($count + $x * 640) + 4096;
+				$tmp = sprintf("%02X", ($num >> 8));
+				print ("1_".$tmp."\n");
+				$tmp = sprintf("%02X", ($num & 255));
+				print ("1_".$tmp."\n");
+			}
+			print ("1_AA\t// FCS1\n");
+			print ("1_BB\t// FCS2\n");
+			print ("1_CC\t// FCS3\n");
+			print ("1_DD\t// FCS4\n");
 		}
-		print ("1_AA\t// FCS1\n");
-		print ("1_BB\t// FCS2\n");
-		print ("1_CC\t// FCS3\n");
-		print ("1_DD\t// FCS4\n");
 	}
 }
 print '0_00
@@ -96,6 +98,6 @@ print '0_00
 0_00
 0_00
 0_00
-0_00';
+2_00';
 print "\n";
 ?>
