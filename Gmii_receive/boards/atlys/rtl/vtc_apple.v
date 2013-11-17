@@ -199,19 +199,10 @@ assign RESET = coldsys_rst10ms;
 	
 	wire di1 = fifo_din[7:0];
 	wire di2 = fifo_din[15:8];
-	/*
-	always@(posedge RXCLK)begin
-		if(reset) begin
-		end else begin
-			if(fifo_wr_en)begin
-				if(y_din)
-			end
-		end
-	end
-*/
-wire frame_f;
-wire [10:0]error;
-frame_check frame(
+
+ wire frame_f; 
+ wire [10:0]error;
+ frame_check frame(
 	.clk100m(sysclk),
 	.clk125m(RXCLK),
 	.reset(reset),
@@ -225,15 +216,16 @@ frame_check frame(
 	.signal(),
 	.error_q(error),
 	.frame(frame_f)
-);
+ );
 
 
 always@* begin
 	//sw_dip <= DEBUG_SW;
 	case(DEBUG_SW)
 		4'b0000 : LED <= {4'b0,full,empty,2'b0};
-		4'b0001 : LED <= error[7:0];
-		4'b0010 : LED <= {5'd0,error[10:8]};
+		4'b1000 : LED <= {4'b0,full,empty,2'b0};
+		//4'b0001 : LED <= error[7:0];
+		//4'b0010 : LED <= {5'd0,error[10:8]};
 		/*4'b0011 : LED <= fifo_din[23:16];
 		4'b0100 : LED <= fifo_din[31:24];
 		4'b0101 : LED <= fifo_din[39:32];
