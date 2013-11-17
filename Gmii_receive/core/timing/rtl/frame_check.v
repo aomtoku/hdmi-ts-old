@@ -6,7 +6,7 @@ module frame_check(
 	input wire fifo_wr_en,
 	input wire [28:0] din,
 	input wire [2:0] sw,
-	output wire [7:0] led,
+	output wire [7:0] led
 );
 
 reg  [28:0] din_q;
@@ -23,6 +23,7 @@ assign din_q_data = din_q[15: 0];
 parameter INIT  = 2'h0;
 parameter WAIT  = 2'h1;
 parameter CHECK = 2'h2;
+parameter STOP = 2'h3;
 reg [1:0] state = IDLE;
 reg [10:0] count;
 reg [1:0]  next_x;
@@ -57,8 +58,9 @@ always@(posedge clk125m)begin
 						led_din   <= din;
 						led_din_q <= din_q;
 						led_count <= count;
+						state <= STOP;
 					end
-					if (count != 11'd640) begin
+					if (count != 11'd639) begin
 						count <= count + 11'd1;
 						next_x <= din_x;
 						next_y <= din_y;
@@ -73,6 +75,7 @@ always@(posedge clk125m)begin
 						next_x <= !din_x;
 					end
 				end
+				STOP: ;
 			endcase
 		end
 	end
@@ -83,6 +86,6 @@ assign led =	 (sw[2:0] == 3'h0) ? led_din  [23:16] :
 		 (sw[2:0] == 3'h2) ? led_din_q[23:16] :
 		 (sw[2:0] == 3'h3) ? led_din_q[28:24] :
 		 (sw[2:0] == 3'h4) ? led_count[ 7: 0] :
-		 (sw[2:0] == 3'h5) ? led_count[10: 8] ;
+		 (sw[2:0] == 3'h5) ? led_count[10: 8] : 8'd0;
 
 endmodule
