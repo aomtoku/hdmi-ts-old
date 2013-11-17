@@ -9,6 +9,7 @@ module datacontroller # (
   input wire [11:0] i_hcnt, //horizontal counter from video timing generator
   output wire  fifo_read,
   input wire [28:0] data,
+  input wire 		  sw,
   
   output reg [7:0]  o_r,
   output reg [7:0]  o_g,
@@ -60,21 +61,21 @@ always @ (posedge i_clk_74M) begin
 					vactive <= 1'b0;
 			if (hactive & vactive) begin
 //			if (i_hcnt >= 600 && i_hcnt <= 700 && i_vcnt >= 300 && i_vcnt <= 400 ) begin
-`ifndef NO
-				if (x_count[0] == ((i_hcnt >= 12'd641) ? 1'b1 : 1'b0)) begin
-					o_b <= data[7:0];
-					o_g <= data[15:8];
-					o_r <= 8'b0;
+				if(sw)begin
+					if (x_count[0] == ((i_hcnt >= 12'd641) ? 1'b1 : 1'b0)) begin
+						o_b <= data[7:0];
+						o_g <= data[15:8];
+						o_r <= 8'b0;
+					end else begin
+						o_b <= 8'h0;
+						o_g <= 8'h0;
+						o_r <= 8'h0;
+					end
 				end else begin
-					o_b <= 8'h0;
-					o_g <= 8'h0;
+					o_b <= i_hcnt[9:2];
+					o_g <= i_vcnt[8:1];
 					o_r <= 8'h0;
 				end
-`else
-				o_b <= 8'h0;
-				o_g <= i_hcnt[9:2];
-				o_r <= i_vcnt[8:1];
-`endif
 			end else begin
 				o_b <= 8'h00;
 				o_g <= 8'h00;

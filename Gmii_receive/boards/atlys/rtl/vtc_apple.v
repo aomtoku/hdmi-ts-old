@@ -185,18 +185,46 @@ assign RESET = coldsys_rst10ms;
 // FIFO
 //------------------------------------------------------------
  wire full, empty, fifo_read;
-
-wire [28:0]din = fifo_din[28:0];
-fifo29_32767 asfifo(
+ fifo29_32767 asfifo(
         .rst(reset),
         .wr_clk(RXCLK),  // TMDS clock 74.25MHz 
         .rd_clk(pclk),  // GMII TX clock 125MHz
-        .din(din),     // data input 28bit
+        .din(fifo_din),     // data input 28bit
         .wr_en(fifo_wr_en),
         .rd_en(fifo_read),
         .dout(dout),    // data output 28bit 
         .full(full),
         .empty(empty)
+ );
+	
+	wire di1 = fifo_din[7:0];
+	wire di2 = fifo_din[15:8];
+	/*
+	always@(posedge RXCLK)begin
+		if(reset) begin
+		end else begin
+			if(fifo_wr_en)begin
+				if(y_din)
+			end
+		end
+	end
+*/
+wire frame_f;
+wire [10:0]error;
+frame_check frame(
+	.clk100m(sysclk),
+	.clk125m(RXCLK),
+	.reset(reset),
+	.fifo_wr_en(fifo_wr_en),
+	.y_din(y_din),
+	.x_din(y_din),
+	.din1(di1),
+	.din2(di2),
+	.sw(DIP),
+	.dipsw(),
+	.signal(),
+	.error_q(error),
+	.frame(frame_f)
 );
 
 
@@ -204,9 +232,9 @@ always@* begin
 	//sw_dip <= DEBUG_SW;
 	case(DEBUG_SW)
 		4'b0000 : LED <= {4'b0,full,empty,2'b0};
-		/*4'b0001 : LED <= fifo_din[7:0];
-		4'b0010 : LED <= fifo_din[15:8];
-		4'b0011 : LED <= fifo_din[23:16];
+		4'b0001 : LED <= error[7:0];
+		4'b0010 : LED <= {5'd0,error[10:8]};
+		/*4'b0011 : LED <= fifo_din[23:16];
 		4'b0100 : LED <= fifo_din[31:24];
 		4'b0101 : LED <= fifo_din[39:32];
 		4'b0110 : LED <= fifo_din[47:40];
@@ -683,24 +711,12 @@ end
     .i_format(2'b00),
     .fifo_read(fifo_read),
     .data(dout),
+	 .sw(DEBUG_SW[3]),
     .o_r(red_data),
     .o_g(green_data),
     .o_b(blue_data)
   );
-/*
-wire frame_f;
-frame_check frame(
-	.clk100m(sysclk),
-	.clk125m(RXCLK),
-	.reset(reset),
-	.fifo_wr_en(fifo_wr_en),
-	.y_din(y_din),
-	.sw(DIP),
-	.dipsw(),
-	.signal(),
-	.frame(frame_f)
-);
-*/
+
   assign JA[0] = RXDV;
   assign JA[1] = VGA_HSYNC;
   assign JA[2] = VGA_VSYNC;
