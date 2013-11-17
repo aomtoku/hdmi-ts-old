@@ -50,7 +50,7 @@ always@(posedge clk125m)begin
 					if ( {din_x,din_y} != {din_q_x,din_q_y} )	// if din_xy != din_q_xy then CHECK
 						state <= CHECK;
 					skip1 <= 1'b1;
-					count <= 11'd0;
+					count <= 11'd1;
 				end
 				CHECK: begin
 					skip1 <= 1'b0;
