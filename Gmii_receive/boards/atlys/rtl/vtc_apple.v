@@ -199,22 +199,18 @@ assign RESET = coldsys_rst10ms;
 	
 	wire di1 = fifo_din[7:0];
 	wire di2 = fifo_din[15:8];
-/*
- wire frame_f; 
- wire [10:0]error;
+
+ wire [7:0] led_frame_check;
+`ifndef NO
  frame_check frame(
-	.clk100m(sysclk),
 	.clk125m(RXCLK),
 	.reset(reset),
 	.fifo_wr_en(fifo_wr_en),
 	.din(fifo_din),
-	.sw(DIP),
-	.dipsw(),
-	.signal(),
-	.error_q(error),
-	.frame(frame_f)
- );*/
-
+	.sw(),
+	.led(led_frame_check)
+ );
+`endif
 
 always@* begin
 	//sw_dip <= DEBUG_SW;
