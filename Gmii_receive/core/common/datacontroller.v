@@ -69,7 +69,7 @@ always @ (posedge i_clk_74M) begin
 					hactive <= 1'b1;
 					xblock  <= 1'b0;
 			end
-			if(i_hcnt == (hstart + 640)) begin
+			if(i_hcnt == (hstart + 641)) begin
 					xblock  <= 1'b1;
 			end
 			if(i_hcnt == hfin) 
