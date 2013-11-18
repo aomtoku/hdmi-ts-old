@@ -187,9 +187,9 @@ assign RESET = coldsys_rst10ms;
  wire full, empty, fifo_read;
  fifo29_32767 asfifo(
         .rst(reset),
-        .wr_clk(RXCLK),  // TMDS clock 74.25MHz 
-        .rd_clk(pclk),  // GMII TX clock 125MHz
-        .din(fifo_din),     // data input 28bit
+        .wr_clk(RXCLK), // GMII TX clock 125MHz
+        .rd_clk(pclk),  // TMDS clock 74.25MHz 
+        .din(fifo_din), // data input 28bit
         .wr_en(fifo_wr_en),
         .rd_en(fifo_read),
         .dout(dout),    // data output 28bit 
@@ -201,7 +201,7 @@ assign RESET = coldsys_rst10ms;
 	wire di2 = fifo_din[15:8];
 
  wire [7:0] led_frame_check;
-`ifndef NO
+`ifdef NO
  frame_check frame(
 	.clk125m(RXCLK),
 	.reset(reset),
@@ -443,7 +443,7 @@ end
 ///////////////////////////////////////////////////////////////////////////
   //1280x1024@60HZ
   parameter HPIXELS_SXGA = 11'd1280; //Horizontal Live Pixels
-  parameter  VLINES_SXGA = 11'd1024;  //Vertical Live ines
+  parameter VLINES_SXGA  = 11'd1024;  //Vertical Live ines
   parameter HSYNCPW_SXGA = 11'd112;  //HSYNC Pulse Width
   parameter VSYNCPW_SXGA = 11'd3;    //VSYNC Pulse Width
   parameter HFNPRCH_SXGA = 11'd48;   //Horizontal Front Portch
@@ -689,14 +689,13 @@ end
 
   datacontroller dataproc(
     .i_clk_74M(pclk),
-    .i_clk_125M(RXCLK),
     .i_rst(reset),
     .i_hcnt(hcnt),
     .i_vcnt(vcnt),
     .i_format(2'b00),
     .fifo_read(fifo_read),
     .data(dout),
-	 .sw(DEBUG_SW[3]),
+    .sw(DEBUG_SW[3]),
     .o_r(red_data),
     .o_g(green_data),
     .o_b(blue_data)
