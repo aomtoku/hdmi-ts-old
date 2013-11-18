@@ -52,13 +52,6 @@
 
 #endif
 
-/*
-struct packet{
-    unsigned short int yres_screen;
-    unsigned short int xres_screen;
-    unsigned short int color[DATA_SIZE/2];
-};*/
-
 #define CLIP(X) ( (X) > 255 ? 255 : (X) < 0 ? 0 : X)
 
 // YCbCr -> RGB
@@ -67,8 +60,7 @@ struct packet{
 #define CYCbCr2B(Y, Cb, Cr) CLIP( Y + (116129 * Cb >> 16 ) - 226 )
 
 struct packet{
-    unsigned short int yres_screen;
-    unsigned short int xres_screen;
+    unsigned short int xyres_screen;
     unsigned char color[DATA_SIZE];
 };
 
@@ -147,6 +139,7 @@ int yuv2rgb(char *rgb_color, struct packet *yuv_packet, int packet_cnt){
 void LoopRecvPacket(int sock, struct sockaddr_in recv, char *buf, struct fb_var_screeninfo vinfo, int line_len, int bpp){
      struct packet rec_packet;
      int rec;
+     int xres_screen, yres_screen;
      int yuv_y0, yuv_y1, yuv_cb, yuv_cr;
      int rgb0_r,rgb0_g,rgb0_b, rgb1_r,rgb1_g,rgb1_b;
      socklen_t sin_size = sizeof(struct sockaddr_in);
@@ -158,12 +151,15 @@ void LoopRecvPacket(int sock, struct sockaddr_in recv, char *buf, struct fb_var_
 	     fprintf(stderr, "cannot receive a packet \n");
 	     exit(1);
 	 }
-
+         yres_screen = (rec_packet.xyres_screen & 0xfff);
+         xres_screen = ((rec_packet.xyres_screen >> 12) & 1) * 640;
+#ifdef DEBUG
+printf("%04d %04d\n",xres_screen,yres_screen);
+#endif
 	     int x_pos_cnt;
              pktptr = (unsigned long *)rec_packet.color;
-             fbptr = (unsigned long *)(buf + ((rec_packet.xres_screen + vinfo.xoffset)*bpp/8) + (rec_packet.yres_screen+vinfo.yoffset)*line_len);
+             fbptr = (unsigned long *)(buf + ((xres_screen + vinfo.xoffset)*bpp/8) + (yres_screen+vinfo.yoffset)*line_len);
 	     for( x_pos_cnt=0; x_pos_cnt<PIXEL_PER_PACKET; x_pos_cnt+=2, ++pktptr ){
-		 //if((rec_packet.xres_screen + x_pos_cnt) < DISPLAY_XRES){
 #ifdef YUVMODE
                      pktdat = *pktptr;
                      yuv_y0 = (pktdat & 0xff);
