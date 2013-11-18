@@ -183,7 +183,7 @@ assign RESET = coldsys_rst10ms;
 // FIFO
 //------------------------------------------------------------
  wire full, empty, fifo_read;
-`ifdef NO
+`ifndef NO
  fifo32_32767 asfifo(
 `else
 asfifo # (
