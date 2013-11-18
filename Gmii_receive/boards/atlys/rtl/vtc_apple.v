@@ -211,7 +211,7 @@ assign RESET = coldsys_rst10ms;
 	.led(LED)
  );
 `endif
-/*
+
 always@* begin
 	//sw_dip <= DEBUG_SW;
 	case(DEBUG_SW)
@@ -229,7 +229,7 @@ always@* begin
 		4'b1010 : LED <= {4'd0,dout[27:24]};
 	endcase
 end
-*/
+
   //////////////////////////////////////
   /// Switching screen formats
   //////////////////////////////////////
