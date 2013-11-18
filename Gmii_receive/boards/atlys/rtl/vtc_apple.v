@@ -210,7 +210,7 @@ assign RESET = coldsys_rst10ms;
  );
 `endif
 
-always@* begin
+always @(RXCLK) begin
 	//sw_dip <= DEBUG_SW;
 	case(DEBUG_SW)
 		4'b0000 : LED <= {4'b0,full,empty,2'b0};

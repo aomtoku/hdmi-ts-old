@@ -47,7 +47,7 @@ parameter vfin	 = 12'd745;
 `endif
 
 reg hactive,vactive;
-reg xblock;
+//reg xblock;
 
 always @ (posedge i_clk_74M) begin
 	if(i_rst) begin
@@ -56,15 +56,15 @@ always @ (posedge i_clk_74M) begin
             o_r      <= 8'h00;
             o_g      <= 8'h00;
             o_b      <= 8'h00;
-	    xblock   <= 1'b0;
+//	    xblock   <= 1'b0;
 	end else begin
 			if(i_hcnt == hstart) begin
 					hactive <= 1'b1;
-					xblock  <= 1'b0;
+//					xblock  <= 1'b0;
 			end
-			if(i_hcnt == (hstart + 640)) begin
-					xblock  <= 1'b1;
-			end
+//			if(i_hcnt == (hstart + 640)) begin
+//					xblock  <= 1'b1;
+//			end
 			if(i_hcnt == hfin) 
 					hactive <= 1'b0;
 		
@@ -74,15 +74,15 @@ always @ (posedge i_clk_74M) begin
 					vactive <= 1'b0;
 			if (hactive & vactive) begin
 				if(sw)begin
-					if (x_count[0] == xblock) begin
+//					if (x_count[0] == xblock) begin
 						o_b <= data[7:0];
 						o_g <= data[15:8];
 						o_r <= 8'b0;
-					end else begin
-						o_b <= 8'h0;
-						o_g <= 8'h0;
-						o_r <= 8'h0;
-					end
+//					end else begin
+//						o_b <= 8'h0;
+//						o_g <= 8'h0;
+//						o_r <= 8'h0;
+//					end
 				end else begin
 					o_b <= i_hcnt[9:2];
 					o_g <= i_vcnt[8:1];
