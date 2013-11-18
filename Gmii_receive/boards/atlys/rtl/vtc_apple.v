@@ -652,10 +652,10 @@ end
     .vblnk(bgnd_vblnk), //output
     .restart(restart),
     .clk74m(pclk),
-	 .clk125m(RXCLK),
-	 .fifo_wr_en(fifo_wr_en),
-	 .y_din(y_din)
-	 );
+    .clk125m(RXCLK),
+    .fifo_wr_en(fifo_wr_en),
+    .y_din(y_din)
+  );
 
   /////////////////////////////////////////
   // V/H SYNC and DE generator
