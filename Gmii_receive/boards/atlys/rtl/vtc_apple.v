@@ -183,7 +183,14 @@ assign RESET = coldsys_rst10ms;
 // FIFO
 //------------------------------------------------------------
  wire full, empty, fifo_read;
+`ifdef NO
  fifo32_32767 asfifo(
+`else
+asfifo # (
+        .DATA_WIDTH(29),
+        .ADDRESS_WIDTH(15)
+) asfifo_inst (
+`endif
         .rst(reset),
         .wr_clk(RXCLK), // GMII RX clock 125MHz
         .rd_clk(pclk),  // TMDS clock 74.25MHz 
