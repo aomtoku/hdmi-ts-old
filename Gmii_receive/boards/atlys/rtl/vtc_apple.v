@@ -159,10 +159,8 @@ always @(posedge RXCLK)
 assign RESET = coldsys_rst10ms;
 
 
- reg tx_en = 1'd0;
- reg tx_er = 1'd0;
- assign TXEN = tx_en;
- assign TXER = tx_en;
+ assign TXEN = 1'b0;
+ assign TXER = 1'b0;
  wire [28:0]fifo_din;
  wire [10:0]y_din = fifo_din[26:16];
  wire [ 1:0]x_din = fifo_din[28:27];
@@ -172,8 +170,8 @@ assign RESET = coldsys_rst10ms;
  wire datavalid;
  wire fifo_wr_en;
  gmii2fifo24 gmii2fifo24(
- 	.clk125(RXCLK),
-  	.sys_rst(RSTBTN),
+   .clk125(RXCLK),
+   .sys_rst(RSTBTN),
    .rxd(RXD),
    .rx_dv(RXDV),
    .datain(fifo_din),
@@ -187,7 +185,7 @@ assign RESET = coldsys_rst10ms;
  wire full, empty, fifo_read;
  fifo29_32767 asfifo(
         .rst(reset),
-        .wr_clk(RXCLK), // GMII TX clock 125MHz
+        .wr_clk(RXCLK), // GMII RX clock 125MHz
         .rd_clk(pclk),  // TMDS clock 74.25MHz 
         .din(fifo_din), // data input 28bit
         .wr_en(fifo_wr_en),
@@ -200,8 +198,8 @@ assign RESET = coldsys_rst10ms;
 	wire di1 = fifo_din[7:0];
 	wire di2 = fifo_din[15:8];
 
- wire [7:0] led_frame_check;
 `ifdef NO
+ wire [7:0] led_frame_check;
  frame_check frame(
 	.clk125m(RXCLK),
 	.reset(reset),
