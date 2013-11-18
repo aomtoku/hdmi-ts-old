@@ -19,6 +19,12 @@ wire [10:0] y_count;
 assign x_count = data[28:27];
 assign y_count = data[26:16];
 
+//`define CLIP(X) ( (X) > 255 ? 255 : (X) < 0 ? 0 : X)
+// YCbCr -> RGB
+//`define CYCbCr2R(Y, Cb, Cr) CLIP( Y + ( 91881 * Cr >> 16 ) - 179 )
+//`define CYCbCr2G(Y, Cb, Cr) CLIP( Y - (( 22544 * Cb + 46793 * Cr ) >> 16) + 135)
+//`define CYCbCr2B(Y, Cb, Cr) CLIP( Y + (116129 * Cb >> 16 ) - 226 )
+
 
 /*
 reg [1:0] i_format_sync, i_format_q;
@@ -47,7 +53,7 @@ parameter vfin	 = 12'd745;
 `endif
 
 reg hactive,vactive;
-//reg xblock;
+reg xblock;
 
 always @ (posedge i_clk_74M) begin
 	if(i_rst) begin
@@ -56,15 +62,15 @@ always @ (posedge i_clk_74M) begin
             o_r      <= 8'h00;
             o_g      <= 8'h00;
             o_b      <= 8'h00;
-//	    xblock   <= 1'b0;
+	    xblock   <= 1'b0;
 	end else begin
 			if(i_hcnt == hstart) begin
 					hactive <= 1'b1;
-//					xblock  <= 1'b0;
+					xblock  <= 1'b0;
 			end
-//			if(i_hcnt == (hstart + 640)) begin
-//					xblock  <= 1'b1;
-//			end
+			if(i_hcnt == (hstart + 640)) begin
+					xblock  <= 1'b1;
+			end
 			if(i_hcnt == hfin) 
 					hactive <= 1'b0;
 		
@@ -74,15 +80,15 @@ always @ (posedge i_clk_74M) begin
 					vactive <= 1'b0;
 			if (hactive & vactive) begin
 				if(sw)begin
-//					if (x_count[0] == xblock) begin
+					if (x_count[0] == xblock) begin
 						o_b <= data[7:0];
 						o_g <= data[15:8];
 						o_r <= 8'b0;
-//					end else begin
-//						o_b <= 8'h0;
-//						o_g <= 8'h0;
-//						o_r <= 8'h0;
-//					end
+					end else begin
+						o_b <= 8'h0;
+						o_g <= 8'h0;
+						o_r <= 8'h0;
+					end
 				end else begin
 					o_b <= i_hcnt[9:2];
 					o_g <= i_vcnt[8:1];
