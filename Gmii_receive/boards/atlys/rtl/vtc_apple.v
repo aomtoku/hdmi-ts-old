@@ -161,10 +161,10 @@ assign RESET = coldsys_rst10ms;
 
  assign TXEN = 1'b0;
  assign TXER = 1'b0;
- wire [28:0]fifo_din;
+ wire [31:0]fifo_din;
  wire [10:0]y_din = fifo_din[26:16];
  wire [ 1:0]x_din = fifo_din[28:27];
- wire [28:0]dout;
+ wire [31:0]dout;
 
 
  wire datavalid;
@@ -183,14 +183,14 @@ assign RESET = coldsys_rst10ms;
 // FIFO
 //------------------------------------------------------------
  wire full, empty, fifo_read;
- fifo29_32767 asfifo(
+ fifo32_32767 asfifo(
         .rst(reset),
         .wr_clk(RXCLK), // GMII RX clock 125MHz
         .rd_clk(pclk),  // TMDS clock 74.25MHz 
-        .din(fifo_din), // data input 28bit
+        .din(fifo_din), // data input 32bit
         .wr_en(fifo_wr_en),
         .rd_en(fifo_read),
-        .dout(dout),    // data output 28bit 
+        .dout(dout),    // data output 32bit 
         .full(full),
         .empty(empty)
  );

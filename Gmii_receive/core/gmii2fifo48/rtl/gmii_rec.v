@@ -12,7 +12,7 @@ module gmii2fifo24#(
 	input sys_rst,
 	input wire [7:0]rxd,
 	input wire rx_dv,
-	output reg [28:0] datain,
+	output reg [31:0] datain,
 	output reg recv_en,
 	output wire packet_en
 );
