@@ -5,6 +5,7 @@ HDMI Transport Stream over IP
  /boards/     Top-level design files, constraint files and Makefiles
               for supported FPGA boards.
  /doc/        Documentation.
+ /software/   Software.
 
 
 [> Building tools
