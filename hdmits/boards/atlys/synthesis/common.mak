@@ -21,7 +21,7 @@ build/top-routed.ncd: build/top.ncd
 	cd build && par -ol high -xe n -w top.ncd top-routed.ncd
 
 build/top.bit: build/top-routed.ncd
-	cd build && bitgen -w top-routed.ncd top.bit
+	cd build && bitgen -w top-routed.ncd top.bit top.pcf
 
 build/top.mcs: build/top.bit
 	cd build && promgen -w -u 0 top
