@@ -1,9 +1,9 @@
 `timescale 1ns / 1ps
 
 module gmii2fifo24#(
-	parameter [31:0]	ipv4_dst_rec = {8'd192, 8'd168, 8'd0, 8'd1},
-	parameter [15:0]	dst_port_rec = 16'd12345,
-	parameter [15:0]	ethernet_type = 16'h0800, 
+	parameter [31:0] ipv4_dst_rec = {8'd192, 8'd168, 8'd0, 8'd1},
+	parameter [15:0] dst_port_rec = 16'd12345,
+	parameter [15:0] ethernet_type = 16'h0800, 
 	parameter [7:0]	ip_version = 8'h45,
 	parameter [7:0]	ip_protcol = 8'h11
 
@@ -58,9 +58,9 @@ always@(posedge clk125) begin
 		x_info		<= 12'h0;
 		y_info		<= 12'h0;
 		pre_en		<= 1'b0;
-		invalid 		<= 1'b0;
+		invalid 	<= 1'b0;
 	end else begin
-		if(rx_dv)begin
+		if(rx_dv) begin
 			rx_count <= rx_count + 11'd1;
 			case(rx_count)
 				11'h14: eth_type[15:8]	<= rxd;
@@ -80,34 +80,26 @@ always@(posedge clk125) begin
 				11'h2c: dst_port[15:8]	<= rxd;
 				11'h2d: dst_port[7:0]	<= rxd;
 				11'h32: begin
-						if(eth_type[15:0]      == ethernet_type &&
-							ip_ver[7:0]    == ip_version &&
-							ipv4_proto[7:0]== ip_protcol &&
-							ipv4_dst[31:8] == ipv4_dst_rec[31:8] &&
-							ipv4_dst[7:0]  == (ipv4_dst_rec[7:0]+{7'd0,id}) &&
-							dst_port[15:0] == dst_port_rec) begin
-							packet_dv 	<= 1'b1;
-							y_info[7:0]	<= rxd;
-						end
+					if(eth_type[15:0]      == ethernet_type &&
+						ip_ver[7:0]    == ip_version &&
+						ipv4_proto[7:0]== ip_protcol &&
+						ipv4_dst[31:8] == ipv4_dst_rec[31:8] &&
+						ipv4_dst[7:0]  == (ipv4_dst_rec[7:0]+{7'd0,id}) &&
+						dst_port[15:0] == dst_port_rec) begin
+						packet_dv 	<= 1'b1;
+						y_info[7:0]	<= rxd;
 					end
-				11'h33: if (packet_dv) begin
-						y_info[11:8]	<= rxd[3:0];
-						x_info[3:0]	<= rxd[7:4];
-						pre_en		<= 1'b1;
-					end
-				/*11'h33: if(packet_dv) y_info[11:8]		<= rxd[3:0];
-				11'h34: if(packet_dv) x_info[7:0] 		<= rxd;
-				11'h35: begin
-							if(packet_dv)begin
-								x_info[11:8]	<= rxd[3:0];
-								pre_en		<= 1'b1;
-							end
-						  end*/
+				end
+				11'h33: if(packet_dv) begin
+					y_info[11:8]	<= rxd[3:0];
+					x_info[3:0]	<= rxd[7:4];
+					pre_en		<= 1'b1;
+				end
 				11'd1331: begin // before 11'd1005
-								packet_dv <= 1'b0;
-								invalid <= 1'b1;
-								pre_en <= 1'b0;
-							 end
+					packet_dv <= 1'b0;
+					invalid <= 1'b1;
+					pre_en <= 1'b0;
+				end
 			endcase
 		end else begin
 			rx_count	<= 11'd0;
@@ -131,22 +123,22 @@ end
 //
 //----------------------------------------------------------
 
-parameter IDLE   	= 2'b00;
-parameter YUV_1 	= 2'b01;
-parameter YUV_2 	= 2'b10;
+parameter IDLE  = 2'b00;
+parameter YUV_1 = 2'b01;
+parameter YUV_2 = 2'b10;
 
 reg [1:0] state_data = IDLE;
 reg [10:0] d_cnt;
 
 
-always@(posedge clk125)begin
-	if(sys_rst)begin
+always@(posedge clk125) begin
+	if(sys_rst) begin
 		state_data 	<= IDLE;
 		datain 		<= 29'd0;
 		recv_en 	<= 1'd0;
 		d_cnt		<= 11'd0;
 	end else begin
-		if(packet_dv && pre_en)begin
+		if(packet_dv && pre_en) begin
 			case(state_data)
 				YUV_1:	begin
 					datain[28:27] 	<= {1'b0,x_info[0]};
@@ -163,7 +155,7 @@ always@(posedge clk125)begin
 				end			
 			endcase
 		end else begin
-			if (invalid) begin
+			if(invalid) begin
 				datain 		<= 29'd0;
 				recv_en 	<= 1'b0;
 				state_data	<= 2'b00;
