@@ -1,91 +1,47 @@
-//////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2009 Xilinx, Inc.
-// This design is confidential and proprietary of Xilinx, All Rights Reserved.
-//////////////////////////////////////////////////////////////////////////////
-//   ____  ____
-//  /   /\/   /
-// /___/  \  /   Vendor:        Xilinx
-// \   \   \/    Version:       1.0.0
-//  \   \        Filename:      vtc_demo.v
-//  /   /        Date Created:  April 8, 2009
-// /___/   /\    Author:        Bob Feng   
-// \   \  /  \
-//  \___\/\___\
-//
-// Devices:   Spartan-6 Generation FPGA
-// Purpose:   SP601 board demo top level
-// Contact:   
-// Reference: None
-//
-// Revision History:
-// 
-//
-//////////////////////////////////////////////////////////////////////////////
-//
-// LIMITED WARRANTY AND DISCLAIMER. These designs are provided to you "as is".
-// Xilinx and its licensors make and you receive no warranties or conditions,
-// express, implied, statutory or otherwise, and Xilinx specifically disclaims
-// any implied warranties of merchantability, non-infringement, or fitness for
-// a particular purpose. Xilinx does not warrant that the functions contained
-// in these designs will meet your requirements, or that the operation of
-// these designs will be uninterrupted or error free, or that defects in the
-// designs will be corrected. Furthermore, Xilinx does not warrant or make any
-// representations regarding use or the results of the use of the designs in
-// terms of correctness, accuracy, reliability, or otherwise.
-//
-// LIMITATION OF LIABILITY. In no event will Xilinx or its licensors be liable
-// for any loss of data, lost profits, cost or procurement of substitute goods
-// or services, or for any special, incidental, consequential, or indirect
-// damages arising from the use or operation of the designs or accompanying
-// documentation, however caused and on any theory of liability. This
-// limitation will apply even if Xilinx has been advised of the possibility
-// of such damage. This limitation shall apply not-withstanding the failure
-// of the essential purpose of any limited remedies herein.
-//
-//////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2009 Xilinx, Inc.
-// This design is confidential and proprietary of Xilinx, All Rights Reserved.
-//////////////////////////////////////////////////////////////////////////////
-
 `timescale 1 ps / 1 ps
 
-module hdmi_recv (
-  input  wire RSTBTN,
-  input  wire SYS_CLK,
-  
-  output wire RESET,
-  input  wire [7:0] RXD,
-  input  wire RXDV,
-  input  wire RXCLK,
-  
-  //output wire [7:0] TXD,
-  output wire TXEN,
-  output wire TXER,
-  output wire GTXCLK,
+`define FRAME_CHECK
 
-  input  wire [3:0] SW,
-  input  wire [3:0] DEBUG_SW,
+module top (
+  /**** SYSTEM ****/
+  input wire        RSTBTN,    //The BTN NORTH
+  input wire        SYS_CLK,   //100 MHz osicallator
   
+  /**** TMDS OUTPUT ****/
+  input wire [3:0]  RX0_TMDS,
+  input wire [3:0]  RX0_TMDSB,
+
+  /**** TMDS INPUT ****/
   output wire [3:0] TMDS,
   output wire [3:0] TMDSB,
+
+  /**** Ethernet PHY ****/
+  output wire RESET,
+  output wire GTXCLK,
+  output wire TXEN,
+  output wire TXER,
+  output wire [7:0] TXD,
+  input	wire RXCLK,
+  input wire RXDV,
+  input wire [7:0] RXD,
+
+  input wire [3:0] SW,
+  input wire [3:0] DEBUG_SW,
+
   output reg  [7:0] LED,
-  output wire [2:0] JA
+  output wire [4:0] JA
 );
-
-
-//`define ORIGINAL
-`define new
 
   //******************************************************************//
   // Create global clock and synchronous system reset.                //
   //******************************************************************//
-  wire          clkfx, pclk;
-  wire          locked;
-  wire          reset;
+  wire clkfx, pclk;
+  wire locked;
+  wire reset;
 
-  wire          clk50m, clk50m_bufg;
+  wire clk50m, clk50m_bufg;
 
-  wire          pwrup;
+  wire pwrup;
   
   IBUFG sysclk_buf (.I(SYS_CLK), .O(sysclk));
   reg clk_buf;
@@ -123,7 +79,6 @@ module hdmi_recv (
   /////////////////////////////////////
 
 wire clk_125M, clk_125M_90;
-wire clk125;
 assign GTXCLK = clk_125M;
 
 clk_wiz_v3_6 clk125_gen(// Clock in ports
@@ -136,30 +91,17 @@ clk_wiz_v3_6 clk125_gen(// Clock in ports
   .RESET(RSTBTN),
   .LOCKED()
  );
- /*
- ODDR2 ODDR2_inst (
-	.Q(clk125),
-	.C0(clk_125M_90),
-	.C1(~clk_125M_90),
-	.CE(1'b1),
-	.D0(1'b0),
-	.D1(1'b1),
-	.R(1'b0),
-	.S(1'b0)
-);
-*/
 
 //-----------------------------------------------------------
 //  PHY RESET
 //-----------------------------------------------------------
-reg [19:0] coldsys_rst = 0;
-wire coldsys_rst10ms = (coldsys_rst == 20'h100000);
-always @(posedge RXCLK)
-  coldsys_rst <= !coldsys_rst10ms ? coldsys_rst + 20'h1 : 20'h100000;
+reg [20:0] coldsys_rst = 21'd0;
+wire coldsys_rst10ms = (coldsys_rst == 21'h100000);
+always @(posedge sysclk)
+  coldsys_rst <= !coldsys_rst10ms ? coldsys_rst + 21'h1 : 21'h100000;
 assign RESET = coldsys_rst10ms;
 
 
- assign TXEN = 1'b0;
  assign TXER = 1'b0;
  wire [28:0]fifo_din;
  wire [10:0]y_din = fifo_din[26:16];
@@ -168,79 +110,42 @@ assign RESET = coldsys_rst10ms;
 
 
  wire datavalid;
- wire fifo_wr_en;
+ wire recv_fifo_wr_en;
  gmii2fifo24 gmii2fifo24(
    .clk125(RXCLK),
    .sys_rst(RSTBTN),
+   .id(DEBUG_SW[0]),
    .rxd(RXD),
    .rx_dv(RXDV),
    .datain(fifo_din),
-   .recv_en(fifo_wr_en),
+   .recv_en(recv_fifo_wr_en),
    .packet_en()
  );
 
 //------------------------------------------------------------
 // FIFO
 //------------------------------------------------------------
- wire full, empty, fifo_read;
-`ifndef NO
- fifo29_32768 asfifo(
-`else
-asfifo # (
-        .DATA_WIDTH(29),
-        .ADDRESS_WIDTH(15)
-) asfifo_inst (
-`endif
+ wire recv_full, recv_empty, fifo_read;
+ fifo29_32768 asfifo_recv (
         .rst(reset),
         .wr_clk(RXCLK), // GMII RX clock 125MHz
         .rd_clk(pclk),  // TMDS clock 74.25MHz 
         .din(fifo_din), // data input
-        .wr_en(fifo_wr_en),
+        .wr_en(recv_fifo_wr_en),
         .rd_en(fifo_read),
         .dout(dout),    // data output
-        .full(full),
-        .empty(empty)
+        .full(recv_full),
+        .empty(recv_empty)
  );
 	
-	wire di1 = fifo_din[7:0];
-	wire di2 = fifo_din[15:8];
-
-`ifdef NO
- wire [7:0] led_frame_check;
- frame_check frame(
-	.clk125m(RXCLK),
-	.reset(reset),
-	.fifo_wr_en(fifo_wr_en),
-	.din(fifo_din),
-	.sw(DEBUG_SW),
-	.led(LED)
- );
-`endif
-
-always @(RXCLK) begin
-	//sw_dip <= DEBUG_SW;
-	case(DEBUG_SW)
-		4'b0000 : LED <= {4'b0,full,empty,2'b0};
-		//4'b1000 : LED <= {4'b0,full,empty,2'b0};
-		//4'b0001 : LED <= error[7:0];
-		//4'b0010 : LED <= {5'd0,error[10:8]};
-		//4'b0011 : LED <= fifo_din[23:16];
-		//4'b0100 : LED <= fifo_din[31:24];
-		//4'b0101 : LED <= fifo_din[39:32];
-		//4'b0110 : LED <= fifo_din[47:40];
-		//4'b0111 : LED <= dout[7:0];
-		//4'b1000 : LED <= dout[15:8];
-		//4'b1001 : LED <= dout[23:16];
-		//4'b1010 : LED <= {4'd0,dout[27:24]};
-	endcase
-end
+wire di1 = fifo_din[7:0];
+wire di2 = fifo_din[15:8];
 
   //////////////////////////////////////
   /// Switching screen formats
   //////////////////////////////////////
   wire busy;
   wire  [3:0] sws_sync; //synchronous output
-  //reg [3:0]SW = 4'b0110;
 
   synchro #(.INITIALIZE("LOGIC0"))
   synchro_sws_3 (.async(SW[3]),.sync(sws_sync[3]),.clk(clk50m_bufg));
@@ -658,7 +563,7 @@ end
     .restart(restart),
     .clk74m(pclk),
     .clk125m(RXCLK),
-    .fifo_wr_en(fifo_wr_en),
+    .fifo_wr_en(recv_fifo_wr_en),
     .y_din(y_din)
   );
 
@@ -700,7 +605,7 @@ end
     .i_format(2'b00),
     .fifo_read(fifo_read),
     .data(dout),
-    .sw(DEBUG_SW[3]),
+    .sw(~DEBUG_SW[3]),
     .o_r(red_data),
     .o_g(green_data),
     .o_b(blue_data)
@@ -709,12 +614,12 @@ end
   assign JA[0] = RXDV;
   assign JA[1] = VGA_HSYNC;
   assign JA[2] = VGA_VSYNC;
-  //assign JA[3] = empty;
-  //assign JA[4] = full;
+  //assign JA[3] = recv_empty;
+  //assign JA[4] = recv_full;
   /*
   assign JA[5] = fifo_read;
-  assign JA[6] = empty;
-  assign JA[7] = full;
+  assign JA[6] = recv_empty;
+  assign JA[7] = recv_full;
   */
   
   ////////////////////////////////////////////////////////////////
@@ -799,5 +704,309 @@ end
     .datain       (tmdsclkint));
 
   OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------
+//  FIFO(48bit) to GMII
+//		Depth --> 4096
+//-----------------------------------------------------------
+wire send_full;
+wire send_empty;
+wire [47:0]tx_data;
+wire rd_en;
+wire [47:0]din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
+wire rx0_pclk;           
+wire rx0_hsync;          // hsync data
+wire rx0_vsync;          // vsync data
+wire send_fifo_wr_en = video_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
+
+fifo48_8k asfifo_send (
+	.rst(RSTBTN | rx0_vsync),
+	.wr_clk(rx0_pclk),  // TMDS clock 74.25MHz 
+	.rd_clk(clk_125M),  // GMII TX clock 125MHz
+	.din(din_fifo),     // data input 48bit
+	.wr_en(send_fifo_wr_en),
+	.rd_en(rd_en),
+	.dout(tx_data),    // data output 48bit 
+	.full(send_full),
+	.empty(send_empty)
+);
+
+  //////////////////////////////////////////////////
+  //
+  // TMDS Input Port 0 (BANK : )
+  //
+  //////////////////////////////////////////////////
+  wire rx0_tmdsclk;
+  wire rx0_pclkx10, rx0_pllclk0;
+  wire rx0_plllckd;
+  wire rx0_reset;
+  wire rx0_serdesstrobe;
+ 
+  wire rx0_psalgnerr;      // channel phase alignment error
+  wire [7:0] rx0_red;      // pixel data out
+  wire [7:0] rx0_green;    // pixel data out
+  wire [7:0] rx0_blue;     // pixel data out
+  wire rx0_de;
+  wire [29:0] rx0_sdata;
+  wire rx0_blue_vld;
+  wire rx0_green_vld;
+  wire rx0_red_vld;
+  wire rx0_blue_rdy;
+  wire rx0_green_rdy;
+  wire rx0_red_rdy;
+
+  dvi_decoder dvi_rx0 (
+    //These are input ports
+    .tmdsclk_p   (RX0_TMDS[3]),
+    .tmdsclk_n   (RX0_TMDSB[3]),
+    .blue_p      (RX0_TMDS[0]),
+    .green_p     (RX0_TMDS[1]),
+    .red_p       (RX0_TMDS[2]),
+    .blue_n      (RX0_TMDSB[0]),
+    .green_n     (RX0_TMDSB[1]),
+    .red_n       (RX0_TMDSB[2]),
+    .exrst       (RSTBTN),
+
+    //These are output ports
+    .reset       (rx0_reset),
+    .pclk        (rx0_pclk),
+    .pclkx2      (rx0_pclkx2),
+    .pclkx10     (rx0_pclkx10),
+    .pllclk0     (rx0_pllclk0), // PLL x10 output
+    .pllclk1     (rx0_pllclk1), // PLL x1 output
+    .pllclk2     (rx0_pllclk2), // PLL x2 output
+    .pll_lckd    (rx0_plllckd),
+    .tmdsclk     (rx0_tmdsclk),
+    .serdesstrobe(rx0_serdesstrobe),
+    .hsync       (rx0_hsync),
+    .vsync       (rx0_vsync),
+    .de          (rx0_de),
+
+    .blue_vld    (rx0_blue_vld),
+    .green_vld   (rx0_green_vld),
+    .red_vld     (rx0_red_vld),
+    .blue_rdy    (rx0_blue_rdy),
+    .green_rdy   (rx0_green_rdy),
+    .red_rdy     (rx0_red_rdy),
+
+    .psalgnerr   (rx0_psalgnerr),
+
+    .sdout       (rx0_sdata),
+    .red         (rx0_red),
+    .green       (rx0_green),
+    .blue        (rx0_blue)); 
+
+
+  //-----------------------------------------------------
+  // TMDS HSYNC VSYNC COUNTER ()
+  //           (1280x720 progressive 
+  //                     HSYNC: 45khz   VSYNC : 60Hz)
+  //-----------------------------------------------------
+  
+  wire [11:0]in_hcnt = {1'b0, video_hcnt[10:0]};
+  wire [11:0]in_vcnt = {1'b0, video_vcnt[10:0]};
+  wire [10:0]video_hcnt;
+  wire [10:0]video_vcnt;
+  wire [11:0]index;
+  wire video_en;
+
+  tmds_timing timing(
+		.rx0_pclk(rx0_pclk),
+		.rstbtn_n(RSTBTN), 
+		.rx0_hsync(rx0_hsync),
+		.rx0_vsync(rx0_vsync),
+		.video_en(video_en),
+		.index(index),
+		.video_hcnt(video_hcnt),
+		.video_vcnt(video_vcnt)
+  );
+
+
+//-----------------------------------------------------------
+//  GMII TX
+//-----------------------------------------------------------
+  
+  gmii_tx gmii_tx(
+	.id(DEBUG_SW[0]),
+	/*** FIFO ***/
+	.fifo_clk(rx0_pclk),
+	.sys_rst(RSTBTN),
+	.dout(tx_data), //48bit
+	.empty(send_empty),
+	.full(send_full),
+	.rd_en(rd_en),
+	.wr_en(video_en),
+	.sw(~DEBUG_SW[2]),
+	
+	/*** Ethernet PHY GMII ***/
+	.tx_clk(clk_125M),
+	.tx_en(TXEN),
+	.txd(TXD)
+);
+ 
+ //-----------------------------------------------------------
+ // DEBUG code : Frame check
+ //-----------------------------------------------------------
+ `ifdef FRAME_CHECK
+ wire [15:0]hf_cnt,vf_cnt,hpwcnt,vpwcnt;
+ frame_checker frame_checker(
+	.clk(rx0_pclk),
+	.rst(RSTBTN),
+	.hsync(rx0_hsync),
+	.vsync(rx0_vsync),
+	.hcnt(hf_cnt),
+	.vcnt(vf_cnt),
+	.hpwcnt(hpwcnt),
+	.vpwcnt(vpwcnt)
+);
+ `endif
+
+ 
+ 
+  //////////////////////////////////////
+  // Status LED 
+  //////////////////////////////////////
+  //assign LED = 8'b11111111;
+  reg pcnt;
+  always@(posedge rx0_pclk)
+	if(RSTBTN)
+		pcnt <= 1'd0;
+	else
+		pcnt <= ~pcnt;
+  
+  assign JA[3] = pcnt;
+  assign JA[4] = pcnt;
+  
+`ifdef NO
+  assign LED = LED_out(	.SW(SW), .TXD(TXD), .empty(send_empty), .full(send_full), .rx0_de(rx0_de));
+  
+  function [7:0]LED_out;
+  input [3:0]SW;
+  input [7:0]TXD;
+  input empty;
+  input full;
+  input rx0_de;
+  begin
+	case(SW)
+		4'b0000: LED_out ={empty,full, rx0_de, 5'd0};
+		4'b0001: LED_out = TXD;
+	`ifdef FRAME_CHECK
+   	4'b0010: LED_out = hf_cnt[7:0];
+		4'b0011: LED_out = hf_cnt[15:8];
+		4'b0100: LED_out = vf_cnt[7:0];
+		4'b0101: LED_out = vf_cnt[15:8];
+		4'b0110: LED_out = hpwcnt[7:0];
+		4'b0111: LED_out = hpwcnt[15:8];
+		4'b1000: LED_out = vpwcnt[7:0];
+		4'b1001: LED_out = vpwcnt[15:8];
+	`endif
+	endcase
+  end
+  endfunction
+`endif
+
+always @(RXCLK) begin
+	//sw_dip <= DEBUG_SW;
+	case(DEBUG_SW[1])
+		1'b0 : LED <= {4'b0,recv_full,recv_empty,2'b0};
+		//4'b1000 : LED <= {4'b0,recv_full,recv_empty,2'b0};
+		//4'b0001 : LED <= error[7:0];
+		//4'b0010 : LED <= {5'd0,error[10:8]};
+		//4'b0011 : LED <= fifo_din[23:16];
+		//4'b0100 : LED <= fifo_din[31:24];
+		//4'b0101 : LED <= fifo_din[39:32];
+		//4'b0110 : LED <= fifo_din[47:40];
+		//4'b0111 : LED <= dout[7:0];
+		//4'b1000 : LED <= dout[15:8];
+		//4'b1001 : LED <= dout[23:16];
+		//4'b1010 : LED <= {4'd0,dout[27:24]};
+	endcase
+end
+
 
 endmodule

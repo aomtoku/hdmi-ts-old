@@ -10,6 +10,7 @@ module gmii2fifo24#(
 )(
 	input clk125,
 	input sys_rst,
+	input id,
 	input wire [7:0]rxd,
 	input wire rx_dv,
 	output reg [31:0] datain,
@@ -82,7 +83,8 @@ always@(posedge clk125) begin
 						if(eth_type[15:0]      == ethernet_type &&
 							ip_ver[7:0]    == ip_version &&
 							ipv4_proto[7:0]== ip_protcol &&
-							ipv4_dst[31:0] == ipv4_dst_rec &&
+							ipv4_dst[31:8] == ipv4_dst_rec[31:8] &&
+							ipv4_dst[7:0]  == (ipv4_dst_rec[7:0]+{7'd0,id}) &&
 							dst_port[15:0] == dst_port_rec) begin
 							packet_dv 	<= 1'b1;
 							y_info[7:0]	<= rxd;
