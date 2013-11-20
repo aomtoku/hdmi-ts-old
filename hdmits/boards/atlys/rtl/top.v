@@ -130,7 +130,7 @@ gmii2fifo24 gmii2fifo24(
 // FIFO
 //------------------------------------------------------------
 wire recv_full, recv_empty, fifo_read;
-fifo29_32768 asfifo_recv (
+fifo16_32768 asfifo_recv (
 	.rst(reset),
 	.wr_clk(RXCLK), // GMII RX clock 125MHz
 	.rd_clk(pclk),  // TMDS clock 74.25MHz 
