@@ -13,7 +13,7 @@ module gmii2fifo24#(
 	input id,
 	input wire [7:0]rxd,
 	input wire rx_dv,
-	output reg [31:0] datain,
+	output reg [28:0] datain,
 	output reg recv_en,
 	output wire packet_en
 );
@@ -123,46 +123,41 @@ end
 //
 //----------------------------------------------------------
 
-parameter IDLE  = 2'b00;
-parameter YUV_1 = 2'b01;
-parameter YUV_2 = 2'b10;
+parameter YUV_1 = 1'b0;
+parameter YUV_2 = 1'b1;
 
-reg [1:0] state_data = IDLE;
+reg [1:0] state_data;
 reg [10:0] d_cnt;
 
 
 always@(posedge clk125) begin
 	if(sys_rst) begin
-		state_data 	<= IDLE;
+		state_data 	<= YUV_1;
 		datain 		<= 29'd0;
 		recv_en 	<= 1'd0;
 		d_cnt		<= 11'd0;
 	end else begin
 		if(packet_dv && pre_en) begin
-			case(state_data)
-				YUV_1:	begin
-					datain[28:27] 	<= {1'b0,x_info[0]};
-					datain[26:16] 	<= y_info[10:0];
-					datain[15:8] 	<= rxd;
-					state_data 	<= YUV_2;
-					recv_en 	<= 1'b0;
-				end
-				YUV_2:  begin
-					recv_en 	<= 1'b1;
-					state_data 	<= YUV_1;
-					datain[7:0] 	<= rxd;
-					d_cnt		<= d_cnt + 11'd1;
-				end			
-			endcase
+			if(state_data == YUV_1) begin
+				datain[28:27] 	<= {1'b0,x_info[0]};
+				datain[26:16] 	<= y_info[10:0];
+				datain[15:8] 	<= rxd;
+				state_data 	<= YUV_2;
+				recv_en 	<= 1'b0;
+			end else begin
+				recv_en 	<= 1'b1;
+				state_data 	<= YUV_1;
+				datain[7:0] 	<= rxd;
+				d_cnt		<= d_cnt + 11'd1;
+			end			
 		end else begin
+			state_data 	<= YUV_1;
 			if(invalid) begin
 				datain 		<= 29'd0;
 				recv_en 	<= 1'b0;
-				state_data	<= 2'b00;
 				d_cnt		<= 11'd0;
 			end else begin
 				recv_en 	<= 1'b0;
-				state_data 	<= YUV_1;
 				d_cnt		<= 11'd0;
 			end
 		end

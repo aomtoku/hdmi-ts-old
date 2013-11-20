@@ -50,9 +50,9 @@ always @ (posedge i_clk_74M) begin
 	if(i_rst) begin
 		hactive  <= 1'b0;
 		vactive  <= 1'b0;
-		a_r      <= 12'h00;
-		a_g      <= 12'h00;
-		a_b      <= 12'h00;
+		a_r      <= 19'h00;
+		a_g      <= 19'h00;
+		a_b      <= 19'h00;
 		b_r      <= 8'h00;
 		b_g      <= 8'h00;
 		b_b      <= 8'h00;

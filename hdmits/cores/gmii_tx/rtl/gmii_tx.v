@@ -58,7 +58,6 @@ module gmii_tx#(
 	/*** Ethernet PHY GMII ***/
 	input wire	 tx_clk,
 	output reg	 tx_en,
-	//output wire [3:0]debug,
 	output reg [7:0] txd
 );
 
@@ -75,7 +74,6 @@ module gmii_tx#(
 //
 `define DATA_YUV
 
-assign debug = state;
 //
 //  LOGIC
 //
@@ -200,27 +198,27 @@ always @(posedge tx_clk )begin
 				state	<= DATA_ETH;
 			end
 			DATA_ETH: begin
-				tx_en	<= 1'b1;
+				tx_en <= 1'b1;
 				count <= count + 11'h1;
 				crc_init <= 1'd0;
 				case(count)
 					/* DST MAC 00:23:45:67:89:ac */
-					10'h0: txd	<= dst_mac[47:40];
-					10'h1: txd	<= dst_mac[39:32];
-					10'h2: txd	<= dst_mac[31:24];
-					10'h3: txd	<= dst_mac[23:16];
-					10'h4: txd	<= dst_mac[15:8];
-					10'h5: txd	<= dst_mac[7:0] - {7'd0,id};
+					11'h0: txd	<= dst_mac[47:40];
+					11'h1: txd	<= dst_mac[39:32];
+					11'h2: txd	<= dst_mac[31:24];
+					11'h3: txd	<= dst_mac[23:16];
+					11'h4: txd	<= dst_mac[15:8];
+					11'h5: txd	<= dst_mac[7:0] - {7'd0,id};
 					/* SRC MAC 00:23:45:67:89:ab */
-					10'h6: txd	<= src_mac[47:40];
-					10'h7: txd	<= src_mac[39:32];
-					10'h8: txd	<= src_mac[31:24];
-					10'h9: txd	<= src_mac[23:16];
-					10'ha: txd	<= src_mac[15:8];
-					10'hb: txd	<= src_mac[7:0] + {7'd0,id};
+					11'h6: txd	<= src_mac[47:40];
+					11'h7: txd	<= src_mac[39:32];
+					11'h8: txd	<= src_mac[31:24];
+					11'h9: txd	<= src_mac[23:16];
+					11'ha: txd	<= src_mac[15:8];
+					11'hb: txd	<= src_mac[7:0] + {7'd0,id};
 					/* IP TYPE  0800 = */
-					10'hc: txd	<= ip_type[15:8];
-					10'hd: 	begin
+					11'hc: txd	<= ip_type[15:8];
+					11'hd: 	begin
 							state <= DATA_IP;
 							txd	<= ip_type[7:0];
 							count <= 11'h0;
@@ -233,50 +231,50 @@ always @(posedge tx_clk )begin
 				count <= count + 11'h1;
 				case(count)
 					/* IP Verision = 4 & IP header Length = 20byte ----> 8'h45 */
-					10'h0: txd	<= ip_ver[15:8];
+					11'h0: txd	<= ip_ver[15:8];
 					/* DSF */
-					10'h1: txd	<= ip_ver[7:0];
+					11'h1: txd	<= ip_ver[7:0];
 					/* Total Length  992byte (=0x03e0) */
-					10'h2: txd	<= ip_len[15:8];
-					10'h3: txd	<= ip_len[7:0];
+					11'h2: txd	<= ip_len[15:8];
+					11'h3: txd	<= ip_len[7:0];
 					/* Identification  ---> <<later>> */
-					10'h4: txd	<= ip_iden[15:8];
-					10'h5: txd	<= ip_iden[7:0];
+					11'h4: txd	<= ip_iden[15:8];
+					11'h5: txd	<= ip_iden[7:0];
 					/* Flag */
-					10'h6: txd	<= ip_flag[15:8];
-					10'h7: txd	<= ip_flag[7:0];
+					11'h6: txd	<= ip_flag[15:8];
+					11'h7: txd	<= ip_flag[7:0];
 					/* TTL  64 = 0x40 */
-					10'h8: txd	<= ip_ttl;
+					11'h8: txd	<= ip_ttl;
 					/* Protocol = (UDP =  17 ==0x11 )*/
-					10'h9: txd	<= ip_prot;
+					11'h9: txd	<= ip_prot;
 					/* checksum = *(culcurate) */
-					10'ha: txd	<= ip_check[15:8];
-					10'hb: txd	<= ip_check[7:0];
+					11'ha: txd	<= ip_check[15:8];
+					11'hb: txd	<= ip_check[7:0];
 					/* IP v4 SRC Address 10.0.21.9 */
-					10'hc: txd	<= ip_src_addr[31:24];
-					10'hd: txd	<= ip_src_addr[23:16];
-					10'he: txd	<= ip_src_addr[15:8];
-					10'hf: txd	<= ip_src_addr[7:0] + {7'd0,id};
+					11'hc: txd	<= ip_src_addr[31:24];
+					11'hd: txd	<= ip_src_addr[23:16];
+					11'he: txd	<= ip_src_addr[15:8];
+					11'hf: txd	<= ip_src_addr[7:0] + {7'd0,id};
 					/* IP v4 DEST Adress 203.178.143.241 */
-					10'h10: txd	<= ip_dst_addr[31:24];
-					10'h11: txd	<= ip_dst_addr[23:16];
-					10'h12: txd	<= ip_dst_addr[15:8];
-					10'h13: txd	<= ip_dst_addr[7:0] - {7'd0,id};
+					11'h10: txd	<= ip_dst_addr[31:24];
+					11'h11: txd	<= ip_dst_addr[23:16];
+					11'h12: txd	<= ip_dst_addr[15:8];
+					11'h13: txd	<= ip_dst_addr[7:0] - {7'd0,id};
 					/* UDP SRC PORT 12344  = 0x3038 */
-					10'h14: txd	<= 8'h30;
-					10'h15: txd	<= 8'h38;
+					11'h14: txd	<= 8'h30;
+					11'h15: txd	<= 8'h38;
 					/* UDP DEST PORT 12345 = 0x3039 */
-					10'h16: txd	<= 8'h30;
-					10'h17: txd	<= 8'h39;
+					11'h16: txd	<= 8'h30;
+					11'h17: txd	<= 8'h39;
 					/* UDP Length 972byte = 0x03cc */
-					10'h18: txd	<= udp_len[15:8];
-					10'h19: txd	<= udp_len[7:0];
+					11'h18: txd	<= udp_len[15:8];
+					11'h19: txd	<= udp_len[7:0];
 					/* UDP checksum ͐ݒ肵ȂĂH*/
-					10'h1a: begin
+					11'h1a: begin
 						txd	<= 8'h00;
 						cnt3 <= 2'd3;
 					end
-					10'h1b: begin
+					11'h1b: begin
 						txd	<= 8'h00;
 						count 	<= 11'd0;
 						state	<= DATA_RESOL;

@@ -39,6 +39,7 @@ wire clkfx, pclk;
 wire locked;
 wire reset;
 
+wire sysclk;
 wire clk50m, clk50m_bufg;
 
 wire pwrup;
@@ -142,9 +143,6 @@ fifo16_32768 asfifo_recv (
 	.empty(recv_empty)
 );
 	
-wire di1 = fifo_din[7:0];
-wire di2 = fifo_din[15:8];
-
 //////////////////////////////////////
 /// Switching screen formats
 //////////////////////////////////////
@@ -562,12 +560,13 @@ timing_gen timing_inst (
 // V/H SYNC and DE generator
 /////////////////////////////////////////
 
-assign active = !bgnd_hblnk && !bgnd_vblnk;
-
+wire active;
 reg active_q;
 reg vsync, hsync;
 reg VGA_HSYNC, VGA_VSYNC;
 reg de;
+
+assign active = !bgnd_hblnk && !bgnd_vblnk;
 
 always @ (posedge pclk) begin
 	hsync <= VGA_HSYNC_INT ^ hvsync_polarity ;
