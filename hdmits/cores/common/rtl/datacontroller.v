@@ -90,9 +90,9 @@ always @ (posedge i_clk_74M) begin
 					b_g <= (a_g >= 19'hff) ? 8'hff : a_g[7:0];
 					b_b <= (a_b >= 19'hff) ? 8'hff : a_b[7:0];
 //				end else begin
-					b_b <= 8'h0;
-					b_g <= 8'h0;
-					b_r <= 8'h0;
+//					b_b <= 8'h0;
+//					b_g <= 8'h0;
+//					b_r <= 8'h0;
 //				end
 			end else begin
 				b_b <= i_hcnt[9:2];
