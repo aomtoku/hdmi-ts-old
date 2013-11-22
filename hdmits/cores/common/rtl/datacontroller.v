@@ -42,7 +42,7 @@ parameter vfin	 = 12'd745;
 `endif
 
 reg hactive,vactive;
-reg xblock;
+//reg xblock;
 reg [18:0] Y, Cb, Cr, a_r, a_g, a_b;
 reg [7:0] b_r, b_g, b_b;
 
@@ -56,15 +56,15 @@ always @ (posedge i_clk_74M) begin
 		b_r      <= 8'h00;
 		b_g      <= 8'h00;
 		b_b      <= 8'h00;
-		xblock   <= 1'b0;
+//		xblock   <= 1'b0;
 	end else begin
 		if(i_hcnt == hstart) begin
 			hactive <= 1'b1;
-			xblock  <= 1'b0;
+//			xblock  <= 1'b0;
 		end
 
-		if(i_hcnt == (hstart + 641))
-			xblock  <= 1'b1;
+//		if(i_hcnt == (hstart + 641))
+//			xblock  <= 1'b1;
 
 		if(i_hcnt == hfin) 
 			hactive <= 1'b0;
