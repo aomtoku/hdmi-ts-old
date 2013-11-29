@@ -15,7 +15,7 @@ flash: build/top.mcs
 	cd build && impact -batch ../flash.cmd
 
 build/top.ncd: build/top.ngd
-	cd build && map top.ngd
+	cd build && map top.ngd -w
 
 build/top-routed.ncd: build/top.ncd
 	cd build && par -ol high -xe n -w top.ncd top-routed.ncd
