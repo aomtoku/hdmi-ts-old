@@ -85,27 +85,30 @@ TIMESPEC "TS_ramra" = FROM "bramra" TO "fddbgrp" TS_PCLK;
 # ##############################################
 # #PIN "dvi_rx0/pclkbufg.O" CLOCK_DEDICATED_ROUTE = FALSE;
 
-NET "RX0_TMDS(3)"   LOC = "D11" |IOSTANDARD = TMDS_33 ; # CLK
-NET "RX0_TMDSB(3)"  LOC = "C11" |IOSTANDARD = TMDS_33 ;
-NET "RX0_TMDS(2)"   LOC = "B12" |IOSTANDARD = TMDS_33 ; # Red
-NET "RX0_TMDSB(2)"  LOC = "A12" |IOSTANDARD = TMDS_33 ;
-NET "RX0_TMDS(1)"   LOC = "B11" |IOSTANDARD = TMDS_33 ; # Green     
-NET "RX0_TMDSB(1)"  LOC = "A11" |IOSTANDARD = TMDS_33 ;
-NET "RX0_TMDS(0)"   LOC = "G9"  |IOSTANDARD = TMDS_33 ; # Blue      
-NET "RX0_TMDSB(0)"  LOC = "F9"  |IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(0)"   LOC = "G9"  |IOSTANDARD = TMDS_33 ; # Blue      
+#NET "RX0_TMDSB(0)"  LOC = "F9"  |IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(1)"   LOC = "B11" |IOSTANDARD = TMDS_33 ; # Green     
+#NET "RX0_TMDSB(1)"  LOC = "A11" |IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(2)"   LOC = "B12" |IOSTANDARD = TMDS_33 ; # Red
+#NET "RX0_TMDSB(2)"  LOC = "A12" |IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(3)"   LOC = "D11" |IOSTANDARD = TMDS_33 ; # CLK
+#NET "RX0_TMDSB(3)"  LOC = "C11" |IOSTANDARD = TMDS_33 ;
 
-############################
-# TMDS pairs on the top
-############################
-#NET "TMDS(0)"  	LOC = "C7" | IOSTANDARD = TMDS_33 ; # Blue
-#NET "TMDSB(0)"  LOC = "A7" | IOSTANDARD = TMDS_33 ;
-#NET "TMDS(1)"  	LOC = "D8" | IOSTANDARD = TMDS_33 ; # Red
-#NET "TMDSB(1)"  LOC = "C8" | IOSTANDARD = TMDS_33 ;
-#NET "TMDS(2)"  	LOC = "B6" | IOSTANDARD = TMDS_33 ; # Green
-#NET "TMDSB(2)"  LOC = "A6" | IOSTANDARD = TMDS_33 ;
-#NET "TMDS(3)"  	LOC = "B8" | IOSTANDARD = TMDS_33 ; # Clock
-#NET "TMDSB(3)"  LOC = "A8" | IOSTANDARD = TMDS_33 ;
+##############################################################
+# TMDS pairs on the top TMDS IN (FPGA Bank 1): J3 
+##############################################################
+NET "RX0_TMDS(0)"  	LOC = "K17" | IOSTANDARD = TMDS_33 ; # Blue
+NET "RX0_TMDSB(0)"  LOC = "K18" | IOSTANDARD = TMDS_33 ;
+NET "RX0_TMDS(1)"  	LOC = "L17" | IOSTANDARD = TMDS_33 ; # Red
+NET "RX0_TMDSB(1)"  LOC = "L18" | IOSTANDARD = TMDS_33 ;
+NET "RX0_TMDS(2)"  	LOC = "J16" | IOSTANDARD = TMDS_33 ; # Green
+NET "RX0_TMDSB(2)"  LOC = "J18" | IOSTANDARD = TMDS_33 ;
+NET "RX0_TMDS(3)"  	LOC = "H17" | IOSTANDARD = TMDS_33 ; # Clock
+NET "RX0_TMDSB(3)"  LOC = "H18" | IOSTANDARD = TMDS_33 ;
 
+##############################################################
+# TMDS pairs on the top TMDS OUT (FPGA Bank 0): J2 
+##############################################################
 NET "TMDS(0)"  	LOC = "D8" | IOSTANDARD = TMDS_33 ; # Blue
 NET "TMDSB(0)"  LOC = "C8" | IOSTANDARD = TMDS_33 ;
 NET "TMDS(1)"  	LOC = "C7" | IOSTANDARD = TMDS_33 ; # Red
