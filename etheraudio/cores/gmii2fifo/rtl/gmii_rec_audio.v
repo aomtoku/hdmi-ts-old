@@ -15,7 +15,9 @@ module gmii2fifo24#(
 	input wire [7:0]rxd,
 	input wire rx_dv,
 	output reg [28:0] datain,
+	output reg [11:0] aux_in,
 	output reg recv_en,
+	output reg fifo_aux_rd,
 	output wire packet_en
 );
 
@@ -48,19 +50,19 @@ reg audio_dv;
 
 always@(posedge clk125) begin
 	if(sys_rst) begin
-		rx_count	<= 11'd0;
-		eth_type	<= 16'h0;
-		ip_ver		<= 8'h0;
+		rx_count		<= 11'd0;
+		eth_type		<= 16'h0;
+		ip_ver			<= 8'h0;
 		ipv4_proto	<= 8'h0;
-		ipv4_src	<= 32'h0;
-		ipv4_dst	<= 32'h0;
-		src_port	<= 16'h0;
-		dst_port	<= 16'h0;
-		packet_dv	<= 1'b0;
-		x_info		<= 12'h0;
-		y_info		<= 12'h0;
-		pre_en		<= 1'b0;
-		invalid 	<= 1'b0;
+		ipv4_src		<= 32'h0;
+		ipv4_dst		<= 32'h0;
+		src_port		<= 16'h0;
+		dst_port		<= 16'h0;
+		packet_dv		<= 1'b0;
+		x_info			<= 12'h0;
+		y_info			<= 12'h0;
+		pre_en			<= 1'b0;
+		invalid 		<= 1'b0;
 	end else begin
 		if(rx_dv) begin
 			rx_count <= rx_count + 11'd1;
@@ -86,15 +88,15 @@ always@(posedge clk125) begin
 						ip_ver		[7:0]  == ip_version 		&&
 						ipv4_proto[7:0]	 == ip_protcol 		&&
 						ipv4_dst	[31:8] == ipv4_dst_rec[31:8] &&
-						ipv4_dst	[7:0]  == (ipv4_dst_rec[7:0]+{7'd0,id}) &&
+						ipv4_dst	[7:0]  == (ipv4_dst_rec[7:0] + {7'd0, id}) &&
 						dst_port	[15:0] == dst_port_rec) begin
 							packet_dv 	<= 1'b1;
 							y_info[7:0]	<= rxd;
-					end else if(eth_type[15:0]      == ethernet_type &&
+					end else if(eth_type[15:0] == ethernet_type &&
 						ip_ver[7:0]    == ip_version &&
 					  ipv4_proto[7:0]== ip_protcol &&
 						ipv4_dst[31:8] == ipv4_dst_rec[31:8] &&
-						ipv4_dst[7:0]  == (ipv4_dst_rec[7:0]+{7'd0,id}) &&
+						ipv4_dst[7:0]  == (ipv4_dst_rec[7:0] + {7'd0, id}) &&
 						dst_port[15:0] == dst_port_aux_rec) begin
 							audio_dv 		<= 1'b1;
 					end
@@ -148,32 +150,32 @@ reg [10:0] d_cnt;
 always@(posedge clk125) begin
 	if(sys_rst) begin
 		state_data 	<= YUV_1;
-		datain 		<= 29'd0;
-		recv_en 	<= 1'd0;
-		d_cnt		<= 11'd0;
+		datain 			<= 29'd0;
+		recv_en 		<= 1'd0;
+		d_cnt				<= 11'd0;
 	end else begin
 		if(packet_dv && pre_en) begin
 			if(state_data == YUV_1) begin
 				datain[28:27] 	<= {1'b0,x_info[0]};
 				datain[26:16] 	<= y_info[10:0];
-				datain[15:8] 	<= rxd;
-				state_data 	<= YUV_2;
-				recv_en 	<= 1'b0;
+				datain[15:8] 		<= rxd;
+				state_data 			<= YUV_2;
+				recv_en 				<= 1'b0;
 			end else begin
-				recv_en 	<= 1'b1;
-				state_data 	<= YUV_1;
-				datain[7:0] 	<= rxd;
-				d_cnt		<= d_cnt + 11'd1;
+				recv_en 				<= 1'b1;
+				state_data 			<= YUV_1;
+				datain[7:0] 		<= rxd;
+				d_cnt						<= d_cnt + 11'd1;
 			end			
 		end else begin
 			state_data 	<= YUV_1;
 			if(invalid) begin
-				datain 		<= 29'd0;
-				recv_en 	<= 1'b0;
-				d_cnt		<= 11'd0;
+				datain 					<= 29'd0;
+				recv_en 				<= 1'b0;
+				d_cnt						<= 11'd0;
 			end else begin
-				recv_en 	<= 1'b0;
-				d_cnt		<= 11'd0;
+				recv_en 				<= 1'b0;
+				d_cnt						<= 11'd0;
 			end
 		end
 	end
@@ -185,9 +187,7 @@ end
 //   AUDIO/AUX receive to FIFO
 //
 //--------------------------------------------------------
-reg [11:0]aux_in;
 reg [3:0]tmp;
-reg fifo_aux_rd;
 reg pck_num;
 reg [5:0]pck_cnt;
 
@@ -202,15 +202,21 @@ always @ (posedge clk125) begin
 			pck_cnt <= pck_cnt + 6'd1;
 			case(pck_num)
 				2'd0 : 	begin 
+											pck_num 			<= 2'd1;
 											aux_in[7:0] 	<= rxd; 
 											fifo_aux_rd 	<= 1'b0; 
 								end
 				2'd1 : 	begin 	
+											pck_num 			<= 2'd2;
 											aux_in[11:8] 	<= rxd[3:0]; 
 											tmp 					<= rxd[7:4]; 
 											fifo_aux_rd 	<= 1'b1; 
 								end
-				2'd2 : 	aux_in <= {aux_in, tmp};
+				2'd2 : 	begin
+											pck_num				<= 2'd0;
+											aux_in 				<= {aux_in, tmp};
+											fifo_aux_rd 	<= 1'b1;
+								end
 			endcase
 		end
 	end
