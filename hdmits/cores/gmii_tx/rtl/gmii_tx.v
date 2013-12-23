@@ -179,11 +179,11 @@ always @(posedge tx_clk )begin
 				end
 			end
 			PRE: begin
-				tx_en	<= 1'b1;
+				tx_en <= 1'b1;
 				count <= count + 11'h1;
 				case(count)
-					11'h0:	txd	<= 8'h55;
-					11'h5:	begin
+					11'h0: txd	<= 8'h55;
+					11'h5: begin
 						txd       <= 8'h55;
 						ip_check  <= ~(ip_check[15:0] + ip_check[23:16]);
 						state     <= SFD;
@@ -220,79 +220,79 @@ always @(posedge tx_clk )begin
 					11'hc: txd	<= ip_type[15:8];
 					11'hd: 	begin
 							state 	<= DATA_IP;
-							txd			<= ip_type[7:0];
+							txd     <= ip_type[7:0];
 							count 	<= 11'h0;
 			 		end
 					//default: tx_en <= 1'b0;
 				endcase
 			end
 			DATA_IP: begin
-				tx_en	<= 1'b1;
+				tx_en <= 1'b1;
 				count <= count + 11'h1;
 				case(count)
 					/* IP Verision = 4 & IP header Length = 20byte ----> 8'h45 */
-					11'h0: txd	<= ip_ver[15:8];
+					11'h0: txd  <= ip_ver[15:8];
 					/* DSF */
-					11'h1: txd	<= ip_ver[7:0];
+					11'h1: txd  <= ip_ver[7:0];
 					/* Total Length  992byte (=0x03e0) */
-					11'h2: txd	<= ip_len[15:8];
-					11'h3: txd	<= ip_len[7:0];
+					11'h2: txd  <= ip_len[15:8];
+					11'h3: txd  <= ip_len[7:0];
 					/* Identification  ---> <<later>> */
-					11'h4: txd	<= ip_iden[15:8];
-					11'h5: txd	<= ip_iden[7:0];
+					11'h4: txd  <= ip_iden[15:8];
+					11'h5: txd  <= ip_iden[7:0];
 					/* Flag */
-					11'h6: txd	<= ip_flag[15:8];
-					11'h7: txd	<= ip_flag[7:0];
+					11'h6: txd  <= ip_flag[15:8];
+					11'h7: txd  <= ip_flag[7:0];
 					/* TTL  64 = 0x40 */
-					11'h8: txd	<= ip_ttl;
+					11'h8: txd  <= ip_ttl;
 					/* Protocol = (UDP =  17 ==0x11 )*/
-					11'h9: txd	<= ip_prot;
+					11'h9: txd  <= ip_prot;
 					/* checksum = *(culcurate) */
-					11'ha: txd	<= ip_check[15:8];
-					11'hb: txd	<= ip_check[7:0];
+					11'ha: txd  <= ip_check[15:8];
+					11'hb: txd  <= ip_check[7:0];
 					/* IP v4 SRC Address 10.0.21.9 */
-					11'hc: txd	<= ip_src_addr[31:24];
-					11'hd: txd	<= ip_src_addr[23:16];
-					11'he: txd	<= ip_src_addr[15:8];
-					11'hf: txd	<= ip_src_addr[7:0] + {7'd0,id};
+					11'hc: txd  <= ip_src_addr[31:24];
+					11'hd: txd  <= ip_src_addr[23:16];
+					11'he: txd  <= ip_src_addr[15:8];
+					11'hf: txd  <= ip_src_addr[7:0] + {7'd0,id};
 					/* IP v4 DEST Adress 203.178.143.241 */
-					11'h10: txd	<= ip_dst_addr[31:24];
-					11'h11: txd	<= ip_dst_addr[23:16];
-					11'h12: txd	<= ip_dst_addr[15:8];
-					11'h13: txd	<= ip_dst_addr[7:0] - {7'd0,id};
+					11'h10: txd <= ip_dst_addr[31:24];
+					11'h11: txd <= ip_dst_addr[23:16];
+					11'h12: txd <= ip_dst_addr[15:8];
+					11'h13: txd <= ip_dst_addr[7:0] - {7'd0,id};
 					/* UDP SRC PORT 12344  = 0x3038 */
-					11'h14: txd	<= 8'h30;
-					11'h15: txd	<= 8'h38;
+					11'h14: txd <= 8'h30;
+					11'h15: txd <= 8'h38;
 					/* UDP DEST PORT 12345 = 0x3039 */
-					11'h16: txd	<= 8'h30;
-					11'h17: txd	<= 8'h39;
+					11'h16: txd <= 8'h30;
+					11'h17: txd <= 8'h39;
 					/* UDP Length 972byte = 0x03cc */
-					11'h18: txd	<= udp_len[15:8];
-					11'h19: txd	<= udp_len[7:0];
+					11'h18: txd <= udp_len[15:8];
+					11'h19: txd <= udp_len[7:0];
 					/* UDP checksum ͐ݒ肵ȂĂH*/
 					11'h1a: begin
-						txd		<= 8'h00;
-						cnt3 	<= 2'd3;
+						txd   <= 8'h00;
+						cnt3  <= 2'd3;
 					end
 					11'h1b: begin
-						txd			<= 8'h00;
-						count 	<= 11'd0;
-						state		<= DATA_RESOL;
-						cnt3		<= 2'd0; //read X,Y in FIFO.
+						txd     <= 8'h00;
+						count   <= 11'd0;
+						state   <= DATA_RESOL;
+						cnt3    <= 2'd0; //read X,Y in FIFO.
 					end
 					//default: tx_en <= 1'b0;
 				endcase
 			end
 			DATA_RESOL: begin
-				cnt3 		<= 2'd2;
-				tx_en 	<= 1'b1;
-				count 	<= count + 11'h1;
+				cnt3    <= 2'd2;
+				tx_en   <= 1'b1;
+				count   <= count + 11'h1;
 				case(count)
 					10'h0: txd <= dout[43:36];
 					10'h1: begin
-						txd 	<= {dout[27:24],dout[47:44]};
+						txd   <= {dout[27:24],dout[47:44]};
 						count <= 11'h0;
-						cnt3 	<= 2'd3;
+						cnt3  <= 2'd3;
 						state <= DATA_RGB;
 					end
 				endcase
@@ -301,9 +301,9 @@ always @(posedge tx_clk )begin
 			DATA_RGB: begin
 				if(count == 11'd1279)begin
 					state <= FCS;
-			 		txd 	<= dout[23:16];
+			 		txd   <= dout[23:16];
 					count <= 11'd0;
-					cnt3 	<= 2'd0;
+					cnt3  <= 2'd0;
 				end else begin
 					tx_en <= 1'b1;
 					count <= count + 11'h1;
@@ -332,16 +332,16 @@ always @(posedge tx_clk )begin
 				count <= count + 11'h1;	
 				casex(cnt3)
 					2'b1x: 	begin
-						txd 	<= dout[7:0]; // Red
-						cnt3 	<= 2'd1;
+						txd   <= dout[7:0]; // Red
+						cnt3  <= 2'd1;
 					end
 					2'b01: 	begin
-						txd 	<= dout[15:8];  // Green
-						cnt3 	<= 2'd0;
+						txd   <= dout[15:8];  // Green
+						cnt3  <= 2'd0;
 					end 
 					2'b00: 	begin
-						txd 	<= dout[23:16];
-						cnt3 	<= 2'd2;// Blue
+						txd   <= dout[23:16];
+						cnt3  <= 2'd2;// Blue
 					end
 					//default: tx_en <= 1'b0;
 				endcase
@@ -352,26 +352,26 @@ always @(posedge tx_clk )begin
 			end
 `endif
 			FCS: begin
-				tx_en 		<= 1'b1;
+				tx_en     <= 1'b1;
 				fcs_count <= fcs_count + 1'b1;
-				crc_rd 		<= 1'b1;
+				crc_rd    <= 1'b1;
 				case(fcs_count)
 					2'h0: txd <= crc_out[31:24];
 					2'h1: txd <= crc_out[23:16];
 					2'h2: txd <= crc_out[15:8];
 					2'h3: begin
-						txd 			<= crc_out[7:0];
+						txd       <= crc_out[7:0];
 						gap_count <= 32'd14; // Inter Frame Gap = 14 (offset value -2)
-						state 		<= IFG;
+						state     <= IFG;
 					end
 					//default : tx_en <= 1'b0;
 				endcase
 			end
 			IFG: begin
 				if(gap_count == 32'd0) 
-					state 		<= IDLE;
+					state     <= IDLE;
 				else begin
-					tx_en 		<= 1'b0;
+					tx_en     <= 1'b0;
 					gap_count <= gap_count - 32'd1;
 				end
 			end
