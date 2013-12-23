@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 
 module gmii2fifo24#(
-	parameter [31:0] ipv4_dst_rec = {8'd192, 8'd168, 8'd0, 8'd1},
-	parameter [15:0] dst_port_rec = 16'd12345,
+	parameter [31:0] ipv4_dst_rec  = {8'd192, 8'd168, 8'd0, 8'd1},
+	parameter [15:0] dst_port_rec  = 16'd12345,
 	parameter [15:0] ethernet_type = 16'h0800, 
-	parameter [7:0]  ip_version = 8'h45,
-	parameter [7:0]  ip_protcol = 8'h11
+	parameter [7:0]  ip_version    = 8'h45,
+	parameter [7:0]  ip_protcol    = 8'h11
 
 )(
 	input  wire        clk125,
@@ -99,7 +99,7 @@ always@(posedge clk125) begin
 				11'd1331: begin // before 11'd1005
 					packet_dv <= 1'b0;
 					invalid   <= 1'b1;
-					pre_en   <= 1'b0;
+					pre_en    <= 1'b0;
 				end
 			endcase
 		end else begin
@@ -152,7 +152,7 @@ always@(posedge clk125) begin
 				d_cnt        <= d_cnt + 11'd1;
 			end			
 		end else begin
-			state_data 	<= YUV_1;
+			state_data  <= YUV_1;
 			if(invalid) begin
 				datain    <= 29'd0;
 				recv_en   <= 1'b0;
