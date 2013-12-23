@@ -22,25 +22,25 @@
 `define DEBUG
 
 module gmii_tx#(
-	parameter [47:0] 	src_mac				= {8'h00,8'h23,8'h45,8'h67,8'h89,8'h01},
-	parameter [47:0] 	dst_mac				= {8'h00,8'h23,8'h45,8'h67,8'h89,8'h02},
-	parameter [15:0] 	ip_type				= 16'h0800,
-	parameter [15:0] 	ip_ver				= 16'h4500,
+	parameter [47:0]  src_mac       = {8'h00,8'h23,8'h45,8'h67,8'h89,8'h01},
+	parameter [47:0]  dst_mac       = {8'h00,8'h23,8'h45,8'h67,8'h89,8'h02},
+	parameter [15:0]  ip_type       = 16'h0800,
+	parameter [15:0]  ip_ver        = 16'h4500,
 `ifdef DATA_YUV
-	parameter [15:0] 	ip_len				= 16'd1312 - 16'd2,
+	parameter [15:0]  ip_len        = 16'd1312 - 16'd2,
 `else
-	parameter [15:0] 	ip_len				= 16'd992,
+	parameter [15:0]  ip_len        = 16'd992,
 `endif
-	parameter [15:0] 	ip_iden				= 16'h0000,
-	parameter [15:0] 	ip_flag				= 16'h4000,
-	parameter [7:0] 	ip_ttl				= 8'h40,
-	parameter [7:0] 	ip_prot				= 8'h11,
-	parameter [31:0]	ip_src_addr 	= {8'd192,8'd168,8'd0,8'd1},
-	parameter [31:0]	ip_dst_addr 	= {8'd192,8'd168,8'd0,8'd2},
+	parameter [15:0]  ip_iden       = 16'h0000,
+	parameter [15:0]  ip_flag       = 16'h4000,
+	parameter [7:0]   ip_ttl        = 8'h40,
+	parameter [7:0]   ip_prot       = 8'h11,
+	parameter [31:0]  ip_src_addr   = {8'd192,8'd168,8'd0,8'd1},
+	parameter [31:0]  ip_dst_addr   = {8'd192,8'd168,8'd0,8'd2},
 `ifdef DATA_YUV
-	parameter [15:0] 	udp_len				= 16'd1292 - 16'd2 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
+	parameter [15:0]  udp_len       = 16'd1292 - 16'd2 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
 `else
-	parameter [15:0] 	udp_len				= 16'd972 // (Pixel = 960) + (X,Y = 4) + (UDP header = 8)
+	parameter [15:0]  udp_len       = 16'd972 // (Pixel = 960) + (X,Y = 4) + (UDP header = 8)
 `endif
 )(
 	input   wire        id,
@@ -77,32 +77,32 @@ module gmii_tx#(
 //
 //  LOGIC
 //
-parameter IDLE		 		= 4'h0;
-parameter PRE 				= 4'h1;
-parameter SFD 				= 4'h2;
-parameter DATA_ETH		= 4'h3;
-parameter DATA_IP			= 4'h4;
-parameter DATA_RESOL	= 4'h5;
-parameter DATA_RGB		= 4'h6;
-parameter FCS 				= 4'h7;
-parameter IFG					= 4'h8;
+parameter IDLE        = 4'h0;
+parameter PRE         = 4'h1;
+parameter SFD         = 4'h2;
+parameter DATA_ETH    = 4'h3;
+parameter DATA_IP     = 4'h4;
+parameter DATA_RESOL  = 4'h5;
+parameter DATA_RGB    = 4'h6;
+parameter FCS         = 4'h7;
+parameter IFG         = 4'h8;
 
 
-reg [3:0] 	state;
-reg [10:0] 	count;
-reg [1:0] 	fcs_count;
-reg [1:0] 	cnt3;
-reg [31:0] 	gap_count;
+reg [3:0]   state;
+reg [10:0]  count;
+reg [1:0]   fcs_count;
+reg [1:0]   cnt3;
+reg [31:0]  gap_count;
 
 
 //
 // CRC 
 //
 
-reg					crc_rd;
-reg					crc_init;// = (state == SFD && count ==0);
-wire [31:0]	crc_out;
-wire				crc_data_en = ~crc_rd;
+reg         crc_rd;
+reg         crc_init;// = (state == SFD && count ==0);
+wire [31:0] crc_out;
+wire        crc_data_en = ~crc_rd;
 
 crc_gen crc_gen(
 	.Reset(sys_rst),
@@ -127,8 +127,8 @@ wire send_enable = fstate;
 
 always @(posedge fifo_clk) begin
 	if(sys_rst) begin
-		fstate		 <= 1'b0;
-		ppl 			 <= 1'b0;
+		fstate     <= 1'b0;
+		ppl        <= 1'b0;
 		buf1_wr_en <= 1'b0;
 		buf2_wr_en <= 1'b0;
 	end else begin
@@ -137,13 +137,13 @@ always @(posedge fifo_clk) begin
 		buf1_tx_en <= tx_en;
 		buf2_tx_en <= buf1_tx_en;
 		if({buf1_wr_en,buf2_wr_en} == 2'b01)
-			fstate 	<= 1'b1;
+			fstate   <= 1'b1;
 		if({buf1_tx_en,buf2_tx_en} == 2'b01) begin
 			if(ppl)begin
-				ppl 		<= 1'b0;
-				fstate 	<= 1'b0;
+				ppl     <= 1'b0;
+				fstate  <= 1'b0;
 			end else begin
-				ppl 		<= 1'b1;
+				ppl     <= 1'b1;
 			end
 		end
 	end
@@ -157,25 +157,25 @@ reg [23:0] ip_check;
 
 always @(posedge tx_clk )begin
 	if(sys_rst)begin
-		txd				<= 8'd0;
-		tx_en			<= 1'd0;
-		count			<= 11'd0;
-		state			<= IDLE;
-		cnt3 			<= 2'd0;
+		txd       <= 8'd0;
+		tx_en     <= 1'd0;
+		count     <= 11'd0;
+		state     <= IDLE;
+		cnt3      <= 2'd0;
 		fcs_count <= 2'd0;
-		crc_rd 		<= 1'b1;
+		crc_rd    <= 1'b1;
 		gap_count <= 32'd0;
-		crc_init 	<= 1'd0;
-		ip_check 	<= 24'd0;
+		crc_init  <= 1'd0;
+		ip_check  <= 24'd0;
 	end else begin
-		crc_rd 		<= 1'b0; 
+		crc_rd    <= 1'b0; 
 		case(state)
 			IDLE: begin
 				if(empty == 1'b0 & send_enable)begin
-					txd				<= 8'h55;
-					tx_en			<= 1'b1;
-					state 		<= PRE;
-					ip_check 	<= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					txd       <= 8'h55;
+					tx_en     <= 1'b1;
+					state     <= PRE;
+					ip_check  <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 				end
 			end
 			PRE: begin
@@ -184,23 +184,23 @@ always @(posedge tx_clk )begin
 				case(count)
 					11'h0:	txd	<= 8'h55;
 					11'h5:	begin
-						txd				<= 8'h55;
-						ip_check 	<= ~(ip_check[15:0] + ip_check[23:16]);
-						state 		<= SFD;
-						count 		<= 11'h0;
+						txd       <= 8'h55;
+						ip_check  <= ~(ip_check[15:0] + ip_check[23:16]);
+						state     <= SFD;
+						count     <= 11'h0;
 					end
 					//default tx_en <= 1'b0;
 				endcase
 			end
 			SFD: begin
-				txd				<= 8'hd5;
-				crc_init 	<= 1'd1;
-				state			<= DATA_ETH;
+				txd       <= 8'hd5;
+				crc_init  <= 1'd1;
+				state     <= DATA_ETH;
 			end
 			DATA_ETH: begin
-				tx_en 		<= 1'b1;
-				count 		<= count + 11'h1;
-				crc_init 	<= 1'd0;
+				tx_en     <= 1'b1;
+				count     <= count + 11'h1;
+				crc_init  <= 1'd0;
 				case(count)
 					/* DST MAC 00:23:45:67:89:ac */
 					11'h0: txd	<= dst_mac[47:40];
