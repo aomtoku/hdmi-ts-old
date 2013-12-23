@@ -55,16 +55,17 @@ module top (
   input wire        rstbtn_n,    //The pink reset button
   input wire        clk100,      //100 MHz osicallator
 	input wire 				btn,
+	input wire				btn_c,
   input wire [3:0]  RX0_TMDS,
   input wire [3:0]  RX0_TMDSB,
 
   output wire [3:0] TX0_TMDS,
   output wire [3:0] TX0_TMDSB,
 
-  input  wire [3:0] SW,
-	//output wire [7:0] PMOD,
+  input  wire [4:0] SW,
+	output wire [7:0] PMOD,
 
-  output wire [7:0] LED
+  output reg	 [7:0] LED
 );
 
   ////////////////////////////////////////////////////
@@ -178,7 +179,7 @@ module top (
     .red_rdy     (rx0_red_rdy),
 
     .psalgnerr   (rx0_psalgnerr),
-		//.debug			 (PMOD),
+		.debug			 (PMOD),
 
     .sdout       (rx0_sdata),
     .aux0 	   	 (rx0_aux0),
@@ -462,9 +463,78 @@ module top (
 				qcnt <= qcnt + 16'd1;
 		end
 	end
-
 	
-  assign LED = (SW[2]) ? cnt_q : (SW[3]) ? q_reg[7:0] : q_reg[15:8] ;
+	reg [23:0]ent_cnt;
+	reg [23:0]ent_cnt_q;
+	reg [15:0]pc_cnt;
+	reg [15:0]pc_cnt_q;
+	reg [15:0]cntr;
+	reg [15:0]cntr_q;
+	reg [5:0]hacnt;
+	reg [5:0]head;
+	reg [2:0]audio_h;
+
+	//parameter HEADER = hd;
+	always @ (posedge rx0_pclk)begin
+		if(btn)begin
+			ent_cnt <= 24'd0;
+			pc_cnt 	<= 16'd0;
+			hacnt 	<= 6'd0;
+			head 		<= 6'd0;
+			//audio_h <= 3'd0;
+		end else begin
+			if({rx0_vsync,vs_q} == 2'b10)begin
+				ent_cnt <= 24'd0;
+				ent_cnt_q <= ent_cnt;
+				pc_cnt 	<= 16'd0;
+				pc_cnt_q<= pc_cnt;
+				cntr		<= 16'd0;
+				cntr_q	<= cntr;
+			end
+			if(ade_q)begin
+				ent_cnt 	<= ent_cnt + 24'd1;
+				if(hacnt == 6'd31)begin
+					cntr 		<= cntr + 16'd1;
+					hacnt 	<= 6'd0;
+					audio_h <= head[2:0];
+					if(head == hd)
+						pc_cnt <= pc_cnt + 16'd1;
+				end else begin
+					hacnt 	<= hacnt + 6'd1;
+				end
+				head[hacnt] <= adin0_q[2]; 
+			end
+		end
+	end
+
+	reg [7:0]hd;
+	reg btn_q;
+	// ADDER by Switch
+	always @ (posedge rx0_pclk)
+		if(btn)
+			hd <= 8'd0;
+		else begin
+			btn_q <= btn_c;
+			if({btn_c,btn_q} == 2'b10)
+				if(hd == 8'h0B)
+					hd <= 8'd0;
+				else
+					hd <= hd + 8'd1;
+		end
+
+	always @(*)begin
+		case(SW[4:2])
+			3'b000: LED <= pc_cnt_q[15:8];
+			3'b001: LED <= pc_cnt_q[7:0];
+			3'b010: LED <= ent_cnt_q[23:16];
+			3'b011: LED <= ent_cnt_q[15:8];
+			3'b100: LED <= ent_cnt_q[7:0];
+			3'b101: LED <= hd;
+			3'b110: LED <= cntr_q[15:8];
+			3'b111: LED <= cntr_q[7:0];
+		endcase
+	end
+  //assign LED = (SW[2]) ? pc_cnt[15:8] : (SW[3]) ? pc_cnt[7:0] : audio_h ;
 	
 	//assign PMOD = debug;
 /*	assign PMOD[1] = rx0_vsync;

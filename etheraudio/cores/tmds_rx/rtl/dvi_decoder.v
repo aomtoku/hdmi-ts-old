@@ -184,13 +184,11 @@ module dvi_decoder (
 	reg  videopreamble;
   reg  dilndpreamble;
   always @ (posedge pclk) begin
-    //videopreamble <=#1 ({ctl0, ctl1, ctl2, ctl3} === 4'b1000);
     videopreamble <=#1 ({ctl0, ctl1, ctl2, ctl3} === 4'b1000);
-    //dilndpreamble <=#1 ({ctl0, ctl1, ctl2, ctl3} === 4'b1010);
     dilndpreamble <=#1 ({ctl0, ctl1, ctl2, ctl3} === 4'b1010);
   end
 
-	assign debug = {hsync,vsync, ctl0, ctl1, ctl2, ctl3, 2'b0};
+	assign debug = {hsync,vsync, aux0, ade, vde};
 
 
 	wire blue_c1, blue_c0;
