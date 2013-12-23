@@ -1,12 +1,12 @@
 module datacontroller (
-	input wire i_clk_74M,     //74.25 MHZ pixel clock
-	input wire i_rst,   
-	input wire [1:0] i_format,
-	input wire [11:0] i_vcnt, //vertical counter from video timing generator
-	input wire [11:0] i_hcnt, //horizontal counter from video timing generator
-	output wire fifo_read,
-	input wire [28:0] data,
-	input wire sw,
+	input  wire        i_clk_74M,     //74.25 MHZ pixel clock
+	input  wire        i_rst,   
+	input  wire [1:0]  i_format,
+	input  wire [11:0] i_vcnt, //vertical counter from video timing generator
+	input  wire [11:0] i_hcnt, //horizontal counter from video timing generator
+	output wire        fifo_read,
+	input  wire [28:0] data,
+	input  wire        sw,
 
 	output wire [7:0]  o_r,
 	output wire [7:0]  o_g,
@@ -31,14 +31,14 @@ assign y_count = data[26:16];
 //------------------------------------------------------------
 `ifndef NO
 parameter hstart = 12'd1;
-parameter hfin	 = 12'd1281;
+parameter hfin   = 12'd1281;
 parameter vstart = 12'd24;
-parameter vfin	 = 12'd745;
+parameter vfin   = 12'd745;
 `else
 parameter hstart = 12'd1;
-parameter hfin	 = 12'd1281;
+parameter hfin   = 12'd1281;
 parameter vstart = 12'd25;
-parameter vfin	 = 12'd745;
+parameter vfin   = 12'd745;
 `endif
 
 reg hactive,vactive;
