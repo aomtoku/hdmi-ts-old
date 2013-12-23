@@ -30,30 +30,30 @@ always@(posedge clk)
 		vpw_cnt <= 16'd0;
 		hpw_cnt <= 16'd0;
 	end else begin
-	    vsync_q <= vsync;
-	    hsync_q <= hsync;
-	    //
-	    // counting Hsync during 1 frame
-	    //
-	    if({vsync,vsync_q} == 2'b10)begin
-				hpw_cnt <= 16'd0;
-				h_cnt   <= 16'd0;
-				h_buff  <= h_cnt;
-				hpw_buf <= hpw_cnt;
-	    end else begin
-			if({hsync,hsync_q} == 2'b10)begin
-				h_cnt     <= h_cnt + 16'd1;
-				act_cnt   <= 16'd0;
-				v_buff    <= act_cnt;
-				vpw_cnt   <= 16'd0;
-				vpw_buf   <= vpw_cnt;
-			end else begin
-				if(hsync)
-					vpw_cnt  <= vpw_cnt + 16'd1;
-					act_cnt  <= act_cnt + 16'd1;
+		vsync_q <= vsync;
+		hsync_q <= hsync;
+	  //
+	  // counting Hsync during 1 frame
+	  //
+	  if({vsync,vsync_q} == 2'b10)begin
+			hpw_cnt <= 16'd0;
+			h_cnt   <= 16'd0;
+			h_buff  <= h_cnt;
+			hpw_buf <= hpw_cnt;
+	  end else begin
+		if({hsync,hsync_q} == 2'b10)begin
+			h_cnt     <= h_cnt + 16'd1;
+			act_cnt   <= 16'd0;
+			v_buff    <= act_cnt;
+			vpw_cnt   <= 16'd0;
+			vpw_buf   <= vpw_cnt;
+		end else begin
+			if(hsync)
+				vpw_cnt  <= vpw_cnt + 16'd1;
+				act_cnt  <= act_cnt + 16'd1;
 			end
-		 if(vsync && {hsync,hsync_q} == 2'b10)
+	 		if(vsync && {hsync,hsync_q} == 2'b10)
 				hpw_cnt  <= hpw_cnt + 16'd1;
-	    end	
+	 	end	
 	end
 endmodule
