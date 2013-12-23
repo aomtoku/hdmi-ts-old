@@ -4,29 +4,26 @@
 
 module top (
 	// SYSTEM
-	input wire RSTBTN,    //The BTN NORTH
-	input wire SYS_CLK,   //100 MHz osicallator
-
+	input  wire       RSTBTN,    //The BTN NORTH
+	input  wire       SYS_CLK,   //100 MHz osicallator
 	// TMDS OUTPUT
-	input wire [3:0] RX0_TMDS,
-	input wire [3:0] RX0_TMDSB,
-
+	input  wire [3:0] RX0_TMDS,
+	input  wire [3:0] RX0_TMDSB,
 	// TMDS INPUT
 	output wire [3:0] TMDS,
 	output wire [3:0] TMDSB,
-
 	// Ethernet PHY
-	output wire RESET,
-	output wire GTXCLK,
-	output wire TXEN,
-	output wire TXER,
+	output wire       RESET,
+	output wire       GTXCLK,
+	output wire       TXEN,
+	output wire       TXER,
 	output wire [7:0] TXD,
-	input wire RXCLK,
-	input wire RXDV,
-	input wire [7:0] RXD,
+	input  wire       RXCLK,
+	input  wire       RXDV,
+	input  wire [7:0] RXD,
 
-	input wire [3:0] SW,
-	input wire [3:0] DEBUG_SW,
+	input  wire [3:0] SW,
+	input  wire [3:0] DEBUG_SW,
 
 	output reg  [7:0] LED,
 	output wire [4:0] JA
@@ -699,33 +696,19 @@ clkout (
 
 OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
 
-
-
-
-
-//-----------------------------------------------------------
-// 
-//
-// Send process
-//
-//
-//-----------------------------------------------------------
-
-
-
 //-----------------------------------------------------------
 //  FIFO(48bit) to GMII
 //		Depth --> 4096
 //-----------------------------------------------------------
-wire send_full;
-wire send_empty;
-wire [47:0]tx_data;
-wire rd_en;
-wire [47:0]din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
-wire rx0_pclk;           
-wire rx0_hsync;          // hsync data
-wire rx0_vsync;          // vsync data
-wire send_fifo_wr_en = video_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
+wire        send_full;
+wire        send_empty;
+wire [47:0] tx_data;
+wire        rd_en;
+wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
+wire        rx0_pclk;           
+wire        rx0_hsync;          // hsync data
+wire        rx0_vsync;          // vsync data
+wire        send_fifo_wr_en = video_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
 
 fifo48_8k asfifo_send (
 	.rst(RSTBTN | rx0_vsync),
@@ -744,24 +727,24 @@ fifo48_8k asfifo_send (
 // TMDS Input Port 0 (BANK : )
 //
 //////////////////////////////////////////////////
-wire rx0_tmdsclk;
-wire rx0_pclkx10, rx0_pllclk0;
-wire rx0_plllckd;
-wire rx0_reset;
-wire rx0_serdesstrobe;
+wire        rx0_tmdsclk;
+wire        rx0_pclkx10, rx0_pllclk0;
+wire        rx0_plllckd;
+wire        rx0_reset;
+wire        rx0_serdesstrobe;
 
-wire rx0_psalgnerr;      // channel phase alignment error
-wire [7:0] rx0_red;      // pixel data out
-wire [7:0] rx0_green;    // pixel data out
-wire [7:0] rx0_blue;     // pixel data out
-wire rx0_de;
+wire        rx0_psalgnerr;      // channel phase alignment error
+wire [7:0]  rx0_red;      // pixel data out
+wire [7:0]  rx0_green;    // pixel data out
+wire [7:0]  rx0_blue;     // pixel data out
+wire        rx0_de;
 wire [29:0] rx0_sdata;
-wire rx0_blue_vld;
-wire rx0_green_vld;
-wire rx0_red_vld;
-wire rx0_blue_rdy;
-wire rx0_green_rdy;
-wire rx0_red_rdy;
+wire        rx0_blue_vld;
+wire        rx0_green_vld;
+wire        rx0_red_vld;
+wire        rx0_blue_rdy;
+wire        rx0_green_rdy;
+wire        rx0_red_rdy;
 
 dvi_decoder dvi_rx0 (
 	//These are input ports
@@ -812,12 +795,12 @@ dvi_decoder dvi_rx0 (
 //                     HSYNC: 45khz   VSYNC : 60Hz)
 //-----------------------------------------------------
 
-wire [11:0]in_hcnt = {1'b0, video_hcnt[10:0]};
-wire [11:0]in_vcnt = {1'b0, video_vcnt[10:0]};
-wire [10:0]video_hcnt;
-wire [10:0]video_vcnt;
-wire [11:0]index;
-wire video_en;
+wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
+wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
+wire [10:0] video_hcnt;
+wire [10:0] video_vcnt;
+wire [11:0] index;
+wire        video_en;
 
 tmds_timing timing(
 		.rx0_pclk(rx0_pclk),
