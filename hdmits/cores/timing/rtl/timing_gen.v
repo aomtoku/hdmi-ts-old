@@ -1,34 +1,35 @@
 `timescale 1 ns / 1 ps
 
 module timing_gen (
-	input wire [10:0] tc_hsblnk,
-	input wire [10:0] tc_hssync,
-	input wire [10:0] tc_hesync,
-	input wire [10:0] tc_heblnk,
+	input  wire [10:0] tc_hsblnk,
+	input  wire [10:0] tc_hssync,
+	input  wire [10:0] tc_hesync,
+	input  wire [10:0] tc_heblnk,
 
 	output wire [10:0] hcount,
-	output wire hsync,
-	output wire hblnk,
+	output wire        hsync,
+	output wire        hblnk,
 
-	input wire [10:0] tc_vsblnk,
-	input wire [10:0] tc_vssync,
-	input wire [10:0] tc_vesync,
-	input wire [10:0] tc_veblnk,
+	input  wire [10:0] tc_vsblnk,
+	input  wire [10:0] tc_vssync,
+	input  wire [10:0] tc_vesync,
+	input  wire [10:0] tc_veblnk,
 
 	output wire [10:0] vcount,
-	output wire vsync,
-	output wire vblnk,
+	output wire        vsync,
+	output wire        vblnk,
 
-	input wire restart,
-	input wire clk74m,
-	input wire clk125m,
+	input  wire        restart,
+	input  wire        clk74m,
+	input  wire        clk125m,
 
-	input wire fifo_wr_en,
-	input wire [10:0] y_din
+	input  wire        fifo_wr_en,
+	input  wire [10:0] y_din
 );
 
-reg [10:0]y_din_q,y_din_qq;
+reg [10:0] y_din_q,y_din_qq;
 reg [10:0] vsync_f;
+
 always@(posedge clk125m)begin
 	if(restart)begin
 		y_din_q     <= 11'b0;
@@ -37,7 +38,7 @@ always@(posedge clk125m)begin
 	end else begin
 		y_din_qq <= y_din_q;
 		if(fifo_wr_en)
-			y_din_q     <= y_din; 
+			y_din_q <= y_din; 
 
 		if(y_din_q < y_din_qq)
 			vsync_f <= 12'b111111111111;
@@ -50,6 +51,7 @@ reg vsync_buf; //Double FF for vsync
 reg vsync_buf_q;
 reg vsync_buf_r;
 reg vclr = 1'b0;
+
 always@(posedge clk74m)begin
 	if(restart)begin
 		vsync_buf   <= 1'b0;
@@ -57,7 +59,7 @@ always@(posedge clk74m)begin
 		vsync_buf_r <= 1'b0;
 		vclr        <= 1'b0;
 	end else begin
-		vsync_buf <= vsync_f[0];
+		vsync_buf   <= vsync_f[0];
 		vsync_buf_q <= vsync_buf;
 		vsync_buf_r <= vsync_buf_q;
 		if ({vsync_buf_q,vsync_buf_r} == 2'b10)
