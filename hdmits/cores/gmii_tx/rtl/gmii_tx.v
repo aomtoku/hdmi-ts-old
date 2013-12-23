@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: Keio University
+// Engineer: Yuta Tokusashi
 // 
 // Create Date:    18:06:07 08/27/2013 
-// Design Name: 
+// Design Name:    Gmii Ethernet Transport
 // Module Name:    gmii_tx 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
+// Project Name:  
+// Target Devices: Atlys 
+// Tool versions:  ISE 14.6
 // Description: 
 //
 // Dependencies: 
@@ -62,8 +62,8 @@ module gmii_tx#(
 );
 
 
-//
-// MODE  DATA_YUV 
+//--------------------------------------------------------------------------------
+//***** MODE  DATA_YUV ******
 //    1280x720 YUV422
 //   	 G(channel 1) --> Y  8bit
 //	 R(channel 2) --> Cb 8bit/ Cr8bit
@@ -71,33 +71,12 @@ module gmii_tx#(
 //	 Packet is
 //	 UDP Header |Y(2 Byte) | X(2 Byte) | Y0(1Byte) | Cb0(1Byte) | Y1(1Byte)
 //	 | Cr1(1Byte) .............
-//
+//--------------------------------------------------------------------------------
 `define DATA_YUV
 
-//
-//  LOGIC
-//
-parameter IDLE        = 4'h0;
-parameter PRE         = 4'h1;
-parameter SFD         = 4'h2;
-parameter DATA_ETH    = 4'h3;
-parameter DATA_IP     = 4'h4;
-parameter DATA_RESOL  = 4'h5;
-parameter DATA_RGB    = 4'h6;
-parameter FCS         = 4'h7;
-parameter IFG         = 4'h8;
-
-
-reg [3:0]   state;
-reg [10:0]  count;
-reg [1:0]   fcs_count;
-reg [1:0]   cnt3;
-reg [31:0]  gap_count;
-
-
-//
-// CRC 
-//
+//--------------------------------------------------------------------------------
+//  CRC 
+//--------------------------------------------------------------------------------
 
 reg         crc_rd;
 reg         crc_init;// = (state == SFD && count ==0);
@@ -115,11 +94,9 @@ crc_gen crc_gen(
 	.CRC_end()
 );
 
-//-------------------------------------------
-//  FIFO control 
-//     
-//-------------------------------------------
-
+//-------------------------------------------------------------------------------
+//  FIFO for VIDEO controller 
+//-------------------------------------------------------------------------------
 reg fstate,ppl;  
 reg buf1_wr_en, buf2_wr_en; //To aboid Metastability
 reg buf1_tx_en, buf2_tx_en;
@@ -147,13 +124,29 @@ always @(posedge fifo_clk) begin
 			end
 		end
 	end
-
 end
 
-//
-// Logic
-//
-reg [23:0] ip_check;
+//---------------------------------------------------------------------
+//  LOGIC
+//---------------------------------------------------------------------
+
+parameter IDLE        = 4'h0;
+parameter PRE         = 4'h1;
+parameter SFD         = 4'h2;
+parameter DATA_ETH    = 4'h3;
+parameter DATA_IP     = 4'h4;
+parameter DATA_RESOL  = 4'h5;
+parameter DATA_RGB    = 4'h6;
+parameter FCS         = 4'h7;
+parameter IFG         = 4'h8;
+
+
+reg [3:0]   state;
+reg [10:0]  count;
+reg [1:0]   fcs_count;
+reg [1:0]   cnt3;
+reg [31:0]  gap_count;
+reg [23:0]  ip_check;
 
 always @(posedge tx_clk )begin
 	if(sys_rst)begin
