@@ -32,15 +32,15 @@ always@(posedge clk)
 	end else begin
 		vsync_q <= vsync;
 		hsync_q <= hsync;
-	  //
-	  // counting Hsync during 1 frame
-	  //
-	  if({vsync,vsync_q} == 2'b10)begin
+		//
+		// counting Hsync during 1 frame
+		//
+		if({vsync,vsync_q} == 2'b10)begin
 			hpw_cnt <= 16'd0;
 			h_cnt   <= 16'd0;
 			h_buff  <= h_cnt;
 			hpw_buf <= hpw_cnt;
-	  end else begin
+		end else begin
 		if({hsync,hsync_q} == 2'b10)begin
 			h_cnt     <= h_cnt + 16'd1;
 			act_cnt   <= 16'd0;
