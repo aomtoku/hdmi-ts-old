@@ -54,6 +54,6 @@ always@(posedge clk)
 			end
 	 		if(vsync && {hsync,hsync_q} == 2'b10)
 				hpw_cnt  <= hpw_cnt + 16'd1;
-	 	end	
+		end	
 	end
 endmodule
