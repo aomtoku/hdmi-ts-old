@@ -373,7 +373,6 @@ always @(posedge tx_clk )begin
 	end
 end
 
-reg zero = 0;
-assign rd_en = ((state == DATA_RGB & cnt3 == 2'd2 ) | (state == DATA_RESOL & cnt3 == 2'd3 ) | (state == DATA_IP & cnt3 == 2'd3 )); //? cnt3[1]: zero;
+assign rd_en = ((state == DATA_RGB & cnt3 == 2'd2 ) | (state == DATA_RESOL & cnt3 == 2'd3 ) | (state == DATA_IP & cnt3 == 2'd3 ));
 
 endmodule
