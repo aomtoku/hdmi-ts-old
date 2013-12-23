@@ -43,22 +43,22 @@ module gmii_tx#(
 	parameter [15:0] 	udp_len				= 16'd972 // (Pixel = 960) + (X,Y = 4) + (UDP header = 8)
 `endif
 )(
-	input 	wire 				id,
+	input 	wire        id,
 	/*** FIFO ***/
-	input		wire 				fifo_clk,
-	input 	wire				sys_rst,
-	input 	wire [47:0] dout,
-	input		wire	 			empty,
-	input 	wire	 			full,
-	output 	wire	 			rd_en,
-	input 	wire	 			wr_en,
+	input	  wire        fifo_clk,
+	input   wire        sys_rst,
+	input   wire [47:0] dout,
+	input	  wire        empty,
+	input   wire        full,
+	output  wire        rd_en,
+	input   wire        wr_en,
 	
-	input 	wire 	 			sw,
+	input   wire        sw,
 	
 	/*** Ethernet PHY GMII ***/
-	input 	wire	 			tx_clk,
-	output 	reg	 				tx_en,
-	output 	reg [7:0] 	txd
+	input   wire        tx_clk,
+	output 	reg         tx_en,
+	output 	reg [7:0]   txd
 );
 
 
