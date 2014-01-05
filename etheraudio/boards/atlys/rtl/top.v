@@ -49,10 +49,8 @@
 
 `timescale 1 ns / 1 ps
 
-//`define DIRECTPASS
-
 module top (
-  input wire        rstbtn_n,    //The pink reset button
+  input wire        RSTBTN,    //The pink reset button
   input wire        clk100,      //100 MHz osicallator
 	input wire 				btn,
 	input wire				btn_c,
@@ -64,6 +62,14 @@ module top (
 
   input  wire [4:0] SW,
 	output wire [7:0] PMOD,
+
+	input  wire       RESET,
+	input  wire       RXDV,
+	input  wire       RXCLK,
+	output wire       GTXCLK,
+	output wire       TXER,
+	output wire       TXEN,
+	output wire [7:0] TXD,
 
   output reg	 [7:0] LED
 );
@@ -79,7 +85,7 @@ module top (
 	reg buf_c;
 	wire clk50m = buf_c;
 	always@(posedge clk100)
-		if(rstbtn_n)
+		if(RSTBTN)
 			buf_c <= 1'b0;
 		else
 			buf_c <= ~buf_c;
@@ -87,7 +93,7 @@ module top (
 	reg buf_d;
 	assign clk25m = buf_d;
 	always@(posedge clk50m)
-		if(rstbtn_n)
+		if(RSTBTN)
 			buf_d <= 1'b0;
 		else
 			buf_d <= ~buf_d;
@@ -112,6 +118,84 @@ module top (
     switch[0] = select[0] ^ select_q[0];
     switch[1] = select[1] ^ select_q[1];
   end
+  
+  //////////////////////////////////////
+  //
+  //  Generate Clock 125MHz for GMII
+  //
+  /////////////////////////////////////
+
+  wire clk_125M, clk_125M_90;
+  assign GTXCLK = clk_125M;
+
+  clk_wiz_v3_6 clk125_gen(// Clock in ports
+	  .CLK_IN1(sysclk),
+	  // Clock out ports
+	  .CLK_OUT1(clk_125M),
+	  .CLK_OUT2(),
+
+	  // Status and control signals
+	  .RESET(RSTBTN),
+	  .LOCKED()
+  );
+
+ 
+  //-----------------------------------------------------------
+  //  PHY RESET
+  //-----------------------------------------------------------
+  reg [20:0] coldsys_rst = 21'd0;
+  wire coldsys_rst10ms = (coldsys_rst == 21'h100000);
+  always @(posedge sysclk) coldsys_rst <= !coldsys_rst10ms ? coldsys_rst + 21'h1 : 21'h100000;
+  assign RESET = coldsys_rst10ms;
+  assign TXER = 1'b0;
+  
+  //-----------------------------------------------------------
+  //  FIFO(48bit) to GMII
+  //		Depth --> 4096
+  //-----------------------------------------------------------
+  wire        send_full;
+  wire        send_empty;
+  wire [47:0] tx_data;
+  wire        rd_en;
+  wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
+  wire        rx0_pclk;           
+  wire        rx0_hsync;          // hsync data
+  wire        rx0_vsync;          // vsync data
+  wire        send_fifo_wr_en = video_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
+
+  fifo48_8k asfifo_send (
+	  .rst(RSTBTN | rx0_vsync),
+	  .wr_clk(rx0_pclk),  // TMDS clock 74.25MHz 
+	  .rd_clk(clk_125M),  // GMII TX clock 125MHz
+	  .din(din_fifo),     // data input 48bit
+	  .wr_en(send_fifo_wr_en),
+	  .rd_en(rd_en),
+	  .dout(tx_data),    // data output 48bit 
+	  .full(send_full),
+	  .empty(send_empty)
+  );
+  
+  //-----------------------------------------------------------
+  //  GMII TX
+  //-----------------------------------------------------------
+
+  gmii_tx gmii_tx(
+	  .id(DEBUG_SW[0]),
+	  // FIFO
+	  .fifo_clk(rx0_pclk),
+	  .sys_rst(RSTBTN),
+	  .dout(tx_data), // 48bit
+	  .empty(send_empty),
+	  .full(send_full),
+	  .rd_en(rd_en),
+	  .wr_en(video_en),
+	  .sw(~DEBUG_SW[2]),
+	
+	  // Ethernet PHY GMII
+	  .tx_clk(clk_125M),
+	  .tx_en(TXEN),
+	  .txd(TXD)
+  );
 
   /////////////////////////
   //
@@ -153,7 +237,7 @@ module top (
     .blue_n      (RX0_TMDSB[0]),
     .green_n     (RX0_TMDSB[1]),
     .red_n       (RX0_TMDSB[2]),
-    .exrst       (~rstbtn_n),
+    .exrst       (~RSTBTN),
 
     //These are output ports
     .reset       (rx0_reset),
