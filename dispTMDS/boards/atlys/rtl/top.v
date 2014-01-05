@@ -49,7 +49,7 @@
 
 `timescale 1 ps / 1 ps
 
-module vtc_demo (
+module top (
   input  wire RSTBTN,
 
   input  wire SYS_CLK,
