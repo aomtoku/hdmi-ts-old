@@ -49,6 +49,8 @@
 
 `timescale 1 ps / 1 ps
 
+//`define apple
+
 module top (
   input  wire RSTBTN,
 
@@ -74,8 +76,11 @@ module top (
 
   IBUF sysclk_buf (.I(SYS_CLK), .O(sysclk));
 
-  BUFIO2 #(.DIVIDE_BYPASS("FALSE"), .DIVIDE(2))
-  sysclk_div (.DIVCLK(clk50m), .IOCLK(), .SERDESSTROBE(), .I(sysclk));
+  reg clk_buf;
+	always @(posedge sysclk) clk_buf <= ~clk_buf;
+	assign clk50m = clk_buf;
+	//BUFIO2 #(.DIVIDE_BYPASS("FALSE"), .DIVIDE(2))
+  //sysclk_div (.DIVCLK(clk50m), .IOCLK(), .SERDESSTROBE(), .I(sysclk));
 
   BUFG clk50m_bufgbufg (.I(clk50m), .O(clk50m_bufg));
 
@@ -541,7 +546,10 @@ module top (
 
   assign {red_data, green_data, blue_data} = active_pixel;
 `else
+`ifdef apple
   apple_out clrbar(
+`else 
+  hdcolorbar clrbar(
     .i_clk_74M(pclk),
     .i_rst(reset),
     .i_hcnt(bgnd_hcount),
@@ -552,6 +560,7 @@ module top (
     .o_g(green_data),
     .o_b(blue_data)
   );
+`endif
 `endif
   ////////////////////////////////////////////////////////////////
   // DVI Encoder
