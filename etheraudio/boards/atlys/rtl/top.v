@@ -60,12 +60,14 @@ module top (
   output wire [3:0] TX0_TMDS,
   output wire [3:0] TX0_TMDSB,
 
-  input  wire [4:0] SW,
+  input  wire [3:0] SW,
+  input  wire [3:0] DEBUG_SW,
 	output wire [7:0] PMOD,
 
 	input  wire       RESET,
 	input  wire       RXDV,
 	input  wire       RXCLK,
+	input  wire [7:0] RXD,
 	output wire       GTXCLK,
 	output wire       TXER,
 	output wire       TXEN,
@@ -153,41 +155,72 @@ module top (
   //  FIFO(48bit) to GMII
   //		Depth --> 4096
   //-----------------------------------------------------------
+
   wire        send_full;
   wire        send_empty;
-  wire [47:0] tx_data;
-  wire        rd_en;
-  wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
+  wire [11:0] tx_dout;
+  wire        send_rd_en;
+  wire [11:0] din_fifo = {rx0_aux0, rx0_aux1, rx0_aux2};
   wire        rx0_pclk;           
   wire        rx0_hsync;          // hsync data
   wire        rx0_vsync;          // vsync data
-  wire        send_fifo_wr_en = video_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
+  wire        send_fifo_wr_en = video_en; // (in_hcnt <= 12'd1280 & in_vcnt < 12'd720) &
 
-  fifo48_8k asfifo_send (
+  auxfifo12 auxfifo_send (
 	  .rst(RSTBTN | rx0_vsync),
 	  .wr_clk(rx0_pclk),  // TMDS clock 74.25MHz 
 	  .rd_clk(clk_125M),  // GMII TX clock 125MHz
 	  .din(din_fifo),     // data input 48bit
 	  .wr_en(send_fifo_wr_en),
-	  .rd_en(rd_en),
+	  .rd_en(send_rd_en),
 	  .dout(tx_data),    // data output 48bit 
 	  .full(send_full),
 	  .empty(send_empty)
   );
   
   //-----------------------------------------------------------
+  //  GMII to AUX FIFO 
+	//       width 12bit 
+  //		   depth 32765
+  //-----------------------------------------------------------
+
+  wire        rx_full;
+  wire        rx_empty;
+  wire [11:0] rx_dout;
+	wire [3:0]  out_aux0 = rx_dout[3:0];
+	wire [3:0]  out_aux1 = rx_dout[7:4];
+	wire [3:0]  out_aux2 = rx_dout[11:8];
+  wire        rx_aux_rd_en;
+  wire [11:0] rx_din;
+  wire        rx0_pclk;           
+  wire        rx_aux_wr_en; // (in_hcnt <= 12'd1280 & in_vcnt < 12'd720) &
+  
+  auxfifo12 auxfifo_recv (
+	  .rst(RSTBTN ),
+	  .wr_clk(clk_125M),  // TMDS clock 74.25MHz 
+	  .rd_clk(),  // GMII TX clock 125MHz
+	  .din(rx_din),     // data input 48bit
+	  .wr_en(rx_aux_wr_en),
+	  .rd_en(rx_aux_rd_en),
+	  .dout(rx_dout),    // data output 48bit 
+	  .full(rx_full),
+	  .empty(rx_empty)
+
+
+  //-----------------------------------------------------------
   //  GMII TX
   //-----------------------------------------------------------
 
-  gmii_tx gmii_tx(
+  gmii_aux_tx gmii_aux_tx(
 	  .id(DEBUG_SW[0]),
+		.type(),
 	  // FIFO
 	  .fifo_clk(rx0_pclk),
 	  .sys_rst(RSTBTN),
 	  .dout(tx_data), // 48bit
 	  .empty(send_empty),
 	  .full(send_full),
-	  .rd_en(rd_en),
+	  .rd_en(send_rd_en),
 	  .wr_en(video_en),
 	  .sw(~DEBUG_SW[2]),
 	
@@ -197,17 +230,33 @@ module top (
 	  .txd(TXD)
   );
 
+  //-----------------------------------------------------------
+  //  GMII RX
+  //-----------------------------------------------------------
+
+  gmii2fifo_aux gmii_aux_rx(
+	  .clk125(RXCLK),   // Ethernet Phy CLK 125MHz
+	  .sys_rst(RSTBTN), // System reset
+	  .id(),
+	  .rxd(RXD),        // Ethernet PHY RXD
+	  .rx_dv(RXDV),     // Ethernet PHY RXDV 
+	  .datain(),        // Video data to FIFO 
+	  .aux_in(rx_din),  // AUX data to FIFO
+	  .recv_en(),       //  
+	  .fifo_aux_rd(),   //
+	  .video_en(),
+	  .audio_en(rx_aux_wr_en)
+	);
+
   /////////////////////////
   //
   // Input Port 0
   //
   /////////////////////////
-  wire rx0_pclk, rx0_pclkx2, rx0_pclkx10, rx0_pllclk0;
+  wire rx0_pclkx2, rx0_pclkx10, rx0_pllclk0;
   wire rx0_plllckd;
   wire rx0_reset;
   wire rx0_serdesstrobe;
-  wire rx0_hsync;          // hsync data
-  wire rx0_vsync;          // vsync data
   wire rx0_ade;             // data enable
   wire rx0_vde;             // data enable
   wire rx0_psalgnerr;      // channel phase alignment error
@@ -498,13 +547,13 @@ module top (
     .blue_din    (b_b),
     .green_din   (b_g),
     .red_din     (b_r),
-		.aux0_din		 (adin0_q),
-		.aux1_din		 (adin1_q),
-		.aux2_din		 (adin2_q),
+		.aux0_din		 (out_aux0),
+		.aux1_din		 (out_aux1),
+		.aux2_din		 (out_aux2),
     .hsync       (hsync_q),
     .vsync       (vsync_q),
-    .vde          (vde_q),
-    .ade          (ade_q),
+    .vde         (vde_q),
+    .ade         (ade_q),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
 
@@ -607,7 +656,7 @@ module top (
 		end
 
 	always @(*)begin
-		case(SW[4:2])
+		case(SW[3:1])
 			3'b000: LED <= pc_cnt_q[15:8];
 			3'b001: LED <= pc_cnt_q[7:0];
 			3'b010: LED <= ent_cnt_q[23:16];
