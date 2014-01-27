@@ -18,40 +18,34 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-`define DATA_YUV
-`define DEBUG
 
 module gmii_aux_tx # (
-	parameter [47:0]	src_mac			= {8'h00,8'h23,8'h45,8'h67,8'h89,8'h01},
-	parameter [47:0]	dst_mac			= {8'h00,8'h23,8'h45,8'h67,8'h89,8'h02},
-	parameter [15:0] 	ip_type			= 16'h0800,
-	parameter [15:0] 	ip_ver			= 16'h4500,
-`ifdef DATA_YUV
-	parameter [15:0] 	ip_len			= 16'd1312 - 16'd2,
-	parameter [15:0] 	ip_aux_len1	= 16'd998,
-	parameter [15:0] 	ip_aux_len2	= 16'd1352,
-`else
-	parameter [15:0] 	ip_len			= 16'd992,
-`endif
-	parameter [15:0] 	ip_iden			= 16'h0000,
-	parameter [15:0] 	ip_flag			= 16'h4000,
-	parameter [7:0] 	ip_ttl			= 8'h40,
-	parameter [7:0] 	ip_prot			= 8'h11,
-	parameter [31:0]	ip_src_addr = {8'd192,8'd168,8'd0,8'd1},
-	parameter [31:0]	ip_dst_addr = {8'd192,8'd168,8'd0,8'd2},
-`ifdef DATA_YUV
-	parameter [15:0] 	udp_len			= 16'd1292 - 16'd2, //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
-	parameter [15:0] 	udp_aux_len1= 16'd978, //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
-	parameter [15:0] 	udp_aux_len2= 16'd1332 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
-`else
-	parameter [15:0] 	udp_len			= 16'd972 // (Pixel = 960) + (X,Y = 4) + (UDP header = 8)
-`endif
+	parameter [47:0]	src_mac			  = {8'h00,8'h23,8'h45,8'h67,8'h89,8'h01},
+	parameter [47:0]	dst_mac			  = {8'h00,8'h23,8'h45,8'h67,8'h89,8'h02},
+	parameter [15:0] 	ip_type			  = 16'h0800,
+	parameter [15:0] 	ip_ver			  = 16'h4500,
+	
+	parameter [15:0] 	ip_aux_len1	  = 16'd998,
+	parameter [15:0] 	ip_aux_len2	  = 16'd1352,
+	
+	parameter [15:0] 	ip_iden			  = 16'h0000,
+	parameter [15:0] 	ip_flag			  = 16'h4000,
+	parameter [7:0] 	ip_ttl			  = 8'h40,
+	parameter [7:0] 	ip_prot			  = 8'h11,
+	parameter [31:0]	ip_src_addr   = {8'd192,8'd168,8'd0,8'd1},
+	parameter [31:0]	ip_dst_addr   = {8'd192,8'd168,8'd0,8'd2},
+	
+	parameter [15:0]  udp_aux_sport = 12346,
+	parameter [15:0]  udp_aux_dport = 12346,
+	parameter [15:0] 	udp_aux_len1  = 16'd978, 
+	parameter [15:0] 	udp_aux_len2  = 16'd1332
 )(
 	input 	wire 				id,
+	input   wire        type, // Aux Packet type: Type1 --> 1332byte, Type2 --> 977byte
 	/*** VIDEO FIFO ***/
 	input		wire 				fifo_clk,
 	input 	wire		 		sys_rst,
-	input 	wire [47:0] dout,
+	input 	wire [11:0] dout,
 	input		wire	 			empty,
 	input 	wire	 			full,
 	output 	wire	 			rd_en,
@@ -64,19 +58,6 @@ module gmii_aux_tx # (
 	output 	reg	 				tx_en,
 	output 	reg	 [7:0] 	txd
 );
-
-
-//-----------------------------------------------------------------------------
-// ***** MODE DATA_YUV *****
-//    1280x720 YUV422
-//   	 	G(channel 1) --> Y  8bit
-//	 		R(channel 2) --> Cb 8bit/ Cr8bit
-//
-//	 Packet is
-//	 UDP Header |Y(2 Byte) | X(2 Byte) | Y0(1Byte) | Cb0(1Byte) | Y1(1Byte)
-//	 | Cr1(1Byte) .............
-//-----------------------------------------------------------------------------
-`define DATA_YUV
 
 //----------------------------------------------------------------------------
 // CRC 
@@ -99,67 +80,17 @@ crc_gen crc_gen(
 );
 
 //-----------------------------------------------------------------------------
-//  VIDEO FIFO controller
-//-----------------------------------------------------------------------------
-
-reg 	fstate, ppl;  
-reg 	buf1_wr_en, buf2_wr_en; //To aboid Metastability
-reg 	buf1_tx_en, buf2_tx_en;
-wire 	send_enable = fstate;
-
-always @(posedge fifo_clk) begin
-	if(sys_rst) begin
-		fstate 			<= 1'b0;
-		ppl 				<= 1'b0;
-		buf1_wr_en 	<= 1'b0;
-		buf2_wr_en 	<= 1'b0;
-	end else begin
-		buf1_wr_en 	<= wr_en;
-		buf2_wr_en 	<= buf1_wr_en;
-		buf1_tx_en 	<= tx_en;
-		buf2_tx_en 	<= buf1_tx_en;
-		if({buf1_wr_en,buf2_wr_en} == 2'b01)
-			fstate 		<= 1'b1;
-		if({buf1_tx_en,buf2_tx_en} == 2'b01) begin
-			if(ppl)begin
-				ppl 		<= 1'b0;
-				fstate 	<= 1'b0;
-			end else begin
-				ppl 		<= 1'b1;
-			end
-		end
-	end
-end
-
-
-
-//--------------------------------------------------------------------------
-//AUDIO/AUX FIFO controller
-//--------------------------------------------------------------------------
-
-always @ (posedge fifo_clk)begin
-	if(sys_rst)
-	else
-		if(vblnk)
-			aux <= 2'b10; // Datagram length 978(Byte)
-			aux <= 2'b11; // Datagram legnth 1332(Byte)
-			
-			
-
-
-
-//-----------------------------------------------------------------------------
 //  LOGIC
 //-----------------------------------------------------------------------------
-parameter IDLE		 		= 4'h0;
-parameter PRE 				= 4'h1;
-parameter SFD 				= 4'h2;
-parameter DATA_ETH		= 4'h3;
-parameter DATA_IP			= 4'h4;
-parameter DATA_RESOL	= 4'h5;
-parameter DATA_RGB		= 4'h6;
-parameter FCS 				= 4'h7;
-parameter IFG					= 4'h8;
+parameter IDLE        = 4'h0;
+parameter PRE         = 4'h1;
+parameter SFD         = 4'h2;
+parameter DATA_ETH    = 4'h3;
+parameter DATA_IP     = 4'h4;
+parameter DATA_RESOL  = 4'h5;
+parameter DATA        = 4'h6;
+parameter FCS         = 4'h8;
+parameter IFG         = 4'h9;
 
 
 reg [3:0] 	state;
@@ -168,6 +99,9 @@ reg [1:0] 	fcs_count;
 reg [1:0] 	cnt3;
 reg [31:0] 	gap_count;
 reg	[23:0] 	ip_check;
+reg [7:0]   swap;
+reg         fifo_rd_en;
+assign rd_en = fifo_rd_en;
 
 always @(posedge tx_clk )begin
 	if(sys_rst)begin
@@ -181,15 +115,17 @@ always @(posedge tx_clk )begin
 		gap_count <= 32'd0;
 		crc_init 	<= 1'd0;
 		ip_check 	<= 24'd0;
+		swap      <= 8'd0;
+		fifo_rd_en<= 1'b0;
 	end else begin
 		crc_rd 		<= 1'b0; 
 		case(state)
 			IDLE: begin
-				if(empty == 1'b0 & send_enable)begin
+				if(empty == 1'b0)begin
 					txd				<= 8'h55;
 					tx_en			<= 1'b1;
 					state 		<= PRE;
-					ip_check 	<= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					ip_check 	<= {8'd0,ip_ver} + {8'd0,ip_aux_len2} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 				end
 			end
 			PRE: begin
@@ -248,8 +184,8 @@ always @(posedge tx_clk )begin
 					/* DSF */
 					11'h1: txd	<= ip_ver[7:0];
 					/* Total Length  992byte (=0x03e0) */
-					11'h2: txd	<= ip_len[15:8];
-					11'h3: txd	<= ip_len[7:0];
+					11'h2: txd	<= ip_aux_len2[15:8];
+					11'h3: txd	<= ip_aux_len2[7:0];
 					/* Identification  ---> <<later>> */
 					11'h4: txd	<= ip_iden[15:8];
 					11'h5: txd	<= ip_iden[7:0];
@@ -274,96 +210,56 @@ always @(posedge tx_clk )begin
 					11'h12: txd	<= ip_dst_addr[15:8];
 					11'h13: txd	<= ip_dst_addr[7:0] - {7'd0, id};
 					/* UDP SRC PORT 12344  = 0x3038 */
-					11'h14: txd	<= 8'h30;
-					11'h15: txd	<= 8'h38;
+					11'h14: txd	<= udp_aux_sport[15:8];
+					11'h15: txd	<= udp_aux_sport[7:0];
 					/* UDP DEST PORT 12345 = 0x3039 */
-					11'h16: txd	<= 8'h30;
-					11'h17: txd	<= 8'h39;
+					11'h16: txd	<= udp_aux_dport[15:8];
+					11'h17: txd	<= udp_aux_dport[7:0];
 					/* UDP Length 972byte = 0x03cc */
-					11'h18: txd	<= udp_len[15:8];
-					11'h19: txd	<= udp_len[7:0];
+					11'h18: txd	<= udp_aux_len2[15:8];
+					11'h19: txd	<= udp_aux_len2[7:0];
 					/* UDP checksum ͐ݒ肵ȂĂH*/
-					11'h1a: begin
-						txd		<= 8'h00;
-						cnt3 	<= 2'd3;
-					end
+					11'h1a: txd <= 8'h00;
 					11'h1b: begin
-						txd		<= 8'h00;
-						count <= 11'd0;
-						state	<= DATA_RESOL;
-						cnt3	<= 2'd0; //read X,Y in FIFO.
+						txd        <= 8'h00;
+						count      <= 11'd0;
+						state	     <= DATA;
+						fifo_rd_en <= 1'b1;
+						cnt3       <= 2'd2;
 					end
 					//default: tx_en <= 1'b0;
 				endcase
 			end
-			DATA_RESOL: begin
-				cnt3 	<= 2'd2;
-				tx_en <= 1'b1;
-				count <= count + 11'h1;
-				case(count)
-					10'h0: txd <= dout[43:36];
-					10'h1: begin
-						txd 	<= {dout[27:24],dout[47:44]};
-						count <= 11'h0;
-						cnt3 	<= 2'd3;
-						state <= DATA_RGB;
-					end
-				endcase
-			end
-`ifdef DATA_YUV
-			DATA_RGB: begin
-				if(count == 11'd1279)begin
+			DATA: begin
+				if(count == 11'd1331)begin
 					state		<= FCS;
-			 		txd 		<= dout[23:16];
+			 		txd 		<= swap; //TBD
 					count		<= 11'd0;
 					cnt3 		<= 2'd0;
 				end else begin
+					case(cnt3)
+						2'd0 : begin
+						        cnt3       <= 2'd2;
+						        fifo_rd_en <= 1'b1;
+										txd        <= swap;
+						       end
+						2'd1 : begin
+						        cnt3       <= 2'd0;
+										fifo_rd_en <= 1'b0;
+										txd        <= {swap[3:0],dout[3:0]};
+										swap       <= dout[11:4];
+						       end
+						2'd2 : begin
+						        cnt3       <= 2'd1;
+										fifo_rd_en <= 1'b1;
+										txd        <= dout[7:0];
+										swap[3:0]  <= dout[11:8];
+						       end
+					endcase
 					tx_en 	<= 1'b1;
 					count 	<= count + 11'h1;
-					casex(cnt3)
-						2'b1x: begin
-							if(sw)
-								txd 	<= dout[15:8]; // Green
-							else
-								txd 	<= dout[45:38]; // Y
-								cnt3 	<= 2'd1;
-						end
-						2'b01: begin
-							if(sw)
-								txd 	<= dout[23:16];  // Red
-							else
-								txd 	<= {dout[24], count[10:4]};  // X
-								cnt3 	<= 2'd2;
-				       		end
-						//default: tx_en <= 1'b0;
-					endcase
 				end
 			end
-`else
-			DATA_RGB: begin
-				tx_en <= 1'b1;
-				count <= count + 11'h1;	
-				casex(cnt3)
-					2'b1x: 	begin
-						txd 	<= dout[7:0]; // Red
-						cnt3 	<= 2'd1;
-					end
-					2'b01: 	begin
-						txd 	<= dout[15:8];  // Green
-						cnt3 	<= 2'd0;
-					end 
-					2'b00: 	begin
-						txd 	<= dout[23:16];
-						cnt3 	<= 2'd2;// Blue
-					end
-					//default: tx_en <= 1'b0;
-				endcase
-				if(count == 11'd959 )begin
-					state <= FCS;
-					count <= 11'd0;
-				end 
-			end
-`endif
 			FCS: begin
 				tx_en 		<= 1'b1;
 				fcs_count <= fcs_count + 1'b1;
@@ -390,8 +286,5 @@ always @(posedge tx_clk )begin
 		endcase
 	end
 end
-
-reg zero = 0;
-assign rd_en = ((state == DATA_RGB & cnt3 == 2'd2 ) | (state == DATA_RESOL & cnt3 == 2'd3 ) | (state == DATA_IP & cnt3 == 2'd3 )); //? cnt3[1]: zero;
 
 endmodule
