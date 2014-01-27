@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 
 module gmii2fifo24#(
-	parameter [31:0] ipv4_dst_rec = {8'd192, 8'd168, 8'd0, 8'd1},
-	parameter [15:0] dst_port_rec = 16'd12345,
+	parameter [31:0] ipv4_dst_rec     = {8'd192, 8'd168, 8'd0, 8'd1},
+	parameter [15:0] dst_port_rec     = 16'd12345,
 	parameter [15:0] dst_port_aux_rec = 16'd12346,
-	parameter [15:0] ethernet_type = 16'h0800, 
-	parameter [7:0]	ip_version = 8'h45,
-	parameter [7:0]	ip_protcol = 8'h11
+	parameter [15:0] ethernet_type    = 16'h0800, 
+	parameter [7:0]	 ip_version       = 8'h45,
+	parameter [7:0]	 ip_protcol       = 8'h11
 
 )(
 	input clk125,
@@ -18,13 +18,14 @@ module gmii2fifo24#(
 	output reg [11:0] aux_in,
 	output reg recv_en,
 	output reg fifo_aux_rd,
-	output wire packet_en
+	output wire video_en,
+	output wire audio_en
 );
 
 `define YUV_MODE
-reg packet_dv;
+reg video_dv;
 reg [10:0] rx_count;
-assign packet_en = packet_dv;
+assign video_en = video_dv;
 
 //---------------------------------------------------------
 //  Ethernet Header & IP Header & UDP Header
@@ -58,7 +59,7 @@ always@(posedge clk125) begin
 		ipv4_dst		<= 32'h0;
 		src_port		<= 16'h0;
 		dst_port		<= 16'h0;
-		packet_dv		<= 1'b0;
+		video_dv		<= 1'b0;
 		x_info			<= 12'h0;
 		y_info			<= 12'h0;
 		pre_en			<= 1'b0;
@@ -90,7 +91,7 @@ always@(posedge clk125) begin
 						ipv4_dst	[31:8] == ipv4_dst_rec[31:8] &&
 						ipv4_dst	[7:0]  == (ipv4_dst_rec[7:0] + {7'd0, id}) &&
 						dst_port	[15:0] == dst_port_rec) begin
-							packet_dv 	<= 1'b1;
+							video_dv 	<= 1'b1;
 							y_info[7:0]	<= rxd;
 					end else if(eth_type[15:0] == ethernet_type &&
 						ip_ver[7:0]    == ip_version &&
@@ -102,7 +103,7 @@ always@(posedge clk125) begin
 					end
 				end
 				11'h33: begin
-					if(packet_dv)begin
+					if(video_dv)begin
 							y_info[11:8]	<= rxd[3:0];
 							x_info[3:0]		<= rxd[7:4];
 							pre_en				<= 1'b1;
@@ -113,7 +114,7 @@ always@(posedge clk125) begin
 						audio_dv <= 	1'b0;
 				end
 				11'd1331: begin // before 11'd1005
-					packet_dv <= 1'b0;
+					video_dv <= 1'b0;
 					invalid <= 1'b1;
 					pre_en <= 1'b0;
 				end
@@ -127,7 +128,7 @@ always@(posedge clk125) begin
 			ipv4_dst	<= 32'h0;
 			src_port	<= 16'h0;
 			dst_port	<= 16'h0;
-			packet_dv 	<= 1'b0;
+			video_dv 	<= 1'b0;
 			pre_en		<= 1'b0;
 			invalid		<= 1'b0;
 		end
@@ -154,7 +155,7 @@ always@(posedge clk125) begin
 		recv_en 		<= 1'd0;
 		d_cnt				<= 11'd0;
 	end else begin
-		if(packet_dv && pre_en) begin
+		if(video_dv && pre_en) begin
 			if(state_data == YUV_1) begin
 				datain[28:27] 	<= {1'b0,x_info[0]};
 				datain[26:16] 	<= y_info[10:0];
@@ -190,6 +191,7 @@ end
 reg [3:0]tmp;
 reg pck_num;
 reg [5:0]pck_cnt;
+reg fifo_aux_wr;
 
 always @ (posedge clk125) begin
 	if(sys_rst) begin
@@ -197,6 +199,7 @@ always @ (posedge clk125) begin
 		tmp					<= 4'd0;
 		pck_num			<= 2'd0;
 		fifo_aux_rd <= 1'b0;
+		fifo_aux_wr <= 1'b0;
 	end else begin
 		if(audio_dv)begin
 			pck_cnt <= pck_cnt + 6'd1;
@@ -205,19 +208,24 @@ always @ (posedge clk125) begin
 											pck_num 			<= 2'd1;
 											aux_in[7:0] 	<= rxd; 
 											fifo_aux_rd 	<= 1'b0; 
+											fifo_aux_wr   <= 1'b0;
 								end
 				2'd1 : 	begin 	
 											pck_num 			<= 2'd2;
 											aux_in[11:8] 	<= rxd[3:0]; 
 											tmp 					<= rxd[7:4]; 
 											fifo_aux_rd 	<= 1'b1; 
+											fifo_aux_wr   <= 1'b1;
 								end
 				2'd2 : 	begin
 											pck_num				<= 2'd0;
 											aux_in 				<= {aux_in, tmp};
 											fifo_aux_rd 	<= 1'b1;
+											fifo_aux_wr   <= 1'b1;
 								end
 			endcase
+		end else begin
+			pck_cnt <= 6'd0;
 		end
 	end
 end
