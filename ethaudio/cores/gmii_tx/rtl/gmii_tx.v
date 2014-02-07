@@ -162,6 +162,7 @@ reg [1:0]   fcs_count;
 reg [1:0]   cnt3;
 reg [31:0]  gap_count;
 reg [23:0]  ip_check;
+reg [7:0]   pcktinfo;
 
 reg [7:0]   tmp;
 reg [3:0]   left_ade;
