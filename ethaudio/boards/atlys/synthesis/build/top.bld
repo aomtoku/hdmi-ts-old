@@ -5,16 +5,17 @@ Command Line: /opt/Xilinx/14.4/ISE_DS/ISE/bin/lin/unwrapped/ngdbuild -uc top.ucf
 top.ngc
 
 Reading NGO file
-"/home/aom/Work/fpga_project/ethaudio/boards/atlys/synthesis/build/top.ngc" ...
+"/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/synthesis/bui
+ld/top.ngc" ...
 Loading design module
-"/home/aom/Work/fpga_project/ethaudio/boards/atlys/synthesis/build/auxfifo12.ngc
-"...
+"/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/synthesis/bui
+ld/auxfifo12.ngc"...
 Loading design module
-"/home/aom/Work/fpga_project/ethaudio/boards/atlys/synthesis/build/fifo29_32768.
-ngc"...
+"/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/synthesis/bui
+ld/fifo29_32768.ngc"...
 Loading design module
-"/home/aom/Work/fpga_project/ethaudio/boards/atlys/synthesis/build/fifo48_8k.ngc
-"...
+"/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/synthesis/bui
+ld/fifo48_8k.ngc"...
 Gathering constraint information from source properties...
 Done.
 
@@ -61,7 +62,7 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings:   0
 
-Total memory usage is 127732 kilobytes
+Total memory usage is 127504 kilobytes
 
 Writing NGD file "top.ngd" ...
 Total REAL time to NGDBUILD completion:  12 sec

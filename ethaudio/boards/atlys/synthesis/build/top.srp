@@ -50,116 +50,116 @@ Optimization Effort                : 2
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" into library work
 Parsing module <top>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/dcmspi.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/dcmspi.v" into library work
 Parsing module <dcmspi>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/debnce.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/debnce.v" into library work
 Parsing module <debnce>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/hdclrbar.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/hdclrbar.v" into library work
 Parsing module <hdcolorbar>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v" into library work
 Parsing module <synchro>.
-WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v" Line 87: Attribute target identifier fdb not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v" Line 82: Attribute target identifier fda not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v" Line 83: Attribute target identifier fdb not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v" Line 84: Attribute target identifier fda not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v" Line 85: Attribute target identifier fdb not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v" Line 86: Attribute target identifier fda not found in this scope
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/DRAM16XN.v" into library work
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v" Line 87: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v" Line 82: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v" Line 83: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v" Line 84: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v" Line 85: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v" Line 86: Attribute target identifier fda not found in this scope
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/DRAM16XN.v" into library work
 Parsing module <DRAM16XN>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/datacontroller.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/datacontroller.v" into library work
 Parsing module <datacontroller>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" into library work
 Parsing module <gmii_tx>.
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 142. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 143. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 144. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 145. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 146. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 147. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 148. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 149. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 150. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 151. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 152. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 153. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 156. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 157. parameter declaration becomes local in gmii_tx with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/crc/rtl/crc_gen.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 142. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 143. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 144. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 145. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 146. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 147. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 148. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 149. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 150. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 151. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 152. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 153. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 156. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 157. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/crc/rtl/crc_gen.v" into library work
 Parsing module <crc_gen>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" into library work
 Parsing module <gmii2fifo24>.
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 55. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 56. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 160. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 161. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 215. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 216. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/sync/rtl/frame_checker.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 55. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 56. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 160. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 161. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 215. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 216. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/sync/rtl/frame_checker.v" into library work
 Parsing module <frame_checker>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/timing/rtl/timing_gen.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/timing/rtl/timing_gen.v" into library work
 Parsing module <timing_gen>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/timing/rtl/tmds_timing.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/timing/rtl/tmds_timing.v" into library work
 Parsing module <tmds_timing>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" into library work
 Parsing module <phsaligner>.
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 65. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 66. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 67. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 68. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 133. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 134. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 135. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 136. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 137. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 138. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 139. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 169. parameter declaration becomes local in phsaligner with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 65. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 66. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 67. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 68. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 133. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 134. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 135. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 136. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 137. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 138. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 139. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 169. parameter declaration becomes local in phsaligner with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" into library work
 Parsing module <serdes_1_to_5_diff_data>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" into library work
 Parsing module <dvi_decoder>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v" into library work
 Parsing module <decode>.
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v" Line 186. parameter declaration becomes local in decode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v" Line 187. parameter declaration becomes local in decode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v" Line 188. parameter declaration becomes local in decode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v" Line 189. parameter declaration becomes local in decode with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/chnlbond.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v" Line 186. parameter declaration becomes local in decode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v" Line 187. parameter declaration becomes local in decode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v" Line 188. parameter declaration becomes local in decode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v" Line 189. parameter declaration becomes local in decode with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/chnlbond.v" into library work
 Parsing module <chnlbond>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/serdes_n_to_1.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/serdes_n_to_1.v" into library work
 Parsing module <serdes_n_to_1>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/srldelay.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/srldelay.v" into library work
 Parsing module <srldelay>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v" into library work
 Parsing module <encode>.
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v" Line 123. parameter declaration becomes local in encode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v" Line 124. parameter declaration becomes local in encode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v" Line 125. parameter declaration becomes local in encode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v" Line 126. parameter declaration becomes local in encode with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/dvi_encoder.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v" Line 123. parameter declaration becomes local in encode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v" Line 124. parameter declaration becomes local in encode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v" Line 125. parameter declaration becomes local in encode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v" Line 126. parameter declaration becomes local in encode with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/dvi_encoder.v" into library work
 Parsing module <dvi_encoder>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/dvi_encoder_top.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/dvi_encoder_top.v" into library work
 Parsing module <dvi_encoder_top>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v" into library work
 Parsing module <convert_30to15_fifo>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/coregen/auxfifo12.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/auxfifo12.v" into library work
 Parsing module <auxfifo12>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/coregen/fifo16_32768.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/fifo16_32768.v" into library work
 Parsing module <fifo16_32768>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/coregen/fifo29_32768.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/fifo29_32768.v" into library work
 Parsing module <fifo29_32768>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/coregen/fifo48_8k.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/fifo48_8k.v" into library work
 Parsing module <fifo48_8k>.
-Analyzing Verilog file "/home/aom/Work/fpga_project/ethaudio/cores/coregen/clk_wiz_v3_6.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/clk_wiz_v3_6.v" into library work
 Parsing module <clk_wiz_v3_6>.
 
 =========================================================================
 *                            HDL Elaboration                            *
 =========================================================================
-WARNING:HDLCompiler:1016 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 762: Port debug is not connected to this instance
-WARNING:HDLCompiler:1016 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 838: Port pcktinfo is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 809: Port debug is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 885: Port pcktinfo is not connected to this instance
 
 Elaborating module <top>.
 
@@ -172,21 +172,21 @@ Elaborating module <SRL16E(INIT=16'b01)>.
 Elaborating module <clk_wiz_v3_6>.
 
 Elaborating module <PLL_BASE(BANDWIDTH="OPTIMIZED",CLK_FEEDBACK="CLKFBOUT",COMPENSATION="SYSTEM_SYNCHRONOUS",DIVCLK_DIVIDE=1,CLKFBOUT_MULT=5,CLKFBOUT_PHASE=0.0,CLKOUT0_DIVIDE=4,CLKOUT0_PHASE=0.0,CLKOUT0_DUTY_CYCLE=0.5,CLKOUT1_DIVIDE=4,CLKOUT1_PHASE=90.0,CLKOUT1_DUTY_CYCLE=0.5,CLKIN_PERIOD=10.0,REF_JITTER=0.01)>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 124: Assignment to clkout2_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 125: Assignment to clkout3_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 126: Assignment to clkout4_unused ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 127: Assignment to clkout5_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 124: Assignment to clkout2_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 125: Assignment to clkout3_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 126: Assignment to clkout4_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/clk_wiz_v3_6.v" Line 127: Assignment to clkout5_unused ignored, since the identifier is never used
 
 Elaborating module <gmii2fifo24>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 58: Assignment to ipv4_src ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v" Line 58: Assignment to ipv4_src ignored, since the identifier is never used
 
 Elaborating module <fifo29_32768>.
-WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/ethaudio/cores/coregen/fifo29_32768.v" Line 39: Empty module <fifo29_32768> remains a black box.
+WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/fifo29_32768.v" Line 39: Empty module <fifo29_32768> remains a black box.
 
 Elaborating module <auxfifo12>.
-WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/ethaudio/cores/coregen/auxfifo12.v" Line 39: Empty module <auxfifo12> remains a black box.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 158: Assignment to ax_recv_full ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 159: Assignment to ax_recv_empty ignored, since the identifier is never used
+WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/auxfifo12.v" Line 39: Empty module <auxfifo12> remains a black box.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 159: Assignment to ax_recv_full ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 160: Assignment to ax_recv_empty ignored, since the identifier is never used
 
 Elaborating module <synchro(INITIALIZE="LOGIC0")>.
 
@@ -195,10 +195,10 @@ Elaborating module <FDC>.
 Elaborating module <debnce>.
 
 Elaborating module <SRL16E(INIT=16'b0)>.
-WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/debnce.v" Line 114: Result of 17-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/debnce.v" Line 114: Result of 17-bit expression is truncated to fit in 16-bit target.
 
 Elaborating module <dcmspi>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 284: Assignment to busy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 285: Assignment to busy ignored, since the identifier is never used
 
 Elaborating module <DCM_CLKGEN(CLKFX_DIVIDE=21,CLKFX_MULTIPLY=31,CLKIN_PERIOD=20.0)>.
 
@@ -211,10 +211,15 @@ Elaborating module <synchro(INITIALIZE="LOGIC1")>.
 Elaborating module <FDP>.
 
 Elaborating module <timing_gen>.
-WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/ethaudio/cores/timing/rtl/timing_gen.v" Line 44: Result of 12-bit expression is truncated to fit in 11-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/timing/rtl/timing_gen.v" Line 44: Result of 12-bit expression is truncated to fit in 11-bit target.
 
 Elaborating module <datacontroller>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/datacontroller.v" Line 20: Assignment to y_count ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/datacontroller.v" Line 20: Assignment to y_count ignored, since the identifier is never used
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 666: Result of 6-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 637: Assignment to vde_h ignored, since the identifier is never used
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 672: Result of 4-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 673: Result of 4-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 674: Result of 4-bit expression is truncated to fit in 1-bit target.
 
 Elaborating module <dvi_encoder_top>.
 
@@ -249,13 +254,13 @@ Elaborating module <FDR>.
 Elaborating module <FDRE>.
 
 Elaborating module <FDE>.
-WARNING:HDLCompiler:189 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 639: Size mismatch in connection of port <aux0_din>. Formal port size is 4-bit while actual signal size is 1-bit.
-WARNING:HDLCompiler:189 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 640: Size mismatch in connection of port <aux1_din>. Formal port size is 4-bit while actual signal size is 1-bit.
-WARNING:HDLCompiler:189 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 641: Size mismatch in connection of port <aux2_din>. Formal port size is 4-bit while actual signal size is 1-bit.
+WARNING:HDLCompiler:189 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 686: Size mismatch in connection of port <aux0_din>. Formal port size is 4-bit while actual signal size is 1-bit.
+WARNING:HDLCompiler:189 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 687: Size mismatch in connection of port <aux1_din>. Formal port size is 4-bit while actual signal size is 1-bit.
+WARNING:HDLCompiler:189 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 688: Size mismatch in connection of port <aux2_din>. Formal port size is 4-bit while actual signal size is 1-bit.
 
 Elaborating module <fifo48_8k>.
-WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/ethaudio/cores/coregen/fifo48_8k.v" Line 39: Empty module <fifo48_8k> remains a black box.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 699: Assignment to ade_out ignored, since the identifier is never used
+WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/fifo48_8k.v" Line 39: Empty module <fifo48_8k> remains a black box.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 746: Assignment to ade_out ignored, since the identifier is never used
 
 Elaborating module <dvi_decoder>.
 
@@ -268,9 +273,9 @@ Elaborating module <PLL_BASE(CLKIN_PERIOD=10,CLKFBOUT_MULT=10,CLKOUT0_DIVIDE=1,C
 Elaborating module <decode(CHANNEL="BLUE")>.
 
 Elaborating module <serdes_1_to_5_diff_data(DIFF_TERM="FALSE",BITSLIP_ENABLE="TRUE")>.
-WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 248: Result of 2-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 250: Result of 2-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 251: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 248: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 250: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 251: Result of 2-bit expression is truncated to fit in 1-bit target.
 
 Elaborating module <IBUFDS(DIFF_TERM="FALSE")>.
 
@@ -283,67 +288,62 @@ Elaborating module <ISERDES2(DATA_WIDTH=5,DATA_RATE="SDR",BITSLIP_ENABLE="TRUE",
 Elaborating module <ISERDES2(DATA_WIDTH=5,DATA_RATE="SDR",BITSLIP_ENABLE="TRUE",SERDES_MODE="SLAVE",INTERFACE_TYPE="RETIMED")>.
 
 Elaborating module <phsaligner>.
-WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 174: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
-WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 221: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 174: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v" Line 221: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
 
 Elaborating module <chnlbond>.
 
 Elaborating module <DRAM16XN(data_width=10)>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 223: Assignment to ade_b ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 224: Assignment to vde_b ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 223: Assignment to ade_b ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 224: Assignment to vde_b ignored, since the identifier is never used
 
 Elaborating module <decode(CHANNEL="GREEN")>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 252: Assignment to ade_g ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 253: Assignment to vde_g ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 252: Assignment to ade_g ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 253: Assignment to vde_g ignored, since the identifier is never used
 
 Elaborating module <decode(CHANNEL="RED")>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 777: Assignment to rx0_pclkx2 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 778: Assignment to rx0_pclkx10 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 779: Assignment to rx0_pllclk0 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 780: Assignment to rx0_pllclk1 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 781: Assignment to rx0_pllclk2 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 782: Assignment to rx0_plllckd ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 783: Assignment to rx0_tmdsclk ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 784: Assignment to rx0_serdesstrobe ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 788: Assignment to rx0_vde ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 790: Assignment to rx0_blue_vld ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 791: Assignment to rx0_green_vld ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 792: Assignment to rx0_red_vld ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 793: Assignment to rx0_blue_rdy ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 794: Assignment to rx0_green_rdy ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 795: Assignment to rx0_red_rdy ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 797: Assignment to rx0_psalgnerr ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 799: Assignment to rx0_sdata ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 824: Assignment to rx0_pclkx2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 825: Assignment to rx0_pclkx10 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 826: Assignment to rx0_pllclk0 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 827: Assignment to rx0_pllclk1 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 828: Assignment to rx0_pllclk2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 829: Assignment to rx0_plllckd ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 830: Assignment to rx0_tmdsclk ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 831: Assignment to rx0_serdesstrobe ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 835: Assignment to rx0_vde ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 837: Assignment to rx0_blue_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 838: Assignment to rx0_green_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 839: Assignment to rx0_red_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 840: Assignment to rx0_blue_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 841: Assignment to rx0_green_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 842: Assignment to rx0_red_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 844: Assignment to rx0_psalgnerr ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 846: Assignment to rx0_sdata ignored, since the identifier is never used
 
 Elaborating module <tmds_timing>.
 
 Elaborating module <gmii_tx>.
 
 Elaborating module <crc_gen>.
-WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 413: Result of 12-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" Line 413: Result of 12-bit expression is truncated to fit in 8-bit target.
 
 Elaborating module <frame_checker>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 873: Assignment to hf_cnt ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 874: Assignment to vf_cnt ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 875: Assignment to hpwcnt ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 876: Assignment to vpwcnt ignored, since the identifier is never used
-WARNING:HDLCompiler:91 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 925: Signal <DEBUG_SW> missing in the sensitivity list is added for synthesis purposes. HDL and post-synthesis simulations may differ as a result.
-WARNING:HDLCompiler:91 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 926: Signal <recv_full> missing in the sensitivity list is added for synthesis purposes. HDL and post-synthesis simulations may differ as a result.
-WARNING:HDLCompiler:634 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 116: Net <ax_recv_rd_en> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 716: Net <ax_din[11]> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 639: Net <out_aux0> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 640: Net <out_aux1> does not have a driver.
-WARNING:HDLCompiler:634 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 641: Net <out_aux2> does not have a driver.
-WARNING:HDLCompiler:552 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 629: Input port ade is not connected on this instance
-WARNING:HDLCompiler:552 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" Line 838: Input port pcktinfo is not connected on this instance
-WARNING:Xst:2972 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 868. All outputs of instance <frame_checker> of block <frame_checker> are unconnected in block <top>. Underlying logic will be removed.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 920: Assignment to hf_cnt ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 921: Assignment to vf_cnt ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 922: Assignment to hpwcnt ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 923: Assignment to vpwcnt ignored, since the identifier is never used
+WARNING:HDLCompiler:91 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 972: Signal <DEBUG_SW> missing in the sensitivity list is added for synthesis purposes. HDL and post-synthesis simulations may differ as a result.
+WARNING:HDLCompiler:91 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 973: Signal <recv_full> missing in the sensitivity list is added for synthesis purposes. HDL and post-synthesis simulations may differ as a result.
+WARNING:HDLCompiler:634 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 763: Net <ax_din[11]> does not have a driver.
+WARNING:HDLCompiler:552 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" Line 885: Input port pcktinfo is not connected on this instance
+WARNING:Xst:2972 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 915. All outputs of instance <frame_checker> of block <frame_checker> are unconnected in block <top>. Underlying logic will be removed.
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
 Synthesizing Unit <top>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v".
         SW_VGA = 4'b0000
         SW_SVGA = 4'b0001
         SW_XGA = 4'b0011
@@ -398,45 +398,39 @@ Synthesizing Unit <top>.
         VFNPRCH_VGA = 11'b00000001011
         HBKPRCH_VGA = 11'b00000110000
         VBKPRCH_VGA = 11'b00000011111
-WARNING:Xst:2898 - Port 'ade', unconnected in block instance 'dvi_tx0', is tied to GND.
 WARNING:Xst:2898 - Port 'pcktinfo', unconnected in block instance 'gmii_tx', is tied to GND.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 80: Output port <CLK_OUT2> of the instance <clk125_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 80: Output port <LOCKED> of the instance <clk125_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 120: Output port <packet_en> of the instance <gmii2fifo24> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 150: Output port <dout> of the instance <auxfifo12_recv> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 150: Output port <full> of the instance <auxfifo12_recv> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 150: Output port <empty> of the instance <auxfifo12_recv> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 276: Output port <BUSY> of the instance <dcmspi_0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <debug> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <sdout> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <aux0> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <aux1> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <aux2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <pclkx2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <pclkx10> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <pllclk0> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <pllclk1> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <pllclk2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <pll_lckd> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <serdesstrobe> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <tmdsclk> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <vde> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <blue_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <green_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <red_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <blue_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <green_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <red_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 762: Output port <psalgnerr> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 868: Output port <hcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 868: Output port <vcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 868: Output port <hpwcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/boards/atlys/rtl/top.v" line 868: Output port <vpwcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 80: Output port <CLK_OUT2> of the instance <clk125_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 80: Output port <LOCKED> of the instance <clk125_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 120: Output port <packet_en> of the instance <gmii2fifo24> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 151: Output port <full> of the instance <auxfifo12_recv> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 151: Output port <empty> of the instance <auxfifo12_recv> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 277: Output port <BUSY> of the instance <dcmspi_0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <debug> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <sdout> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <aux0> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <aux1> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <aux2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <pclkx2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <pclkx10> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <pllclk0> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <pllclk1> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <pllclk2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <pll_lckd> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <serdesstrobe> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <tmdsclk> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <vde> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <blue_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <green_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <red_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <blue_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <green_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <red_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 809: Output port <psalgnerr> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 915: Output port <hcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 915: Output port <vcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 915: Output port <hpwcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/boards/atlys/rtl/top.v" line 915: Output port <vpwcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
 WARNING:Xst:653 - Signal <ax_din> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-WARNING:Xst:653 - Signal <ax_recv_rd_en> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-WARNING:Xst:653 - Signal <out_aux0> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-WARNING:Xst:653 - Signal <out_aux1> is used but never assigned. This sourceless signal will be automatically connected to value GND.
-WARNING:Xst:653 - Signal <out_aux2> is used but never assigned. This sourceless signal will be automatically connected to value GND.
     Found 21-bit register for signal <coldsys_rst>.
     Found 4-bit register for signal <sws_sync_q>.
     Found 1-bit register for signal <switch>.
@@ -449,6 +443,11 @@ WARNING:Xst:653 - Signal <out_aux2> is used but never assigned. This sourceless 
     Found 1-bit register for signal <VGA_VSYNC>.
     Found 1-bit register for signal <active_q>.
     Found 1-bit register for signal <vde>.
+    Found 1-bit register for signal <ade>.
+    Found 5-bit register for signal <adecnt>.
+    Found 1-bit register for signal <ade_q>.
+    Found 1-bit register for signal <init>.
+    Found 1-bit register for signal <initq>.
     Found 4-bit register for signal <ade_c>.
     Found 5-bit register for signal <cnt_32>.
     Found 4-bit register for signal <ade_num>.
@@ -456,29 +455,32 @@ WARNING:Xst:653 - Signal <out_aux2> is used but never assigned. This sourceless 
     Found 1-bit register for signal <pcnt>.
     Found 1-bit register for signal <clk_buf>.
     Found 21-bit adder for signal <coldsys_rst[20]_GND_1_o_add_3_OUT> created at line 96.
-    Found 4-bit adder for signal <ade_c[3]_GND_1_o_add_48_OUT> created at line 688.
-    Found 5-bit adder for signal <cnt_32[4]_GND_1_o_add_49_OUT> created at line 690.
-    Found 8x88-bit Read Only RAM for signal <_n0500>
-    Found 8x16-bit Read Only RAM for signal <_n0509>
+    Found 5-bit adder for signal <adecnt[4]_GND_1_o_add_48_OUT> created at line 666.
+    Found 4-bit adder for signal <ade_c[3]_GND_1_o_add_59_OUT> created at line 735.
+    Found 5-bit adder for signal <cnt_32[4]_GND_1_o_add_60_OUT> created at line 737.
+    Found 8x88-bit Read Only RAM for signal <_n0569>
+    Found 8x16-bit Read Only RAM for signal <_n0578>
 WARNING:Xst:737 - Found 1-bit latch for signal <LED<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <LED<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <LED<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 12-bit comparator equal for signal <hcnt[11]_axdout[11]_equal_47_o> created at line 655
     Summary:
 	inferred   2 RAM(s).
-	inferred   3 Adder/Subtractor(s).
-	inferred  68 D-type flip-flop(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  77 D-type flip-flop(s).
 	inferred   3 Latch(s).
+	inferred   1 Comparator(s).
 	inferred   8 Multiplexer(s).
 Unit <top> synthesized.
 
 Synthesizing Unit <clk_wiz_v3_6>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/coregen/clk_wiz_v3_6.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/coregen/clk_wiz_v3_6.v".
     Summary:
 	no macro.
 Unit <clk_wiz_v3_6> synthesized.
 
 Synthesizing Unit <gmii2fifo24>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii2fifo/rtl/gmii_rec.v".
         ipv4_dst_rec = 32'b11000000101010000000000000000001
         dst_port_rec = 16'b0011000000111001
         ethernet_type = 16'b0000100000000000
@@ -606,14 +608,14 @@ Synthesizing Unit <gmii2fifo24>.
 Unit <gmii2fifo24> synthesized.
 
 Synthesizing Unit <synchro_1>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v".
         INITIALIZE = "LOGIC0"
     Summary:
 	no macro.
 Unit <synchro_1> synthesized.
 
 Synthesizing Unit <debnce>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/debnce.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/debnce.v".
         SATISFY = 16'b1111111111111111
     Found 1-bit register for signal <transition>.
     Found 1-bit register for signal <cntr_en>.
@@ -627,7 +629,7 @@ Synthesizing Unit <debnce>.
 Unit <debnce> synthesized.
 
 Synthesizing Unit <dcmspi>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/dcmspi.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/dcmspi.v".
         TCQ = 1
     Found 1-bit register for signal <dfslckd_rising>.
     Found 1-bit register for signal <BUSY>.
@@ -643,14 +645,14 @@ Synthesizing Unit <dcmspi>.
 Unit <dcmspi> synthesized.
 
 Synthesizing Unit <synchro_2>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/synchro.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/synchro.v".
         INITIALIZE = "LOGIC1"
     Summary:
 	no macro.
 Unit <synchro_2> synthesized.
 
 Synthesizing Unit <timing_gen>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/timing/rtl/timing_gen.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/timing/rtl/timing_gen.v".
 WARNING:Xst:647 - Input <tc_vsblnk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <tc_vssync> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <tc_vesync> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -681,7 +683,7 @@ WARNING:Xst:647 - Input <tc_vesync> is never used. This port will be preserved a
 Unit <timing_gen> synthesized.
 
 Synthesizing Unit <datacontroller>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/datacontroller.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/datacontroller.v".
         hstart = 12'b000000000001
         hfin = 12'b010100000001
         vstart = 12'b000000011000
@@ -724,29 +726,29 @@ WARNING:Xst:647 - Input <data<26:16>> is never used. This port will be preserved
 Unit <datacontroller> synthesized.
 
 Synthesizing Unit <dvi_encoder_top>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/dvi_encoder_top.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/dvi_encoder_top.v".
         DILNDPREAM = 4'b1010
         VIDEOPREAM = 4'b1000
         NULLCONTRL = 4'b0000
     Found 1-bit register for signal <toggle>.
+    Found 1-bit register for signal <ctl2>.
     Found 1-bit register for signal <ctl0>.
     Found 5-bit register for signal <tmdsclkint>.
     WARNING:Xst:2404 -  FFs/Latches <ctl1<0:0>> (without init value) have a constant value of 0 in block <dvi_encoder_top>.
     WARNING:Xst:2404 -  FFs/Latches <ctl3<0:0>> (without init value) have a constant value of 0 in block <dvi_encoder_top>.
-    WARNING:Xst:2404 -  FFs/Latches <ctl2<0:0>> (without init value) have a constant value of 0 in block <dvi_encoder_top>.
     Summary:
-	inferred   7 D-type flip-flop(s).
+	inferred   8 D-type flip-flop(s).
 Unit <dvi_encoder_top> synthesized.
 
 Synthesizing Unit <serdes_n_to_1>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/serdes_n_to_1.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/serdes_n_to_1.v".
         SF = 5
     Summary:
 	no macro.
 Unit <serdes_n_to_1> synthesized.
 
 Synthesizing Unit <srldelay>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/srldelay.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/srldelay.v".
         WIDTH = 40
         TAPS = 4'b1010
     Summary:
@@ -754,7 +756,7 @@ Synthesizing Unit <srldelay>.
 Unit <srldelay> synthesized.
 
 Synthesizing Unit <encode_1>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v".
         CHANNEL = "BLUE"
     Found 10-bit register for signal <dout>.
     Found 5-bit register for signal <cnt>.
@@ -813,7 +815,7 @@ Synthesizing Unit <encode_1>.
 Unit <encode_1> synthesized.
 
 Synthesizing Unit <encode_2>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v".
         CHANNEL = "GREEN"
     Found 10-bit register for signal <dout>.
     Found 5-bit register for signal <cnt>.
@@ -872,7 +874,7 @@ Synthesizing Unit <encode_2>.
 Unit <encode_2> synthesized.
 
 Synthesizing Unit <encode_3>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/encode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/encode.v".
         CHANNEL = "RED"
     Found 10-bit register for signal <dout>.
     Found 5-bit register for signal <cnt>.
@@ -931,7 +933,7 @@ Synthesizing Unit <encode_3>.
 Unit <encode_3> synthesized.
 
 Synthesizing Unit <convert_30to15_fifo>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v".
         ADDR0 = 4'b0000
         ADDR1 = 4'b0001
         ADDR2 = 4'b0010
@@ -949,7 +951,7 @@ Synthesizing Unit <convert_30to15_fifo>.
         ADDR14 = 4'b1110
         ADDR15 = 4'b1111
     Set property "ASYNC_REG = TRUE" for instance <fdp_rst>.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v" line 64: Output port <O_DATA_OUT> of the instance <fifo_u> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v" line 64: Output port <O_DATA_OUT> of the instance <fifo_u> is unconnected or connected to loadless signal.
     Found 16x4-bit Read Only RAM for signal <wa_d>
     Found 16x4-bit Read Only RAM for signal <ra_d>
     Summary:
@@ -958,18 +960,18 @@ INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_tx/rtl/convert_
 Unit <convert_30to15_fifo> synthesized.
 
 Synthesizing Unit <DRAM16XN_1>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/DRAM16XN.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/DRAM16XN.v".
         data_width = 30
     Summary:
 	no macro.
 Unit <DRAM16XN_1> synthesized.
 
 Synthesizing Unit <dvi_decoder>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v".
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 203: Output port <ade> of the instance <dec_b> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 203: Output port <vde> of the instance <dec_b> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 232: Output port <ade> of the instance <dec_g> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 232: Output port <vde> of the instance <dec_g> is unconnected or connected to loadless signal.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v".
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 203: Output port <ade> of the instance <dec_b> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 203: Output port <vde> of the instance <dec_b> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 232: Output port <ade> of the instance <dec_g> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 232: Output port <vde> of the instance <dec_g> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <dilndpreamble>.
     Found 1-bit register for signal <videopreamble>.
     Summary:
@@ -977,7 +979,7 @@ INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/dvi_deco
 Unit <dvi_decoder> synthesized.
 
 Synthesizing Unit <decode_1>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v".
         CHANNEL = "BLUE"
 WARNING:Xst:647 - Input <dilndpreamble> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 1-bit register for signal <toggle>.
@@ -1002,7 +1004,7 @@ WARNING:Xst:647 - Input <dilndpreamble> is never used. This port will be preserv
 Unit <decode_1> synthesized.
 
 Synthesizing Unit <serdes_1_to_5_diff_data>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v".
         DIFF_TERM = "FALSE"
         SIM_TAP_DELAY = 49
         BITSLIP_ENABLE = "TRUE"
@@ -1044,7 +1046,7 @@ Synthesizing Unit <serdes_1_to_5_diff_data>.
 Unit <serdes_1_to_5_diff_data> synthesized.
 
 Synthesizing Unit <phsaligner>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/phsaligner.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/phsaligner.v".
         OPENEYE_CNT_WD = 3
         CTKNCNTWD = 7
         SRCHTIMERWD = 12
@@ -1088,12 +1090,12 @@ Synthesizing Unit <phsaligner>.
 Unit <phsaligner> synthesized.
 
 Synthesizing Unit <chnlbond>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/chnlbond.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/chnlbond.v".
         CTRLTOKEN0 = 10'b1101010100
         CTRLTOKEN1 = 10'b0010101011
         CTRLTOKEN2 = 10'b0101010100
         CTRLTOKEN3 = 10'b1010101011
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/chnlbond.v" line 86: Output port <O_DATA_OUT> of the instance <cbfifo_i> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/chnlbond.v" line 86: Output port <O_DATA_OUT> of the instance <cbfifo_i> is unconnected or connected to loadless signal.
     Register <we> equivalent to <rawdata_vld_q> has been removed
     Found 4-bit register for signal <wa>.
     Found 10-bit register for signal <sdata>.
@@ -1114,14 +1116,14 @@ INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/chnlbond
 Unit <chnlbond> synthesized.
 
 Synthesizing Unit <DRAM16XN_2>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/common/rtl/DRAM16XN.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/common/rtl/DRAM16XN.v".
         data_width = 10
     Summary:
 	no macro.
 Unit <DRAM16XN_2> synthesized.
 
 Synthesizing Unit <decode_2>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v".
         CHANNEL = "GREEN"
     Found 1-bit register for signal <toggle>.
     Found 5-bit register for signal <raw5bit_q>.
@@ -1146,7 +1148,7 @@ Synthesizing Unit <decode_2>.
 Unit <decode_2> synthesized.
 
 Synthesizing Unit <decode_3>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/tmds_rx/rtl/decode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/tmds_rx/rtl/decode.v".
         CHANNEL = "RED"
     Found 1-bit register for signal <toggle>.
     Found 5-bit register for signal <raw5bit_q>.
@@ -1171,7 +1173,7 @@ Synthesizing Unit <decode_3>.
 Unit <decode_3> synthesized.
 
 Synthesizing Unit <tmds_timing>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/timing/rtl/tmds_timing.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/timing/rtl/tmds_timing.v".
     Found 11-bit register for signal <hcounter>.
     Found 11-bit register for signal <vcounter>.
     Found 11-bit register for signal <video_hcnt>.
@@ -1191,7 +1193,7 @@ Synthesizing Unit <tmds_timing>.
 Unit <tmds_timing> synthesized.
 
 Synthesizing Unit <gmii_tx>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v".
         src_mac = 48'b000000000010001101000101011001111000100100000001
         dst_mac = 48'b000000000010001101000101011001111000100100000010
         ip_type = 16'b0000100000000000
@@ -1209,7 +1211,7 @@ WARNING:Xst:647 - Input <dout<35:28>> is never used. This port will be preserved
 WARNING:Xst:647 - Input <full> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <ax_send_full> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <ax_send_empty> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "/home/aom/Work/fpga_project/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" line 95: Output port <CRC_end> of the instance <crc_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/rtl/gmii_tx.v" line 95: Output port <CRC_end> of the instance <crc_gen> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <ppl>.
     Found 1-bit register for signal <buf1_wr_en>.
     Found 1-bit register for signal <buf2_wr_en>.
@@ -1280,7 +1282,7 @@ INFO:Xst:1799 - State 1000 is never reached in FSM <state>.
 Unit <gmii_tx> synthesized.
 
 Synthesizing Unit <crc_gen>.
-    Related source file is "/home/aom/Work/fpga_project/ethaudio/cores/crc/rtl/crc_gen.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/crc/rtl/crc_gen.v".
 WARNING:Xst:647 - Input <CRC_rd> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:653 - Signal <CRC_end> is used but never assigned. This sourceless signal will be automatically connected to value GND.
     Found 32-bit register for signal <CRC_reg>.
@@ -1303,7 +1305,7 @@ Macro Statistics
  19x7-bit multiplier                                   : 1
  19x8-bit multiplier                                   : 1
  19x9-bit multiplier                                   : 2
-# Adders/Subtractors                                   : 123
+# Adders/Subtractors                                   : 124
  1-bit adder                                           : 3
  11-bit adder                                          : 8
  12-bit adder                                          : 4
@@ -1318,12 +1320,12 @@ Macro Statistics
  32-bit subtractor                                     : 1
  4-bit adder                                           : 37
  4-bit subtractor                                      : 4
- 5-bit adder                                           : 19
+ 5-bit adder                                           : 20
  5-bit subtractor                                      : 9
  7-bit adder                                           : 3
  9-bit adder                                           : 3
-# Registers                                            : 367
- 1-bit register                                        : 246
+# Registers                                            : 373
+ 1-bit register                                        : 251
  10-bit register                                       : 13
  11-bit register                                       : 11
  12-bit register                                       : 6
@@ -1336,16 +1338,17 @@ Macro Statistics
  3-bit register                                        : 3
  32-bit register                                       : 2
  4-bit register                                        : 30
- 5-bit register                                        : 12
+ 5-bit register                                        : 13
  7-bit register                                        : 3
  8-bit register                                        : 14
  9-bit register                                        : 6
 # Latches                                              : 3
  1-bit latch                                           : 3
-# Comparators                                          : 26
+# Comparators                                          : 27
  1-bit comparator equal                                : 1
  11-bit comparator greater                             : 5
  11-bit comparator lessequal                           : 4
+ 12-bit comparator equal                               : 1
  19-bit comparator lessequal                           : 3
  4-bit comparator equal                                : 3
  4-bit comparator greater                              : 9
@@ -1541,7 +1544,8 @@ Synthesizing (advanced) Unit <top>.
 The following registers are absorbed into counter <ade_c>: 1 register on signal <ade_c>.
 The following registers are absorbed into counter <cnt_32>: 1 register on signal <cnt_32>.
 The following registers are absorbed into counter <coldsys_rst>: 1 register on signal <coldsys_rst>.
-INFO:Xst:3231 - The small RAM <Mram__n0500> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+The following registers are absorbed into counter <adecnt>: 1 register on signal <adecnt>.
+INFO:Xst:3231 - The small RAM <Mram__n0569> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -1552,7 +1556,7 @@ INFO:Xst:3231 - The small RAM <Mram__n0500> will be implemented on LUTs in order
     |     diA            | connected to signal <GND>           |          |
     |     doA            | connected to internal node          |          |
     -----------------------------------------------------------------------
-INFO:Xst:3231 - The small RAM <Mram__n0509> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+INFO:Xst:3231 - The small RAM <Mram__n0578> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -1596,7 +1600,7 @@ Macro Statistics
  5-bit subtractor                                      : 9
 # Adder Trees                                          : 6
  4-bit / 6-inputs adder tree                           : 6
-# Counters                                             : 33
+# Counters                                             : 34
  11-bit up counter                                     : 7
  12-bit up counter                                     : 4
  16-bit up counter                                     : 4
@@ -1605,15 +1609,16 @@ Macro Statistics
  32-bit down counter                                   : 1
  4-bit down counter                                    : 1
  4-bit up counter                                      : 7
- 5-bit up counter                                      : 1
+ 5-bit up counter                                      : 2
  7-bit up counter                                      : 3
  9-bit up counter                                      : 3
-# Registers                                            : 1005
- Flip-Flops                                            : 1005
-# Comparators                                          : 26
+# Registers                                            : 1010
+ Flip-Flops                                            : 1010
+# Comparators                                          : 27
  1-bit comparator equal                                : 1
  11-bit comparator greater                             : 5
  11-bit comparator lessequal                           : 4
+ 12-bit comparator equal                               : 1
  19-bit comparator lessequal                           : 3
  4-bit comparator equal                                : 3
  4-bit comparator greater                              : 9
@@ -1652,11 +1657,9 @@ WARNING:Xst:1898 - Due to constant pushing, FF/Latch <left_1> is unconnected in 
 WARNING:Xst:1898 - Due to constant pushing, FF/Latch <left_0> is unconnected in block <gmii2fifo24>.
 WARNING:Xst:1710 - FF/Latch <LED_7> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
 INFO:Xst:2261 - The FF/Latch <tmdsclkint_0> in Unit <dvi_encoder_top> is equivalent to the following 4 FFs/Latches, which will be removed : <tmdsclkint_1> <tmdsclkint_2> <tmdsclkint_3> <tmdsclkint_4> 
-INFO:Xst:2261 - The FF/Latch <c0_q> in Unit <encode_3> is equivalent to the following FF/Latch, which will be removed : <c1_q> 
 WARNING:Xst:1710 - FF/Latch <c1_q> (without init value) has a constant value of 0 in block <encode_2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <c1_reg> (without init value) has a constant value of 0 in block <encode_2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <c0_q> (without init value) has a constant value of 0 in block <encode_3>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <c0_reg> (without init value) has a constant value of 0 in block <encode_3>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <c1_q> (without init value) has a constant value of 0 in block <encode_3>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <c1_reg> (without init value) has a constant value of 0 in block <encode_3>. This FF/Latch will be trimmed during the optimization process.
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <gmii2fifo24/FSM_0> on signal <state_data[1:1]> with sequential encoding.
@@ -1850,9 +1853,9 @@ WARNING:Xst:2677 - Node <ade_c_2> of sequential type is unconnected in block <to
 WARNING:Xst:2677 - Node <ade_c_3> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <cnt_32_0> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <cnt_32_1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <cnt_32_4> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <cnt_32_2> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <cnt_32_3> of sequential type is unconnected in block <top>.
-WARNING:Xst:2677 - Node <cnt_32_4> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_9> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_8> of sequential type is unconnected in block <top>.
 WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_7> of sequential type is unconnected in block <top>.
@@ -1999,9 +2002,7 @@ Processing Unit <top> :
 	Register(s) dcmspi_0/sndval_7 has(ve) been backward balanced into : dcmspi_0/sndval_7_BRB3 dcmspi_0/sndval_7_BRB4.
 	Register(s) dcmspi_0/sndval_8 has(ve) been backward balanced into : dcmspi_0/sndval_8_BRB2 dcmspi_0/sndval_8_BRB3 dcmspi_0/sndval_8_BRB4.
 	Register(s) dcmspi_0/sndval_9 has(ve) been backward balanced into : dcmspi_0/sndval_9_BRB0 .
-	Register(s) dvi_tx0/ctl0 has(ve) been backward balanced into : dvi_tx0/ctl0_BRB1.
-	Register(s) dvi_tx0/encg/c0_q has(ve) been backward balanced into : dvi_tx0/encg/c0_q_BRB0.
-	Register(s) hsync has(ve) been backward balanced into : hsync_BRB0 hsync_BRB1 hsync_BRB2 hsync_BRB3 hsync_BRB4 hsync_BRB5.
+	Register(s) hsync has(ve) been backward balanced into : hsync_BRB0 hsync_BRB1 .
 	Register(s) pclk_D_0 has(ve) been backward balanced into : pclk_D_0_BRB0 pclk_D_0_BRB1 pclk_D_0_BRB2.
 	Register(s) pclk_D_1 has(ve) been backward balanced into : pclk_D_1_BRB0 .
 	Register(s) pclk_D_2 has(ve) been backward balanced into : pclk_D_2_BRB0 .
@@ -2012,7 +2013,7 @@ Processing Unit <top> :
 	Register(s) pclk_M_3 has(ve) been backward balanced into : pclk_M_3_BRB0 pclk_M_3_BRB2.
 	Register(s) pclk_M_4 has(ve) been backward balanced into : pclk_M_4_BRB0 .
 	Register(s) pclk_M_7 has(ve) been backward balanced into : pclk_M_7_BRB0 .
-	Register(s) vsync has(ve) been backward balanced into : vsync_BRB4 vsync_BRB5.
+	Register(s) vsync has(ve) been backward balanced into : vsync_BRB0 vsync_BRB1 vsync_BRB2 vsync_BRB3 vsync_BRB4 vsync_BRB5.
 Unit <top> processed.
 FlipFlop dataproc/Cr_0 has been replicated 1 time(s)
 FlipFlop dataproc/Cr_1 has been replicated 2 time(s)
@@ -2036,16 +2037,18 @@ Final Macro Processing ...
 
 Processing Unit <top> :
 	Found 2-bit shift register for signal <dvi_tx0/encb/ade_reg_qq>.
+	Found 2-bit shift register for signal <dvi_tx0/encg/c0_reg>.
+	Found 2-bit shift register for signal <dvi_tx0/encr/c0_reg>.
 Unit <top> processed.
 
 =========================================================================
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 1327
- Flip-Flops                                            : 1327
-# Shift Registers                                      : 1
- 2-bit shift register                                  : 1
+# Registers                                            : 1335
+ Flip-Flops                                            : 1335
+# Shift Registers                                      : 3
+ 2-bit shift register                                  : 3
 
 =========================================================================
 
@@ -2068,37 +2071,37 @@ Top Level Output File Name         : top.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 2854
+# BELS                             : 2866
 #      GND                         : 1
-#      INV                         : 56
+#      INV                         : 55
 #      LUT1                        : 196
-#      LUT2                        : 276
-#      LUT3                        : 257
-#      LUT4                        : 280
+#      LUT2                        : 277
+#      LUT3                        : 260
+#      LUT4                        : 281
 #      LUT5                        : 294
-#      LUT6                        : 660
+#      LUT6                        : 670
 #      MUXCY                       : 415
-#      MUXF7                       : 50
+#      MUXF7                       : 48
 #      VCC                         : 1
 #      XORCY                       : 368
-# FlipFlops/Latches                : 1330
-#      FD                          : 310
+# FlipFlops/Latches                : 1340
+#      FD                          : 308
 #      FDC                         : 115
 #      FDCE                        : 12
-#      FDE                         : 142
+#      FDE                         : 144
 #      FDP                         : 10
 #      FDPE                        : 3
-#      FDR                         : 292
-#      FDRE                        : 402
-#      FDS                         : 3
+#      FDR                         : 296
+#      FDRE                        : 407
+#      FDS                         : 4
 #      FDSE                        : 7
 #      FDSE_1                      : 32
 #      LD                          : 2
 # RAMS                             : 60
 #      RAM16X1D                    : 60
-# Shift Registers                  : 51
+# Shift Registers                  : 53
 #      SRL16E                      : 50
-#      SRLC16E                     : 1
+#      SRLC16E                     : 3
 # Clock Buffers                    : 11
 #      BUFG                        : 11
 # IO Buffers                       : 54
@@ -2127,19 +2130,19 @@ Selected Device : 6slx45csg324-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:            1328  out of  54576     2%  
- Number of Slice LUTs:                 2190  out of  27288     8%  
-    Number used as Logic:              2019  out of  27288     7%  
-    Number used as Memory:              171  out of   6408     2%  
+ Number of Slice Registers:            1338  out of  54576     2%  
+ Number of Slice LUTs:                 2206  out of  27288     8%  
+    Number used as Logic:              2033  out of  27288     7%  
+    Number used as Memory:              173  out of   6408     2%  
        Number used as RAM:              120
-       Number used as SRL:               51
+       Number used as SRL:               53
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   2540
-   Number with an unused Flip Flop:    1212  out of   2540    47%  
-   Number with an unused LUT:           350  out of   2540    13%  
-   Number of fully used LUT-FF pairs:   978  out of   2540    38%  
-   Number of unique control sets:        80
+ Number of LUT Flip Flop pairs used:   2557
+   Number with an unused Flip Flop:    1219  out of   2557    47%  
+   Number with an unused LUT:           351  out of   2557    13%  
+   Number of fully used LUT-FF pairs:   987  out of   2557    38%  
+   Number of unique control sets:        82
 
 IO Utilization: 
  Number of IOs:                          61
@@ -2173,7 +2176,7 @@ Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
 dvi_rx0/PLL_ISERDES/CLKOUT1        | BUFG                   | 334   |
 clk_buf                            | BUFG                   | 214   |
-PLL_OSERDES/CLKOUT1                | BUFG                   | 387   |
+PLL_OSERDES/CLKOUT1                | BUFG                   | 399   |
 DEBUG_SW<1>                        | IBUF                   | 2     |
 SYS_CLK                            | IBUFG                  | 22    |
 RXCLK                              | IBUF+BUFG              | 210   |
@@ -2216,10 +2219,10 @@ Delay:               5.722ns (Levels of Logic = 6)
     ----------------------------------------  ------------
      FD:C->Q               6   0.447   0.973  dvi_rx0/dec_r/cbnd/sdata_9 (dvi_rx0/dec_r/cbnd/sdata_9)
      LUT3:I0->O            3   0.205   0.651  dvi_rx0/dec_r/out711 (dvi_rx0/dec_r/out71)
-     LUT5:I4->O            1   0.205   0.580  dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_517_o13 (dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_517_o12)
-     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_517_o14 (dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_517_o13)
-     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_517_o15 (dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_517_o14)
-     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_r/ade_rstpot1_SW0 (N529)
+     LUT5:I4->O            1   0.205   0.580  dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_526_o13 (dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_526_o12)
+     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_526_o14 (dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_526_o13)
+     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_526_o15 (dvi_rx0/dec_r/Mmux_ade_GND_61_o_MUX_526_o14)
+     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_r/ade_rstpot1_SW0 (N522)
      LUT6:I5->O            1   0.205   0.000  dvi_rx0/dec_r/ade_rstpot1 (dvi_rx0/dec_r/ade_rstpot1)
      FD:D                      0.102          dvi_rx0/dec_r/ade
     ----------------------------------------
@@ -2251,7 +2254,7 @@ Delay:               4.003ns (Levels of Logic = 1)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'PLL_OSERDES/CLKOUT1'
   Clock period: 6.826ns (frequency: 146.503MHz)
-  Total number of paths / destination ports: 517853 / 639
+  Total number of paths / destination ports: 517966 / 667
 -------------------------------------------------------------------------
 Delay:               6.826ns (Levels of Logic = 12)
   Source:            dataproc/Cr_1_1 (FF)
@@ -2348,7 +2351,7 @@ Delay:               5.343ns (Levels of Logic = 4)
      FDCE:C->Q            19   0.447   1.300  dvi_rx0/dec_b/des_0/pdcounter_4 (dvi_rx0/dec_b/des_0/pdcounter_4)
      LUT5:I2->O            1   0.205   0.580  dvi_rx0/dec_b/des_0/_n0277_inv16 (dvi_rx0/dec_b/des_0/_n0277_inv15)
      LUT4:I3->O            1   0.205   0.580  dvi_rx0/dec_b/des_0/_n0277_inv17 (dvi_rx0/dec_b/des_0/_n0277_inv16)
-     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_b/des_0/_n0277_inv19_SW0 (N521)
+     LUT6:I5->O            1   0.205   0.580  dvi_rx0/dec_b/des_0/_n0277_inv19_SW0 (N514)
      LUT4:I3->O            5   0.205   0.714  dvi_rx0/dec_b/des_0/_n0277_inv19 (dvi_rx0/dec_b/des_0/_n0277_inv)
      FDCE:CE                   0.322          dvi_rx0/dec_b/des_0/pdcounter_0
     ----------------------------------------
@@ -2372,7 +2375,7 @@ Delay:               3.418ns (Levels of Logic = 3)
     ----------------------------------------  ------------
      FDRE:C->Q            10   0.447   0.961  gmii_tx/txd_3 (gmii_tx/txd_3)
      LUT4:I2->O            5   0.203   0.715  gmii_tx/crc_gen/Mxor__n0242_xo<0>1 (gmii_tx/crc_gen/_n0242)
-     LUT4:I3->O            1   0.205   0.580  gmii_tx/crc_gen/Mmux_CRC_reg[31]_PWR_62_o_mux_2_OUT6_SW1 (N509)
+     LUT4:I3->O            1   0.205   0.580  gmii_tx/crc_gen/Mmux_CRC_reg[31]_PWR_62_o_mux_2_OUT6_SW1 (N502)
      LUT6:I5->O            1   0.205   0.000  gmii_tx/crc_gen/Mmux_CRC_reg[31]_PWR_62_o_mux_2_OUT6 (gmii_tx/crc_gen/CRC_reg[31]_PWR_62_o_mux_2_OUT<14>)
      FDSE_1:D                  0.102          gmii_tx/crc_gen/CRC_reg_14
     ----------------------------------------
@@ -2395,7 +2398,7 @@ Delay:               2.881ns (Levels of Logic = 1)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDR:C->Q             50   0.447   1.547  dvi_tx0/pixel2x/sync_gen (dvi_tx0/pixel2x/sync)
-     INV:I->O              1   0.206   0.579  dvi_tx0/pixel2x/sync_INV_85_o1_INV_0 (dvi_tx0/pixel2x/sync_INV_85_o)
+     INV:I->O              1   0.206   0.579  dvi_tx0/pixel2x/sync_INV_88_o1_INV_0 (dvi_tx0/pixel2x/sync_INV_88_o)
      FDR:D                     0.102          dvi_tx0/pixel2x/sync_gen
     ----------------------------------------
     Total                      2.881ns (0.755ns logic, 2.126ns route)
@@ -2415,7 +2418,7 @@ Offset:              5.109ns (Levels of Logic = 2)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O           159   1.222   2.121  RSTBTN_IBUF (RSTBTN_IBUF)
-     LUT2:I0->O           22   0.203   1.133  RSTBTN_rx0_vsync_OR_261_o1 (timing/Mcount_vcounter_val)
+     LUT2:I0->O           22   0.203   1.133  RSTBTN_rx0_vsync_OR_267_o1 (timing/Mcount_vcounter_val)
      FDRE:R                    0.430          timing/vcounter_0
     ----------------------------------------
     Total                      5.109ns (1.855ns logic, 3.254ns route)
@@ -2514,11 +2517,11 @@ Offset:              6.974ns (Levels of Logic = 8)
     ----------------------------------------  ------------
      IBUF:I->O             7   1.222   1.118  DEBUG_SW_0_IBUF (DEBUG_SW_0_IBUF)
      LUT5:I0->O            1   0.203   0.580  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT74 (gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT74)
-     LUT3:I2->O            1   0.205   0.580  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT75_SW0 (N513)
+     LUT3:I2->O            1   0.205   0.580  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT75_SW0 (N506)
      LUT6:I5->O            1   0.205   0.808  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT75 (gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT75)
      LUT6:I3->O            1   0.205   0.580  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT76 (gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT76)
      LUT6:I5->O            2   0.205   0.617  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT712 (gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT711)
-     LUT6:I5->O            1   0.205   0.000  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT716_G (N558)
+     LUT6:I5->O            1   0.205   0.000  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT716_G (N551)
      MUXF7:I1->O           1   0.140   0.000  gmii_tx/Mmux_state[3]_txd[7]_wide_mux_131_OUT716 (gmii_tx/state[3]_txd[7]_wide_mux_131_OUT<0>)
      FDRE:D                    0.102          gmii_tx/txd_0
     ----------------------------------------
@@ -2547,7 +2550,7 @@ Offset:              4.703ns (Levels of Logic = 2)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'PLL_OSERDES/CLKOUT1'
-  Total number of paths / destination ports: 217 / 97
+  Total number of paths / destination ports: 232 / 101
 -------------------------------------------------------------------------
 Offset:              5.984ns (Levels of Logic = 4)
   Source:            DEBUG_SW<3> (PAD)
@@ -2626,7 +2629,7 @@ Offset:              3.668ns (Levels of Logic = 1)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'PLL_OSERDES/CLKOUT1'
-  Total number of paths / destination ports: 6 / 5
+  Total number of paths / destination ports: 9 / 6
 -------------------------------------------------------------------------
 Offset:              3.634ns (Levels of Logic = 1)
   Source:            VGA_VSYNC (FF)
@@ -2778,7 +2781,7 @@ Clock to Setup on destination clock PLL_OSERDES/CLKOUT2
                    | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 -------------------+---------+---------+---------+---------+
-PLL_OSERDES/CLKOUT1|    2.882|         |         |         |
+PLL_OSERDES/CLKOUT1|    2.892|         |         |         |
 PLL_OSERDES/CLKOUT2|    2.881|         |         |         |
 -------------------+---------+---------+---------+---------+
 
@@ -2787,7 +2790,7 @@ Clock to Setup on destination clock RXCLK
                    | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 -------------------+---------+---------+---------+---------+
-PLL_OSERDES/CLKOUT1|    2.882|         |         |         |
+PLL_OSERDES/CLKOUT1|    2.892|         |         |         |
 RXCLK              |    6.137|         |         |         |
 -------------------+---------+---------+---------+---------+
 
@@ -2805,7 +2808,7 @@ Clock to Setup on destination clock clk125_gen/pll_base_inst/CLKOUT0
 Source Clock                    |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 --------------------------------+---------+---------+---------+---------+
 clk125_gen/pll_base_inst/CLKOUT0|    6.645|    2.781|    3.869|         |
-dvi_rx0/PLL_ISERDES/CLKOUT1     |    3.551|         |         |         |
+dvi_rx0/PLL_ISERDES/CLKOUT1     |    3.653|         |         |         |
 --------------------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock clk_buf
@@ -2838,15 +2841,15 @@ dvi_rx0/PLL_ISERDES/CLKOUT2|    5.343|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 37.00 secs
-Total CPU time to Xst completion: 34.55 secs
+Total REAL time to Xst completion: 36.00 secs
+Total CPU time to Xst completion: 34.66 secs
  
 --> 
 
 
-Total memory usage is 143304 kilobytes
+Total memory usage is 142900 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  233 (   0 filtered)
-Number of infos    :   87 (   0 filtered)
+Number of warnings :  226 (   0 filtered)
+Number of infos    :   85 (   0 filtered)
 

@@ -146,7 +146,8 @@ fifo29_32768 asfifo_recv (
 	.full(recv_full),
 	.empty(recv_empty)
 );
-	
+
+wire [11:0] axdout;
 auxfifo12 auxfifo12_recv(
   .rst(reset),
 	.wr_clk(RXCLK),
@@ -154,7 +155,7 @@ auxfifo12 auxfifo12_recv(
 	.din(axdin),
 	.wr_en(ax_recv_wr_en),
 	.rd_en(ax_recv_rd_en),
-	.dout(),
+	.dout(axdout),
 	.full(ax_recv_full),
 	.empty(ax_recv_empty)
 );
@@ -627,37 +628,38 @@ wire serdes_rst = RSTBTN | ~bufpll_lock;
 
 reg ade;
 reg [4:0] adecnt;
-reg ax_rd_en;
+reg [11:0]aclkc;
 reg vde_h,ade_q;
+reg init, initq;
 
-wire ax_recv_rd_en = ade || ax_rd_en || adecnt == 6'd32
+assign ax_recv_rd_en = {init,initq} == 2'b10 || ade || adecnt == 6'd32;
 
 always@(posedge pclk)begin
   if(reset)begin
 		ade      <= 1'b0;
 		adecnt   <= 6'd0;
-		ax_rd_en <= 1'b0;
 		vde_h    <= 1'b0;
+		aclkc    <= 12'd0;
+		ade_q    <= 1'b0;
+		init     <= 1'b0;
+		initq    <= 1'b0;
 	end else begin
 	  vde_h <= vde;
 		ade_q <= ade;
 		
-		if(ax_recv_empty)
-			ax_read <= 1'b0;
-		else 
-			ax_read <= 1'b1;
+    //first read signal
+    if(fifo_read)
+			init <= 1'b1;
+		initq <= init;
 
-    
-
-		if({vde,vde_h} == 2'b01)
-				ax_rd_en <= 1'b1;
-		if(~vde & ~ade & hcnt == )begin
+		if(~vde & ~ade & hcnt == axdout)begin
 			ade <= 1'b1;
 		end
 		// Aux Data Enable period 
 		if(ade)begin
 			if(adecnt == 6'd32)begin
 				adecnt <= 6'd0;
+				aclkc  <= axdout;
 			end else if(adecnt == 6'd31)begin
 				ade    <= 1'b0;
 			end else begin
@@ -666,6 +668,10 @@ always@(posedge pclk)begin
 		end
 	end
 end
+
+assign out_aux0 = axdout[ 3:0];
+assign out_aux1 = axdout[ 7:4];
+assign out_aux2 = axdout[11:8];
 
 dvi_encoder_top dvi_tx0 (
     .pclk        (pclk),
@@ -683,7 +689,7 @@ dvi_encoder_top dvi_tx0 (
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (ade),
+    .ade         (ade_q),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
