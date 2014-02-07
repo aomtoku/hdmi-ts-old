@@ -302,7 +302,7 @@ always @(posedge tx_clk)begin
 				endcase
 			end
 			PCKTIDNT: begin
-				if(pcktinfo)begin
+				if(pcktinfo == audio)begin
 					txd   <= audio;
 					state <= AUXID;
 					count <= 11'd0;
