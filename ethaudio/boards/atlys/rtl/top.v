@@ -883,6 +883,9 @@ tmds_timing timing(
 //  GMII TX
 //-----------------------------------------------------------
 
+
+wire ade_tx = (video_vcnt < 22) && (video_cnt > 741) && (video_hcnt == 11'd1);
+
 gmii_tx gmii_tx(
 	.id(DEBUG_SW[0]),
 	// FIFO
@@ -896,6 +899,7 @@ gmii_tx gmii_tx(
 	.sw(~DEBUG_SW[2]),
 
 	// AX FIFO
+	.adesig(ade_tx),
 	.ade_num(ade_num),
 	.axdout(ax_dout),
 	.ax_send_full(ax_send_full),

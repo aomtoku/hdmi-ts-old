@@ -54,7 +54,7 @@ module gmii_tx#(
 	input   wire        wr_en,
 	
   /*** AUX ***/
-	input   wire        pcktinfo,
+	input   wire        adesig,
 	input   wire [3:0]  ade_num,
 	input   wire [11:0] axdout,
 	input   wire        ax_send_full,
@@ -188,6 +188,13 @@ always @(posedge tx_clk)begin
 					tx_en     <= 1'b1;
 					state     <= PRE;
 					ip_check  <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					pcktinfo <= video;
+				end else if(ax_send_empty == 1'b0 & adesig)begin
+					txd       <= 8'h55;
+					tx_en     <= 1'b1;
+					state     <= PRE;
+					ip_check  <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					pcktinfo <= audio;
 				end
 			end
 			PRE: begin
