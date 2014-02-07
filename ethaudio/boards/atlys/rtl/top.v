@@ -972,7 +972,7 @@ always @(RXCLK) begin
 	//sw_dip <= DEBUG_SW;
 	case(DEBUG_SW[1])
 		1'b0 : LED <= {4'b0,recv_full,recv_empty,2'b0};
-		1'b1 : LED <= {ax_recv_full,ax_recv_empty,6'd0};
+		1'b1 : LED <= {ax_recv_full,ax_recv_empty,ax_send_full,ax_send_empty,4'd0};
 		//4'b1000 : LED <= {4'b0,recv_full,recv_empty,2'b0};
 		//4'b0001 : LED <= error[7:0];
 		//4'b0010 : LED <= {5'd0,error[10:8]};
