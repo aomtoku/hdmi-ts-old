@@ -884,7 +884,7 @@ tmds_timing timing(
 //-----------------------------------------------------------
 
 
-wire ade_tx = (video_vcnt < 22) && (video_cnt > 741) && (video_hcnt == 11'd1);
+wire ade_tx = (video_vcnt < 11'd22) && (video_vcnt > 11'd741) && (video_hcnt == 11'd1);
 
 gmii_tx gmii_tx(
 	.id(DEBUG_SW[0]),
