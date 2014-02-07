@@ -33,6 +33,11 @@ wire TXEN;
 wire [7:0]TXD;
 reg [23:0]tx_data;
 
+reg [11:0]ax_dout;
+reg ax_send_full;
+reg ax_send_empty;
+wire ax_send_rd_en;
+
 gmii_tx gmiisend(
 	/*** FIFO ***/
 	.fifo_clk(fifo_clk),
@@ -42,12 +47,19 @@ gmii_tx gmiisend(
 	.full(full),
 	.rd_en(rd_en),
 	//.rd_clk(fifo_clk),
-							
+	// AX FIFO
+	.adesig(ade_tx),
+	.ade_num(ade_num),
+	.axdout(ax_dout),
+	.ax_send_full(ax_send_full),
+	.ax_send_empty(ax_send_empty),
+	.ax_send_rd_en(ax_send_rd_en),
+
 	/*** Ethernet PHY GMII ****/
 	.tx_clk(gmii_tx_clk),
 	.tx_en(TXEN),
 	.txd(TXD)
-    );
+);
 
 //
 // a clock

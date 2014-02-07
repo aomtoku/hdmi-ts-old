@@ -1,4 +1,4 @@
-SRC = tb_gmiisend.v ../rtl/gmii_tx.v ../../crc/crc_gen.v
+SRC = tb_gmiisend.v ../rtl/gmii_tx.v 
 
 tb_system: $(SRC)
 	iverilog -o tb_system $(SRC)
