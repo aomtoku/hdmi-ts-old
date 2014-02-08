@@ -400,36 +400,37 @@ always @(posedge tx_clk)begin
 				end
 			end
       AUX: begin
-			  if(count == 11'd31)begin
-					if(left_ade == 4'd0)
-					  state <= FCS;
-					else
-						state <= AUXID;
-					txd   <= tmp;
-					count <= 11'd0;
-				end else begin
-				  tx_en <= 1'b1;
-					count <= count + 11'd1;
-					case(cnt3)
-					  2'd0: begin
-					         txd           <= axdout[7:0];
-						       tmp[3:0]      <= axdout[11:8];
-									 ax_send_rd_en <= 1'b1;
-									 cnt3          <= 2'd1;
-						      end
-						2'd1: begin
-					         txd           <= {tmp,axdout[3:0]};
-						       tmp           <= axdout[11:4];
-									 cnt3          <= 2'd2;
-									 ax_send_rd_en <= 1'b0;
-						      end
-						2'd2: begin
-						       txd           <= tmp;
-									 cnt3          <= 2'd0;
-									 ax_send_rd_en <= 1'b1;
-						      end
-					endcase
+			 if(count == 11'd31)begin
+			   if(left_ade == 4'd0)begin
+				  state <= FCS;
+			    end else begin
+				  state <= AUXID;
 				end
+				txd   <= tmp;
+				count <= 11'd0;
+			  end else begin
+				tx_en <= 1'b1;
+				count <= count + 11'd1;
+				case(cnt3)
+				  2'd0: begin
+				    txd           <= axdout[7:0];
+					tmp[3:0]      <= axdout[11:8];
+					ax_send_rd_en <= 1'b1;
+					cnt3          <= 2'd1;
+				  end
+				  2'd1: begin
+					txd           <= {tmp,axdout[3:0]};
+					tmp           <= axdout[11:4];
+					cnt3          <= 2'd2;
+					ax_send_rd_en <= 1'b0;
+				  end
+				  2'd2: begin
+					txd           <= tmp;
+					cnt3          <= 2'd0;
+					ax_send_rd_en <= 1'b1;
+				  end
+				endcase
+			  end
 			end
 			FCS: begin
 				tx_en     <= 1'b1;
