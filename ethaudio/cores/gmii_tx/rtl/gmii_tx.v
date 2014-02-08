@@ -432,33 +432,33 @@ always @(posedge tx_clk)begin
 				endcase
 			  end
 			end
-			FCS: begin
-				tx_en     <= 1'b1;
-				fcs_count <= fcs_count + 1'b1;
-				crc_rd    <= 1'b1;
-				case(fcs_count)
-					2'h0: txd <= crc_out[31:24];
-					2'h1: txd <= crc_out[23:16];
-					2'h2: txd <= crc_out[15:8];
-					2'h3: begin
-						txd       <= crc_out[7:0];
-						gap_count <= 32'd14; // Inter Frame Gap = 14 (offset value -2)
-						state     <= IFG;
-					end
-					//default : tx_en <= 1'b0;
-				endcase
-			end
-			IFG: begin
-				if(gap_count == 32'd0) 
-					state     <= IDLE;
-				else begin
-					tx_en     <= 1'b0;
-					gap_count <= gap_count - 32'd1;
+	 FCS: begin
+			tx_en     <= 1'b1;
+			fcs_count <= fcs_count + 1'b1;
+			crc_rd    <= 1'b1;
+			case(fcs_count)
+				2'h0: txd <= crc_out[31:24];
+				2'h1: txd <= crc_out[23:16];
+				2'h2: txd <= crc_out[15:8];
+				2'h3: begin
+					txd       <= crc_out[7:0];
+					gap_count <= 32'd14; // Inter Frame Gap = 14 (offset value -2)
+					state     <= IFG;
 				end
+				//default : tx_en <= 1'b0;
+			endcase
+		end
+	 IFG: begin
+			if(gap_count == 32'd0) 
+				state     <= IDLE;
+			else begin
+				tx_en     <= 1'b0;
+				gap_count <= gap_count - 32'd1;
 			end
+		end
 			//default: tx_en <= 1'b0;
-		endcase
-	end
+	endcase
+  end
 end
 
 assign rd_en = ((state == DATA_RGB & cnt3 == 2'd2 ) | (state == DATA_RESOL & cnt3 == 2'd3 ) | (state == PCKTIDNT & cnt3 == 2'd3 ));
