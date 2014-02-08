@@ -1,4 +1,4 @@
-SRC = tb_hdmioverip.v ../../../core/common/datacontroller.v  ../../../core/gmii2fifo48/rtl/gmii_rec.v ../../../core/fifo/test/asfifo.v ../../../core/fifo/test/afifo48.v ../../../core/fifo/test/graycounter.v ../../../core/common/timing.v
+SRC = tb_hdmioverip.v ../../../cores/common/rtl/datacontroller.v  ../../../cores/gmii2fifo/rtl/gmii_rec.v ../../../cores/fifo/test/asfifo.v ../../../cores/fifo/test/afifo48.v ../../../cores/fifo/test/graycounter.v ../../../cores/timing/rtl/timing.v 
 
 tb_system: $(SRC)
 	iverilog -o tb_system $(SRC)
