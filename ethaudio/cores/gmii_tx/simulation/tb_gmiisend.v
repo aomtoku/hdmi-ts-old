@@ -88,16 +88,19 @@ always@(posedge sys_clk)begin
 	end
 	if(ax_send_rd_en)begin
 		{ax_dout} <= arom[acounter];
-		acounter <= acounter + 'd1;
+		acounter <= acounter + 12'd1;
+  end
 end
 
 
 initial begin
 	$dumpfile("./test.vcd");
 	$dumpvars(0, tb_gmiisend);
-	$readmemh("request.mem", rom);
+	$readmemh("vrequest.mem",vrom);
+	$readmemh("arequest.mem",arom);
 	sys_rst = 1'b1;
-	counter = 0;
+	vcounter = 0;
+	acounter = 0;
 	
 	waitclock;
 	waitclock;
