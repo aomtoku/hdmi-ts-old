@@ -660,7 +660,7 @@ always@(posedge pclk)begin
 		if(ade)begin
 			if(adecnt == 6'd31)begin
 				ade    <= 1'b0;
-				adecnt < 6'd0;
+				adecnt <= 6'd0;
 			end else begin
 				adecnt <= adecnt + 6'd1;
 			end
