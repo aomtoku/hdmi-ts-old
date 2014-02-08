@@ -99,9 +99,7 @@ assign TXER = 1'b0;
 
 //-----------------------------------------------------------
 // 
-//
 // Receive process
-//
 //
 //-----------------------------------------------------------
 
@@ -547,7 +545,7 @@ wire          bgnd_hblnk;
 wire          bgnd_vsync;
 wire          bgnd_vblnk;
 
-wire restart = reset ;
+wire restart = reset;
 
 timing_gen timing_inst (
 	.tc_hsblnk(tc_hsblnk), //input
@@ -648,16 +646,17 @@ always@(posedge pclk)begin
 	end else begin
 	    vde_h <= vde;
 	    ade_q <= ade;
-        //first read signal
-        if(fifo_read)begin
-		  init <= 1'b1;
-	    end
 	    initq  <= init;
 		initqq <= initq; 
-		if({initq,initqq}==2'b10)
+        //first read signal
+        if(fifo_read)begin
+		    init <= 1'b1;
+	    end
+		if({initq,initqq}==2'b10)begin
 			aclkc <= axdout;
+		end
 		
-	    if(init & ~vde/* & ~ade*/ & hcnt == aclkc)begin
+	    if(init & ~vde & ~ade & hcnt == aclkc)begin
 		    ade <= 1'b1;
 	    end
 		// Aux Data Enable period 
