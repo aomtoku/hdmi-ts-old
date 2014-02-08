@@ -750,7 +750,7 @@ always @ (posedge rx0_pclk)begin
 	  ade_out <= 12'd0;
 		ade_gg  <= 1'b0;
 	end else begin
-		ade_buf <= {rx0_aux0, rx0_aux1, rx0_aux2};
+		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
 		ade_gg <= rx0_ade;
 		if({rx0_ade,ade_gg} == 2'b10)
 			ade_out <= {1'b0,video_hcnt};
