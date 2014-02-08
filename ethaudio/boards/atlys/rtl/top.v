@@ -632,7 +632,7 @@ reg [11:0]aclkc;
 reg vde_h,ade_q;
 reg init, initq;
 
-assign ax_recv_rd_en = {init,initq} == 2'b10 || ade || ade_q;
+assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
 
 always@(posedge pclk)begin
   if(reset)begin
@@ -648,12 +648,13 @@ always@(posedge pclk)begin
 		ade_q <= ade;
 		
     //first read signal
-    if(fifo_read)
+    if(fifo_read)begin
 			init <= 1'b1;
+		end
 		initq <= init;
 
 		
-		if(init & ~vde & ~ade & hcnt == aclkc)begin
+		if(init & ~vde/* & ~ade*/ & hcnt == aclkc)begin
 			ade <= 1'b1;
 		end
 		// Aux Data Enable period 
@@ -665,8 +666,9 @@ always@(posedge pclk)begin
 				adecnt <= adecnt + 6'd1;
 			end
 		end
-		if({ade,ade_q} == 2'b01)
+		if({ade,ade_q} == 2'b01)begin
 			aclkc <= axdout;
+		end
 	end
 end
 
