@@ -26,7 +26,7 @@ module top (
 	input  wire [3:0] DEBUG_SW,
 
 	output reg  [7:0] LED,
-	output wire [4:0] JA
+	output wire [5:0] JA
 );
 
 //******************************************************************//
@@ -620,6 +620,7 @@ assign JA[1] = VGA_HSYNC;
 assign JA[2] = VGA_VSYNC;
 assign JA[3] = ax_recv_rd_en;
 assign JA[4] = ax_send_rd_en;
+assign JA[5] = fifo_read;
 ////////////////////////////////////////////////////////////////
 // DVI Encoder
 ////////////////////////////////////////////////////////////////
@@ -630,7 +631,7 @@ reg [4:0] adecnt;
 reg [11:0]aclkc;
 reg ade;
 reg vde_h,ade_q;
-reg init, initq;
+reg init, initq,initqq;
 
 assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
 
@@ -643,6 +644,7 @@ always@(posedge pclk)begin
 		ade_q    <= 1'b0;
 		init     <= 1'b0;
 		initq    <= 1'b0;
+		initqq   <= 1'b0;
 	end else begin
 	    vde_h <= vde;
 	    ade_q <= ade;
@@ -650,7 +652,10 @@ always@(posedge pclk)begin
         if(fifo_read)begin
 		  init <= 1'b1;
 	    end
-	    initq <= init;
+	    initq  <= init;
+		initqq <= initq; 
+		if({initq,initqq}==2'b10)
+			aclkc <= axdout;
 		
 	    if(init & ~vde/* & ~ade*/ & hcnt == aclkc)begin
 		    ade <= 1'b1;
