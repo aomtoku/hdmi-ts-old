@@ -765,6 +765,7 @@ wire [11:0] ax_din;
 wire [11:0] ax_dout;
 
 assign ax_send_wr_en = rx0_ade | ade_gg;
+wire        rx0_reset;
 
 auxfifo12 auxfifo12_tx(
   .rst(rx0_reset),
@@ -787,7 +788,6 @@ auxfifo12 auxfifo12_tx(
 wire        rx0_tmdsclk;
 wire        rx0_pclkx10, rx0_pllclk0;
 wire        rx0_plllckd;
-wire        rx0_reset;
 wire        rx0_serdesstrobe;
 
 wire        rx0_psalgnerr;      // channel phase alignment error
