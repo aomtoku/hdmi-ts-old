@@ -761,7 +761,7 @@ end
 
 wire        ax_send_full, ax_send_empty;
 wire        ax_send_wr_en, ax_send_rd_en;
-wire [11:0] ax_din;
+wire [11:0] ax_din = ade_out;
 wire [11:0] ax_dout;
 
 assign ax_send_wr_en = rx0_ade | ade_gg;
