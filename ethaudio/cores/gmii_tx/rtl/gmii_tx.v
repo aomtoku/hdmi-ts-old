@@ -387,16 +387,16 @@ always @(posedge tx_clk)begin
 			//
       AUXID: begin
 				if(count == 11'd1)begin
-					txd   <= {left_ade, axdout[11:8]};
-					left_ade <= left_ade - 4'd1;
-					count <= 11'd0;
-					state <= AUX;
-					cnt3  <= 2'd0;
+				  txd   <= {left_ade, axdout[11:8]};
+				  left_ade <= left_ade - 4'd1;
+			      count <= 11'd0;
+				  state <= AUX;
+				  cnt3  <= 2'd0;
 				  ax_send_rd_en <= 1'b1;
 				end else begin
 				  ax_send_rd_en <= 1'b0;
 				  count <= 11'd1;
-					txd   <= axdout[7:0];
+			      txd   <= axdout[7:0];
 				end
 			end
       AUX: begin
