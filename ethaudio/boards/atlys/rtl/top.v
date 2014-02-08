@@ -632,7 +632,7 @@ reg [11:0]aclkc;
 reg vde_h,ade_q;
 reg init, initq;
 
-assign ax_recv_rd_en = {init,initq} == 2'b10 || ade || adecnt == 6'd32;
+assign ax_recv_rd_en = {init,initq} == 2'b10 || ade || ade_q;
 
 always@(posedge pclk)begin
   if(reset)begin
@@ -658,15 +658,15 @@ always@(posedge pclk)begin
 		end
 		// Aux Data Enable period 
 		if(ade)begin
-			if(adecnt == 6'd32)begin
-				adecnt <= 6'd0;
-				aclkc  <= axdout;
-			end else if(adecnt == 6'd31)begin
+			if(adecnt == 6'd31)begin
 				ade    <= 1'b0;
+				adecnt < 6'd0
 			end else begin
 				adecnt <= adecnt + 6'd1;
 			end
 		end
+		if({ade,ade_q} == 2'b01)
+			aclkc <= axdout;
 	end
 end
 
