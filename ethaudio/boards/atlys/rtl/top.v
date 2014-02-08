@@ -767,7 +767,7 @@ wire [11:0] ax_dout;
 assign ax_send_wr_en = rx0_ade | ade_gg;
 
 auxfifo12 auxfifo12_tx(
-  .rst(RSTBTN),
+  .rst(rx0_reset),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
