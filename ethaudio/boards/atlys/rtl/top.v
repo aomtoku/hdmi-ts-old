@@ -149,7 +149,7 @@ fifo29_32768 asfifo_recv (
 
 wire [11:0] axdout;
 auxfifo12 auxfifo12_recv(
-  .rst(reset),
+    .rst(reset),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
 	.din(axdin),
@@ -626,16 +626,16 @@ assign JA[2] = VGA_VSYNC;
 wire [4:0] tmds_data0, tmds_data1, tmds_data2;
 wire serdes_rst = RSTBTN | ~bufpll_lock;
 
-reg ade;
 reg [4:0] adecnt;
 reg [11:0]aclkc;
+reg ade;
 reg vde_h,ade_q;
 reg init, initq;
 
 assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
 
 always@(posedge pclk)begin
-  if(reset)begin
+    if(reset)begin
 		ade      <= 1'b0;
 		adecnt   <= 6'd0;
 		vde_h    <= 1'b0;
@@ -644,32 +644,30 @@ always@(posedge pclk)begin
 		init     <= 1'b0;
 		initq    <= 1'b0;
 	end else begin
-	  vde_h <= vde;
-		ade_q <= ade;
+	    vde_h <= vde;
+	    ade_q <= ade;
+        //first read signal
+        if(fifo_read)begin
+		  init <= 1'b1;
+	    end
+	    initq <= init;
 		
-    //first read signal
-    if(fifo_read)begin
-			init <= 1'b1;
-		end
-		initq <= init;
-
-		
-		if(init & ~vde/* & ~ade*/ & hcnt == aclkc)begin
-			ade <= 1'b1;
-		end
+	    if(init & ~vde/* & ~ade*/ & hcnt == aclkc)begin
+		    ade <= 1'b1;
+	    end
 		// Aux Data Enable period 
-		if(ade)begin
-			if(adecnt == 6'd31)begin
-				ade    <= 1'b0;
-				adecnt <= 6'd0;
-			end else begin
-				adecnt <= adecnt + 6'd1;
-			end
-		end
-		if({ade,ade_q} == 2'b01)begin
-			aclkc <= axdout;
-		end
-	end
+	    if(ade)begin
+		    if(adecnt == 6'd31)begin
+			    ade    <= 1'b0;
+		        adecnt <= 6'd0;
+		    end else begin
+			    adecnt <= adecnt + 6'd1;
+		    end
+	    end
+	    if({ade,ade_q} == 2'b01)begin
+		    aclkc <= axdout;
+	    end
+    end
 end
 
 assign out_aux0 = axdout[ 3:0];
@@ -682,13 +680,13 @@ dvi_encoder_top dvi_tx0 (
     .pclkx10     (pclkx10),
     .serdesstrobe(serdesstrobe),
     .rstin       (reset),
-		.serdes_rst  (serdes_rst),
+	.serdes_rst  (serdes_rst),
     .blue_din    (blue_data),
     .green_din   (green_data),
     .red_din     (red_data),
-		.aux0_din		 (out_aux0),
-		.aux1_din		 (out_aux1),
-		.aux2_din		 (out_aux2),
+	.aux0_din	 (out_aux0),
+	.aux1_din	 (out_aux1),
+	.aux2_din	 (out_aux2),
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
@@ -749,7 +747,7 @@ reg ade_gg;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf <= 12'd0;
-	  ade_out <= 12'd0;
+	    ade_out <= 12'd0;
 		ade_gg  <= 1'b0;
 	end else begin
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
@@ -766,11 +764,11 @@ wire        ax_send_wr_en, ax_send_rd_en;
 wire [11:0] ax_din = ade_out;
 wire [11:0] ax_dout;
 
-assign ax_send_wr_en = rx0_ade | ade_gg;
-wire        rx0_reset;
+assign   ax_send_wr_en = rx0_ade | ade_gg;
+wire     rx0_reset;
 
 auxfifo12 auxfifo12_tx(
-  .rst(rx0_reset),
+    .rst(rx0_reset|RSTBTN),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
@@ -855,7 +853,6 @@ dvi_decoder dvi_rx0 (
 	.blue        (rx0_blue)
 ); 
 
-
 //-----------------------------------------------------
 // TMDS HSYNC VSYNC COUNTER ()
 //           (1280x720 progressive 
@@ -880,13 +877,11 @@ tmds_timing timing(
 		.video_vcnt(video_vcnt)
 );
 
-
 //-----------------------------------------------------------
 //  GMII TX
 //-----------------------------------------------------------
 
-
-wire ade_tx = (video_vcnt < 11'd22) && (video_vcnt > 11'd741) && (video_hcnt == 11'd1);
+wire ade_tx = (video_vcnt < 11'd22) && (video_vcnt > 11'd741) && (video_hcnt >= 11'd1) && (video_hcnt < 11'd31);
 
 gmii_tx gmii_tx(
 	.id(DEBUG_SW[0]),
