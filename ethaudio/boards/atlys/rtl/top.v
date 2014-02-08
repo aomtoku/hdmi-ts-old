@@ -547,7 +547,6 @@ wire          bgnd_hblnk;
 wire          bgnd_vsync;
 wire          bgnd_vblnk;
 
-
 wire restart = reset ;
 
 timing_gen timing_inst (
@@ -619,7 +618,8 @@ datacontroller dataproc(
 assign JA[0] = RXDV;
 assign JA[1] = VGA_HSYNC;
 assign JA[2] = VGA_VSYNC;
-
+assign JA[3] = ax_recv_rd_en;
+assign JA[4] = ax_send_rd_en;
 ////////////////////////////////////////////////////////////////
 // DVI Encoder
 ////////////////////////////////////////////////////////////////
@@ -779,7 +779,6 @@ auxfifo12 auxfifo12_tx(
 	.empty(ax_send_empty)
 );
 
-
 //////////////////////////////////////////////////
 //
 // TMDS Input Port 0 (BANK : )
@@ -931,6 +930,7 @@ frame_checker frame_checker(
 // Status LED 
 //////////////////////////////////////
 //assign LED = 8'b11111111;
+/*
 reg pcnt;
 always@(posedge rx0_pclk)
 	if(RSTBTN)
@@ -940,7 +940,7 @@ always@(posedge rx0_pclk)
 
 assign JA[3] = pcnt;
 assign JA[4] = pcnt;
-
+*/
 `ifdef NO
 assign LED = LED_out(	.SW(SW), .TXD(TXD), .empty(send_empty), .full(send_full), .rx0_vde(rx0_vde));
 
