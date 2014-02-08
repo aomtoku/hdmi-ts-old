@@ -25,14 +25,16 @@ always #13.468 fifo_clk = ~fifo_clk;
 // Test Bench
 //
 reg sys_rst;
-//reg rx_dv;
 reg empty;
 reg full;
 wire rd_en;
 wire TXEN;
 wire [7:0]TXD;
-reg [23:0]tx_data;
+reg [47:0]tx_data;
 
+
+reg ade_tx;
+reg [3:0]ade_num;
 reg [11:0]ax_dout;
 reg ax_send_full;
 reg ax_send_empty;
@@ -46,7 +48,6 @@ gmii_tx gmiisend(
 	.empty(empty),
 	.full(full),
 	.rd_en(rd_en),
-	//.rd_clk(fifo_clk),
 	// AX FIFO
 	.adesig(ade_tx),
 	.ade_num(ade_num),
@@ -75,12 +76,19 @@ endtask
 // Scinario
 //
 
-reg [25:0] rom [0:2024];
-reg [11:0]counter = 12'd0;
+reg [47:0] vrom [0:2024];
+reg [11:0] arom [0:2024];
+reg [11:0]vcounter = 12'd0;
+reg [11:0]acounter = 12'd0;
 
 always@(posedge sys_clk)begin
-	{full,empty, tx_data} 	<= rom[counter];
-	counter		<= counter + 12'd1;
+  if(rd_en)begin
+		{tx_data} 	<= vrom[vcounter];
+		vcounter		<= vcounter + 12'd1;
+	end
+	if(ax_send_rd_en)begin
+		{ax_dout} <= arom[acounter];
+		acounter <= acounter + 'd1;
 end
 
 
