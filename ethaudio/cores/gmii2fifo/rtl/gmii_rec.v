@@ -120,13 +120,13 @@ always@(posedge clk125) begin
 					 pre_en       <= 1'b1;
 				end
 				11'd1332: begin // before 11'd1005
-				  case(pcktinfo)
+				    case(pcktinfo)
 						video: begin
 					           packet_dv <= 1'b0;
 					           vinvalid  <= 1'b1;
 					           pre_en    <= 1'b0;
-										 audio_en  <= 1'b1;
-									 end
+							   audio_en  <= 1'b1;
+						end
 					endcase
 					packet_dv <= 1'b0;
 					vinvalid  <= 1'b1;
@@ -228,17 +228,17 @@ always@(posedge clk125)begin
 	  if(audio_en) begin
       case(aux_state)
 		    AUXID:begin
-			    if(a_cnt == 5'd1)begin
-					  a_cnt      <= 5'd0;
-					  aux_state  <= AUX;
-					  ax_wr_en   <= 1'b1;
-					  daux[11:8] <= rxd[3:0];
-						left       <= rxd[7:4];
-				  end else begin
-					  ax_wr_en  <= 1'b0;
+			   if(a_cnt == 5'd1)begin
+					a_cnt      <= 5'd0;
+					aux_state  <= AUX;
+					ax_wr_en   <= 1'b1;
+					daux[11:8] <= rxd[3:0];
+					left       <= rxd[7:4];
+			   end else begin
+					ax_wr_en  <= 1'b0;
 				    a_cnt     <= 5'd1;
-					  daux[7:0] <= rxd;
-			    end
+					daux[7:0] <= rxd;
+			   end
 			  end
 			  AUX:begin
 			    if(a_cnt == 5'd47)begin

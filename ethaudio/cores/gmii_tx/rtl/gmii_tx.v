@@ -153,7 +153,7 @@ parameter FCS         = 4'ha;
 parameter IFG         = 4'hb;
 
 
-parameter auxsize     = 12'd49;
+parameter auxsize     = 12'd50;
 parameter video       = 8'b00000000;
 parameter audio       = 8'b00000001;
 
