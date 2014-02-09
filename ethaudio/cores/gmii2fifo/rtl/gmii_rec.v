@@ -241,7 +241,7 @@ always@(posedge clk125)begin
 			    end
 			  end
 			  AUX:begin
-			    if(a_cnt == 5'd31)begin
+			    if(a_cnt == 5'd47)begin
 					  a_cnt      <= 5'd0;
 					  cnt2       <= 2'd0;
 					  daux[ 3:0] <= tmp;
