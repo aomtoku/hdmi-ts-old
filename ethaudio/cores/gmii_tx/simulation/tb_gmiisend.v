@@ -20,7 +20,29 @@ reg fifo_clk;
 initial fifo_clk = 1'b0;
 always #13.468 fifo_clk = ~fifo_clk;
 
+// Generate Video Signal
+wire vsync, hsync;
+reg [10:0]hcnt,vcnt;
+assign vsync = (vcnt >= 746 || vcnt == 0);
+assign hsync = (hcnt >= 1611 || hcnt == 0);
+always@(posedge fifo_clk)begin
+  if(sys_rst)begin
+	  hcnt <= 11'd0;
+	  vcnt <= 11'd0;
+  end else begin
+    if(hcnt == 1649)begin
+	  hcnt <= 11'd0;
+	  if(vcnt == 749)
+	    vcnt <= 11'd0;
+	  else
+		vcnt <= vcnt + 11'd1;
+	end else begin
+      hcnt <= hcnt + 11'd1;
+	end
+  end
+end
 
+wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
 //
 // Test Bench
 //
@@ -33,7 +55,7 @@ wire [7:0]TXD;
 reg [47:0]tx_data;
 
 
-reg ade_tx;
+wire ade_tx = ((vcnt < 11'd22) || (vcnt > 11'd741)) && ((hcnt >= 11'd1) && (hcnt < 11'd80));
 reg [3:0]ade_num;
 reg [11:0]ax_dout;
 reg ax_send_full;
@@ -44,10 +66,11 @@ gmii_tx gmiisend(
 	/*** FIFO ***/
 	.fifo_clk(fifo_clk),
 	.sys_rst(sys_rst),
-	.dout(tx_data), //24bit
+	.dout(tx_data), //48bit
 	.empty(empty),
 	.full(full),
 	.rd_en(rd_en),
+	.wr_en(vde),
 	// AX FIFO
 	.adesig(ade_tx),
 	.ade_num(ade_num),
@@ -65,6 +88,7 @@ gmii_tx gmiisend(
 //
 // a clock
 //
+
 task waitclock;
 begin
 	@(posedge sys_clk);
@@ -83,12 +107,12 @@ reg [11:0]acounter = 12'd0;
 
 always@(posedge sys_clk)begin
   if(rd_en)begin
-		{tx_data} 	<= vrom[vcounter];
-		vcounter		<= vcounter + 12'd1;
-	end
-	if(ax_send_rd_en)begin
-		{ax_dout} <= arom[acounter];
-		acounter <= acounter + 12'd1;
+	{tx_data}  <= vrom[vcounter];
+	vcounter   <= vcounter + 12'd1;
+  end
+  if(ax_send_rd_en)begin
+	{ax_dout}  <= arom[acounter];
+	acounter   <= acounter + 12'd1;
   end
 end
 
