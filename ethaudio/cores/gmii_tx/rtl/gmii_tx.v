@@ -27,7 +27,7 @@ module gmii_tx#(
 	parameter [15:0]  ip_type       = 16'h0800,
 	parameter [15:0]  ip_ver        = 16'h4500,
 `ifdef DATA_YUV
-	parameter [15:0]  ip_len        = 16'd1312 - 16'd2,
+	parameter [15:0]  ip_len        = 16'd1312 - 16'd1,
 `else
 	parameter [15:0]  ip_len        = 16'd992,
 `endif
@@ -38,7 +38,7 @@ module gmii_tx#(
 	parameter [31:0]  ip_src_addr   = {8'd192,8'd168,8'd0,8'd1},
 	parameter [31:0]  ip_dst_addr   = {8'd192,8'd168,8'd0,8'd2},
 `ifdef DATA_YUV
-	parameter [15:0]  udp_len       = 16'd1292 - 16'd2 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
+	parameter [15:0]  udp_len       = 16'd1292 - 16'd1 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
 `else
 	parameter [15:0]  udp_len       = 16'd972 // (Pixel = 960) + (X,Y = 4) + (UDP header = 8)
 `endif
@@ -153,6 +153,7 @@ parameter FCS         = 4'ha;
 parameter IFG         = 4'hb;
 
 
+parameter auxsize     = 12'd49;
 parameter video       = 8'b00000000;
 parameter audio       = 8'b00000001;
 
@@ -163,6 +164,7 @@ reg [1:0]   cnt3;
 reg [31:0]  gap_count;
 reg [23:0]  ip_check;
 reg [7:0]   pcktinfo;
+reg [11:0]  packet_size;
 
 reg [7:0]   tmp;
 reg [3:0]   left_ade;
@@ -179,30 +181,36 @@ always @(posedge tx_clk)begin
 		crc_init  <= 1'd0;
 		ip_check  <= 24'd0;
 		ax_send_rd_en <= 1'b0;
+		packet_size <= 12'd0;
 		tmp       <= 8'd0;
 	end else begin
 		crc_rd    <= 1'b0; 
 		case(state)
 			IDLE: begin
 				if(empty == 1'b0 & send_enable)begin
-					txd       <= 8'h55;
-					tx_en     <= 1'b1;
-					state     <= PRE;
-					ip_check  <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
-					pcktinfo <= video;
+					txd        <= 8'h55;
+					tx_en      <= 1'b1;
+					state      <= PRE;
+					packt_size <= auxsize * ({8'd0,ade_num} + 12'd1);
+					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					pcktinfo   <= video;
 				end else if(ax_send_empty == 1'b0 & adesig)begin
-					txd       <= 8'h55;
-					tx_en     <= 1'b1;
-					state     <= PRE;
-					ip_check  <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
-					pcktinfo <= audio;
+					txd        <= 8'h55;
+					tx_en      <= 1'b1;
+					state      <= PRE;
+					packt_size <= auxsize * ({8'd0,ade_num} + 12'd1);
+					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					pcktinfo   <= audio;
 				end
 			end
 			PRE: begin
 				tx_en <= 1'b1;
 				count <= count + 11'h1;
 				case(count)
-					11'h0: txd	<= 8'h55;
+					11'h0: begin
+					    txd	<= 8'h55;
+						ip_check  <= ip_check + {12'd0,packet_size};
+					end
 					11'h5: begin
 						txd       <= 8'h55;
 						ip_check  <= ~(ip_check[15:0] + ip_check[23:16]);
@@ -302,6 +310,7 @@ always @(posedge tx_clk)begin
 					//default: tx_en <= 1'b0;
 				endcase
 			end
+			// 1Byte
 			PCKTIDNT: begin
 				if(pcktinfo == audio)begin
 					txd   <= audio;
@@ -316,6 +325,7 @@ always @(posedge tx_clk)begin
 					count <= 11'd0;
 				end
 			end
+			// 2Byte
 			DATA_RESOL: begin
 				cnt3    <= 2'd2;
 				tx_en   <= 1'b1;
@@ -406,7 +416,7 @@ always @(posedge tx_clk)begin
 				end
 			end
       AUX: begin
-			 if(count == 11'd31)begin
+			 if(count == 11'd47)begin
 			   if(left_ade == 4'd0)begin
 				  state <= FCS;
 				  ax_send_rd_en <= 1'b0;
