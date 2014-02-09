@@ -135,7 +135,7 @@ initial begin
 	waitclock;
 	
 	
-	#10000000;
+	#1000000;
 	$finish;
 end
 

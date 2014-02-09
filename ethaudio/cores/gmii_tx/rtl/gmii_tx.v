@@ -297,6 +297,7 @@ always @(posedge tx_clk)begin
 					11'h1b: begin
 						txd     <= 8'h00;
 						state   <= PCKTIDNT;
+						count   <= 11'd0;
 					end
 					//default: tx_en <= 1'b0;
 				endcase
