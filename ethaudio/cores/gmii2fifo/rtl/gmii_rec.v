@@ -147,6 +147,7 @@ always@(posedge clk125) begin
 			packet_dv   <= 1'b0;
 			pre_en      <= 1'b0;
 			vinvalid    <= 1'b0;
+			audio_en    <= 1'b0;
 		end
 	end
 end
@@ -271,7 +272,10 @@ always@(posedge clk125)begin
 					  endcase
 				  end
 			  end
+			  default : ax_wr_en <= 1'b0;
 		  endcase
+	  end else begin
+	    ax_wr_en <= 1'b0;
 	  end
   end
 end
