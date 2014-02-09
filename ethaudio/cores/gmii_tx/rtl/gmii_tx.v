@@ -332,7 +332,10 @@ always @(posedge tx_clk)begin
 `ifdef DATA_YUV
 			DATA_RGB: begin
 				if(count == 11'd1279)begin
-					state <= FCS;
+					if(ax_send_empty)
+					  state <= FCS;
+					else
+					  state <= AUXID;
 			 		txd   <= dout[23:16];
 					count <= 11'd0;
 					cnt3  <= 2'd0;
