@@ -10,44 +10,68 @@ module tb_gmiisend();
 //
 reg sys_clk;
 initial sys_clk = 1'b0;
-always #8 sys_clk = ~sys_clk;
+always #4 sys_clk = ~sys_clk;
 
 reg gmii_tx_clk;
 initial gmii_tx_clk = 1'b0;
-always #8 gmii_tx_clk = ~gmii_tx_clk;
+always #4 gmii_tx_clk = ~gmii_tx_clk;
 
 reg fifo_clk;
 initial fifo_clk = 1'b0;
-always #13.468 fifo_clk = ~fifo_clk;
+always #6.734 fifo_clk = ~fifo_clk;
 
+// Generate Video Signal
+wire vsync, hsync;
+reg [10:0]hcnt,vcnt;
+assign vsync = (vcnt >= 746 || vcnt == 0);
+assign hsync = (hcnt >= 1611 || hcnt == 0);
+always@(posedge fifo_clk)begin
+  if(sys_rst)begin
+	  hcnt <= 11'd0;
+	  vcnt <= 11'd0;
+  end else begin
+    if(hcnt == 1649)begin
+	  hcnt <= 11'd0;
+	  if(vcnt == 749)
+	    vcnt <= 11'd0;
+	  else
+		vcnt <= vcnt + 11'd1;
+	end else begin
+      hcnt <= hcnt + 11'd1;
+	end
+  end
+end
 
+wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
 //
 // Test Bench
 //
 reg sys_rst;
-reg empty;
-reg full;
+reg empty = 0;
+reg full  = 0;
 wire rd_en;
 wire TXEN;
 wire [7:0]TXD;
 reg [47:0]tx_data;
 
 
-reg ade_tx;
-reg [3:0]ade_num;
+wire ade_tx = ((vcnt < 11'd22) || (vcnt > 11'd741)) && ((hcnt >= 11'd1) && (hcnt < 11'd80));
+wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
 reg [11:0]ax_dout;
 reg ax_send_full;
-reg ax_send_empty;
+reg ax_send_empty = 1'b0;
 wire ax_send_rd_en;
 
 gmii_tx gmiisend(
+    .id(1'b1),
 	/*** FIFO ***/
 	.fifo_clk(fifo_clk),
 	.sys_rst(sys_rst),
-	.dout(tx_data), //24bit
+	.dout(tx_data), //48bit
 	.empty(empty),
 	.full(full),
 	.rd_en(rd_en),
+	.wr_en(vde),
 	// AX FIFO
 	.adesig(ade_tx),
 	.ade_num(ade_num),
@@ -130,6 +154,7 @@ assign rd_en = active;
 //
 // a clock
 //
+
 task waitclock;
 begin
 	@(posedge sys_clk);
@@ -148,12 +173,21 @@ reg [11:0]acounter = 12'd0;
 
 always@(posedge sys_clk)begin
   if(rd_en)begin
+<<<<<<< HEAD
 		tx_data 	<= vrom[vcounter];
 		vcounter	<= vcounter + 12'd1;
 	end
 	if(ax_send_rd_en)begin
 		ax_dout  <= arom[acounter];
 		acounter <= acounter + 12'd1;
+=======
+	{tx_data}  <= vrom[vcounter];
+	vcounter   <= vcounter + 12'd1;
+  end
+  if(ax_send_rd_en)begin
+	{ax_dout}  <= arom[acounter];
+	acounter   <= acounter + 12'd1;
+>>>>>>> 6f419b7acde67c995188eb317addbbaae47f992a
   end
 end
 
@@ -175,7 +209,7 @@ initial begin
 	waitclock;
 	
 	
-	#100000;
+	#1000000;
 	$finish;
 end
 

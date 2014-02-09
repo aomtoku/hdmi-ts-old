@@ -1,5 +1,5 @@
-Release 14.6 - xst P.68d (lin)
-Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Release 14.4 - xst P.49d (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
 --> 
 
 TABLE OF CONTENTS
@@ -50,85 +50,85 @@ Optimization Effort                : 2
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "/home/aom/Work/videotest/boards/atlys/rtl/top.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" into library work
 Parsing module <top>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/common/rtl/dcmspi.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/dcmspi.v" into library work
 Parsing module <dcmspi>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/common/rtl/debnce.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/debnce.v" into library work
 Parsing module <debnce>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/common/rtl/hdclrbar.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/hdclrbar.v" into library work
 Parsing module <hdcolorbar>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/common/rtl/synchro.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v" into library work
 Parsing module <synchro>.
-WARNING:HDLCompiler:924 - "/home/aom/Work/videotest/cores/common/rtl/synchro.v" Line 87: Attribute target identifier fdb not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/videotest/cores/common/rtl/synchro.v" Line 82: Attribute target identifier fda not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/videotest/cores/common/rtl/synchro.v" Line 83: Attribute target identifier fdb not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/videotest/cores/common/rtl/synchro.v" Line 84: Attribute target identifier fda not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/videotest/cores/common/rtl/synchro.v" Line 85: Attribute target identifier fdb not found in this scope
-WARNING:HDLCompiler:924 - "/home/aom/Work/videotest/cores/common/rtl/synchro.v" Line 86: Attribute target identifier fda not found in this scope
-Analyzing Verilog file "/home/aom/Work/videotest/cores/common/rtl/DRAM16XN.v" into library work
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v" Line 87: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v" Line 82: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v" Line 83: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v" Line 84: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v" Line 85: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v" Line 86: Attribute target identifier fda not found in this scope
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/DRAM16XN.v" into library work
 Parsing module <DRAM16XN>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/common/rtl/datacontroller.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/datacontroller.v" into library work
 Parsing module <datacontroller>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" into library work
 Parsing module <phsaligner>.
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 65. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 66. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 67. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 68. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 133. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 134. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 135. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 136. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 137. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 138. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 139. parameter declaration becomes local in phsaligner with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 169. parameter declaration becomes local in phsaligner with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 65. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 66. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 67. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 68. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 133. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 134. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 135. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 136. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 137. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 138. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 139. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 169. parameter declaration becomes local in phsaligner with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" into library work
 Parsing module <serdes_1_to_5_diff_data>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" into library work
 Parsing module <dvi_decoder>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v" into library work
 Parsing module <decode>.
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v" Line 186. parameter declaration becomes local in decode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v" Line 187. parameter declaration becomes local in decode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v" Line 188. parameter declaration becomes local in decode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v" Line 189. parameter declaration becomes local in decode with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_rx/rtl/chnlbond.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v" Line 186. parameter declaration becomes local in decode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v" Line 187. parameter declaration becomes local in decode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v" Line 188. parameter declaration becomes local in decode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v" Line 189. parameter declaration becomes local in decode with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/chnlbond.v" into library work
 Parsing module <chnlbond>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_tx/rtl/serdes_n_to_1.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/serdes_n_to_1.v" into library work
 Parsing module <serdes_n_to_1>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_tx/rtl/srldelay.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/srldelay.v" into library work
 Parsing module <srldelay>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v" into library work
 Parsing module <encode>.
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v" Line 123. parameter declaration becomes local in encode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v" Line 124. parameter declaration becomes local in encode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v" Line 125. parameter declaration becomes local in encode with formal parameter declaration list
-INFO:HDLCompiler:693 - "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v" Line 126. parameter declaration becomes local in encode with formal parameter declaration list
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_tx/rtl/dvi_encoder.v" into library work
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v" Line 123. parameter declaration becomes local in encode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v" Line 124. parameter declaration becomes local in encode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v" Line 125. parameter declaration becomes local in encode with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v" Line 126. parameter declaration becomes local in encode with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/dvi_encoder.v" into library work
 Parsing module <dvi_encoder>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_tx/rtl/dvi_encoder_top.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/dvi_encoder_top.v" into library work
 Parsing module <dvi_encoder_top>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/tmds_tx/rtl/convert_30to15_fifo.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v" into library work
 Parsing module <convert_30to15_fifo>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/coregen/clk_wiz_v3_6.v" into library work
-Parsing module <clk_wiz_v3_6>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/coregen/fifo16_32768.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/coregen/fifo16_32768.v" into library work
 Parsing module <fifo16_32768>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/coregen/fifo29_32768.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/coregen/fifo29_32768.v" into library work
 Parsing module <fifo29_32768>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/coregen/fifo48_8k.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/coregen/fifo48_8k.v" into library work
 Parsing module <fifo48_8k>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/timing/rtl/tmds_timing.v" into library work
-Parsing module <tmds_timing>.
-Analyzing Verilog file "/home/aom/Work/videotest/cores/timing/rtl/timing_gen.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/coregen/clk_wiz_v3_6.v" into library work
+Parsing module <clk_wiz_v3_6>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/timing/rtl/timing_gen.v" into library work
 Parsing module <timing_gen>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/timing/rtl/tmds_timing.v" into library work
+Parsing module <tmds_timing>.
 
 =========================================================================
 *                            HDL Elaboration                            *
 =========================================================================
-WARNING:HDLCompiler:1016 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 145: Port debug is not connected to this instance
+WARNING:HDLCompiler:1016 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 145: Port debug is not connected to this instance
 
 Elaborating module <top>.
 
@@ -137,7 +137,7 @@ Elaborating module <BUFG>.
 Elaborating module <synchro(INITIALIZE="LOGIC0")>.
 
 Elaborating module <FDC>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 108: Assignment to switch ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 108: Assignment to switch ignored, since the identifier is never used
 
 Elaborating module <dvi_decoder>.
 
@@ -152,9 +152,9 @@ Elaborating module <BUFPLL(DIVIDE=5)>.
 Elaborating module <decode(CHANNEL="BLUE")>.
 
 Elaborating module <serdes_1_to_5_diff_data(DIFF_TERM="FALSE",BITSLIP_ENABLE="TRUE")>.
-WARNING:HDLCompiler:413 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 248: Result of 2-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 250: Result of 2-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 251: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 248: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 250: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 251: Result of 2-bit expression is truncated to fit in 1-bit target.
 
 Elaborating module <IBUFDS(DIFF_TERM="FALSE")>.
 
@@ -167,37 +167,37 @@ Elaborating module <ISERDES2(DATA_WIDTH=5,DATA_RATE="SDR",BITSLIP_ENABLE="TRUE",
 Elaborating module <ISERDES2(DATA_WIDTH=5,DATA_RATE="SDR",BITSLIP_ENABLE="TRUE",SERDES_MODE="SLAVE",INTERFACE_TYPE="RETIMED")>.
 
 Elaborating module <phsaligner>.
-WARNING:HDLCompiler:1308 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 174: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
-WARNING:HDLCompiler:1308 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v" Line 221: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 174: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v" Line 221: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
 
 Elaborating module <chnlbond>.
 
 Elaborating module <DRAM16XN(data_width=10)>.
 
 Elaborating module <RAM16X1D>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" Line 225: Assignment to ade_b ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" Line 226: Assignment to vde_b ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 225: Assignment to ade_b ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 226: Assignment to vde_b ignored, since the identifier is never used
 
 Elaborating module <decode(CHANNEL="GREEN")>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" Line 254: Assignment to ade_g ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" Line 255: Assignment to vde_g ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 254: Assignment to ade_g ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" Line 255: Assignment to vde_g ignored, since the identifier is never used
 
 Elaborating module <decode(CHANNEL="RED")>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 160: Assignment to rx0_pclkx2 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 161: Assignment to rx0_pclkx10 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 162: Assignment to rx0_pllclk0 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 164: Assignment to rx0_pllclk2 ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 165: Assignment to rx0_plllckd ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 166: Assignment to rx0_tmdsclk ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 167: Assignment to rx0_serdesstrobe ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 173: Assignment to rx0_blue_vld ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 174: Assignment to rx0_green_vld ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 175: Assignment to rx0_red_vld ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 176: Assignment to rx0_blue_rdy ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 177: Assignment to rx0_green_rdy ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 178: Assignment to rx0_red_rdy ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 180: Assignment to rx0_psalgnerr ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 183: Assignment to rx0_sdata ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 160: Assignment to rx0_pclkx2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 161: Assignment to rx0_pclkx10 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 162: Assignment to rx0_pllclk0 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 164: Assignment to rx0_pllclk2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 165: Assignment to rx0_plllckd ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 166: Assignment to rx0_tmdsclk ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 167: Assignment to rx0_serdesstrobe ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 173: Assignment to rx0_blue_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 174: Assignment to rx0_green_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 175: Assignment to rx0_red_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 176: Assignment to rx0_blue_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 177: Assignment to rx0_green_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 178: Assignment to rx0_red_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 180: Assignment to rx0_psalgnerr ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 183: Assignment to rx0_sdata ignored, since the identifier is never used
 
 Elaborating module <PLL_BASE(CLKIN_PERIOD=10,CLKFBOUT_MULT=10,CLKOUT0_DIVIDE=1,CLKOUT1_DIVIDE=10,CLKOUT2_DIVIDE=5,COMPENSATION="SOURCE_SYNCHRONOUS")>.
 
@@ -234,32 +234,32 @@ Elaborating module <FDR>.
 Elaborating module <FDRE>.
 
 Elaborating module <FDE>.
-WARNING:HDLCompiler:1127 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" Line 450: Assignment to qcnt_q ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" Line 450: Assignment to qcnt_q ignored, since the identifier is never used
 
 =========================================================================
 *                           HDL Synthesis                               *
 =========================================================================
 
 Synthesizing Unit <top>.
-    Related source file is "/home/aom/Work/videotest/boards/atlys/rtl/top.v".
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 99: Output port <sync> of the instance <synchro_sws_0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 102: Output port <sync> of the instance <synchro_sws_1> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <debug> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <sdout> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <pclkx2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <pclkx10> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <pllclk0> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <pllclk2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <pll_lckd> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <serdesstrobe> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <tmdsclk> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <blue_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <green_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <red_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <blue_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <green_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <red_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Output port <psalgnerr> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v".
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 99: Output port <sync> of the instance <synchro_sws_0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 102: Output port <sync> of the instance <synchro_sws_1> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <debug> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <sdout> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <pclkx2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <pclkx10> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <pllclk0> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <pllclk2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <pll_lckd> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <serdesstrobe> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <tmdsclk> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <blue_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <green_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <red_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <blue_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <green_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <red_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/boards/atlys/rtl/top.v" line 145: Output port <psalgnerr> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <buf_d>.
     Found 1-bit register for signal <hsync_q>.
     Found 1-bit register for signal <vsync_q>.
@@ -311,18 +311,18 @@ INFO:Xst:3210 - "/home/aom/Work/videotest/boards/atlys/rtl/top.v" line 145: Outp
 Unit <top> synthesized.
 
 Synthesizing Unit <synchro>.
-    Related source file is "/home/aom/Work/videotest/cores/common/rtl/synchro.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/synchro.v".
         INITIALIZE = "LOGIC0"
     Summary:
 	no macro.
 Unit <synchro> synthesized.
 
 Synthesizing Unit <dvi_decoder>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v".
-INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" line 205: Output port <ade> of the instance <dec_b> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" line 205: Output port <vde> of the instance <dec_b> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" line 234: Output port <ade> of the instance <dec_g> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" line 234: Output port <vde> of the instance <dec_g> is unconnected or connected to loadless signal.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v".
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 205: Output port <ade> of the instance <dec_b> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 205: Output port <vde> of the instance <dec_b> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 234: Output port <ade> of the instance <dec_g> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/dvi_decoder.v" line 234: Output port <vde> of the instance <dec_g> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <dilndpreamble>.
     Found 1-bit register for signal <videopreamble>.
     Summary:
@@ -330,7 +330,7 @@ INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/dvi_decoder.v" line 
 Unit <dvi_decoder> synthesized.
 
 Synthesizing Unit <decode_1>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v".
         CHANNEL = "BLUE"
 WARNING:Xst:647 - Input <dilndpreamble> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 1-bit register for signal <toggle>.
@@ -355,7 +355,7 @@ WARNING:Xst:647 - Input <dilndpreamble> is never used. This port will be preserv
 Unit <decode_1> synthesized.
 
 Synthesizing Unit <serdes_1_to_5_diff_data>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v".
         DIFF_TERM = "FALSE"
         SIM_TAP_DELAY = 49
         BITSLIP_ENABLE = "TRUE"
@@ -397,7 +397,7 @@ Synthesizing Unit <serdes_1_to_5_diff_data>.
 Unit <serdes_1_to_5_diff_data> synthesized.
 
 Synthesizing Unit <phsaligner>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_rx/rtl/phsaligner.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/phsaligner.v".
         OPENEYE_CNT_WD = 3
         CTKNCNTWD = 7
         SRCHTIMERWD = 12
@@ -441,12 +441,12 @@ Synthesizing Unit <phsaligner>.
 Unit <phsaligner> synthesized.
 
 Synthesizing Unit <chnlbond>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_rx/rtl/chnlbond.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/chnlbond.v".
         CTRLTOKEN0 = 10'b1101010100
         CTRLTOKEN1 = 10'b0010101011
         CTRLTOKEN2 = 10'b0101010100
         CTRLTOKEN3 = 10'b1010101011
-INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/chnlbond.v" line 86: Output port <O_DATA_OUT> of the instance <cbfifo_i> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/chnlbond.v" line 86: Output port <O_DATA_OUT> of the instance <cbfifo_i> is unconnected or connected to loadless signal.
     Register <we> equivalent to <rawdata_vld_q> has been removed
     Found 4-bit register for signal <wa>.
     Found 10-bit register for signal <sdata>.
@@ -467,14 +467,14 @@ INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_rx/rtl/chnlbond.v" line 86:
 Unit <chnlbond> synthesized.
 
 Synthesizing Unit <DRAM16XN_1>.
-    Related source file is "/home/aom/Work/videotest/cores/common/rtl/DRAM16XN.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/DRAM16XN.v".
         data_width = 10
     Summary:
 	no macro.
 Unit <DRAM16XN_1> synthesized.
 
 Synthesizing Unit <decode_2>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v".
         CHANNEL = "GREEN"
     Found 1-bit register for signal <toggle>.
     Found 5-bit register for signal <raw5bit_q>.
@@ -499,7 +499,7 @@ Synthesizing Unit <decode_2>.
 Unit <decode_2> synthesized.
 
 Synthesizing Unit <decode_3>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_rx/rtl/decode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_rx/rtl/decode.v".
         CHANNEL = "RED"
     Found 1-bit register for signal <toggle>.
     Found 5-bit register for signal <raw5bit_q>.
@@ -524,7 +524,7 @@ Synthesizing Unit <decode_3>.
 Unit <decode_3> synthesized.
 
 Synthesizing Unit <dvi_encoder_top>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_tx/rtl/dvi_encoder_top.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/dvi_encoder_top.v".
         DILNDPREAM = 4'b1010
         VIDEOPREAM = 4'b1000
         NULLCONTRL = 4'b0000
@@ -539,14 +539,14 @@ Synthesizing Unit <dvi_encoder_top>.
 Unit <dvi_encoder_top> synthesized.
 
 Synthesizing Unit <serdes_n_to_1>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_tx/rtl/serdes_n_to_1.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/serdes_n_to_1.v".
         SF = 5
     Summary:
 	no macro.
 Unit <serdes_n_to_1> synthesized.
 
 Synthesizing Unit <srldelay>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_tx/rtl/srldelay.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/srldelay.v".
         WIDTH = 40
         TAPS = 4'b1010
     Summary:
@@ -554,7 +554,7 @@ Synthesizing Unit <srldelay>.
 Unit <srldelay> synthesized.
 
 Synthesizing Unit <encode_1>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v".
         CHANNEL = "BLUE"
     Found 10-bit register for signal <dout>.
     Found 5-bit register for signal <cnt>.
@@ -613,7 +613,7 @@ Synthesizing Unit <encode_1>.
 Unit <encode_1> synthesized.
 
 Synthesizing Unit <encode_2>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v".
         CHANNEL = "GREEN"
     Found 10-bit register for signal <dout>.
     Found 5-bit register for signal <cnt>.
@@ -672,7 +672,7 @@ Synthesizing Unit <encode_2>.
 Unit <encode_2> synthesized.
 
 Synthesizing Unit <encode_3>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_tx/rtl/encode.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/encode.v".
         CHANNEL = "RED"
     Found 10-bit register for signal <dout>.
     Found 5-bit register for signal <cnt>.
@@ -731,7 +731,7 @@ Synthesizing Unit <encode_3>.
 Unit <encode_3> synthesized.
 
 Synthesizing Unit <convert_30to15_fifo>.
-    Related source file is "/home/aom/Work/videotest/cores/tmds_tx/rtl/convert_30to15_fifo.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v".
         ADDR0 = 4'b0000
         ADDR1 = 4'b0001
         ADDR2 = 4'b0010
@@ -749,7 +749,7 @@ Synthesizing Unit <convert_30to15_fifo>.
         ADDR14 = 4'b1110
         ADDR15 = 4'b1111
     Set property "ASYNC_REG = TRUE" for instance <fdp_rst>.
-INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_tx/rtl/convert_30to15_fifo.v" line 64: Output port <O_DATA_OUT> of the instance <fifo_u> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/tmds_tx/rtl/convert_30to15_fifo.v" line 64: Output port <O_DATA_OUT> of the instance <fifo_u> is unconnected or connected to loadless signal.
     Found 16x4-bit Read Only RAM for signal <wa_d>
     Found 16x4-bit Read Only RAM for signal <ra_d>
     Summary:
@@ -758,7 +758,7 @@ INFO:Xst:3210 - "/home/aom/Work/videotest/cores/tmds_tx/rtl/convert_30to15_fifo.
 Unit <convert_30to15_fifo> synthesized.
 
 Synthesizing Unit <DRAM16XN_2>.
-    Related source file is "/home/aom/Work/videotest/cores/common/rtl/DRAM16XN.v".
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/selfaudio/cores/common/rtl/DRAM16XN.v".
         data_width = 30
     Summary:
 	no macro.
@@ -1879,13 +1879,13 @@ dvi_rx0/PLL_ISERDES/CLKOUT2|    4.667|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 26.00 secs
-Total CPU time to Xst completion: 25.92 secs
+Total REAL time to Xst completion: 28.00 secs
+Total CPU time to Xst completion: 25.79 secs
  
 --> 
 
 
-Total memory usage is 134220 kilobytes
+Total memory usage is 133876 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   88 (   0 filtered)

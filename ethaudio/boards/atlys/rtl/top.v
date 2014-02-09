@@ -147,7 +147,7 @@ fifo29_32768 asfifo_recv (
 
 wire [11:0] axdout;
 auxfifo12 auxfifo12_recv(
-    .rst(reset),
+    .rst(reset| RSTBTN),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
 	.din(axdin),
@@ -635,25 +635,25 @@ assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
 
 always@(posedge pclk)begin
     if(reset)begin
-		ade      <= 1'b0;
-		adecnt   <= 6'd0;
-		vde_h    <= 1'b0;
+		ade      <=  1'b0;
+		adecnt   <=  6'd0;
+		vde_h    <=  1'b0;
 		aclkc    <= 12'd0;
-		ade_q    <= 1'b0;
-		init     <= 1'b0;
-		initq    <= 1'b0;
-		initqq   <= 1'b0;
+		ade_q    <=  1'b0;
+		init     <=  1'b0;
+		initq    <=  1'b0;
+		initqq   <=  1'b0;
 	end else begin
-	    vde_h <= vde;
-	    ade_q <= ade;
+	    vde_h  <= vde;
+	    ade_q  <= ade;
 	    initq  <= init;
 		initqq <= initq; 
         //first read signal
-        if(fifo_read)begin
+        if(fifo_read) begin
 		    init <= 1'b1;
 	    end
 		if({initq,initqq}==2'b10)begin
-			aclkc <= axdout;
+			aclkc <= axdout; 
 		end
 		
 	    if(init & ~vde & ~ade & hcnt == aclkc)begin
@@ -730,14 +730,14 @@ reg [3:0] ade_num;
 reg [4:0] cnt_32;
 always @ (posedge rx0_pclk)begin
   if(rx0_reset || video_hcnt == 0)begin
-		ade_c  <= 4'd0;
-		cnt_32 <= 5'd0; 
+	  ade_c  <= 4'd0;
+	  cnt_32 <= 5'd0; 
 	  ade_num <= ade_c;
 	end else begin
 	  if(rx0_ade)begin
 		  if(cnt_32 == 5'd31)begin
-			  cnt_32 <= 5'd0;
-			  ade_c  <= ade_c + 4'd1;
+			cnt_32 <= 5'd0;
+			ade_c  <= ade_c + 4'd1;
 		  end else begin
 		    cnt_32 <= cnt_32 + 5'd1;
 		  end
@@ -746,20 +746,22 @@ always @ (posedge rx0_pclk)begin
 end
 
 // Generate AUDIO FIFO data
-reg [11:0]ade_buf,ade_out;
+reg [11:0]ade_buf, ade_out;
 reg ade_gg;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf <= 12'd0;
 	    ade_out <= 12'd0;
-		ade_gg  <= 1'b0;
+		ade_gg  <=  1'b0;
 	end else begin
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
 		ade_gg <= rx0_ade;
-		if({rx0_ade,ade_gg} == 2'b10)
-			ade_out <= {1'b0,video_hcnt};
-		if(ade_gg)
+		if({rx0_ade,ade_gg} == 2'b10)begin
+			ade_out <= {1'b0, video_hcnt};
+		end
+		if(ade_gg)begin
 			ade_out <= ade_buf;
+		end
 	end
 end
 
@@ -772,7 +774,7 @@ assign   ax_send_wr_en = rx0_ade | ade_gg;
 wire     rx0_reset;
 
 auxfifo12 auxfifo12_tx(
-    .rst(rx0_reset|RSTBTN),
+    .rst(rx0_reset | RSTBTN),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
@@ -870,14 +872,14 @@ wire [11:0] index;
 wire        video_en;
 
 tmds_timing timing(
-		.rx0_pclk(rx0_pclk),
-		.rstbtn_n(RSTBTN), 
-		.rx0_hsync(rx0_hsync),
-		.rx0_vsync(rx0_vsync),
-		.video_en(video_en),
-		.index(index),
-		.video_hcnt(video_hcnt),
-		.video_vcnt(video_vcnt)
+	.rx0_pclk(rx0_pclk),
+	.rstbtn_n(RSTBTN), 
+	.rx0_hsync(rx0_hsync),
+	.rx0_vsync(rx0_vsync),
+	.video_en(video_en),
+	.index(index),
+	.video_hcnt(video_hcnt),
+	.video_vcnt(video_vcnt)
 );
 
 //-----------------------------------------------------------
@@ -928,7 +930,6 @@ frame_checker frame_checker(
 	.vpwcnt(vpwcnt)
 );
 `endif
-
 
 //////////////////////////////////////
 // Status LED 
