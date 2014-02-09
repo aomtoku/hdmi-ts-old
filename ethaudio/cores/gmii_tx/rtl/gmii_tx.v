@@ -409,15 +409,17 @@ always @(posedge tx_clk)begin
 			 if(count == 11'd31)begin
 			   if(left_ade == 4'd0)begin
 				  state <= FCS;
-			    end else begin
+				  ax_send_rd_en <= 1'b0;
+			   end else begin
 				  state <= AUXID;
-				end
-				txd   <= tmp;
-				count <= 11'd0;
-			  end else begin
-				tx_en <= 1'b1;
-				count <= count + 11'd1;
-				case(cnt3)
+				  ax_send_rd_en <= 1'b1;
+			   end
+			   txd   <= tmp;
+			   count <= 11'd0;
+			 end else begin
+			   tx_en <= 1'b1;
+			   count <= count + 11'd1;
+			   case(cnt3)
 				  2'd0: begin
 				    txd           <= axdout[7:0];
 					tmp[3:0]      <= axdout[11:8];
