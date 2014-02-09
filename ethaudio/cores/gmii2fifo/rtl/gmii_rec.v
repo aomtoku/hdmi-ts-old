@@ -250,7 +250,7 @@ always@(posedge clk125)begin
 					  ax_wr_en   <= 1'b1;
 					  aux_state  <= AUXID;
 				  end else begin
-				    a_cnt <= 5'd1; // counting 32 clock cycles for audio data enable
+				    a_cnt <= a_cnt + 5'd1; // counting 32 clock cycles for audio data enable
 					  case(cnt2)
 					    2'd0:begin
 						    cnt2       <= 2'd1;
@@ -276,6 +276,7 @@ always@(posedge clk125)begin
 		  endcase
 	  end else begin
 	    ax_wr_en <= 1'b0;
+		aux_state <= 
 	  end
   end
 end
