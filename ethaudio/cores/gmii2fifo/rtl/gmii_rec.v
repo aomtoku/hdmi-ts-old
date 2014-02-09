@@ -204,7 +204,7 @@ end
 
 reg [ 3:0]tmp;
 reg [ 1:0]cnt2;
-reg [ 4:0]a_cnt;
+reg [ 5:0]a_cnt;
 reg [ 3:0]left;
 reg [11:0]daux;
 reg       ax_wr_en;
@@ -223,34 +223,34 @@ always@(posedge clk125)begin
 		cnt2      <=  2'd0;
 		ax_wr_en  <=  1'b0;
 		aux_state <=  1'b0;
-		a_cnt     <=  5'd0;
+		a_cnt     <=  6'd0;
 		daux      <= 12'd0;
 	end else begin
 	  if(audio_en) begin
       case(aux_state)
 		    AUXID:begin
-			   if(a_cnt == 5'd1)begin
-					a_cnt      <= 5'd0;
+			   if(a_cnt == 6'd1)begin
+					a_cnt      <= 6'd0;
 					aux_state  <= AUX;
 					ax_wr_en   <= 1'b1;
 					daux[11:8] <= rxd[3:0];
 					left       <= rxd[7:4];
 			   end else begin
 					ax_wr_en  <= 1'b0;
-				    a_cnt     <= 5'd1;
+				    a_cnt     <= 6'd1;
 					daux[7:0] <= rxd;
 			   end
 			  end
 			  AUX:begin
-			    if(a_cnt == 5'd47)begin
-					  a_cnt      <= 5'd0;
+			    if(a_cnt == 6'd47)begin
+					  a_cnt      <= 6'd0;
 					  cnt2       <= 2'd0;
 					  daux[ 3:0] <= tmp;
 					  daux[11:4] <= rxd;
 					  ax_wr_en   <= 1'b1;
 					  aux_state  <= AUXID;
 				  end else begin
-				    a_cnt <= a_cnt + 5'd1; // counting 32 clock cycles for audio data enable
+				    a_cnt <= a_cnt + 6'd1; // counting 32 clock cycles for audio data enable
 					  case(cnt2)
 					    2'd0:begin
 						    cnt2       <= 2'd1;
