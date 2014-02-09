@@ -276,7 +276,7 @@ always@(posedge clk125)begin
 		  endcase
 	  end else begin
 	    ax_wr_en <= 1'b0;
-		aux_state <= 
+		aux_state <= 1'b0;
 	  end
   end
 end
