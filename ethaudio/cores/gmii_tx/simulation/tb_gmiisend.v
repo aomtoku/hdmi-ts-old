@@ -10,15 +10,15 @@ module tb_gmiisend();
 //
 reg sys_clk;
 initial sys_clk = 1'b0;
-always #8 sys_clk = ~sys_clk;
+always #4 sys_clk = ~sys_clk;
 
 reg gmii_tx_clk;
 initial gmii_tx_clk = 1'b0;
-always #8 gmii_tx_clk = ~gmii_tx_clk;
+always #4 gmii_tx_clk = ~gmii_tx_clk;
 
 reg fifo_clk;
 initial fifo_clk = 1'b0;
-always #13.468 fifo_clk = ~fifo_clk;
+always #6.734 fifo_clk = ~fifo_clk;
 
 // Generate Video Signal
 wire vsync, hsync;
@@ -47,8 +47,8 @@ wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740);
 // Test Bench
 //
 reg sys_rst;
-reg empty;
-reg full;
+reg empty = 0;
+reg full  = 0;
 wire rd_en;
 wire TXEN;
 wire [7:0]TXD;
@@ -56,13 +56,14 @@ reg [47:0]tx_data;
 
 
 wire ade_tx = ((vcnt < 11'd22) || (vcnt > 11'd741)) && ((hcnt >= 11'd1) && (hcnt < 11'd80));
-reg [3:0]ade_num;
+wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
 reg [11:0]ax_dout;
 reg ax_send_full;
-reg ax_send_empty;
+reg ax_send_empty = 1'b0;
 wire ax_send_rd_en;
 
 gmii_tx gmiisend(
+    .id(1'b1),
 	/*** FIFO ***/
 	.fifo_clk(fifo_clk),
 	.sys_rst(sys_rst),
@@ -134,7 +135,7 @@ initial begin
 	waitclock;
 	
 	
-	#100000;
+	#10000000;
 	$finish;
 end
 
