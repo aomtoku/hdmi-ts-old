@@ -133,7 +133,7 @@ always@(posedge clk125) begin
 					pre_en    <= 1'b0;
 				end
 			endcase
-			if(left == 4'd0 && a_cnt == 5'd31)
+			if(left == 4'd0 && a_cnt == 6'd47)
 				audio_en <= 1'b0;
 		end else begin
 			rx_count    <= 11'd0;
