@@ -26,7 +26,7 @@ module top (
 	input  wire [3:0] DEBUG_SW,
 
 	output reg  [7:0] LED,
-	output wire [4:0] JA
+	output wire [5:0] JA
 );
 
 //******************************************************************//
@@ -99,9 +99,7 @@ assign TXER = 1'b0;
 
 //-----------------------------------------------------------
 // 
-//
 // Receive process
-//
 //
 //-----------------------------------------------------------
 
@@ -547,7 +545,7 @@ wire          bgnd_hblnk;
 wire          bgnd_vsync;
 wire          bgnd_vblnk;
 
-wire restart = reset ;
+wire restart = reset;
 
 timing_gen timing_inst (
 	.tc_hsblnk(tc_hsblnk), //input
@@ -620,6 +618,7 @@ assign JA[1] = VGA_HSYNC;
 assign JA[2] = VGA_VSYNC;
 assign JA[3] = ax_recv_rd_en;
 assign JA[4] = ax_send_rd_en;
+assign JA[5] = fifo_read;
 ////////////////////////////////////////////////////////////////
 // DVI Encoder
 ////////////////////////////////////////////////////////////////
@@ -630,7 +629,7 @@ reg [4:0] adecnt;
 reg [11:0]aclkc;
 reg ade;
 reg vde_h,ade_q;
-reg init, initq;
+reg init, initq,initqq;
 
 assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
 
@@ -643,16 +642,21 @@ always@(posedge pclk)begin
 		ade_q    <= 1'b0;
 		init     <= 1'b0;
 		initq    <= 1'b0;
+		initqq   <= 1'b0;
 	end else begin
 	    vde_h <= vde;
 	    ade_q <= ade;
+	    initq  <= init;
+		initqq <= initq; 
         //first read signal
         if(fifo_read)begin
-		  init <= 1'b1;
+		    init <= 1'b1;
 	    end
-	    initq <= init;
+		if({initq,initqq}==2'b10)begin
+			aclkc <= axdout;
+		end
 		
-	    if(init & ~vde/* & ~ade*/ & hcnt == aclkc)begin
+	    if(init & ~vde & ~ade & hcnt == aclkc)begin
 		    ade <= 1'b1;
 	    end
 		// Aux Data Enable period 
@@ -880,7 +884,7 @@ tmds_timing timing(
 //  GMII TX
 //-----------------------------------------------------------
 
-wire ade_tx = (video_vcnt < 11'd22) && (video_vcnt > 11'd741) && (video_hcnt >= 11'd1) && (video_hcnt < 11'd80);
+wire ade_tx = ((video_vcnt < 11'd22) || (video_vcnt > 11'd741)) && ((video_hcnt >= 11'd1) && (video_hcnt < 11'd80));
 
 gmii_tx gmii_tx(
 	.id(DEBUG_SW[0]),
