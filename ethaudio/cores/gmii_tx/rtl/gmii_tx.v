@@ -402,7 +402,7 @@ always @(posedge tx_clk)begin
       AUXID: begin
 				if(count == 11'd1)begin
 				  txd   <= {left_ade, axdout[11:8]};
-				  if(left_ade > 4'd1)begin
+				  if(left_ade != 4'd0)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
 			      count <= 11'd0;
@@ -417,7 +417,7 @@ always @(posedge tx_clk)begin
 			end
       AUX: begin
 			 if(count == 11'd47)begin
-			   if(left_ade == 4'd1)begin
+			   if(left_ade == 4'd0)begin
 				  state <= FCS;
 				  ax_send_rd_en <= 1'b0;
 			   end else begin
