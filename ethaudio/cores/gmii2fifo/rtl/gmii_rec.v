@@ -227,7 +227,7 @@ always@(posedge clk125)begin
 		daux      <= 12'd0;
 	end else begin
 	  if(audio_en) begin
-      case(aux_state)
+         case(aux_state)
 		    AUXID:begin
 			   if(a_cnt == 6'd1)begin
 					a_cnt      <= 6'd0;
@@ -240,8 +240,8 @@ always@(posedge clk125)begin
 				    a_cnt     <= 6'd1;
 					daux[7:0] <= rxd;
 			   end
-			  end
-			  AUX:begin
+			end
+			AUX:begin
 			    if(a_cnt == 6'd47)begin
 					  a_cnt      <= 6'd0;
 					  cnt2       <= 2'd0;
@@ -249,33 +249,33 @@ always@(posedge clk125)begin
 					  daux[11:4] <= rxd;
 					  ax_wr_en   <= 1'b1;
 					  aux_state  <= AUXID;
-				  end else begin
-				    a_cnt <= a_cnt + 6'd1; // counting 32 clock cycles for audio data enable
-					  case(cnt2)
+				 end else begin
+				    a_cnt <= a_cnt + 6'd1; // counting 48 clock cycles for audio data enable
+					case(cnt2)
 					    2'd0:begin
 						    cnt2       <= 2'd1;
-							  daux[ 7:0] <= rxd;
-							  ax_wr_en   <= 1'b0;
-						  end
+							daux[ 7:0] <= rxd;
+							ax_wr_en   <= 1'b0;
+						end
 					    2'd1:begin
 						    cnt2       <= 2'd2;
-							  daux[11:8] <= rxd[3:0];
-							  tmp       <= rxd[7:4];
-							  ax_wr_en   <= 1'b1;
-						  end
+							daux[11:8] <= rxd[3:0];
+							tmp        <= rxd[7:4];
+							ax_wr_en   <= 1'b1;
+						end
 					    2'd2:begin
 						    cnt2       <= 2'd0;
-							  daux[ 3:0] <= tmp;
-							  daux[11:4] <= rxd;
-							  ax_wr_en   <= 1'b1;
-						  end
-					  endcase
+							daux[ 3:0] <= tmp;
+							daux[11:4] <= rxd;
+							ax_wr_en   <= 1'b1;
+						end
+					endcase
 				  end
 			  end
 			  default : ax_wr_en <= 1'b0;
 		  endcase
 	  end else begin
-	    ax_wr_en <= 1'b0;
+	    ax_wr_en  <= 1'b0;
 		aux_state <= 1'b0;
 	  end
   end
