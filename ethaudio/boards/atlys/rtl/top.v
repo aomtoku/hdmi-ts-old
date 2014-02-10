@@ -730,8 +730,10 @@ fifo48_8k asfifo_send (
 reg [3:0] ade_c;
 reg [3:0] ade_num;
 reg [4:0] cnt_32;
+reg       vde_b;
 always @ (posedge rx0_pclk)begin
-  if(rx0_reset || video_hcnt == 0)begin
+  vde_b <= rx0_vde;
+  if(rx0_reset || {rx0_vde,vde_b}==2'b10)begin
 	  ade_c  <= 4'd0;
 	  cnt_32 <= 5'd0; 
 	  ade_num <= ade_c;
