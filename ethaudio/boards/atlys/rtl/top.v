@@ -725,6 +725,8 @@ fifo48_8k asfifo_send (
 	.empty(send_empty)
 );
 
+
+// Generating a Number of audio enable period
 reg [3:0] ade_c;
 reg [3:0] ade_num;
 reg [4:0] cnt_32;
@@ -748,11 +750,13 @@ end
 // Generate AUDIO FIFO data
 reg [11:0]ade_buf, ade_out;
 reg ade_gg;
+reg start;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf <= 12'd0;
 	    ade_out <= 12'd0;
 		ade_gg  <=  1'b0;
+		start   <=  1'b0;
 	end else begin
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
 		ade_gg <= rx0_ade;
@@ -762,6 +766,9 @@ always @ (posedge rx0_pclk)begin
 		if(ade_gg)begin
 			ade_out <= ade_buf;
 		end
+
+		if(video_en)
+			start <= 1'b1;
 	end
 end
 
@@ -770,7 +777,7 @@ wire        ax_send_wr_en, ax_send_rd_en;
 wire [11:0] ax_din = ade_out;
 wire [11:0] ax_dout;
 
-assign   ax_send_wr_en = rx0_ade | ade_gg;
+assign   ax_send_wr_en = (start) ? (rx0_ade | ade_gg) : 1'b0;
 wire     rx0_reset;
 
 auxfifo12 auxfifo12_tx(
@@ -974,10 +981,13 @@ function [7:0]LED_out;
 endfunction
 `endif
 
+reg [3:0]anum = 4'd0;
 always @(RXCLK) begin
 	//sw_dip <= DEBUG_SW;
+	if(anum < ade_num)
+	    anum <= ade_num;
 	case(DEBUG_SW[1])
-		1'b0 : LED <= {4'b0,recv_full,recv_empty,2'b0};
+		1'b0 : LED <= {anum,recv_full,recv_empty,2'b0};
 		1'b1 : LED <= {ax_recv_full,ax_recv_empty,ax_recv_wr_en,ax_recv_rd_en,ax_send_full,ax_send_empty,ax_send_wr_en,ax_send_rd_en};
 		//4'b1000 : LED <= {4'b0,recv_full,recv_empty,2'b0};
 		//4'b0001 : LED <= error[7:0];
