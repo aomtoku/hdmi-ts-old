@@ -651,11 +651,11 @@ always@(posedge pclk)begin
         if(fifo_read) begin
 		    init <= 1'b1;
 	    end
-		if({initq,initqq}==2'b10)begin
+		if({initq,initqq}==2'b10) begin
 			aclkc <= axdout; 
 		end
 		
-	    if(init & ~vde /*& ~ade*/ & hcnt == aclkc)begin
+	    if(init & ~vde /*& ~ade*/ & hcnt == aclkc) begin
 		    ade <= 1'b1;
 	    end
 		// Aux Data Enable period 
@@ -724,12 +724,12 @@ fifo48_8k asfifo_send (
 	.empty(send_empty)
 );
 
-
 // Generating a Number of audio enable period
 reg [3:0] ade_c;
 reg [3:0] ade_num;
 reg [4:0] cnt_32;
 reg       vde_b;
+
 always @ (posedge rx0_pclk)begin
   vde_b <= rx0_vde;
   if(rx0_reset || {rx0_vde,vde_b}==2'b10)begin
@@ -985,8 +985,9 @@ endfunction
 reg [3:0]anum = 4'd0;
 always @(RXCLK) begin
 	//sw_dip <= DEBUG_SW;
-	if(anum < ade_num)
+	if(anum < ade_num)begin
 	    anum <= ade_num;
+	end
 	case(DEBUG_SW[1])
 		1'b0 : LED <= {aclkc[11:8],recv_full,recv_empty,ade,vde};
 		1'b1 : LED <= aclkc[7:0];
