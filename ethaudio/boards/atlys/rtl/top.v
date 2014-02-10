@@ -748,11 +748,13 @@ end
 // Generate AUDIO FIFO data
 reg [11:0]ade_buf, ade_out;
 reg ade_gg;
+reg start;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf <= 12'd0;
 	    ade_out <= 12'd0;
 		ade_gg  <=  1'b0;
+		start   <=  1'b0;
 	end else begin
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
 		ade_gg <= rx0_ade;
@@ -762,6 +764,9 @@ always @ (posedge rx0_pclk)begin
 		if(ade_gg)begin
 			ade_out <= ade_buf;
 		end
+
+		if(video_en)
+			start <= 1'b1;
 	end
 end
 
@@ -770,7 +775,7 @@ wire        ax_send_wr_en, ax_send_rd_en;
 wire [11:0] ax_din = ade_out;
 wire [11:0] ax_dout;
 
-assign   ax_send_wr_en = rx0_ade | ade_gg;
+assign   ax_send_wr_en = (start) ? (rx0_ade | ade_gg) : 1'b0;
 wire     rx0_reset;
 
 auxfifo12 auxfifo12_tx(
