@@ -191,14 +191,14 @@ always @(posedge tx_clk)begin
 					txd        <= 8'h55;
 					tx_en      <= 1'b1;
 					state      <= PRE;
-					packet_size <= auxsize * ({8'd0,ade_num} + 12'd1);
+					packet_size <= auxsize * {8'd0,ade_num};
 					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 					pcktinfo   <= video;
 				end else if(ax_send_empty == 1'b0 & adesig)begin
 					txd        <= 8'h55;
 					tx_en      <= 1'b1;
 					state      <= PRE;
-					packet_size <= auxsize * ({8'd0,ade_num} + 12'd1);
+					packet_size <= auxsize * {8'd0,ade_num};
 					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 					pcktinfo   <= audio;
 				end
@@ -402,7 +402,7 @@ always @(posedge tx_clk)begin
       AUXID: begin
 				if(count == 11'd1)begin
 				  txd   <= {left_ade, axdout[11:8]};
-				  if(left_ade != 4'd0)begin
+				  if(left_ade > 4'd1)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
 			      count <= 11'd0;
@@ -417,7 +417,7 @@ always @(posedge tx_clk)begin
 			end
       AUX: begin
 			 if(count == 11'd47)begin
-			   if(left_ade == 4'd0)begin
+			   if(left_ade == 4'd1)begin
 				  state <= FCS;
 				  ax_send_rd_en <= 1'b0;
 			   end else begin
