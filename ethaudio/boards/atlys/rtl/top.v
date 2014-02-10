@@ -634,7 +634,7 @@ reg init, initq,initqq;
 assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
 
 always@(posedge pclk)begin
-    if(reset|RSTBTN)begin
+    if(/*reset|*/RSTBTN)begin
 		ade      <=  1'b0;
 		adecnt   <=  6'd0;
 		vde_h    <=  1'b0;
