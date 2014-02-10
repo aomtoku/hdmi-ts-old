@@ -102,13 +102,15 @@ end
 
 // Generating a Number of audio enable period
 reg [3:0] ade_c;
-reg [3:0] ade_num;
+reg [3:0] ade_numd;
 reg [4:0] cnt_32;
+reg       vde_b;
 always @ (posedge fifo_clk)begin
-  if(sys_rst || hcnt == 0)begin
+  vde_b <= vde;
+  if(sys_rst || {vde,vde_b}==2'b10)begin
 	  ade_c  <= 4'd0;
 	  cnt_32 <= 5'd0; 
-	  ade_num <= ade_c;
+	  ade_numd <= ade_c;
    end else begin
 	  if(ade)begin
 		  if(cnt_32 == 5'd31)begin
