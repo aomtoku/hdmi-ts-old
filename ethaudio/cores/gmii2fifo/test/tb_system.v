@@ -22,6 +22,21 @@ wire [28:0] datain;
 wire recv_en;
 wire packet_en;
 
+wire ax_recv_we_en;
+
+gmii2fifo24 gmii2fifo24(
+     .clk125(sys_clk),
+     .sys_rst(sys_rst),
+     .id(1'b0),
+     .rxd(rxd),
+     .rx_dv(rx_dv),
+     .datain(datain),
+     .recv_en(recv_en),
+     .packet_en(),
+     .aux_data_in(axdin),
+     .aux_wr_en(ax_recv_wr_en)
+);
+/*
 gmii2fifo24 gmiififo24_inst (
 	.clk125(sys_clk),
 	.sys_rst(sys_rst),
@@ -31,7 +46,7 @@ gmii2fifo24 gmiififo24_inst (
 	.recv_en(recv_en),
 	.packet_en(packet_en)
 );
-
+*/
 //
 // a clock
 //

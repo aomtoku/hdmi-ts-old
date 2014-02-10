@@ -86,6 +86,71 @@ gmii_tx gmiisend(
 	.txd(TXD)
 );
 
+reg [10:0] tc_hsblnk;
+reg [10:0] tc_hssync;
+reg [10:0] tc_hesync;
+reg [10:0] tc_heblnk;
+reg [10:0] tc_vsblnk;
+reg [10:0] tc_vssync;
+reg [10:0] tc_vesync;
+reg [10:0] tc_veblnk;
+
+
+parameter HPIXELS_HDTV720P = 11'd1280; //Horizontal Live Pixels
+parameter VLINES_HDTV720P  = 11'd720;  //Vertical Live ines
+parameter HSYNCPW_HDTV720P = 11'd40;  //HSYNC Pulse Width
+parameter VSYNCPW_HDTV720P = 11'd5;    //VSYNC Pulse Width
+parameter HFNPRCH_HDTV720P = 11'd110; //Horizontal Front Portch hotoha72
+parameter VFNPRCH_HDTV720P = 11'd5;    //Vertical Front Portch
+parameter HBKPRCH_HDTV720P = 11'd220;  //Horizontal Front Portch
+parameter VBKPRCH_HDTV720P = 11'd20;   //Vertical Front Portch
+
+
+always @(*)begin
+ tc_hsblnk = HPIXELS_HDTV720P - 11'd1;
+ tc_hssync = HPIXELS_HDTV720P - 11'd1 + HFNPRCH_HDTV720P;
+ tc_hesync = HPIXELS_HDTV720P - 11'd1 + HFNPRCH_HDTV720P + HSYNCPW_HDTV720P;
+ tc_heblnk = HPIXELS_HDTV720P - 11'd1 + HFNPRCH_HDTV720P + HSYNCPW_HDTV720P + HBKPRCH_HDTV720P;
+ tc_vsblnk =  VLINES_HDTV720P - 11'd1;
+ tc_vssync =  VLINES_HDTV720P - 11'd1 + VFNPRCH_HDTV720P;
+ tc_vesync =  VLINES_HDTV720P - 11'd1 + VFNPRCH_HDTV720P + VSYNCPW_HDTV720P;
+ tc_veblnk =  VLINES_HDTV720P - 11'd1 + VFNPRCH_HDTV720P + VSYNCPW_HDTV720P + VBKPRCH_HDTV720P;
+end
+wire [10:0] bgnd_hcount;
+wire [10:0] bgnd_vcount;
+
+wire VGA_HSYNC_INT, VGA_VSYNC_INT;
+wire          bgnd_hsync;
+wire          bgnd_hblnk;
+wire          bgnd_vsync;
+wire          bgnd_vblnk;
+
+
+timing_gen timing_inst (
+	.tc_hsblnk(tc_hsblnk), //input
+	.tc_hssync(tc_hssync), //input
+	.tc_hesync(tc_hesync), //input
+	.tc_heblnk(tc_heblnk), //input
+	.hcount(bgnd_hcount), //output
+	.hsync(VGA_HSYNC_INT), //output
+	.hblnk(bgnd_hblnk), //output
+	.tc_vsblnk(tc_vsblnk), //input
+	.tc_vssync(tc_vssync), //input
+	.tc_vesync(tc_vesync), //input
+	.tc_veblnk(tc_veblnk), //input
+	.vcount(bgnd_vcount), //output
+	.vsync(VGA_VSYNC_INT), //output
+	.vblnk(bgnd_vblnk), //output
+	.restart(sys_rst),
+	.clk74m(pclk),
+	.clk125m(RXCLK),
+	.fifo_wr_en(recv_fifo_wr_en),
+	.y_din(y_din)
+);
+wire active;
+assign active = !bgnd_hblnk && !bgnd_vblnk;
+assign rd_en = active;
+
 //
 // a clock
 //
@@ -108,12 +173,21 @@ reg [11:0]acounter = 12'd0;
 
 always@(posedge sys_clk)begin
   if(rd_en)begin
+<<<<<<< HEAD
+		tx_data 	<= vrom[vcounter];
+		vcounter	<= vcounter + 12'd1;
+	end
+	if(ax_send_rd_en)begin
+		ax_dout  <= arom[acounter];
+		acounter <= acounter + 12'd1;
+=======
 	{tx_data}  <= vrom[vcounter];
 	vcounter   <= vcounter + 12'd1;
   end
   if(ax_send_rd_en)begin
 	{ax_dout}  <= arom[acounter];
 	acounter   <= acounter + 12'd1;
+>>>>>>> 6f419b7acde67c995188eb317addbbaae47f992a
   end
 end
 

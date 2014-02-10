@@ -134,21 +134,15 @@ always @ (posedge tmds_clk)
 // Data Controller
 //
 
-datacontroller #(
-    .empty_interval(21'd49500)
-  ) dataproc (
+datacontroller dataproc (
     .i_clk_74M(tmds_clk),
-    .i_clk_125M(sys_clk),
     .i_rst(sys_rst),
     .i_hcnt(i_hcnt),
     .i_vcnt(i_vcnt),
     .i_format(2'b00),
-    .reset_timing(reset_timing),
     .fifo_read(fifo_read),
-    .fifo_wr_en(fifo_wr_en),
     .data(fifo_dout),
-    .empty(empty),
-    .full(full),
+		.sw(),
     .o_r(o_r),
     .o_g(o_g),
     .o_b(o_b)
