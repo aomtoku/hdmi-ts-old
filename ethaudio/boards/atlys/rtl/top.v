@@ -729,7 +729,7 @@ reg       vde_b;
 
 always @ (posedge rx0_pclk)begin
   vde_b <= rx0_vde;
-  if(rx0_reset || video_hcnt == 11'd1649)begin
+  if(rx0_reset || video_hcnt == 11'd1644)begin
 	  ade_c  <= 4'd0;
 	  cnt_32 <= 5'd0; 
 	  ade_num <= ade_c;
