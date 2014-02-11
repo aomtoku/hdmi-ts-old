@@ -28,6 +28,7 @@ module gmii_tx#(
 	parameter [15:0]  ip_ver        = 16'h4500,
 `ifdef DATA_YUV
 	parameter [15:0]  ip_len        = 16'd1312 - 16'd1,
+	parameter [15:0]  ip_alen        = 16'd43,
 `else
 	parameter [15:0]  ip_len        = 16'd992,
 `endif
@@ -206,7 +207,7 @@ always @(posedge tx_clk)begin
 					txd        <= 8'h55;
 					tx_en      <= 1'b1;
 					state      <= PRE;
-					packet_size <= auxsize * {8'd0,ade_num + 1'b1};
+					packet_size <= auxsize * ({8'd0,ade_num} + 12'd1);
 					ip_check   <= {8'd0,ip_ver} + {8'd0,12'd43} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 					pcktinfo   <= audio;
 				end
@@ -222,10 +223,22 @@ always @(posedge tx_clk)begin
 					11'h5: begin
 						txd       <= 8'h55;
 						ip_check  <= ~(ip_check[15:0] + ip_check[23:16]);
-						ip_length <= ip_check[15:0];
-						udp_length<= udp_len + {4'd0,packet_size};
 						state     <= SFD;
 						count     <= 11'h0;
+						case(pcktinfo)
+							video: begin
+								ip_length <= ip_len;
+								udp_length<= udp_len;
+							end
+							audio:begin
+								ip_length <= ip_alen + {4'd0,packet_size};
+								udp_length<= 16'd9 + {4'd0,packet_size};
+							end
+							vidax:begin
+								ip_length <= ip_len + {4'd0,packet_size};
+								udp_length<= udp_len + {4'd0,packet_size};
+							end
+						endcase
 					end
 					//default tx_en <= 1'b0;
 				endcase
