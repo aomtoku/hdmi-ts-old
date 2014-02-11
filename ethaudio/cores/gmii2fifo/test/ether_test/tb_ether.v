@@ -98,6 +98,75 @@ always@(posedge fifo_clk)begin
     end
 end
 
+
+
+// Generate AUDIO FIFO data
+wire [23:0]axdin_s,axdout_s;
+wire ax_s_empty, ax_s_full;
+wire ax_s_wr_en, ax_s_rd_en;
+reg [11:0]ade_buf, ade_hcnt;
+reg [23:0]ade_out;
+reg ade_gg;
+reg start;
+reg st,stc;
+
+
+assign axdin_s = ade_out;
+reg [3:0]aux0,aux1,aux2;
+
+
+always @ (posedge fifo_clk)begin
+	if(sys_rst)begin
+		ade_buf  <= 12'd0;
+	    ade_out  <= 24'd0;
+	    ade_hcnt <= 12'd0;
+		ade_gg   <=  1'b0;
+		start    <=  1'b0;
+	end else begin
+		/*
+		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
+		ade_gg <= rx0_ade;
+		if(cnt_32 == 5'd1)begin
+			ade_hcnt <= {1'b0, video_hcnt - 11'd1};
+		end
+		if(ade_gg)begin
+			ade_out <= {ade_hcnt,ade_buf};
+		end
+		*/
+		// To 
+		if(vde)begin
+			start <= 1'b1;
+			st    <= 1'b1;
+			stc   <= 1'b0;
+		end
+		if(hcnt == 11'd220)
+			st <= 1'b0;
+		if(st == 1'b1)begin
+			if(stc)begin
+				ade_buf <= {aux2, aux1, aux0};
+				ade_gg <= ade;
+				if(cnt_32 == 5'd1)begin
+					ade_hcnt <= {1'b0, hcnt - 11'd1};
+				end
+				if(ade_gg)begin
+					ade_out <= {ade_hcnt,ade_buf};
+				end
+			end else begin
+				stc <= 1'b1;
+			end
+		end else begin
+			ade_buf <= {aux2, aux1, aux0};
+			ade_gg <= ade;
+			if(cnt_32 == 5'd1)begin
+				ade_hcnt <= {1'b0, hcnt - 11'd1};
+			end
+			if(ade_gg)begin
+				ade_out <= {ade_hcnt,ade_buf};
+			end
+		
+		end
+	end
+end
 /*
 
 assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
@@ -181,10 +250,6 @@ reg [47:0]tx_data;
 
 wire ade_tx = ((vcnt < 11'd22) || (vcnt > 11'd741)) && ((hcnt >= 11'd1) && (hcnt < 11'd80));
 wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
-reg [11:0]ax_dout;
-reg ax_send_full;
-reg ax_send_empty = 1'b0;
-wire ax_send_rd_en;
 
 gmii_tx gmiisend(
     .id(1'b1),
@@ -199,10 +264,10 @@ gmii_tx gmiisend(
 	// AX FIFO
 	.adesig(ade_tx),
 	.ade_num(ade_num),
-	.axdout(ax_dout),
-	.ax_send_full(ax_send_full),
-	.ax_send_empty(ax_send_empty),
-	.ax_send_rd_en(ax_send_rd_en),
+	.axdout(axdout_s),
+	.ax_send_full(ax_s_full),
+	.ax_send_empty(ax_s_empty),
+	.ax_send_rd_en(ax_s_rd_en),
 
 	/*** Ethernet PHY GMII ****/
 	.tx_clk(gmii_tx_clk),
@@ -210,6 +275,18 @@ gmii_tx gmiisend(
 	.txd(TXD)
 );
 
+afifo24 afifo24_send (
+    .Data(axdin_s),
+    .WrClock(fifo_clk),
+    .RdClock(sys_clk),
+    .WrEn(ax_s_wr_en),
+    .RdEn(ax_s_rd_en),
+    .Reset(sys_rst),
+    .RPReset(sys_rst),
+    .Q(axdout_s),
+    .Empty(ax_s_empty),
+    .Full(ax_s_full)
+);
 
 wire [28:0]fifo_din;
 wire recv_fifo_wr_en;
@@ -230,7 +307,7 @@ gmii2fifo24 gmii2fifo24(
 );
 wire axempty,axfull;
 
-afifo24 afifo24 (
+afifo24 afifo24_recv (
     .Data(axdin),
     .WrClock(sys_clk),
     .RdClock(fifo_clk),
@@ -269,10 +346,9 @@ always@(posedge sys_clk)begin
 	{tx_data}  <= vrom[vcounter];
 	vcounter   <= vcounter + 12'd1;
   end
-  if(ax_send_rd_en)begin
-	{ax_dout}  <= arom[acounter];
-	acounter   <= acounter + 12'd1;
-  end
+  {aux2, aux1, aux0}  <= arom[acounter];
+  acounter   <= acounter + 12'd1;
+ 
 end
 
 
