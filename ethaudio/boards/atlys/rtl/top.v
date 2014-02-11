@@ -821,7 +821,7 @@ wire [10:0] video_vcnt;
 wire [11:0] index;
 wire        video_en;
 
-afifo24_send auxfifo24_tx(
+afifo24_recv auxfifo24_tx(
     .rst(rx0_reset | RSTBTN | ((video_vcnt == 11'd21) && rx0_vde) ),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
