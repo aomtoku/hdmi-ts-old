@@ -146,13 +146,15 @@ fifo29_32768 asfifo_recv (
 );
 
 wire [23:0] axdout;
+reg init;
+wire ax_rx_rd_en = init & ax_recv_rd_en;
 afifo24_recv afifo24_recv(
     .rst(reset| RSTBTN),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
 	.din(axdin),
 	.wr_en(ax_recv_wr_en),
-	.rd_en(ax_recv_rd_en),
+	.rd_en(ax_rx_rd_en),
 	.dout(axdout),
 	.full(ax_recv_full),
 	.empty(ax_recv_empty)
@@ -625,20 +627,23 @@ assign JA[5] = fifo_read;
 wire [4:0] tmds_data0, tmds_data1, tmds_data2;
 wire serdes_rst = RSTBTN | ~bufpll_lock;
 
-reg [4:0] adecnt;
+/*reg [4:0] adecnt;
 reg [11:0]aclkc;
 reg ade;
 reg vde_h,ade_q;
 reg init, initq,initqq;
-
+*/
 //assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
-//assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0; 
-
+//assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
 
 always@(posedge pclk)begin
-	if(RSTBTN)
+	if(RSTBTN)begin
+		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
-	else begin
+	end else begin
+        if(fifo_read) begin
+		    init <= 1'b1;
+	    end
 		if(bgnd_vblnk)begin
 			if(hcnt >= 1559 & hcnt <= 1590)
 				ax_recv_rd_en <= 1'b1;
@@ -723,7 +728,7 @@ dvi_encoder_top dvi_tx0 (
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (ax_recv_rd_en),
+    .ade         (ax_rx_rd_en),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
