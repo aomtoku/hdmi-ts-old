@@ -637,7 +637,7 @@ always@(posedge pclk)begin
 		ade      <=  1'b0;
 		adecnt   <=  6'd0;
 		vde_h    <=  1'b0;
-		aclkc    <= 12'd0;
+		aclkc    <= 24'd0;
 		ade_q    <=  1'b0;
 		init     <=  1'b0;
 		initq    <=  1'b0;
@@ -753,11 +753,11 @@ reg start;
 reg st,stc;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
-		ade_buf <= 12'd0;
-	    ade_out <= 24'd0;
+		ade_buf  <= 12'd0;
+	    ade_out  <= 24'd0;
 	    ade_hcnt <= 12'd0;
-		ade_gg  <=  1'b0;
-		start   <=  1'b0;
+		ade_gg   <=  1'b0;
+		start    <=  1'b0;
 	end else begin
 		/*
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
@@ -806,8 +806,8 @@ end
 
 wire        ax_send_full, ax_send_empty;
 wire        ax_send_wr_en, ax_send_rd_en;
-wire [11:0] ax_din = ade_out;
-wire [11:0] ax_dout;
+wire [23:0] ax_din = ade_out;
+wire [23:0] ax_dout;
 
 assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 wire     rx0_reset;
