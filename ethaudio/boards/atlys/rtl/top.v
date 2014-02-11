@@ -630,7 +630,7 @@ reg ade;
 reg vde_h,ade_q;
 reg init, initq,initqq;
 
-assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
+assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
 
 always@(posedge pclk)begin
     if(/*reset|*/RSTBTN)begin
@@ -660,6 +660,11 @@ always@(posedge pclk)begin
 	    end
 		// Aux Data Enable period 
 	    if(ade)begin
+			case(adecnt)
+				6'd0:  
+				6'd31: adecnt <= 6'd0
+				default: adecnt <= adecnt + 6'd1;
+			endcase
 		    if(adecnt == 6'd31)begin
 			    ade    <= 1'b0;
 		        adecnt <= 6'd0;
@@ -729,7 +734,7 @@ reg       vde_b;
 
 always @ (posedge rx0_pclk)begin
   vde_b <= rx0_vde;
-  if(rx0_reset || video_hcnt == 11'd1644)begin
+  if(rx0_reset || video_hcnt == 11'd1)begin
 	  ade_c  <= 4'd0;
 	  cnt_32 <= 5'd0; 
 	  ade_num <= ade_c;
