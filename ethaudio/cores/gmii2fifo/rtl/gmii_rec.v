@@ -131,7 +131,7 @@ always@(posedge clk125) begin
 					vinvalid  <= 1'b1;
 					pre_en    <= 1'b0;
 				end
-				11'd1372:begin
+				11'd1382:begin
 					if(pcktinfo == vidax)begin
 					    audio_en <= 1'b0;
 					end
@@ -247,12 +247,12 @@ always@(posedge clk125)begin
 			end
 			AUX:begin
 			    if(a_cnt == 6'd47)begin
-					  a_cnt      <= 6'd0;
-					  cnt2       <= 2'd0;
-					  daux[ 3:0] <= tmp;
-					  daux[11:4] <= rxd;
-					  ax_wr_en   <= 1'b1;
-					  aux_state  <= AUXID;
+				    a_cnt      <= 6'd0;
+				    cnt2       <= 2'd0;
+				    daux[ 3:0] <= tmp;
+				    daux[11:4] <= rxd;
+				    ax_wr_en   <= 1'b1;
+			  	    aux_state  <= AUXID;
 				 end else begin
 				    a_cnt <= a_cnt + 6'd1; // counting 48 clock cycles for audio data enable
 					case(cnt2)
