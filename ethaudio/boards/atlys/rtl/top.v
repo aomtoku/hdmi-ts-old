@@ -815,7 +815,7 @@ assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 wire     rx0_reset;
 
 afifo24_send auxfifo24_tx(
-    .rst(rx0_reset | RSTBTN),
+    .rst(rx0_reset | RSTBTN | ((video_vcnt == 11'd21) && rx0_vde) ),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
