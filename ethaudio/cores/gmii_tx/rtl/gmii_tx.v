@@ -164,6 +164,8 @@ reg [1:0]   fcs_count;
 reg [1:0]   cnt3;
 reg [31:0]  gap_count;
 reg [23:0]  ip_check;
+reg [15:0]  ip_length;
+reg [15:0]  udp_length;
 reg [7:0]   pcktinfo;
 reg [11:0]  packet_size;
 
@@ -220,6 +222,8 @@ always @(posedge tx_clk)begin
 					11'h5: begin
 						txd       <= 8'h55;
 						ip_check  <= ~(ip_check[15:0] + ip_check[23:16]);
+						ip_length <= ip_check[15:0]
+						udp_length<= udp_len + {4'd0,pckt_size};
 						state     <= SFD;
 						count     <= 11'h0;
 					end
@@ -269,8 +273,8 @@ always @(posedge tx_clk)begin
 					/* DSF */
 					11'h1: txd  <= ip_ver[7:0];
 					/* Total Length  992byte (=0x03e0) */
-					11'h2: txd  <= ip_len[15:8];
-					11'h3: txd  <= ip_len[7:0];
+					11'h2: txd  <= ip_length[15:8];
+					11'h3: txd  <= ip_length[7:0];
 					/* Identification  ---> <<later>> */
 					11'h4: txd  <= ip_iden[15:8];
 					11'h5: txd  <= ip_iden[7:0];
@@ -301,8 +305,8 @@ always @(posedge tx_clk)begin
 					11'h16: txd <= 8'h30;
 					11'h17: txd <= 8'h39;
 					/* UDP Length 972byte = 0x03cc */
-					11'h18: txd <= udp_len[15:8];
-					11'h19: txd <= udp_len[7:0];
+					11'h18: txd <= udp_length[15:8];
+					11'h19: txd <= udp_length[7:0];
 					/* UDP checksum ͐ݒ肵ȂĂH*/
 					11'h1a: begin
 						txd   <= 8'h00;
