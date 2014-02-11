@@ -723,7 +723,7 @@ dvi_encoder_top dvi_tx0 (
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (ade_q),
+    .ade         (ax_recv_rd_en),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
