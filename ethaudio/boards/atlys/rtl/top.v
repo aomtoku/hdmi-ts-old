@@ -1062,7 +1062,7 @@ always @(RXCLK) begin
 	case(DEBUG_SW[1])
 		//1'b0 : LED <= {aclkc[11:8],recv_full,recv_empty,ade,vde};
 		//1'b1 : LED <= aclkc[7:0];
-		1'b0 : LED <= {anum,recv_full,recv_empty,ade,vde};
+		1'b0 : LED <= {anum,recv_full,recv_empty,ax_rx_rd_en,vde};
 		1'b1 : LED <= {ax_recv_full,ax_recv_empty,ax_recv_wr_en,ax_recv_rd_en,ax_send_full,ax_send_empty,ax_send_wr_en,ax_send_rd_en};
 		//4'b1000 : LED <= {4'b0,recv_full,recv_empty,2'b0};
 		//4'b0001 : LED <= error[7:0];
