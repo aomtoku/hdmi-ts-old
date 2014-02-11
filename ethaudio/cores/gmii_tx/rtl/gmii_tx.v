@@ -194,7 +194,7 @@ always @(posedge tx_clk)begin
 					state      <= PRE;
 					packet_size <= auxsize * {8'd0,ade_num};
 					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
-					if(ade_num == 4'd0)
+					if(!ppl/*ade_num == 4'd0*/)
 						pcktinfo   <= video;
 					else
 						pcktinfo   <= vidax;
