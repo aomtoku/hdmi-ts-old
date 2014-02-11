@@ -661,7 +661,7 @@ always@(posedge pclk)begin
 		// Aux Data Enable period 
 	    if(ade)begin
 			case(adecnt)
-				6'd0:  
+				//6'd0:  
 				6'd31: adecnt <= 6'd0
 				default: adecnt <= adecnt + 6'd1;
 			endcase
