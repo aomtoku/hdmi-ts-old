@@ -684,7 +684,7 @@ always@(posedge pclk)begin
 			aclkc <= axdout[23:12]; 
 		end
 		
-	    if(init & ~vde /*& ~ade*/ & hcnt == aclkc) begin
+	    if(init & ~vde  & hcnt == aclkc) begin
 		    ade <= 1'b1;
 	    end
 		// Aux Data Enable period 
