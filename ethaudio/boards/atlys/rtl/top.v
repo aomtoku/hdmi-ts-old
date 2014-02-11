@@ -112,7 +112,7 @@ wire recv_fifo_wr_en;
 
 wire ax_recv_wr_en, ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
-wire [11:0] axdin;
+wire [23:0] axdin;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(RXCLK),
@@ -144,8 +144,8 @@ fifo29_32768 asfifo_recv (
 	.empty(recv_empty)
 );
 
-wire [11:0] axdout;
-auxfifo12 auxfifo12_recv(
+wire [23:0] axdout;
+afifo24_recv afifo24_recv(
     .rst(reset| RSTBTN),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
@@ -651,8 +651,8 @@ always@(posedge pclk)begin
         if(fifo_read) begin
 		    init <= 1'b1;
 	    end
-		if({initq,initqq}==2'b10) begin
-			aclkc <= axdout; 
+		if({initq,initqq}==2'b10 || {ade,ade_q}==2'b01) begin
+			aclkc <= axdout[23:12]; 
 		end
 		
 	    if(init & ~vde /*& ~ade*/ & hcnt == aclkc) begin
@@ -666,9 +666,6 @@ always@(posedge pclk)begin
 		    end else begin
 			    adecnt <= adecnt + 6'd1;
 		    end
-	    end
-	    if({ade,ade_q} == 2'b01)begin
-		    aclkc <= axdout;
 	    end
     end
 end

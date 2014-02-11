@@ -17,7 +17,7 @@ module gmii2fifo24#(
 	output reg         recv_en,
 	output wire        packet_en,
 	// AUX FIFO
-	output wire [11:0] aux_data_in,
+	output wire [23:0] aux_data_in,
 	output wire        aux_wr_en
 );
 
