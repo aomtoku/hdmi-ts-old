@@ -123,8 +123,9 @@ always@(posedge clk125) begin
 				end
 				11'd1332: begin // before 11'd1005
 				    case(pcktinfo)
-						video: audio_en  <= 1'b0;
-						vidax: audio_en  <= 1'b1;
+						video:   audio_en  <= 1'b0;
+						vidax:   audio_en  <= 1'b1;
+						default: audio_en <= 1'b0;
 					endcase
 					packet_dv <= 1'b0;
 					vinvalid  <= 1'b1;
