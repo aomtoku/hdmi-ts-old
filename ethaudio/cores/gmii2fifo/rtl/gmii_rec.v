@@ -106,6 +106,7 @@ always@(posedge clk125) begin
 						// packet info byte
 						case(rxd)
 						  video: packet_dv   <= 1'b1;
+						  vidax: packet_dv   <= 1'b1;
 						  audio: audio_en    <= 1'b1;
 					  endcase
 						pcktinfo[7:0] <= rxd;
