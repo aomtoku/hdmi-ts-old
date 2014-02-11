@@ -316,18 +316,28 @@ always @(posedge tx_clk)begin
 			end
 			// 1Byte
 			PCKTIDNT: begin
-				if(pcktinfo == audio)begin
-					txd   <= audio;
-					state <= AUXID;
-					count <= 11'd0;
-					ax_send_rd_en <= 1'b1;
-					left_ade <= ade_num;
-				end else begin
-					state <= DATA_RESOL;
-					txd   <= video;
-					cnt3  <= 2'd0; //read X,Y om FIRO
-					count <= 11'd0;
-				end
+				case(pcktinfo)
+					audio:begin
+						txd   <= audio;
+						state <= AUXID;
+						count <= 11'd0;
+						ax_send_rd_en <= 1'b1;
+						left_ade <= ade_num;
+					end
+					video:begin
+						state <= DATA_RESOL;
+						txd   <= video;
+						cnt3  <= 2'd0; //read X,Y om FIRO
+						count <= 11'd0;
+					end
+					vidax:begin
+						state <= DATA_RESOL;
+						txd   <= video;
+						cnt3  <= 2'd0; //read X,Y om FIRO
+						count <= 11'd0;
+						left_ade <= 1'b1;
+					end
+				endcase
 			end
 			// 2Byte
 			DATA_RESOL: begin
