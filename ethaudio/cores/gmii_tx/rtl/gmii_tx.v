@@ -222,8 +222,8 @@ always @(posedge tx_clk)begin
 					11'h5: begin
 						txd       <= 8'h55;
 						ip_check  <= ~(ip_check[15:0] + ip_check[23:16]);
-						ip_length <= ip_check[15:0]
-						udp_length<= udp_len + {4'd0,pckt_size};
+						ip_length <= ip_check[15:0];
+						udp_length<= udp_len + {4'd0,packet_size};
 						state     <= SFD;
 						count     <= 11'h0;
 					end
