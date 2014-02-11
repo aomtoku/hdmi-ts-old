@@ -135,6 +135,7 @@ always@(posedge clk125) begin
 					if(pcktinfo == vidax)begin
 					    audio_en <= 1'b0;
 					end
+				end
 			endcase
 			if(left == 4'd1 && a_cnt == 6'd47)
 				audio_en <= 1'b0;
