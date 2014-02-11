@@ -56,7 +56,7 @@ module gmii_tx#(
   /*** AUX ***/
 	input   wire        adesig,
 	input   wire [3:0]  ade_num,
-	input   wire [11:0] axdout,
+	input   wire [23:0] axdout,
 	input   wire        ax_send_full,
 	input   wire        ax_send_empty,
 	output  reg         ax_send_rd_en,
