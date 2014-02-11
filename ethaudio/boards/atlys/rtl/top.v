@@ -110,7 +110,8 @@ wire [28:0] dout;
 wire datavalid;
 wire recv_fifo_wr_en;
 
-wire ax_recv_wr_en, ax_recv_rd_en;
+wire ax_recv_wr_en;
+//ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
 wire [23:0] axdin;
 
@@ -630,10 +631,38 @@ reg ade;
 reg vde_h,ade_q;
 reg init, initq,initqq;
 
-assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
+//assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
+//assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0; 
 
+
+reg ax_recv_rd_en;
 always@(posedge pclk)begin
-    if(/*reset|*/RSTBTN)begin
+	if(RSTBTN)
+		ax_recv_rd_en <= 1'b0;
+	else begin
+		if(bgnd_vblnk)begin
+			if(hcnt >= 1559 & hcnt <= 1590)
+				ax_recv_rd_en <= 1'b1;
+			else 
+				ax_recv_rd_en <= 1'b0;
+		end else begin
+			if(vcnt == 725)begin
+				if(hcnt > 8 & hcnt <= 200)
+					ax_recv_rd_en <= 1'b1;
+				else
+					ax_recv_rd_en <= 1'b0;
+			end else begin
+				if(hcnt >= 1559 & hcnt <= 1590)
+					ax_recv_rd_en <= 1'b1;
+				else 
+					ax_recv_rd_en <= 1'b0;
+			end
+		end
+	end
+end
+/*
+always@(posedge pclk)begin
+    if(RSTBTN)begin
 		ade      <=  1'b0;
 		adecnt   <=  6'd0;
 		vde_h    <=  1'b0;
@@ -674,7 +703,7 @@ always@(posedge pclk)begin
 	    end
     end
 end
-
+*/
 assign out_aux0 = axdout[ 3:0];
 assign out_aux1 = axdout[ 7:4];
 assign out_aux2 = axdout[11:8];
