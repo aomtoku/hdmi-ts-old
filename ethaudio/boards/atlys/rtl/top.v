@@ -813,6 +813,13 @@ wire [23:0] ax_dout;
 
 assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 wire     rx0_reset;
+wire     rx0_vde;
+wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
+wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
+wire [10:0] video_hcnt;
+wire [10:0] video_vcnt;
+wire [11:0] index;
+wire        video_en;
 
 afifo24_send auxfifo24_tx(
     .rst(rx0_reset | RSTBTN | ((video_vcnt == 11'd21) && rx0_vde) ),
@@ -844,7 +851,6 @@ wire [7:0]  rx0_red;      // pixel data out
 wire [7:0]  rx0_green;    // pixel data out
 wire [7:0]  rx0_blue;     // pixel data out
 wire        rx0_ade;
-wire        rx0_vde;
 wire [29:0] rx0_sdata;
 wire        rx0_blue_vld;
 wire        rx0_green_vld;
@@ -905,12 +911,6 @@ dvi_decoder dvi_rx0 (
 //                     HSYNC: 45khz   VSYNC : 60Hz)
 //-----------------------------------------------------
 
-wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
-wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
-wire [10:0] video_hcnt;
-wire [10:0] video_vcnt;
-wire [11:0] index;
-wire        video_en;
 
 tmds_timing timing(
 	.rx0_pclk(rx0_pclk),
