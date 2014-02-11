@@ -173,21 +173,12 @@ reg [11:0]acounter = 12'd0;
 
 always@(posedge sys_clk)begin
   if(rd_en)begin
-<<<<<<< HEAD
 		tx_data 	<= vrom[vcounter];
 		vcounter	<= vcounter + 12'd1;
 	end
 	if(ax_send_rd_en)begin
 		ax_dout  <= arom[acounter];
 		acounter <= acounter + 12'd1;
-=======
-	{tx_data}  <= vrom[vcounter];
-	vcounter   <= vcounter + 12'd1;
-  end
-  if(ax_send_rd_en)begin
-	{ax_dout}  <= arom[acounter];
-	acounter   <= acounter + 12'd1;
->>>>>>> 6f419b7acde67c995188eb317addbbaae47f992a
   end
 end
 
