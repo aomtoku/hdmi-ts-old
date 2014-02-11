@@ -343,10 +343,12 @@ always @(posedge tx_clk)begin
 `ifdef DATA_YUV
 			DATA_RGB: begin
 				if(count == 11'd1279)begin
-					if(ax_send_empty)
+					if(ax_send_empty)begin
 					  state <= FCS;
-					else
+					end else begin
 					  state <= AUXID;
+					  ax_send_rd_en <= 1'b1;
+					end
 			 		txd   <= dout[23:16];
 					count <= 11'd0;
 					cnt3  <= 2'd0;
@@ -400,18 +402,18 @@ always @(posedge tx_clk)begin
       // 16bit AUXID : left audio ade number -> 4bit | clock 12bit
       AUXID: begin
 				if(count == 11'd1)begin
-				  txd           <= {left_ade, axdout[11:8]};
+				  txd           <= {left_ade, axdout[23:20]};
 				  if(left_ade != 4'd0)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
 			      count         <= 11'd0;
 				  state         <= AUX;
 				  cnt3          <= 2'd0;
-				  ax_send_rd_en <= 1'b1;
+				  ax_send_rd_en <= 1'b0;
 				end else begin
 				  ax_send_rd_en <= 1'b0;
 				  count         <= 11'd1;
-			      txd           <= axdout[7:0];
+			      txd           <= axdout[19:13];
 				end
 			end
       AUX: begin
