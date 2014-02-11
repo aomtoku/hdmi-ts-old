@@ -753,6 +753,7 @@ reg [11:0]ade_buf, ade_hcnt;
 reg [23:0]ade_out;
 reg ade_gg;
 reg start;
+reg st,stc;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf <= 12'd0;
@@ -778,7 +779,7 @@ always @ (posedge rx0_pclk)begin
 			stc   <= 1'b0;
 		end
 		if(video_hcnt == 11'd220)
-			st <= 1'b0
+			st <= 1'b0;
 		if(st == 1'b1)begin
 			if(stc)begin
 				ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
@@ -790,7 +791,7 @@ always @ (posedge rx0_pclk)begin
 					ade_out <= {ade_hcnt,ade_buf};
 				end
 			end else begin
-				stc <= 1'b1
+				stc <= 1'b1;
 			end
 		end else begin
 			ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
