@@ -812,10 +812,10 @@ wire        ax_send_wr_en, ax_send_rd_en;
 wire [11:0] ax_din = ade_out;
 wire [11:0] ax_dout;
 
-assign   ax_send_wr_en = (start) ? (rx0_ade | ade_gg) : 1'b0;
+assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 wire     rx0_reset;
 
-afifo12_send auxfifo12_tx(
+afifo24_send auxfifo24_tx(
     .rst(rx0_reset | RSTBTN),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
