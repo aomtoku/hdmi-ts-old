@@ -206,7 +206,7 @@ reg [ 3:0]tmp;
 reg [ 1:0]cnt2;
 reg [ 5:0]a_cnt;
 reg [ 3:0]left;
-reg [11:0]daux;
+reg [23:0]daux;
 reg       ax_wr_en;
 reg       aux_state;
 
@@ -232,13 +232,13 @@ always@(posedge clk125)begin
 			   if(a_cnt == 6'd1)begin
 					a_cnt      <= 6'd0;
 					aux_state  <= AUX;
-					ax_wr_en   <= 1'b1;
-					daux[11:8] <= rxd[3:0];
+					ax_wr_en   <= 1'b0;
+					daux[23:20] <= rxd[3:0];
 					left       <= rxd[7:4];
 			   end else begin
 					ax_wr_en  <= 1'b0;
 				    a_cnt     <= 6'd1;
-					daux[7:0] <= rxd;
+					daux[19:12] <= rxd;
 			   end
 			end
 			AUX:begin
