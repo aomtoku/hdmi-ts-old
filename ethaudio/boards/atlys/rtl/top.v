@@ -111,7 +111,7 @@ wire datavalid;
 wire recv_fifo_wr_en;
 
 wire ax_recv_wr_en;
-//ax_recv_rd_en;
+reg ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
 wire [23:0] axdin;
 
@@ -635,7 +635,6 @@ reg init, initq,initqq;
 //assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0; 
 
 
-reg ax_recv_rd_en;
 always@(posedge pclk)begin
 	if(RSTBTN)
 		ax_recv_rd_en <= 1'b0;
