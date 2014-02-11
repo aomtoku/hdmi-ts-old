@@ -54,6 +54,7 @@ reg [ 7:0] pcktinfo;
 
 parameter video = 8'b00000000;
 parameter audio = 8'b00000001;
+parameter vidax = 8'b00000010;
 
 always@(posedge clk125) begin
 	if(sys_rst) begin
@@ -121,17 +122,17 @@ always@(posedge clk125) begin
 				end
 				11'd1332: begin // before 11'd1005
 				    case(pcktinfo)
-						video: begin
-					           packet_dv <= 1'b0;
-					           vinvalid  <= 1'b1;
-					           pre_en    <= 1'b0;
-							   audio_en  <= 1'b1;
-						end
+						video: audio_en  <= 1'b0;
+						vidax: audio_en  <= 1'b1;
 					endcase
 					packet_dv <= 1'b0;
 					vinvalid  <= 1'b1;
 					pre_en    <= 1'b0;
 				end
+				11'd1372:begin
+					if(pcktinfo == vidax)begin
+					    audio_en <= 1'b0;
+					end
 			endcase
 			if(left == 4'd1 && a_cnt == 6'd47)
 				audio_en <= 1'b0;
