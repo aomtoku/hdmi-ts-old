@@ -332,7 +332,7 @@ always @(posedge tx_clk)begin
 					end
 					vidax:begin
 						state <= DATA_RESOL;
-						txd   <= video;
+						txd   <= vidax;
 						cnt3  <= 2'd0; //read X,Y om FIRO
 						count <= 11'd0;
 						left_ade <= 1'b1;
@@ -357,7 +357,7 @@ always @(posedge tx_clk)begin
 `ifdef DATA_YUV
 			DATA_RGB: begin
 				if(count == 11'd1279)begin
-					if(ax_send_empty)begin
+					if(pcktinfo == video)begin
 					  state <= FCS;
 					end else begin
 					  state <= AUXID;
