@@ -749,27 +749,60 @@ always @ (posedge rx0_pclk)begin
 end
 
 // Generate AUDIO FIFO data
-reg [11:0]ade_buf, ade_out;
+reg [11:0]ade_buf, ade_hcnt;
+reg [23:0]ade_out;
 reg ade_gg;
 reg start;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf <= 12'd0;
-	    ade_out <= 12'd0;
+	    ade_out <= 24'd0;
+	    ade_hcnt <= 12'd0;
 		ade_gg  <=  1'b0;
 		start   <=  1'b0;
 	end else begin
+		/*
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
 		ade_gg <= rx0_ade;
-		if({rx0_ade,ade_gg} == 2'b10)begin
-			ade_out <= {1'b0, video_hcnt};
+		if(cnt_32 == 5'd1)begin
+			ade_hcnt <= {1'b0, video_hcnt - 11'd1};
 		end
 		if(ade_gg)begin
-			ade_out <= ade_buf;
+			ade_out <= {ade_hcnt,ade_buf};
 		end
-
-		if(video_en)
+		*/
+		// To 
+		if(video_en)begin
 			start <= 1'b1;
+			st    <= 1'b1;
+			stc   <= 1'b0;
+		end
+		if(video_hcnt == 11'd220)
+			st <= 1'b0
+		if(st == 1'b1)begin
+			if(stc)begin
+				ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
+				ade_gg <= rx0_ade;
+				if(cnt_32 == 5'd1)begin
+					ade_hcnt <= {1'b0, video_hcnt - 11'd1};
+				end
+				if(ade_gg)begin
+					ade_out <= {ade_hcnt,ade_buf};
+				end
+			end else begin
+				stc <= 1'b1
+			end
+		end else begin
+			ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
+			ade_gg <= rx0_ade;
+			if(cnt_32 == 5'd1)begin
+				ade_hcnt <= {1'b0, video_hcnt - 11'd1};
+			end
+			if(ade_gg)begin
+				ade_out <= {ade_hcnt,ade_buf};
+			end
+		
+		end
 	end
 end
 
