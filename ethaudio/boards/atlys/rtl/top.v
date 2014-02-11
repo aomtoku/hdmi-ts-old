@@ -758,6 +758,8 @@ always @ (posedge rx0_pclk)begin
 	    ade_hcnt <= 12'd0;
 		ade_gg   <=  1'b0;
 		start    <=  1'b0;
+		st       <=  1'b0;
+		stc      <=  1'b0;
 	end else begin
 		/*
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
@@ -778,7 +780,7 @@ always @ (posedge rx0_pclk)begin
 		if(video_hcnt == 11'd220)
 			st <= 1'b0;
 		if(st == 1'b1)begin
-			if(stc)begin
+			if(stc == 1'b0)begin
 				ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
 				ade_gg <= rx0_ade;
 				if(cnt_32 == 5'd1)begin
