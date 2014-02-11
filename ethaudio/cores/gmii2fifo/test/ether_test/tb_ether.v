@@ -56,7 +56,50 @@ reg [11:0]aclkc;
 reg ade;
 reg vde_h,ade_q;
 reg init, initq,initqq;
-wire [11:0]axdout;
+wire [23:0]axdout;
+
+assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
+
+always@(posedge fifo_clk)begin
+    if(sys_rst)begin
+		ade      <=  1'b0;
+		adecnt   <=  6'd0;
+		vde_h    <=  1'b0;
+		aclkc    <= 12'd0;
+		ade_q    <=  1'b0;
+		init     <=  1'b0;
+		initq    <=  1'b0;
+		initqq   <=  1'b0;
+	end else begin
+	    vde_h  <= vde;
+	    ade_q  <= ade;
+	    initq  <= init;
+		initqq <= initq; 
+        //first read signal
+        if(fifo_read) begin
+		    init <= 1'b1;
+	    end
+		if({initq,initqq}==2'b10 || {ade,ade_q}==2'b01) begin
+			aclkc <= axdout[23:12]; 
+		end
+		
+	    if(init & ~vde /*& ~ade*/ & hcnt == aclkc) begin
+		    ade <= 1'b1;
+	    end
+		// Aux Data Enable period 
+	    if(ade)begin
+		    if(adecnt == 6'd31)begin
+			    ade    <= 1'b0;
+		        adecnt <= 6'd0;
+		    end else begin
+			    adecnt <= adecnt + 6'd1;
+		    end
+	    end
+    end
+end
+
+/*
+
 assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
 
 always@(posedge fifo_clk)begin
@@ -99,6 +142,7 @@ always@(posedge fifo_clk)begin
 	    end
     end
 end
+*/
 
 // Generating a Number of audio enable period
 reg [3:0] ade_c;
@@ -169,7 +213,7 @@ gmii_tx gmiisend(
 
 wire [28:0]fifo_din;
 wire recv_fifo_wr_en;
-wire [11:0]axdin;
+wire [23:0]axdin;
 wire ax_recv_wr_en;
 
 gmii2fifo24 gmii2fifo24(
@@ -186,7 +230,7 @@ gmii2fifo24 gmii2fifo24(
 );
 wire axempty,axfull;
 
-afifo12 afifo12 (
+afifo24 afifo24 (
     .Data(axdin),
     .WrClock(sys_clk),
     .RdClock(fifo_clk),
