@@ -207,13 +207,15 @@ reg buf_vde;
 reg adep;
 always @ (posedge rx0_pclk) begin
     buf_vde <= vde;
-    if({vde,buf_vde} == 2'b10)
+    if({vde,buf_vde} == 2'b10)begin
         adep <= 1'b1;
-    if(rx0_ade)
+	end
+    if(rx0_ade)begin
         adep <= 1'b0;
+	end
 end
 
-wire ade = (adep) ? ade_q : 1'b0;
+wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 
   // TMDS output
 `ifdef DIRECTPASS
