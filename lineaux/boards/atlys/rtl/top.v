@@ -419,7 +419,7 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 				chk <= ~chk;
 				Y <= {11'b0,tx0_green};
 				if (chk == 1'b0)
-					Cr <= {11'b0, tx0_blue};
+					Cr <= {11'b0, tx0_red};
 				else
 					Cb <= {11'b0, tx0_red};
 				
