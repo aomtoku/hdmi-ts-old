@@ -447,7 +447,7 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 	.aux2_din		 (/*adin2_q*/),
     .hsync       (tx0_hsync),
     .vsync       (tx0_vsync),
-    .vde          (tx0_vde),
+    .vde          (tx0_de),
     .ade          (/*ade*/),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
