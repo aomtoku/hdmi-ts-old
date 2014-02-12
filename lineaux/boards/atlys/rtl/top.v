@@ -441,7 +441,7 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
     .rstin       (tx0_reset),
     .blue_din    (rx0_blue/*b_b*/),
     .green_din   (rx0_green/*b_g*/),
-    .red_din     (rx0_blue/*b_r*/),
+    .red_din     (rx0_red/*b_r*/),
 	.aux0_din		 (rx0_aux0/*adin0_q*/),
 	.aux1_din		 (rx0_aux1/*adin1_q*/),
 	.aux2_din		 (rx0_aux2/*adin2_q*/),
