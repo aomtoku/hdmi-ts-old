@@ -419,9 +419,9 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 				chk <= ~chk;
 				Y <= {11'b0,tx0_green};
 				if (chk == 1'b0)
-					Cr <= {11'b0, tx0_red};
+					Cr <= {11'b0, tx0_blue};
 				else
-					Cb <= {11'b0, tx0_red};
+					Cb <= {11'b0, tx0_blue};
 				
 				a_r <= ( (Y<<8) + (19'b1_0110_0111*Cr) - 19'hb380)>>8;
 				a_g <= ( (Y<<8) + 19'h8780 - (19'b1011_0111*Cr) - (19'b0101_1000*Cb) )>>8;
