@@ -448,7 +448,7 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
     .hsync       (hsync_q),
     .vsync       (vsync_q),
     .vde          (vde_q),
-    .ade          (/*ade*/1'b0),
+    .ade          (/*ade*/),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
 
