@@ -188,6 +188,33 @@ module top (
     .green       (rx0_green),
     .blue        (rx0_blue)); 
 
+
+wire vde;
+wire [10:0]hcnt,vcnt;
+tmds_timing(
+	.rx0_pclk(rx0_pclk),
+	.rstbtn_n(rstbtn_n), 
+	.rx0_hsync(rx0_hsync),
+	.rx0_vsync(rx0_vsync),
+	.video_en(vde),
+	.index(),
+	.video_hcnt(hcnt),
+	.video_vcnt(vnct)
+);
+
+wire aq;
+reg buf_vde;
+reg adep;
+always @ (posedge rx0_pclk) begin
+    buf_vde <= vde;
+    if({vde,buf_vde} == 2'b10)
+        adep <= 1'b1;
+    if(rx0_ade)
+        adep <= 1'b0;
+end
+
+wire ade = (adep) ? ade_q : 1'b0;
+
   // TMDS output
 `ifdef DIRECTPASS
   wire rstin         = rx0_reset;
@@ -413,13 +440,13 @@ module top (
     .blue_din    (b_b),
     .green_din   (b_g),
     .red_din     (b_r),
-		.aux0_din		 (adin0_q),
-		.aux1_din		 (adin1_q),
-		.aux2_din		 (adin2_q),
+	.aux0_din		 (adin0_q),
+	.aux1_din		 (adin1_q),
+	.aux2_din		 (adin2_q),
     .hsync       (hsync_q),
     .vsync       (vsync_q),
     .vde          (vde_q),
-    .ade          (ade_q),
+    .ade          (ade),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
 
