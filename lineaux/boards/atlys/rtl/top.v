@@ -385,6 +385,10 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 
 	reg hsync_q,vsync_q,vde_q,ade_q;
 	reg [3:0]adin0_q,adin1_q,adin2_q;
+	reg ade_qq,ade_qqq;
+	reg [3:0]adin0_qq,adin1_qq,adin2_qq;
+	reg [3:0]adin0_qqq,adin1_qqq,adin2_qqq;
+	reg hsync_qq,hsync_qqq, vsync_qq,vsync_qqq;
 	always @ (posedge rx0_pclk)begin
 		if(rx0_reset)begin
 			hsync_q <= 1'b0;
@@ -393,15 +397,32 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 		end else begin
 			hsync_q <= tx0_hsync;
 			vsync_q <= tx0_vsync;
+
+			hsync_qq <= hsync_q;
+			vsync_qq <= vsync_q;
+
+			hsync_qqq <= hsync_qq;
+			vsync_qqq <= vsync_qq;
+			
 			vde_q		<= rx0_vde;
 			ade_q		<= rx0_ade;
+			ade_qq  <= ade_q;
+			ade_qqq <= ade_qq;
 
 			adin0_q <= rx0_aux0;
 			adin1_q <= rx0_aux1;
 			adin2_q <= rx0_aux2;
+
+			adin0_qq <= adin0_q;
+			adin1_qq <= adin1_q;
+			adin2_qq <= adin2_q;
+
+			adin0_qqq <= adin0_qq;
+			adin1_qqq <= adin1_qq;
+			adin2_qqq <= adin2_qq;
 		end
 	end
-
+/*
 	reg [18:0] Y, Cb, Cr, a_r, a_g, a_b;
 	reg [7:0] b_r, b_g, b_b;
 	reg chk;
@@ -432,11 +453,11 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 			end
 		end
 	end
-  
+*/  
 
-wire [3:0]test0 = (rx0_ade) ? {1'b1, rx0_aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
-wire [3:0]test1 = (rx0_ade) ? rx0_aux1 : 4'b0;
-wire [3:0]test2 = (rx0_ade) ? {1'b0, rx0_aux2[2:0]} : 4'b0;
+wire [3:0]test0 = (ade_qqq) ? {1'b1, adin0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
+wire [3:0]test1 = (ade_qqq) ? adin1_qqq : 4'b0;
+wire [3:0]test2 = (ade_qqq) ? {1'b0, adin2_qqq[2:0]} : 4'b0;
 
 	dvi_encoder_top dvi_tx0 (
     .pclk        (tx0_pclk),
@@ -453,7 +474,7 @@ wire [3:0]test2 = (rx0_ade) ? {1'b0, rx0_aux2[2:0]} : 4'b0;
     .hsync       (rx0_hsync/*_q*/),
     .vsync       (rx0_vsync/*_q*/),
     .vde          (rx0_vde/*_q*/),
-    .ade          (rx0_ade/*_q*/),
+    .ade          (ade_qqq/*_q*/),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
 
