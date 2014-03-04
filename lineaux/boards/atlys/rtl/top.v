@@ -211,6 +211,10 @@ reg apb = 1'b0;
 reg [7:0]hsycnt;
 
 always @ (posedge rx0_pclk) begin
+  if(rstbtn_n)begin
+		ap  <= 1'b0;
+		apb <= 1'b0;
+	end
   buf_vde <= vde;
   if({vde,buf_vde} == 2'b10)begin
      adep <= 1'b1;
@@ -223,9 +227,9 @@ always @ (posedge rx0_pclk) begin
 	else
 		hsycnt <= 8'd0;
 
-	if(rx0_ade & hcnt >= 11'd1500 & hcnt <= 11'd1510)
+	if(rx0_ade && (hcnt >= 11'd1500) && (hcnt <= 11'd1510))
      ap <= 1'b1;
-	if(rx0_ade & hcnt > 11'd1510)
+	if(rx0_ade && (hcnt > 11'd1510))
      apb <= 1'b1;
 end
 
