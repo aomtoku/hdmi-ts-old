@@ -713,7 +713,8 @@ always@(posedge pclk)begin
     end
 end
 */
-assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
+//assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
+assign out_aux0 = axdout[ 3:0];
 assign out_aux1 = axdout[ 7:4];
 assign out_aux2 = axdout[11:8];
 
