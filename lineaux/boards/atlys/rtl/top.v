@@ -501,19 +501,19 @@ wire [3:0]test2 = (ade_qqq) ? {1'b0, adin2_qqq[2:0]} : 4'b0;
 	end
 
 	reg [15:0]qcnt, qcnt_q,q_reg;
-	reg ade_qq, vs_q;
+	reg ade_bb, vs_q;
 	always @ (posedge rx0_pclk)begin
 		if(btn)begin
 			qcnt 		<= 16'd0;
 			qcnt_q 	<= 16'd0;
 		end else begin
 			vs_q 		<= rx0_vsync;
-			ade_qq 	<= ade_q;
+			ade_bb 	<= ade_q;
 			if({rx0_vsync,vs_q} == 2'b10)begin
 				qcnt 	<= 16'd0;
 				q_reg <= qcnt;
 			end
-			if({ade_q,ade_qq} == 2'b10)
+			if({ade_q,ade_bb} == 2'b10)
 				qcnt <= qcnt + 16'd1;
 		end
 	end
