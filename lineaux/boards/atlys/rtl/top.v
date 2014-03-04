@@ -198,8 +198,10 @@ tmds_timing(
 	.rx0_vsync(rx0_vsync),
 	.video_en(vde),
 	.index(),
-	.video_hcnt(hcnt),
-	.video_vcnt(vnct)
+	.video_hcnt(),
+	.video_vcnt(),
+	.vcounter(vcnt),
+	.hcounter(hcnt)
 );
 
 wire aq;
