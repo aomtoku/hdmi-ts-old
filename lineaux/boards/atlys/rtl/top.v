@@ -436,7 +436,7 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 
 wire [3:0]test0 = (rx0_ade) ? {1'b1, rx0_aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
 wire [3:0]test1 = (rx0_ade) ? rx0_aux1 : 4'b0;
-wire [3:0]test2 = (rx0_ade) ? rx0_aux2 : 4'b0;
+wire [3:0]test2 = (rx0_ade) ? {1'b0, rx0_aux2[2:0]} : 4'b0;
 
 	dvi_encoder_top dvi_tx0 (
     .pclk        (tx0_pclk),
