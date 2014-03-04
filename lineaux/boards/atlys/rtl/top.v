@@ -433,6 +433,11 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 		end
 	end
   
+
+wire [3:0]test0 = (rx0_ade) ? rx0_aux0 : 4'b0;
+wire [3:0]test1 = (rx0_ade) ? rx0_aux1 : 4'b0;
+wire [3:0]test2 = (rx0_ade) ? rx0_aux2 : 4'b0;
+
 	dvi_encoder_top dvi_tx0 (
     .pclk        (tx0_pclk),
     .pclkx2      (tx0_pclkx2),
@@ -442,9 +447,9 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
     .blue_din    (rx0_blue/*b_b*/),
     .green_din   (rx0_green/*b_g*/),
     .red_din     (rx0_red/*b_r*/),
-	.aux0_din		 (rx0_aux0/*adin0_q*/),
-	.aux1_din		 (rx0_aux1/*adin1_q*/),
-	.aux2_din		 (rx0_aux2/*adin2_q*/),
+	.aux0_din		 (test0/*rx0_aux0*//*adin0_q*/),
+	.aux1_din		 (test1/*adin1_q*/),
+	.aux2_din		 (test2/*adin2_q*/),
     .hsync       (rx0_hsync/*_q*/),
     .vsync       (rx0_vsync/*_q*/),
     .vde          (rx0_vde/*_q*/),
