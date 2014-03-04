@@ -223,9 +223,9 @@ always @ (posedge rx0_pclk) begin
 	else
 		hsycnt <= 8'd0;
 
-	if(rx0_ade & hsycnt == 8'd39)
+	if(rx0_ade & hcnt == 1500)
      ap <= 1'b1;
-	if(hsycnt == 8'd39)
+	if(rx0_ade & hcnt == 1510)
      apb <= 1'b1;
 end
 
