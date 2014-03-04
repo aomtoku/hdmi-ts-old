@@ -11,8 +11,8 @@ module tmds_timing(
   output reg [10:0] hcounter
 );
 
-reg [10:0] vcounter;
-reg [10:0] hcounter;
+//reg [10:0] vcounter;
+//reg [10:0] hcounter;
 reg        vactive;
 reg        hactive;
 reg        hsync_buf;
