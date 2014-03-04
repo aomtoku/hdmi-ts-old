@@ -727,7 +727,7 @@ dvi_encoder_top dvi_tx0 (
     .blue_din    (blue_data),
     .green_din   (green_data),
     .red_din     (red_data),
-	.aux0_din	 (out_aux0[3:2]),
+	.aux0_din	 (out_aux0),
 	.aux1_din	 (out_aux1),
 	.aux2_din	 (out_aux2),
     .hsync       (VGA_HSYNC),
