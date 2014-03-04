@@ -211,7 +211,7 @@ reg apb = 1'b0;
 reg [7:0]hsycnt;
 
 always @ (posedge rx0_pclk) begin
-  if(rstbtn_n)begin
+  if(~rstbtn_n)begin
 		ap  <= 1'b0;
 		apb <= 1'b0;
 	end
