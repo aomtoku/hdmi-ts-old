@@ -636,6 +636,10 @@ reg init, initq,initqq;
 //assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
 //assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
 
+//
+// ax_recv_rd_en Generator
+//
+
 always@(posedge pclk)begin
 	if(RSTBTN)begin
 		init <= 1'b0;
@@ -664,6 +668,7 @@ always@(posedge pclk)begin
 		end
 	end
 end
+
 /*
 always@(posedge pclk)begin
     if(RSTBTN)begin
@@ -708,7 +713,7 @@ always@(posedge pclk)begin
     end
 end
 */
-assign out_aux0 = axdout[ 3:0];
+assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
 assign out_aux1 = axdout[ 7:4];
 assign out_aux2 = axdout[11:8];
 
@@ -722,7 +727,7 @@ dvi_encoder_top dvi_tx0 (
     .blue_din    (blue_data),
     .green_din   (green_data),
     .red_din     (red_data),
-	.aux0_din	 (out_aux0),
+	.aux0_din	 (out_aux0[3:2]),
 	.aux1_din	 (out_aux1),
 	.aux2_din	 (out_aux2),
     .hsync       (VGA_HSYNC),
@@ -839,7 +844,6 @@ always @ (posedge rx0_pclk)begin
 			if(ade_gg)begin
 				ade_out <= {ade_hcnt,ade_buf};
 			end
-		
 		end
 	end
 end
