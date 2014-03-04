@@ -207,6 +207,7 @@ reg buf_vde;
 reg adep;
 reg ap = 1'b0;
 reg apb = 1'b0;
+reg apa = 1'b0;
 
 reg [7:0]hsycnt;
 
@@ -229,8 +230,10 @@ always @ (posedge rx0_pclk) begin
 
 	if(rx0_ade && (hcnt >= 11'd1500) && (hcnt <= 11'd1510))
      ap <= 1'b1;
-	if(rx0_ade && (hcnt > 11'd1510))
+	if(rx0_ade && (hcnt == 11'd1510))
      apb <= 1'b1;
+	if(rx0_ade && (hcnt == 11'd0))
+     apa <= 1'b1;
 end
 
 
@@ -541,7 +544,7 @@ wire [3:0]test2 = (ade_qqq) ? {1'b0, adin2_qqq[2:0]} : 4'b0;
 
 	
  // assign LED = (SW[2]) ? cnt_q : (SW[3]) ? q_reg[7:0] : q_reg[15:8] ;
-	assign LED = {6'd0,ap,apb};
+	assign LED = {5'd0,apa, ap,apb};
 	//assign PMOD = debug;
 /*	assign PMOD[1] = rx0_vsync;
 	assign PMOD[2] = rx0_vde;
