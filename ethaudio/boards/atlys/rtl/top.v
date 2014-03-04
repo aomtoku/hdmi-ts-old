@@ -641,7 +641,7 @@ always@(posedge pclk)begin
 		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 	end else begin
-        if(fifo_read) begin
+      if(fifo_read) begin
 		    init <= 1'b1;
 	    end
 		if(bgnd_vblnk)begin
@@ -792,8 +792,8 @@ reg st,stc;
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf  <= 12'd0;
-	    ade_out  <= 24'd0;
-	    ade_hcnt <= 12'd0;
+	  ade_out  <= 24'd0;
+	  ade_hcnt <= 12'd0;
 		ade_gg   <=  1'b0;
 		start    <=  1'b0;
 		st       <=  1'b0;
