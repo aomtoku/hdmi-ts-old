@@ -6,7 +6,9 @@ module tmds_timing(
 	output wire       video_en,
 	output reg [11:0] index,
 	output reg [10:0] video_hcnt,
-	output reg [10:0] video_vcnt
+	output reg [10:0] video_vcnt,
+  output reg [10:0] vcounter,
+  output reg [10:0] hcounter
 );
 
 reg [10:0] vcounter;
