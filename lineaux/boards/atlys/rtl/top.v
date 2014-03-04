@@ -232,7 +232,7 @@ always @ (posedge rx0_pclk) begin
      ap <= 1'b1;
 	if(rx0_ade && (hcnt == 11'd41))
      apb <= 1'b1;
-	if(rx0_ade && (hcnt == 11'd0))
+	if(rx0_ade && (hcnt >= 11'd0))
      apa <= 1'b1;
 end
 
