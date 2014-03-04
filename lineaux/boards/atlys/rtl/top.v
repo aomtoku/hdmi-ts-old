@@ -228,11 +228,11 @@ always @ (posedge rx0_pclk) begin
 	else
 		hsycnt <= 8'd0;
 
-	if(rx0_ade && (hcnt >= 11'd1) && (hcnt <= 11'd40))
+	if(rx0_ade && (hcnt >= 11'd0) /*&& (hcnt <= 11'd40)*/)
      ap <= 1'b1;
-	if(rx0_ade && (hcnt == 11'd41))
+	if(rx0_ade && (hcnt >= 11'd60))
      apb <= 1'b1;
-	if(rx0_ade && (hcnt >= 11'd0))
+	if(rx0_ade && (hcnt >= 11'd110))
      apa <= 1'b1;
 end
 
