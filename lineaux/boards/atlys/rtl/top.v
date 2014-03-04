@@ -193,7 +193,7 @@ wire vde;
 wire [10:0]hcnt,vcnt;
 tmds_timing(
 	.rx0_pclk(rx0_pclk),
-	.rstbtn_n(rstbtn_n), 
+	.rstbtn_n(~rstbtn_n), 
 	.rx0_hsync(rx0_hsync),
 	.rx0_vsync(rx0_vsync),
 	.video_en(vde),
