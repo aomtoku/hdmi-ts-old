@@ -962,15 +962,18 @@ tmds_timing timing(
 	.rx0_vsync(rx0_vsync),
 	.video_en(video_en),
 	.index(index),
-	.video_hcnt(video_hcnt),
-	.video_vcnt(video_vcnt)
+	.video_hcnt(),
+	.video_vcnt(),
+	.vcounter(video_vnct),
+	.hcounter(video_hcnt)
 );
 
 //-----------------------------------------------------------
 //  GMII TX
 //-----------------------------------------------------------
 
-wire ade_tx = ((video_vcnt < 11'd22) || (video_vcnt > 11'd741)) && ((video_hcnt >= 11'd1) && (video_hcnt < 11'd80));
+//wire ade_tx = ((video_vcnt < 11'd22) || (video_vcnt > 11'd741)) && ((video_hcnt >= 11'd1) && (video_hcnt < 11'd80));
+wire ade_tx = ~video_en && ((video_hcnt >= 11'd1504) && (video_hcnt < 11'd1510));
 
 gmii_tx gmii_tx(
 	.id(DEBUG_SW[0]),
