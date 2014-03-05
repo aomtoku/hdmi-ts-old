@@ -151,22 +151,34 @@ wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740);
 //   *** 2 ade periods every 15 lines.
 // 
 reg [3:0]c15;
+reg [10:0]vc_b;
+reg ade;
 always@(posedge fifo_clk)begin
   if(sys_rst)begin
 		ade <= 1'b0;
 		c15 <= 4'd0;
+		vc_b <= 11'd0;
 	end else begin
-	  if(vc == 0)
+	  vc_b <= vc;
+		if(vc != vc_b)begin
+			if(c15 == 4'd14)
+				c15 <= 4'd0;
+			else
+				c15 <= c15 + 4'd1;
+		end
 
-		else if(c15 == 4'd14)begin
-			c15 <= 4'd0;
-			if( ((hcnt >= 1558) && (hcnt <= 1590)) || ((hcnt >= 1592) && (hcnt <= 1624)) )
+	  if(vc == 0)begin
+			if( ((hcnt >= 1000) && (hcnt <= 1128)) || ((hc  >= 93) && (hc <= 125)) )
+				ade <= 1'b1;
+			else
+				ade <= 1'b0;
+		end else if(c15 == 4'd14)begin
+			if( ((hc >= 59) && (hc <= 91)) || ((hc >= 93) && (hc <= 125)) )
 				ade <= 1'b1;
 			else
 				ade <= 1'b0;
 		end else begin
-		  c15 <= c15 + 4'd1;
-			if( (hcnt >= 1558) && (hcnt <= 1590) )
+			if( (hc >= 59) && (hc <= 91) )
 				ade <= 1'b1;
 			else
 				ade <= 1'b0;
