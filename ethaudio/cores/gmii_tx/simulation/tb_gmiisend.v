@@ -20,29 +20,7 @@ reg fifo_clk;
 initial fifo_clk = 1'b0;
 always #6.734 fifo_clk = ~fifo_clk;
 
-// Generate Video Signal
-wire vsync, hsync;
-reg [10:0]hcnt,vcnt;
-assign vsync = (vcnt >= 746 || vcnt == 0);
-assign hsync = (hcnt >= 1611 || hcnt == 0);
-always@(posedge fifo_clk)begin
-  if(sys_rst)begin
-	  hcnt <= 11'd0;
-	  vcnt <= 11'd0;
-  end else begin
-    if(hcnt == 1649)begin
-	  hcnt <= 11'd0;
-	  if(vcnt == 749)
-	    vcnt <= 11'd0;
-	  else
-		vcnt <= vcnt + 11'd1;
-	end else begin
-      hcnt <= hcnt + 11'd1;
-	end
-  end
-end
 
-wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
 //
 // Test Bench
 //
@@ -55,7 +33,10 @@ wire [7:0]TXD;
 reg [47:0]tx_data;
 
 
-wire ade_tx = ((vcnt < 11'd22) || (vcnt > 11'd741)) && ((hcnt >= 11'd1) && (hcnt < 11'd80));
+wire [10:0]hcnt,vcnt;
+wire video_en;
+
+wire ade_tx = ~video_en && ((hcnt >= 11'd1504) && (hcnt < 11'd1510));
 wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
 reg [11:0]ax_dout;
 reg ax_send_full;
@@ -85,7 +66,7 @@ gmii_tx gmiisend(
 	.tx_en(TXEN),
 	.txd(TXD)
 );
-
+/*
 reg [10:0] tc_hsblnk;
 reg [10:0] tc_hssync;
 reg [10:0] tc_hesync;
@@ -124,8 +105,88 @@ wire          bgnd_hsync;
 wire          bgnd_hblnk;
 wire          bgnd_vsync;
 wire          bgnd_vblnk;
+*/
+reg hs,vs;
+reg hs_q,vs_q;
+reg [10:0]hc,vc;
+always @ (posedge fifo_clk)begin
+  if(sys_rst)begin
+		hs <= 1'b0;
+		vs <= 1'b0;
+		hc <= 11'b0;
+		vc <= 11'b0;
+	end else begin
+	  hs_q <= hs;
+	  vs_q <= vs;
+	  // hcounter , vcounter Generate 
+		if(hc == 11'd1649)begin
+			hc <= 11'd0;
+			if(vc == 11'd749)
+				vc <= 11'd0;
+			else
+				vc <= vc + 11'd1;
+		end else
+		  hc <= hc + 11'd1;
+
+		//hsync, vsync Generate
+		if((hc >= 110) && (hc <= 149))
+			hs <= 1'b1;
+		else 
+			hs <= 1'b0;
+
+		if((vc >= 0) && (vc <= 4))
+			vs <= 1'b1;
+		else 
+			vs <= 1'b0;
+
+	end
+end
 
 
+wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
+
+//ADE Generator
+//   *** ADE has 804 or 805 period in a Frame.
+//   *** entire 750 lines ---> at least, one ADE per line
+//   *** 2 ade periods every 15 lines.
+// 
+reg [3:0]c15;
+always@(posedge fifo_clk)begin
+  if(sys_rst)begin
+		ade <= 1'b0;
+		c15 <= 4'd0;
+	end else begin
+	  if(vc == 0)
+
+		else if(c15 == 4'd14)begin
+			c15 <= 4'd0;
+			if( ((hcnt >= 1558) && (hcnt <= 1590)) || ((hcnt >= 1592) && (hcnt <= 1624)) )
+				ade <= 1'b1;
+			else
+				ade <= 1'b0;
+		end else begin
+		  c15 <= c15 + 4'd1;
+			if( (hcnt >= 1558) && (hcnt <= 1590) )
+				ade <= 1'b1;
+			else
+				ade <= 1'b0;
+		end
+	end
+end
+
+tmds_timing timing_inst (
+  .rx0_pclk(fifo_clk),
+  .rstbtn_n(sys_rst), 
+  .rx0_hsync(hs),
+  .rx0_vsync(vs),
+  .video_en(video_en),
+  .index(),
+  .video_hcnt(),
+  .video_vcnt(),
+  .vcounter(vcnt),
+  .hcounter(hcnt)
+);
+/*
 timing_gen timing_inst (
 	.tc_hsblnk(tc_hsblnk), //input
 	.tc_hssync(tc_hssync), //input
@@ -146,9 +207,9 @@ timing_gen timing_inst (
 	.clk125m(RXCLK),
 	.fifo_wr_en(recv_fifo_wr_en),
 	.y_din(y_din)
-);
+);*/
 wire active;
-assign active = !bgnd_hblnk && !bgnd_vblnk;
+//assign active = !bgnd_hblnk && !bgnd_vblnk;
 assign rd_en = active;
 
 //
