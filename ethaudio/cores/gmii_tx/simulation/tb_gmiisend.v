@@ -37,7 +37,33 @@ wire [10:0]hcnt,vcnt;
 wire video_en;
 
 wire ade_tx = ~video_en && ((hcnt >= 11'd1504) && (hcnt < 11'd1510));
-wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
+//wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
+// Generating a Number of audio enable period
+reg [3:0] ade_c;
+reg [3:0] ade_num;
+reg [4:0] cnt_32;
+reg       vde_b;
+
+always @ (posedge fifo_clk)begin
+  vde_b <= vde;
+  if(sys_rst || hcnt == 11'd1)begin
+	  ade_c  <= 4'd0;
+	  cnt_32 <= 5'd0; 
+	  ade_num <= ade_c;
+	end else begin
+	  if(ade)begin
+		  if(cnt_32 == 5'd31)begin
+			cnt_32 <= 5'd0;
+			ade_c  <= ade_c + 4'd1;
+		  end else begin
+		    cnt_32 <= cnt_32 + 5'd1;
+		  end
+		end
+	end
+end
+
+
+
 reg [11:0]ax_dout;
 reg ax_send_full;
 reg ax_send_empty = 1'b0;
@@ -66,46 +92,7 @@ gmii_tx gmiisend(
 	.tx_en(TXEN),
 	.txd(TXD)
 );
-/*
-reg [10:0] tc_hsblnk;
-reg [10:0] tc_hssync;
-reg [10:0] tc_hesync;
-reg [10:0] tc_heblnk;
-reg [10:0] tc_vsblnk;
-reg [10:0] tc_vssync;
-reg [10:0] tc_vesync;
-reg [10:0] tc_veblnk;
 
-
-parameter HPIXELS_HDTV720P = 11'd1280; //Horizontal Live Pixels
-parameter VLINES_HDTV720P  = 11'd720;  //Vertical Live ines
-parameter HSYNCPW_HDTV720P = 11'd40;  //HSYNC Pulse Width
-parameter VSYNCPW_HDTV720P = 11'd5;    //VSYNC Pulse Width
-parameter HFNPRCH_HDTV720P = 11'd110; //Horizontal Front Portch hotoha72
-parameter VFNPRCH_HDTV720P = 11'd5;    //Vertical Front Portch
-parameter HBKPRCH_HDTV720P = 11'd220;  //Horizontal Front Portch
-parameter VBKPRCH_HDTV720P = 11'd20;   //Vertical Front Portch
-
-
-always @(*)begin
- tc_hsblnk = HPIXELS_HDTV720P - 11'd1;
- tc_hssync = HPIXELS_HDTV720P - 11'd1 + HFNPRCH_HDTV720P;
- tc_hesync = HPIXELS_HDTV720P - 11'd1 + HFNPRCH_HDTV720P + HSYNCPW_HDTV720P;
- tc_heblnk = HPIXELS_HDTV720P - 11'd1 + HFNPRCH_HDTV720P + HSYNCPW_HDTV720P + HBKPRCH_HDTV720P;
- tc_vsblnk =  VLINES_HDTV720P - 11'd1;
- tc_vssync =  VLINES_HDTV720P - 11'd1 + VFNPRCH_HDTV720P;
- tc_vesync =  VLINES_HDTV720P - 11'd1 + VFNPRCH_HDTV720P + VSYNCPW_HDTV720P;
- tc_veblnk =  VLINES_HDTV720P - 11'd1 + VFNPRCH_HDTV720P + VSYNCPW_HDTV720P + VBKPRCH_HDTV720P;
-end
-wire [10:0] bgnd_hcount;
-wire [10:0] bgnd_vcount;
-
-wire VGA_HSYNC_INT, VGA_VSYNC_INT;
-wire          bgnd_hsync;
-wire          bgnd_hblnk;
-wire          bgnd_vsync;
-wire          bgnd_vblnk;
-*/
 reg hs,vs;
 reg hs_q,vs_q;
 reg [10:0]hc,vc;
@@ -220,9 +207,9 @@ timing_gen timing_inst (
 	.fifo_wr_en(recv_fifo_wr_en),
 	.y_din(y_din)
 );*/
-wire active;
+//wire active;
 //assign active = !bgnd_hblnk && !bgnd_vblnk;
-assign rd_en = active;
+assign rd_en = vde;
 
 //
 // a clock

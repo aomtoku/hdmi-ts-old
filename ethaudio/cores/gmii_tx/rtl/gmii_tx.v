@@ -435,11 +435,11 @@ always @(posedge tx_clk)begin
       // 16bit AUXID : left audio ade number -> 4bit | clock 12bit
       AUXID: begin
 				if(count == 11'd1)begin
-				  txd           <= {left_ade, axdout[23:20]};
+				  txd   <= {left_ade, axdout[23:20]};
 				  if(left_ade != 4'd0)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
-			      count         <= 11'd0;
+			    count         <= 11'd0;
 				  state         <= AUX;
 				  cnt3          <= 2'd0;
 				  ax_send_rd_en <= 1'b0;
