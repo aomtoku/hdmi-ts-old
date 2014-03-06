@@ -153,6 +153,7 @@ parameter AUX         = 4'h9;
 parameter FCS         = 4'ha;
 parameter IFG         = 4'hb;
 
+parameter AUDIOMAX    = 5'd20
 
 parameter auxsize     = 12'd50;
 parameter video       = 8'b00000000;
@@ -171,7 +172,7 @@ reg [7:0]   pcktinfo;
 reg [11:0]  packet_size;
 
 reg [7:0]   tmp;
-reg [3:0]   left_ade;
+reg [4:0]   left_ade;
 always @(posedge tx_clk)begin
 	if(sys_rst)begin
 		txd       <= 8'd0;
@@ -341,7 +342,10 @@ always @(posedge tx_clk)begin
 						state <= AUXID;
 						count <= 11'd0;
 						ax_send_rd_en <= 1'b1;
-						left_ade <= ade_num;
+						if(ade_num > AUDIOMAX)
+							left_ade <= AUDIOMAX;
+						else
+							left_ade <= ade_num;
 					end
 					video:begin
 						state <= DATA_RESOL;
@@ -435,7 +439,7 @@ always @(posedge tx_clk)begin
       // 16bit AUXID : left audio ade number -> 4bit | clock 12bit
       AUXID: begin
 				if(count == 11'd1)begin
-				  txd   <= {left_ade, axdout[23:20]};
+				  txd   <= {left_ade, axdout[22:20]};
 				  if(left_ade != 4'd0)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
