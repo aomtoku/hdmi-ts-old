@@ -53,7 +53,7 @@ module gmii_tx#(
 	input   wire        full,
 	output  wire        rd_en,
 	input   wire        wr_en,
-	
+	input   wire        vperi,
   /*** AUX ***/
 	input   wire        adesig,
 	input   wire [3:0]  ade_num,
@@ -125,7 +125,7 @@ always @(posedge fifo_clk) begin
 		buf2_tx_en <= buf1_tx_en;
 		if({buf1_wr_en,buf2_wr_en} == 2'b01)
 			fstate   <= 1'b1;
-		if({buf1_tx_en,buf2_tx_en} == 2'b01) begin
+		if(vperi && ({buf1_tx_en,buf2_tx_en} == 2'b01)) begin
 			if(ppl)begin
 				ppl     <= 1'b0;
 				fstate  <= 1'b0;
