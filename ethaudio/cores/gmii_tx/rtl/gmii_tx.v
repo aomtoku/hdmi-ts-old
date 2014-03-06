@@ -153,7 +153,7 @@ parameter AUX         = 4'h9;
 parameter FCS         = 4'ha;
 parameter IFG         = 4'hb;
 
-parameter AUDIOMAX    = 5'd20
+parameter AUDIOMAX    = 5'd20;
 
 parameter auxsize     = 12'd50;
 parameter video       = 8'b00000000;
