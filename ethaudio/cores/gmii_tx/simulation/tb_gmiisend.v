@@ -37,7 +37,7 @@ wire [10:0]hcnt,vcnt;
 wire video_en;
 
 wire ade_tx = ~video_en && ((hcnt >= 11'd1504) && (hcnt < 11'd1510));
-//wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
+
 // Generating a Number of audio enable period
 reg [3:0] ade_c;
 reg [3:0] ade_num;
@@ -46,9 +46,9 @@ reg       vde_b;
 
 always @ (posedge fifo_clk)begin
   vde_b <= vde;
-  if(sys_rst || hcnt == 11'd1)begin
-	  ade_c  <= 4'd0;
-	  cnt_32 <= 5'd0; 
+  if(sys_rst || hcnt == 11'd1502)begin
+	  ade_c   <= 4'd0;
+	  cnt_32  <= 5'd0; 
 	  ade_num <= ade_c;
 	end else begin
 	  if(ade)begin
@@ -185,30 +185,7 @@ tmds_timing timing_inst (
   .vcounter(vcnt),
   .hcounter(hcnt)
 );
-/*
-timing_gen timing_inst (
-	.tc_hsblnk(tc_hsblnk), //input
-	.tc_hssync(tc_hssync), //input
-	.tc_hesync(tc_hesync), //input
-	.tc_heblnk(tc_heblnk), //input
-	.hcount(bgnd_hcount), //output
-	.hsync(VGA_HSYNC_INT), //output
-	.hblnk(bgnd_hblnk), //output
-	.tc_vsblnk(tc_vsblnk), //input
-	.tc_vssync(tc_vssync), //input
-	.tc_vesync(tc_vesync), //input
-	.tc_veblnk(tc_veblnk), //input
-	.vcount(bgnd_vcount), //output
-	.vsync(VGA_VSYNC_INT), //output
-	.vblnk(bgnd_vblnk), //output
-	.restart(sys_rst),
-	.clk74m(pclk),
-	.clk125m(RXCLK),
-	.fifo_wr_en(recv_fifo_wr_en),
-	.y_din(y_din)
-);*/
-//wire active;
-//assign active = !bgnd_hblnk && !bgnd_vblnk;
+
 assign rd_en = vde;
 
 //
