@@ -69,6 +69,9 @@ reg ax_send_full;
 reg ax_send_empty = 1'b0;
 wire ax_send_rd_en;
 
+
+wire vperi = (vcnt >= 21) && (vcnt <= 741) 
+
 gmii_tx gmiisend(
     .id(1'b1),
 	/*** FIFO ***/
@@ -79,6 +82,7 @@ gmii_tx gmiisend(
 	.full(full),
 	.rd_en(rd_en),
 	.wr_en(vde),
+	.vperi(vperi),
 	// AX FIFO
 	.adesig(ade_tx),
 	.ade_num(ade_num),
