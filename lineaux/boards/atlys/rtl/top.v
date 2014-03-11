@@ -190,13 +190,20 @@ module top (
 
 wire [11:0]din_aux = {rx0_aux2,rx0_aux1, rx0_aux0};
 wire [11:0]dout_aux;
+//wire [11:0]dout_aux = {rx0_aux2, rx0_aux1, rx0_aux0};
+//wire [11:0]din_aux = 12'd0;
+
 wire dbg_empty,dbg_full;
 wire rd_en;
+reg [11:0]buf_aux;
+always@(posedge rx0_pclk)
+	buf_aux <= din_aux;
+
 auxfifo12 auxfifo(
-  .rst(sys_rst),
+  .rst(~rstbtn_n),
   .wr_clk(rx0_pclk),
   .rd_clk(rx0_pclk),
-  .din(din_aux),
+  .din(buf_aux),
   .wr_en(rx0_ade),
   .rd_en(rd_en),
   .dout(dout_aux),
@@ -206,8 +213,6 @@ auxfifo12 auxfifo(
 wire [3:0]aux0 = dout_aux[3:0];
 wire [3:0]aux1 = dout_aux[7:4];
 wire [3:0]aux2 = dout_aux[11:8];
-
-
 
 wire vde;
 wire [10:0]hcnt,vcnt;
@@ -261,10 +266,9 @@ end
 //Controller rd_en logic 
 // FIFO for aux data
 
-wire video_ade  = ((vcnt >= 21 && vcnt <= 740) && (hcnt >= 1558 && hcnt <= 1590)) ? 1'b1 : 1'b0;
-wire nvideo_ade = (vcnt < 21 && vcnt > 740) && ~dbg_empty ? 1'b1 : 1'b0;
+wire video_ade  = ((vcnt >= 21 && vcnt <= 740) && (hcnt >= 1569 && hcnt <= 1600)) ? 1'b1 : 1'b0;
+wire nvideo_ade = ((vcnt < 21 || vcnt > 740) && ((hcnt >= 1069 && hcnt <= 1100) || (hcnt >= 1169 && hcnt <= 1200) || (hcnt >= 1269 && hcnt <= 1300) || (hcnt >= 1569 && hcnt <= 1600)) && ~dbg_empty ) ? 1'b1 : 1'b0;
 
-assign rd_en = video_ade | nvideo_ade;
 /*
 reg ade_g;
 assign rd_en = ade_g;
@@ -504,12 +508,29 @@ wire [3:0]test0 = {1'b1, aux0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
 wire [3:0]test1 = adin1_qqq : 4'b0;
 wire [3:0]test2 = adin2_qqq[2:0]} : 4'b0;
 */
-wire nade = rd_en;
-wire [3:0]test0 = (nade) ? {1'b1, aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
-wire [3:0]test1 = (nade) ? aux1 : 4'b0;
-wire [3:0]test2 = (nade) ? {1'b1,aux2[2:0]} : 4'b0;
+assign rd_en = video_ade | nvideo_ade;
+reg gade,ggade;
+reg dade, ddade, dddade, ddddade;
+//assign rd_en = dddade;
+always@(posedge rx0_pclk)begin
+	gade  <= rd_en;
+	ggade <= gade;
 
-	dvi_encoder_top dvi_tx0 (
+	dade    <= rx0_ade;
+	ddade   <= dade   ;
+	dddade  <= ddade  ;
+	ddddade <= dddade ;
+end
+
+wire [3:0]test0 = (gade) ? {1'b1, aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
+wire [3:0]test1 = (gade) ? aux1 : 4'b0;
+wire [3:0]test2 = (gade) ? aux2 : 4'b0;
+/*
+wire [3:0]test0 = (ddddade) ? aux0 : (dade) ?  {1'b1, 1'b1, 1'b0, 1'b0} :4'b0;
+wire [3:0]test1 = (ddddade) ? aux1 : 4'b0;
+wire [3:0]test2 = (ddddade) ? aux2 : 4'b0;
+*/
+dvi_encoder_top dvi_tx0 (
     .pclk        (tx0_pclk),
     .pclkx2      (tx0_pclkx2),
     .pclkx10     (tx0_pclkx10),
@@ -524,7 +545,7 @@ wire [3:0]test2 = (nade) ? {1'b1,aux2[2:0]} : 4'b0;
     .hsync       (rx0_hsync),
     .vsync       (rx0_vsync),
     .vde          (rx0_vde),
-    .ade          (ade_qqq),
+    .ade          (gade),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
 
