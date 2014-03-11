@@ -203,9 +203,9 @@ auxfifo12 auxfifo(
   .full(dbg_full),
   .empty(dbg_empty)
 );
-wire aux0 = dout_aux[3:0];
-wire aux1 = dout_aux[7:4];
-wire aux2 = dout_aux[11:8];
+wire [3:0]aux0 = dout_aux[3:0];
+wire [3:0]aux1 = dout_aux[7:4];
+wire [3:0]aux2 = dout_aux[11:8];
 
 
 
@@ -505,9 +505,9 @@ wire [3:0]test1 = adin1_qqq : 4'b0;
 wire [3:0]test2 = adin2_qqq[2:0]} : 4'b0;
 */
 wire nade = rd_en;
-wire [3:0]test0 = (nade) {1'b1, aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
-wire [3:0]test1 = (nade) aux1 : 4'b0;
-wire [3:0]test2 = (nade) aux2[2:0]} : 4'b0;
+wire [3:0]test0 = (nade) ? {1'b1, aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
+wire [3:0]test1 = (nade) ? aux1 : 4'b0;
+wire [3:0]test2 = (nade) ? {1'b1,aux2[2:0]} : 4'b0;
 
 	dvi_encoder_top dvi_tx0 (
     .pclk        (tx0_pclk),
