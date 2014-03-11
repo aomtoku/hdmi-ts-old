@@ -498,11 +498,16 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 wire [3:0]test0 = (ade_qqq) ? {1'b1, adin0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
 wire [3:0]test1 = (ade_qqq) ? adin1_qqq : 4'b0;
 wire [3:0]test2 = (ade_qqq) ? {1'b0, adin2_qqq[2:0]} : 4'b0;
-*/
+
 
 wire [3:0]test0 = {1'b1, aux0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
 wire [3:0]test1 = adin1_qqq : 4'b0;
 wire [3:0]test2 = adin2_qqq[2:0]} : 4'b0;
+*/
+wire nade = rd_en;
+wire [3:0]test0 = (nade) {1'b1, aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
+wire [3:0]test1 = (nade) aux1 : 4'b0;
+wire [3:0]test2 = (nade) aux2[2:0]} : 4'b0;
 
 	dvi_encoder_top dvi_tx0 (
     .pclk        (tx0_pclk),
