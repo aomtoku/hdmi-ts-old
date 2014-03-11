@@ -261,7 +261,7 @@ end
 //Controller rd_en logic 
 // FIFO for aux data
 
-wire video_ade  = ((vcnt >= 21 && vcnt <= 740) && (hcnt >= 1559 && hcnt <= 1590)) ? 1'b1 : 1'b0;
+wire video_ade  = ((vcnt >= 21 && vcnt <= 740) && (hcnt >= 1558 && hcnt <= 1590)) ? 1'b1 : 1'b0;
 wire nvideo_ade = (vcnt < 21 && vcnt > 740) && ~dbg_empty ? 1'b1 : 1'b0;
 
 assign rd_en = video_ade | nvideo_ade;
@@ -570,7 +570,8 @@ wire [3:0]test2 = (nade) ? {1'b1,aux2[2:0]} : 4'b0;
 
 	
  // assign LED = (SW[2]) ? cnt_q : (SW[3]) ? q_reg[7:0] : q_reg[15:8] ;
-	assign LED = {5'd0,apa, ap,apb};
+	//assign LED = {5'd0,apa, ap,apb};
+assign LED = {5'd0,rd_en,dbg_full,dbg_empty};
 	//assign PMOD = debug;
 /*	assign PMOD[1] = rx0_vsync;
 	assign PMOD[2] = rx0_vde;
