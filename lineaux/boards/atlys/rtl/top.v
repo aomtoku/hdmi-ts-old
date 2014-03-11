@@ -262,7 +262,7 @@ end
 // FIFO for aux data
 
 wire video_ade  = ((vcnt >= 21 && vcnt <= 740) && (hcnt >= 1559 && hcnt <= 1590)) ? 1'b1 : 1'b0;
-wire nvideo_ade = (vcnt < 21 && vcnt > 740) && ~empty ? 1'b1 : 1'b0;
+wire nvideo_ade = (vcnt < 21 && vcnt > 740) && ~dbg_empty ? 1'b1 : 1'b0;
 
 assign rd_en = video_ade | nvideo_ade;
 /*
