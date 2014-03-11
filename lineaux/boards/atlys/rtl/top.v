@@ -188,6 +188,26 @@ module top (
     .green       (rx0_green),
     .blue        (rx0_blue)); 
 
+wire [11:0]din_aux = {rx0_aux2,rx0_aux1, rx0_aux0};
+wire [11:0]dout_aux;
+wire dbg_empty,dbg_full;
+wire rd_en;
+auxfifo12 auxfifo(
+  .rst(sys_rst),
+  .wr_clk(rx0_pclk),
+  .rd_clk(rx0_pclk),
+  .din(din_aux),
+  .wr_en(rx0_ade),
+  .rd_en(rd_en),
+  .dout(dout_aux),
+  .full(dbg_full),
+  .empty(dbg_empty)
+);
+wire aux0 = dout_aux[3:0];
+wire aux1 = dout_aux[7:4];
+wire aux2 = dout_aux[11:8];
+
+
 
 wire vde;
 wire [10:0]hcnt,vcnt;
@@ -238,8 +258,34 @@ always @ (posedge rx0_pclk) begin
      apa <= 1'b1;
 end
 
+//Controller rd_en logic 
+// FIFO for aux data
 
+wire video_ade  = ((vcnt >= 21 && vcnt <= 740) && (hcnt >= 1559 && hcnt <= 1590)) ? 1'b1 : 1'b0;
+wire nvideo_ade = (vcnt < 21 && vcnt > 740) && ~empty ? 1'b1 : 1'b0;
 
+assign rd_en = video_ade | nvideo_ade;
+/*
+reg ade_g;
+assign rd_en = ade_g;
+always@(posedge rx0_pclk)begin
+  if(~rstbtn_n)begin
+		ade_g <= 1'b0;
+	end else begin
+		if(vcnt >= 21 && vcnt <= 740)begin
+	    if(hcnt >= 1559 && hcnt <= 1590)
+			  ade_g <= 1'b1;
+			else
+				ade_g <= 1'b0;
+		end else begin
+		  if(hcnt >= 1559 && vcnt <= )
+				ade_g <= 1'b1;
+			else
+				ade_g <= 1'b0;
+		end
+	end
+end
+*/
 
 wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 
@@ -449,41 +495,14 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 		end
 	end
 /*
-	reg [18:0] Y, Cb, Cr, a_r, a_g, a_b;
-	reg [7:0] b_r, b_g, b_b;
-	reg chk;
-	always @ (posedge rx0_pclk)begin
-		if(rx0_reset)begin
-			chk			 <= 1'b0;
-			a_r      <= 19'h00;
-			a_g      <= 19'h00;
-			a_b      <= 19'h00;
-			b_r      <= 8'h00;
-			b_g      <= 8'h00;
-			b_b      <= 8'h00;
-		end else begin
-			if(tx0_de)begin
-				chk <= ~chk;
-				Y <= {11'b0,tx0_green};
-				if (chk == 1'b0)
-					Cr <= {11'b0, tx0_blue};
-				else
-					Cb <= {11'b0, tx0_blue};
-				
-				a_r <= ( (Y<<8) + (19'b1_0110_0111*Cr) - 19'hb380)>>8;
-				a_g <= ( (Y<<8) + 19'h8780 - (19'b1011_0111*Cr) - (19'b0101_1000*Cb) )>>8;
-				a_b <= ( (Y<<8) + (19'b1_1100_0110*Cb) - 19'he300)>>8;
-				b_r <= (a_r >= 19'hff) ? 8'hff : a_r[7:0];
-				b_g <= (a_g >= 19'hff) ? 8'hff : a_g[7:0];
-				b_b <= (a_b >= 19'hff) ? 8'hff : a_b[7:0];
-			end
-		end
-	end
-*/  
-
 wire [3:0]test0 = (ade_qqq) ? {1'b1, adin0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
 wire [3:0]test1 = (ade_qqq) ? adin1_qqq : 4'b0;
 wire [3:0]test2 = (ade_qqq) ? {1'b0, adin2_qqq[2:0]} : 4'b0;
+*/
+
+wire [3:0]test0 = {1'b1, aux0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
+wire [3:0]test1 = adin1_qqq : 4'b0;
+wire [3:0]test2 = adin2_qqq[2:0]} : 4'b0;
 
 	dvi_encoder_top dvi_tx0 (
     .pclk        (tx0_pclk),
@@ -491,16 +510,16 @@ wire [3:0]test2 = (ade_qqq) ? {1'b0, adin2_qqq[2:0]} : 4'b0;
     .pclkx10     (tx0_pclkx10),
     .serdesstrobe(tx0_serdesstrobe),
     .rstin       (tx0_reset),
-    .blue_din    (rx0_blue/*b_b*/),
-    .green_din   (rx0_green/*b_g*/),
-    .red_din     (rx0_red/*b_r*/),
+    .blue_din    (rx0_blue),
+    .green_din   (rx0_green),
+    .red_din     (rx0_red),
 	.aux0_din		 (test0/*rx0_aux0*//*adin0_q*/),
 	.aux1_din		 (test1/*adin1_q*/),
 	.aux2_din		 (test2/*adin2_q*/),
-    .hsync       (rx0_hsync/*_q*/),
-    .vsync       (rx0_vsync/*_q*/),
-    .vde          (rx0_vde/*_q*/),
-    .ade          (ade_qqq/*_q*/),
+    .hsync       (rx0_hsync),
+    .vsync       (rx0_vsync),
+    .vde          (rx0_vde),
+    .ade          (ade_qqq),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
 
