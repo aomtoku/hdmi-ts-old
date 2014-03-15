@@ -27,7 +27,7 @@ module gmii_tx#(
 	parameter [15:0]  ip_type       = 16'h0800,
 	parameter [15:0]  ip_ver        = 16'h4500,
 `ifdef DATA_YUV
-	parameter [15:0]  ip_len        = 16'd1312 - 16'd2,
+	parameter [15:0]  ip_len        = 16'd992 - 16'd2,
 `else
 	parameter [15:0]  ip_len        = 16'd992,
 `endif
@@ -38,7 +38,7 @@ module gmii_tx#(
 	parameter [31:0]  ip_src_addr   = {8'd192,8'd168,8'd0,8'd1},
 	parameter [31:0]  ip_dst_addr   = {8'd192,8'd168,8'd0,8'd2},
 `ifdef DATA_YUV
-	parameter [15:0]  udp_len       = 16'd1292 - 16'd2 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
+	parameter [15:0]  udp_len       = 16'd972 - 16'd2 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
 `else
 	parameter [15:0]  udp_len       = 16'd972 // (Pixel = 960) + (X,Y = 4) + (UDP header = 8)
 `endif
@@ -292,9 +292,9 @@ always @(posedge tx_clk )begin
 			end
 `ifdef DATA_YUV
 			DATA_RGB: begin
-				if(count == 11'd1279)begin
+				if(count == 11'd959)begin
 					state <= FCS;
-			 		txd   <= dout[23:16];
+			 		txd   <= dout[7:0];
 					count <= 11'd0;
 					cnt3  <= 2'd0;
 				end else begin
@@ -310,11 +310,15 @@ always @(posedge tx_clk )begin
 						end
 						2'b01: begin
 							if(sw)
-								txd 	<= /*{4'd0,dout[35:32]}*/dout[23:16];  // Red
+								txd 	<= /*{4'd0,dout[35:32]}*/cout[23:16];  // Red
 							else
 								txd 	<= {dout[24], count[10:4]};  // X
-								cnt3 	<= 2'd2;
+								cnt3 	<= 2'd0;
 				       		end
+						2'b00: begin
+						  txd    <= dout[15:8];
+							cnt3   <= 2'd2;
+							end
 						//default: tx_en <= 1'b0;
 					endcase
 				end
@@ -373,6 +377,7 @@ always @(posedge tx_clk )begin
 	end
 end
 
-assign rd_en = ((state == DATA_RGB & cnt3 == 2'd2 ) | (state == DATA_RESOL & cnt3 == 2'd3 ) | (state == DATA_IP & cnt3 == 2'd3 ));
+assign rd_en = ((state == DATA_RGB & cnt3 == 2'd0) | (state == DATA_RGB & cnt3 == 2'd2 ) | (state == DATA_RESOL & cnt3 == 2'd3 ) | (state == DATA_IP & cnt3 == 2'd3 ));
+
 
 endmodule
