@@ -112,6 +112,7 @@ wire [28:0] dout;
 
 wire datavalid;
 wire recv_fifo_wr_en;
+wire fifo_read;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(RXCLK),
@@ -146,12 +147,12 @@ dc_adpcm adpcm_decode(
 //------------------------------------------------------------
 // FIFO
 //------------------------------------------------------------
-wire recv_full, recv_empty, fifo_read;
+wire recv_full, recv_empty;
 fifo29_32768 asfifo_recv (
 	.rst(reset),
 	.wr_clk(RXCLK), // GMII RX clock 125MHz
 	.rd_clk(pclk),  // TMDS clock 74.25MHz 
-	.din({fifo_din), // data input
+	.din(fifo_din), // data input
 	.wr_en(recv_fifo_wr_en),
 	.rd_en(fifo_read),
 	.dout(dout),    // data output
