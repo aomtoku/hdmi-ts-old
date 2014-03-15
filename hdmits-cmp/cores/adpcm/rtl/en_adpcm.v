@@ -3,14 +3,14 @@
  *      by Yuta TOKUSASHI
  * ***********************************************************/
 
-module dc_adpcm(
-  input  wire        clk,
-  input  wire        rst,
-  input  wire        eo,
-  input  wire        in_en,
-  input  wire [15:0] din,
-  output wire        out_en,
-  output wire [15:0] dout
+module en_adpcm(
+  input  wire        clk,     // System Clock
+  input  wire        rst,     // System Reset
+  input  wire        eo,      // Even bit, Odd bit
+  input  wire        in_en,   // Input Enable Signal
+  input  wire [15:0] din,     // Decoded data(input)
+  output wire        out_en,  // Output Enable Signal
+  output wire [15:0] dout     // Encoded Data(output)
 );
 
 reg [15:0] bp;
@@ -37,13 +37,13 @@ always@(posedge clk)begin
 	bp <= din;
 	if(eo)begin
       if(yin > ybp)
-        y    <= (({8'd0,yin} - {8'd0,ybp}) * 8 + 127)/*/254*/;
+        y    <= (({8'd0,yin} - {8'd0,ybp}) * 8 + 127)/254;
       else
-        y    <= (({8'd0,ybp} - {8'd0,yin}) * 8 + 127)/*/254*/;
+        y    <= (({8'd0,ybp} - {8'd0,yin}) * 8 + 127)/254;
       if(rbin > rbbp)
-        cbcr <= (({8'd0,rbin} - {8'd0,rbbp}) * 8 + 127)/*/254*/;
+        cbcr <= (({8'd0,rbin} - {8'd0,rbbp}) * 8 + 127)/254;
       else
-		cbcr <= (({8'd0,rbbp} - {8'd0,rbin}) * 8 + 127)/*/254*/;
+		cbcr <= (({8'd0,rbbp} - {8'd0,rbin}) * 8 + 127)/254;
 	end else begin
       out <= din;
     end
