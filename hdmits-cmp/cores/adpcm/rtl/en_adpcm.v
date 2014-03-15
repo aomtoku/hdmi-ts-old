@@ -38,6 +38,8 @@ always@(posedge clk)
 
 always@(posedge clk)begin
   if(rst)begin
+		yp   <= 1'd0;
+		cp   <= 1'd0;
 	  bp   <= 16'd0;
 	  y    <= 16'd0;
 	  cbcr <= 16'd0;
