@@ -1,16 +1,16 @@
 /**************************************************************
- *   Data Encoder like adpcm
+ *   Data Decoder like adpcm
  *      by Yuta TOKUSASHI
  * ***********************************************************/
 
 module dc_adpcm(
-  input  wire        clk,
-  input  wire        rst,
-  input  wire        eo,
-  input  wire        in_en,
-  input  wire [15:0] din,
-  output wire        out_en,
-  output wire [15:0] dout
+  input  wire        clk,     // System clock
+  input  wire        rst,     // System Reset 
+  input  wire        eo,      // Even bit, Odd bit
+  input  wire        in_en,   // Input Enable Signal
+  input  wire [15:0] din,     // Encoded Data(input)
+  output wire        out_en,  // Output Enable signal 1 clock sycle delay
+  output wire [15:0] dout     // Decoded Data(output)
 );
 
 reg [15:0] bp;
@@ -34,17 +34,17 @@ always@(posedge clk)begin
 	  out  <= 16'd0;
   end else begin
     oen <= in_en;
-	bp <= din;
-	if(eo)begin
-      if(yin > ybp)
-        y    <= (({8'd0,yin} - {8'd0,ybp}) * 8 + 127)/*/254*/;
-      else
-        y    <= (({8'd0,ybp} - {8'd0,yin}) * 8 + 127)/*/254*/;
-      if(rbin > rbbp)
-        cbcr <= (({8'd0,rbin} - {8'd0,rbbp}) * 8 + 127)/*/254*/;
-      else
-		cbcr <= (({8'd0,rbbp} - {8'd0,rbin}) * 8 + 127)/*/254*/;
-	end else begin
+	  bp <= din;
+	  if(eo)begin
+			if(din[3]) // Adactive Differencial Value 
+			  y  <= bp + ({13'd,din[2:0]} * 16'd254 / 16'd8);
+			else
+			  y  <= bp - ({13'd,din[2:0]} * 16'd254 / 16'd8);
+			if(din[7])
+			  cbcr  <= bp + ({13'd,din[6:4]} * 16'd254 / 16'd8);
+			else
+			  cbcr  <= bp - ({13'd,din[6:4]} * 16'd254 / 16'd8);
+	  end else begin // Non compressing Data
       out <= din;
     end
   end
