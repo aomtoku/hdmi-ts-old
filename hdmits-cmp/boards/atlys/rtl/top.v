@@ -752,7 +752,7 @@ en_adpcm test(
   .rst(RSTBTN),
   .in_en(video_en),
   .din({rx0_red, rx0_green}),
-  .out_en(send_wr_en),
+  .out_en(send_fifo_wr_en),
   .dout(cout),
 	.eo(eo)
 );
