@@ -81,7 +81,7 @@ always @ (posedge i_clk_74M) begin
 
 		if (hhactive & vactive) begin
 			Y <= {11'b0,data[15:8]};
-			if (i_hcnt[0] == 1'b0)
+			if (i_hcnt[0] == 1'b1)
 				Cr <= {11'b0, data[7:0]};
 			else
 				Cb <= {11'b0, data[7:0]};
