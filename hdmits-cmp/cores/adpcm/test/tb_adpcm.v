@@ -14,21 +14,34 @@ always #6.74 sys_clk = ~sys_clk;
 // Test Bench
 //
 reg sys_rst;
-reg eo,en; // ever or odd bit
+reg en; // ever or odd bit
 wire [15:0]in;
 wire [15:0]out;
 wire oen;
+wire eo;
 
-adpcm test(
+en_adpcm test(
   .clk(sys_clk),
   .rst(sys_rst),
-  .eo(eo),
   .in_en(en),
   .din(in),
   .out_en(oen),
-  .dout(out)
+  .dout(out),
+	.eo(eo)
 );
 
+wire [15:0]ddout = (eo) ? out : {8'd0,out[11:8],out[3:0]};
+
+wire toen;
+wire [15:0]dout;
+dc_adpcm test1(
+  .clk(sys_clk),     // System clock
+  .rst(sys_rst),     // System Reset 
+  .in_en(oen),   // Input Enable Signal
+  .din(ddout),     // Encoded Data(input)
+  .out_en(toen),  // Output Enable signal 1 clock sycle delay
+  .dout(dout)     // Decoded Data(output)
+);
 
 //
 // a clock
@@ -40,27 +53,22 @@ begin
 end
 endtask
 
-always @ (posedge sys_clk)
-  if(sys_rst)
-    eo <= 1'b0;
-  else
-    eo <= ~eo;
-
 reg [7:0]cnt;
-always @ (posedge sys_clk)begin
+always@(posedge sys_clk)
   if(sys_rst)begin
-    en <= 1'd0;
-	cnt <= 8'd0;
-  end else begin
-    if(cnt == 8'd15)
-	  cnt <= 8'd0;	
-	else
-	  cnt <= cnt + 8'd1;
+		en <= 1'd0;
+		cnt <= 8'd0;
+	end else begin
+	  if(cnt == 8'd15)
+			cnt <= 8'd0;
+		else
+			cnt <= cnt + 8'd1;
 
-	if(cnt == 8'd1)
-	  en <= ~en;
-  end
-end
+		if(cnt == 8'd1)
+			en <= ~en;
+
+	end
+		
 
 reg [7:0]a,b;
 assign in = {a,b};

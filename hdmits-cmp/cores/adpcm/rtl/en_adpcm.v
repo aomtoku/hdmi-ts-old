@@ -6,11 +6,11 @@
 module en_adpcm(
   input  wire        clk,     // System Clock
   input  wire        rst,     // System Reset
-  input  wire        eo,      // Even bit, Odd bit
   input  wire        in_en,   // Input Enable Signal
   input  wire [15:0] din,     // Decoded data(input)
   output wire        out_en,  // Output Enable Signal
-  output wire [15:0] dout     // Encoded Data(output)
+  output wire [15:0] dout,    // Encoded Data(output)
+	output reg         eo
 );
 
 reg [15:0] bp;
@@ -21,11 +21,21 @@ wire [7:0] yin  = din[7:0 ];
 wire [7:0] rbin = din[15:8];
 wire [7:0] ybp  = bp [7:0 ];
 wire [7:0] rbbp = bp [15:8];
+reg yp,cp;
 
-wire [15:0]yout = (~eo) ? {cbcr[7:0], y[7:0]} : out;
+wire [15:0]yout = (~eo) ? {4'd0,cp,cbcr[2:0],4'd0,yp, y[2:0]} : out;
 
 assign dout = (oen) ? yout : 16'd0;
 assign out_en = oen;
+
+
+always@(posedge clk)
+  if(~in_en)
+		eo <= 1'b0;
+	else
+		eo <= ~eo;
+
+
 always@(posedge clk)begin
   if(rst)begin
 	  bp   <= 16'd0;
@@ -36,14 +46,20 @@ always@(posedge clk)begin
     oen <= in_en;
 	bp <= din;
 	if(eo)begin
-      if(yin > ybp)
+      if(yin > ybp)begin
         y    <= (({8'd0,yin} - {8'd0,ybp}) * 8 + 127)/270; //default is 254
-      else
+				yp   <= 1'b1;
+      end else begin
         y    <= (({8'd0,ybp} - {8'd0,yin}) * 8 + 127)/270; //default is 254
-      if(rbin > rbbp)
+				yp   <= 1'b0;
+      end 
+			if(rbin > rbbp)begin
         cbcr <= (({8'd0,rbin} - {8'd0,rbbp}) * 8 + 127)/270; //default is 254
-      else
+				cp   <= 1'b1;
+      end else begin
 				cbcr <= (({8'd0,rbbp} - {8'd0,rbin}) * 8 + 127)/270; // default is 254
+				cp   <= 1'b0;
+			end
 	end else begin
       out <= din;
     end
