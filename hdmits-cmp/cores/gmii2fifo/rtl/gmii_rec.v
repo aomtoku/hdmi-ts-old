@@ -144,20 +144,20 @@ always@(posedge clk125) begin
 			  YUV_1:begin
 				datain[28:27]  <= {1'b0,x_info[0]};
 				datain[26:16]  <= y_info[10:0];
-				datain[15:8]   <= rxd;
+				datain[7:0]   <= rxd; //Green
 				state_data     <= YUV_2;
 				recv_en        <= 1'b0;
 				end
 			  YUV_2:begin
 				recv_en      <= 1'b1;
 				state_data   <= YUV_3;
-				datain[7:0]  <= rxd;
+				datain[15:8]  <= rxd; //Red
 				d_cnt        <= d_cnt + 11'd1;
 			  end		
 			  YUV_3:begin
 				recv_en      <= 1'b1;
 				state_data   <= YUV_1;
-				datain[7:0]  <= rxd;
+				datain[7:0]  <= rxd; //{Red,Green}
 				datain[15:8] <= 8'd0;
 				d_cnt        <= d_cnt + 11'd1;
 				end
