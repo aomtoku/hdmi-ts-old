@@ -30,13 +30,13 @@ assign y_count = data[26:16];
 //  Determine the Data Space or  Blank Space
 //------------------------------------------------------------
 `ifndef NO
-parameter hstart = 12'd1;
-parameter hfin   = 12'd1281;
+parameter hstart = 12'd0; //defalt is 1
+parameter hfin   = 12'd1280; //default is 1281
 parameter vstart = 12'd24;
 parameter vfin   = 12'd745;
 `else
-parameter hstart = 12'd1;
-parameter hfin   = 12'd1281;
+parameter hstart = 12'd0;
+parameter hfin   = 12'd1280;
 parameter vstart = 12'd25;
 parameter vfin   = 12'd745;
 `endif
