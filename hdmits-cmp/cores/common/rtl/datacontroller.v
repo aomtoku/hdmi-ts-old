@@ -80,11 +80,11 @@ always @ (posedge i_clk_74M) begin
 			vactive <= 1'b0;
 
 		if (hhactive & vactive) begin
-			Y <= {11'b0,data[15:8]};
+			Y <= {11'b0,data[7:0]};
 			if (i_hcnt[0] == 1'b0)
-				Cr <= {11'b0, data[7:0]};
+				Cr <= {11'b0, data[15:8]};
 			else
-				Cb <= {11'b0, data[7:0]};
+				Cb <= {11'b0, data[15:8]};
 			if (sw) begin
 				if (x_count[0] == xblock) begin
 					a_r <= ( (Y<<8) + (19'b1_0110_0111*Cr) - 19'hb380)>>8;

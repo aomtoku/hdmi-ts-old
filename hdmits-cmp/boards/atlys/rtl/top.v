@@ -756,7 +756,7 @@ en_adpcm test(
   .din({rx0_red, rx0_green}),
   .out_en(send_fifo_wr_en),
   .dout(cout),
-	.eo(eo)
+	.eo()
 );
 
 //////////////////////////////////////////////////
