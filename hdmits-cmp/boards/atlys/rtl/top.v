@@ -700,15 +700,18 @@ OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
 //  FIFO(48bit) to GMII
 //		Depth --> 4096
 //-----------------------------------------------------------
+wire [15:0] cout;
+
 wire        send_full;
 wire        send_empty;
 wire [47:0] tx_data;
 wire        rd_en;
-wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
+wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, cout, rx0_blue};
 wire        rx0_pclk;           
 wire        rx0_hsync;          // hsync data
 wire        rx0_vsync;          // vsync data
-wire        send_fifo_wr_en = video_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
+wire        send_fifo_wr_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
+
 
 fifo48_8k asfifo_send (
 	.rst(RSTBTN | rx0_vsync),
@@ -720,6 +723,16 @@ fifo48_8k asfifo_send (
 	.dout(tx_data),    // data output 48bit 
 	.full(send_full),
 	.empty(send_empty)
+);
+
+en_adpcm test(
+  .clk(rx0_pclk),
+  .rst(RSTBTN),
+  .in_en(video_en),
+  .din({rx0_red, rx0_green}),
+  .out_en(send_wr_en),
+  .dout(cout),
+	.eo(eo)
 );
 
 //////////////////////////////////////////////////
