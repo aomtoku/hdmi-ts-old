@@ -127,10 +127,10 @@ gmii2fifo24 gmii2fifo24(
 
 wire [15:0]out_d;
 wire aden;
-reg [11:0]del;
+reg [12:0]del;
 always@(posedge pclk)
   if(RSTBTN)
-    del <= 12'd0;
+    del <= 13'd0;
   else
     del <= dout[28:16];
 
