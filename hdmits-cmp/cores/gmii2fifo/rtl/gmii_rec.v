@@ -96,7 +96,7 @@ always@(posedge clk125) begin
 					x_info[3:0]   <= rxd[7:4];
 					pre_en        <= 1'b1;
 				end
-				11'd1111: begin // before 11'd1005
+				11'd1011: begin // before 11'd1005
 					packet_dv <= 1'b0;
 					invalid   <= 1'b1;
 					pre_en    <= 1'b0;
