@@ -96,7 +96,7 @@ always@(posedge clk125) begin
 					x_info[3:0]   <= rxd[7:4];
 					pre_en        <= 1'b1;
 				end
-				11'd1331: begin // before 11'd1005
+				11'd1111: begin // before 11'd1005
 					packet_dv <= 1'b0;
 					invalid   <= 1'b1;
 					pre_en    <= 1'b0;
@@ -139,18 +139,28 @@ always@(posedge clk125) begin
 		d_cnt       <= 11'd0;
 	end else begin
 		if(packet_dv && pre_en) begin
-			if(state_data == YUV_1) begin
+			case(state_data)
+			  YUV_1:begin
 				datain[28:27]  <= {1'b0,x_info[0]};
 				datain[26:16]  <= y_info[10:0];
 				datain[15:8]   <= rxd;
 				state_data     <= YUV_2;
 				recv_en        <= 1'b0;
-			end else begin
+				end
+			  YUV_2:begin
 				recv_en      <= 1'b1;
-				state_data   <= YUV_1;
+				state_data   <= YUV_3;
 				datain[7:0]  <= rxd;
 				d_cnt        <= d_cnt + 11'd1;
-			end			
+			  end		
+			  YUV_3:begin
+				recv_en      <= 1'b1;
+				state_data   <= YUV_3;
+				datain[7:0]  <= rxd;
+				datain[15:8] <= 8'd0;
+				d_cnt        <= d_cnt + 11'd1;
+				end
+			endcase
 		end else begin
 			state_data  <= YUV_1;
 			if(invalid) begin
