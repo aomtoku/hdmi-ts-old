@@ -310,7 +310,7 @@ always @(posedge tx_clk )begin
 						end
 						2'b01: begin
 							if(sw)
-								txd 	<= /*{4'd0,dout[35:32]}*/cout[23:16];  // Red
+								txd 	<= /*{4'd0,dout[35:32]}*/dout[23:16];  // Red
 							else
 								txd 	<= {dout[24], count[10:4]};  // X
 								cnt3 	<= 2'd0;

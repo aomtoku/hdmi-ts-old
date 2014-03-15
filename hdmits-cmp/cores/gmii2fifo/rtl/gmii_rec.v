@@ -124,8 +124,9 @@ end
 //
 //----------------------------------------------------------
 
-parameter YUV_1 = 1'b0;
-parameter YUV_2 = 1'b1;
+parameter YUV_1 = 2'b00;
+parameter YUV_2 = 2'b01;
+parameter YUV_3 = 2'b10;
 
 reg [1:0]  state_data;
 reg [10:0] d_cnt;

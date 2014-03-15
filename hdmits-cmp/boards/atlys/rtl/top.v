@@ -124,6 +124,24 @@ gmii2fifo24 gmii2fifo24(
 	.packet_en()
 );
 
+wire aden;
+reg [11:0]del;
+always@(posedge RXCLK)
+  if(RSTBTN)
+    del <= 12'd0;
+  else
+    del <= fifo_din[28:16];
+
+dc_adpcm adpcm_decode(
+  .clk(RXCLK),     // System clock
+  .rst(reset),     // System Reset 
+  .in_en(recv_fifo_wr_en),   // Input Enable Signal
+  .din(fifo_din[15:0]),     // Encoded Data(input)
+  .out_en(aden),  // Output Enable signal 1 clock sycle delay
+  .dout(out_d)     // Decoded Data(output)
+);
+
+
 //------------------------------------------------------------
 // FIFO
 //------------------------------------------------------------
@@ -132,8 +150,8 @@ fifo29_32768 asfifo_recv (
 	.rst(reset),
 	.wr_clk(RXCLK), // GMII RX clock 125MHz
 	.rd_clk(pclk),  // TMDS clock 74.25MHz 
-	.din(fifo_din), // data input
-	.wr_en(recv_fifo_wr_en),
+	.din({del,out_d}), // data input
+	.wr_en(aden),
 	.rd_en(fifo_read),
 	.dout(dout),    // data output
 	.full(recv_full),
@@ -702,6 +720,9 @@ OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
 //-----------------------------------------------------------
 wire [15:0] cout;
 
+wire [7:0]  rx0_red;      // pixel data out
+wire [7:0]  rx0_green;    // pixel data out
+wire [7:0]  rx0_blue;     // pixel data out
 wire        send_full;
 wire        send_empty;
 wire [47:0] tx_data;
@@ -711,6 +732,7 @@ wire        rx0_pclk;
 wire        rx0_hsync;          // hsync data
 wire        rx0_vsync;          // vsync data
 wire        send_fifo_wr_en; /*(in_hcnt <= 12'd1280 & in_vcnt < 12'd720) & */
+wire        video_en;
 
 
 fifo48_8k asfifo_send (
@@ -747,9 +769,6 @@ wire        rx0_reset;
 wire        rx0_serdesstrobe;
 
 wire        rx0_psalgnerr;      // channel phase alignment error
-wire [7:0]  rx0_red;      // pixel data out
-wire [7:0]  rx0_green;    // pixel data out
-wire [7:0]  rx0_blue;     // pixel data out
 wire        rx0_de;
 wire [29:0] rx0_sdata;
 wire        rx0_blue_vld;
@@ -813,7 +832,6 @@ wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [10:0] video_hcnt;
 wire [10:0] video_vcnt;
 wire [11:0] index;
-wire        video_en;
 
 tmds_timing timing(
 		.rx0_pclk(rx0_pclk),
