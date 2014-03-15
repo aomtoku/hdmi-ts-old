@@ -1,4 +1,9 @@
-module adpcm(
+/**************************************************************
+ *   Data Encoder like adpcm
+ *      by Yuta TOKUSASHI
+ * ***********************************************************/
+
+module dc_adpcm(
   input  wire        clk,
   input  wire        rst,
   input  wire        eo,
