@@ -124,19 +124,20 @@ gmii2fifo24 gmii2fifo24(
 	.packet_en()
 );
 
+wire [15:0]out_d;
 wire aden;
 reg [11:0]del;
-always@(posedge RXCLK)
+always@(posedge pclk)
   if(RSTBTN)
     del <= 12'd0;
   else
-    del <= fifo_din[28:16];
+    del <= dout[28:16];
 
 dc_adpcm adpcm_decode(
-  .clk(RXCLK),     // System clock
+  .clk(pclk),     // System clock
   .rst(reset),     // System Reset 
-  .in_en(recv_fifo_wr_en),   // Input Enable Signal
-  .din(fifo_din[15:0]),     // Encoded Data(input)
+  .in_en(fifo_read),   // Input Enable Signal
+  .din(dout[15:0]),     // Encoded Data(input)
   .out_en(aden),  // Output Enable signal 1 clock sycle delay
   .dout(out_d)     // Decoded Data(output)
 );
@@ -150,8 +151,8 @@ fifo29_32768 asfifo_recv (
 	.rst(reset),
 	.wr_clk(RXCLK), // GMII RX clock 125MHz
 	.rd_clk(pclk),  // TMDS clock 74.25MHz 
-	.din({del,out_d}), // data input
-	.wr_en(aden),
+	.din({fifo_din), // data input
+	.wr_en(recv_fifo_wr_en),
 	.rd_en(fifo_read),
 	.dout(dout),    // data output
 	.full(recv_full),
@@ -608,7 +609,7 @@ datacontroller dataproc(
 	.i_vcnt(vcnt),
 	.i_format(2'b00),
 	.fifo_read(fifo_read),
-	.data(dout),
+	.data({del,out_d}),
 	.sw(~DEBUG_SW[3]),
 	.o_r(red_data),
 	.o_g(green_data),
