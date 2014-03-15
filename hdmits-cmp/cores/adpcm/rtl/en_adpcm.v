@@ -49,17 +49,17 @@ always@(posedge clk)begin
 	bp <= din;
 	if(eo)begin
       if(yin > ybp)begin
-        y    <= (({8'd0,yin} - {8'd0,ybp}) * 8 + 127)/270; //default is 254
+        y    <= (({8'd0,yin} - {8'd0,ybp}) * 8 + 127)/254; //default is 254
 				yp   <= 1'b1;
       end else begin
-        y    <= (({8'd0,ybp} - {8'd0,yin}) * 8 + 127)/270; //default is 254
+        y    <= (({8'd0,ybp} - {8'd0,yin}) * 8 + 127)/254; //default is 254
 				yp   <= 1'b0;
       end 
 			if(rbin > rbbp)begin
-        cbcr <= (({8'd0,rbin} - {8'd0,rbbp}) * 8 + 127)/270; //default is 254
+        cbcr <= (({8'd0,rbin} - {8'd0,rbbp}) * 8 + 127)/254; //default is 254
 				cp   <= 1'b1;
       end else begin
-				cbcr <= (({8'd0,rbbp} - {8'd0,rbin}) * 8 + 127)/270; // default is 254
+				cbcr <= (({8'd0,rbbp} - {8'd0,rbin}) * 8 + 127)/254; // default is 254
 				cp   <= 1'b0;
 			end
 	end else begin
