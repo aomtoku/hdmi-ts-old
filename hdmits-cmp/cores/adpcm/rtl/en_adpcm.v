@@ -23,7 +23,7 @@ wire [7:0] ybp  = bp [7:0 ];
 wire [7:0] rbbp = bp [15:8];
 reg yp,cp;
 
-wire [15:0]yout = (~eo) ? {4'd0,cp,cbcr[2:0],4'd0,yp, y[2:0]} : out;
+wire [15:0]yout = (~eo) ? {8'd0,cp,cbcr[2:0],yp, y[2:0]} : out;
 
 assign dout = (oen) ? yout : 16'd0;
 assign out_en = oen;
