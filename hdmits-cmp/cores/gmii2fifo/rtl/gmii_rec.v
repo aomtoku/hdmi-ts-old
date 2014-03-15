@@ -156,7 +156,7 @@ always@(posedge clk125) begin
 			  end		
 			  YUV_3:begin
 				recv_en      <= 1'b1;
-				state_data   <= YUV_3;
+				state_data   <= YUV_1;
 				datain[7:0]  <= rxd;
 				datain[15:8] <= 8'd0;
 				d_cnt        <= d_cnt + 11'd1;
