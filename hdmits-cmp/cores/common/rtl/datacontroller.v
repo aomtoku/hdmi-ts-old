@@ -41,13 +41,14 @@ parameter vstart = 12'd25;
 parameter vfin   = 12'd745;
 `endif
 
-reg hactive,vactive;
+reg hhactive,hactive,vactive;
 reg xblock;
 reg [18:0] Y, Cb, Cr, a_r, a_g, a_b;
 reg [7:0] b_r, b_g, b_b;
 
 always @ (posedge i_clk_74M) begin
 	if(i_rst) begin
+		hhactive  <= 1'b0;
 		hactive  <= 1'b0;
 		vactive  <= 1'b0;
 		a_r      <= 19'h00;
@@ -58,12 +59,15 @@ always @ (posedge i_clk_74M) begin
 		b_b      <= 8'h00;
 		xblock   <= 1'b0;
 	end else begin
+	  hhactive <= hactive;
 		if(i_hcnt == hstart) begin
 			hactive <= 1'b1;
+		end
+		if(i_hcnt == 12'd1) begin
 			xblock  <= 1'b0;
 		end
 
-		if(i_hcnt == (hstart + 641))
+		if(i_hcnt == (12'd1 + 641))
 			xblock  <= 1'b1;
 
 		if(i_hcnt == hfin) 
@@ -75,7 +79,7 @@ always @ (posedge i_clk_74M) begin
 		if(i_vcnt == vfin) 
 			vactive <= 1'b0;
 
-		if (hactive & vactive) begin
+		if (hhactive & vactive) begin
 			Y <= {11'b0,data[15:8]};
 			if (i_hcnt[0] == 1'b0)
 				Cr <= {11'b0, data[7:0]};
