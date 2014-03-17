@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define CLIP(X) ( (X) > 255 ? 255 : (X) < 0 ? 0 : X)
+#define CLIP(X) ( (X) > 7 ? 7 : (X) < 0 ? 0 : X)
 #define DCAD(X,Y,Z) ( (Y) ?  Z + CLIP( (127 * (2 * X + 1)) / 8) :  Z - CLIP( (127 * (2 * X + 1)) / 8))
 #define ENAD(X,Y,Z) ( (Y) ?  Z + CLIP( (127 * (2 * X + 1)) / 8) :  Z - CLIP( (127 * (2 * X + 1)) / 8))
 
@@ -29,6 +29,7 @@ int main(int argc, char *argv[]){
 	unsigned long buf;
 	unsigned int fp;
 	int y0,y1,cb,cr;
+	int dfy, dfc;
 	while((size = read(fd,&buf,sizeof(unsigned int))) > 0){
 		//printf("%d,%d: %#08x\n",line,cnt, (unsigned int)buf);
 		fp = (unsigned int)buf;
@@ -37,13 +38,34 @@ int main(int argc, char *argv[]){
 		y1 = ((fp & 0xff0000)) >> 16;
 		cr = ((fp & 0xff000000)) >> 24;
 		
-		y1 = ENAD(y0);
-		cr = ENAD(cb);
-		
 		char a,b,c;
 		a = ((y0 & 0xff));
 		b = ((cb & 0xff));
-		c = ((y1 & 0xf)) | ((cr & 0xf)) << 4;
+		//c = ((y1 & 0xf)) | ((cr & 0xf)) << 4;
+		
+		dfy = y0 - y1;
+		dfc = cb - cr;
+		if(dfy > 0){
+			dfy = (dfy * 8 + 127)/254;
+			dfy = CLIP(dfy);
+			dfy = ((dfy | 0x8));
+		} else {
+			dfy = y1 - y0;
+			dfy = (dfy * 8 + 127)/254;
+			dfy = CLIP(dfy);
+		}
+		if(dfc > 0){
+			dfc = (dfc * 8 + 127)/254;
+			dfc = CLIP(dfc);
+			dfc = ((dfc | 0x8));
+		} else {
+			dfc = cr -cb;
+			dfc = (dfc * 8 + 127)/254;
+			dfc = CLIP(dfc);
+		}
+		
+		c = ((dfy & 0xff)) | ((dfc & 0xff)) << 8;
+
 		printf("%c%c%c",a,b,c);
 	}
 	return 0;
