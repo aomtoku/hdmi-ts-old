@@ -204,7 +204,7 @@ always @(posedge tx_clk)begin
 						packet_size <= 12'd0;
 						pcktinfo    <= video;
 					end else begin
-						packet_size <= auxsize;
+						packet_size <= auxsize * ade_num;
 						pcktinfo    <= vidax;
 					end
 				end else if(ax_send_empty == 1'b0 & adesig)begin
@@ -361,7 +361,7 @@ always @(posedge tx_clk)begin
 						txd   <= vidax;
 						cnt3  <= 2'd0; //read X,Y om FIRO
 						count <= 11'd0;
-						left_ade <= 1'b1;
+						left_ade <= ade_num;
 					end
 				endcase
 			end
