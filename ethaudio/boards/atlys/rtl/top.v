@@ -964,7 +964,7 @@ tmds_timing timing(
 	.index(index),
 	.video_hcnt(),
 	.video_vcnt(),
-	.vcounter(video_vnct),
+	.vcounter(video_vcnt),
 	.hcounter(video_hcnt)
 );
 
