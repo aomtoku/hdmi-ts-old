@@ -127,8 +127,7 @@ always @(posedge fifo_clk) begin
 		buf2_tx_en <= buf1_tx_en;
 		if({buf1_wr_en,buf2_wr_en} == 2'b01) // Check buffering 1 line 
 			fstate   <= 1'b1;
-		//if(vperi && ({buf1_tx_en,buf2_tx_en} == 2'b01)) begin
-		if({buf1_tx_en,buf2_tx_en} == 2'b01) begin
+		if(vperi && ({buf1_tx_en,buf2_tx_en} == 2'b01)) begin
 			if(ppl)begin
 				ppl     <= 1'b0;
 				fstate  <= 1'b0;
