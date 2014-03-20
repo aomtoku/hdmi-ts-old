@@ -647,7 +647,7 @@ always@(posedge pclk)begin
 	end else begin
 		if(~vde & ~ax_recv_empty)
 				ax_recv_rd_en <= 1'b1;
-		end else begin
+		else begin
 				ax_recv_rd_en <= 1'b1;
 		end
 			/*
