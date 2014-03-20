@@ -40,8 +40,8 @@ module gmii_tx#(
 	parameter [7:0]   ip_prot       = 8'h11,
 	parameter [31:0]  ip_src_addr   = {8'd192,8'd168,8'd0,8'd1},
 	parameter [31:0]  ip_dst_addr   = {8'd192,8'd168,8'd0,8'd2},
-`define FORCE
-	parameter [15:0]  udp_len       = 16'd1212 - 16'd1, //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
+`ifdef FORCE
+	parameter [15:0]  udp_len       = 16'd1212 - 16'd1 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
 `else //DATA_YUV
 	parameter [15:0]  udp_len       = 16'd1292 - 16'd1 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
 `endif
