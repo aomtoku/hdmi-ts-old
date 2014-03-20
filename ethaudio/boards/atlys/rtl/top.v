@@ -712,9 +712,9 @@ always@(posedge pclk)begin
 end
 */
 //assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
-assign out_aux0 = axdout[ 3:0];
-assign out_aux1 = axdout[ 7:4];
-assign out_aux2 = axdout[11:8];
+assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
+assign out_aux1 = axdout[ 4:1];
+assign out_aux2 = {1'b0,axdout[7:5]};
 
 dvi_encoder_top dvi_tx0 (
     .pclk        (pclk),
