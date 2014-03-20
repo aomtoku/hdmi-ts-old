@@ -20,17 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 `define DATA_YUV
 `define DEBUG
+`define FORCE
 
 module gmii_tx#(
 	parameter [47:0]  src_mac       = {8'h00,8'h23,8'h45,8'h67,8'h89,8'h01},
 	parameter [47:0]  dst_mac       = {8'h00,8'h23,8'h45,8'h67,8'h89,8'h02},
 	parameter [15:0]  ip_type       = 16'h0800,
 	parameter [15:0]  ip_ver        = 16'h4500,
-`ifdef DATA_YUV
+`ifdef FORCE
+	parameter [15:0]  ip_len        = 16'd1232 - 16'd1, // (Pixel byte =1200) + (packet header 2) + (UDP h = 8) + (AUDIO 32)
+	parameter [15:0]  ip_alen       = 16'd43,
+`else // DATA_YUV
 	parameter [15:0]  ip_len        = 16'd1312 - 16'd1,
-	parameter [15:0]  ip_alen        = 16'd43,
-`else
-	parameter [15:0]  ip_len        = 16'd992,
+	parameter [15:0]  ip_alen       = 16'd43,
 `endif
 	parameter [15:0]  ip_iden       = 16'h0000,
 	parameter [15:0]  ip_flag       = 16'h4000,
@@ -38,10 +40,10 @@ module gmii_tx#(
 	parameter [7:0]   ip_prot       = 8'h11,
 	parameter [31:0]  ip_src_addr   = {8'd192,8'd168,8'd0,8'd1},
 	parameter [31:0]  ip_dst_addr   = {8'd192,8'd168,8'd0,8'd2},
-`ifdef DATA_YUV
+`define FORCE
+	parameter [15:0]  udp_len       = 16'd1212 - 16'd1, //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
+`else //DATA_YUV
 	parameter [15:0]  udp_len       = 16'd1292 - 16'd1 //  (Pixel = 1280) + (X,Y = 4) + (UDP header= 8)
-`else
-	parameter [15:0]  udp_len       = 16'd972 // (Pixel = 960) + (X,Y = 4) + (UDP header = 8)
 `endif
 )(
 	input   wire        id,
@@ -377,7 +379,41 @@ always @(posedge tx_clk)begin
 					end
 				endcase
 			end
-`ifdef DATA_YUV
+`ifdef FORCE
+			DATA_RGB: begin
+				if(count == 11'd1199)begin
+					if(pcktinfo == video)begin
+					  state <= FCS;
+					end else begin
+					  state <= AUXID;
+					  ax_send_rd_en <= 1'b1;
+					end
+			 		txd   <= dout[23:16];
+					count <= 11'd0;
+					cnt3  <= 2'd0;
+				end else begin
+					tx_en <= 1'b1;
+					count <= count + 11'h1;
+					casex(cnt3)
+						2'b1x: begin
+							if(sw)
+								txd 	<= /*dout[31:24]*/dout[15:8]; // Green
+							else
+								txd 	<= dout[45:38]; // Y
+								cnt3	<= 2'd1;
+						end
+						2'b01: begin
+							if(sw)
+								txd 	<= /*{4'd0,dout[35:32]}*/dout[23:16];  // Red
+							else
+								txd 	<= {dout[24], count[10:4]};  // X
+								cnt3 	<= 2'd2;
+				     	end
+						//default: tx_en <= 1'b0;
+					endcase
+				end
+			end
+`else
 			DATA_RGB: begin
 				if(count == 11'd1279)begin
 					if(pcktinfo == video)begin
@@ -411,30 +447,6 @@ always @(posedge tx_clk)begin
 					endcase
 				end
 			end
-`else
-			DATA_RGB: begin
-				tx_en <= 1'b1;
-				count <= count + 11'h1;	
-				casex(cnt3)
-					2'b1x: 	begin
-						txd   <= dout[7:0]; // Red
-						cnt3  <= 2'd1;
-					end
-					2'b01: 	begin
-						txd   <= dout[15:8];  // Green
-						cnt3  <= 2'd0;
-					end 
-					2'b00: 	begin
-						txd   <= dout[23:16];
-						cnt3  <= 2'd2;// Blue
-					end
-					//default: tx_en <= 1'b0;
-				endcase
-				if(count == 11'd959 )begin
-					state <= FCS;
-					count <= 11'd0;
-				end 
-			end
 `endif
       // 16bit AUXID : left audio ade number -> 4bit | clock 12bit
       AUXID: begin
@@ -454,7 +466,7 @@ always @(posedge tx_clk)begin
 				end
 			end
       AUX: begin
-			 if(count == 11'd47)begin
+			 if(count == 11'd31)begin
 			   if(left_ade == 4'd0)begin
 				  state <= FCS;
 				  ax_send_rd_en <= 1'b0;
