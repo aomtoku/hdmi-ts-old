@@ -116,7 +116,7 @@ always@(posedge clk125) begin
 				11'h33: if(packet_dv) begin
 						y_info[7:0]	<= rxd;
 				end
-				11'h34: if(packet_dv) begin
+				11'h34: if(packet_dv) begin //11'd55
 					 y_info[11:8]	<= rxd[3:0];
 					 x_info[ 3:0] <= rxd[7:4];
 					 pre_en       <= 1'b1;
@@ -236,12 +236,12 @@ always@(posedge clk125)begin
 			   if(a_cnt == 6'd1)begin
 					a_cnt      <= 6'd0;
 					aux_state  <= AUX;
-					ax_wr_en   <= 1'b0;
+					ax_wr_en   <= 1'b1;
 					daux[23:20] <= rxd[3:0];
 					left       <= rxd[7:4];
 			   end else begin
 					ax_wr_en  <= 1'b0;
-				    a_cnt     <= 6'd1;
+				  a_cnt     <= 6'd1;
 					daux[19:12] <= rxd;
 			   end
 			end
@@ -249,9 +249,8 @@ always@(posedge clk125)begin
 			    if(a_cnt == 6'd31)begin
 				    a_cnt      <= 6'd0;
 				    cnt2       <= 2'd0;
-				    daux[ 3:0] <= tmp;
-				    daux[11:4] <= rxd;
-				    ax_wr_en   <= 1'b1;
+						daux[ 7:0] <= rxd;
+				    ax_wr_en   <= 1'b0;
 			  	  aux_state  <= AUXID;
 				 end else begin
 				    a_cnt <= a_cnt + 6'd1; // counting 32 clock cycles for audio data enable
