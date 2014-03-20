@@ -147,7 +147,7 @@ fifo29_32768 asfifo_recv (
 
 wire [23:0] axdout;
 reg init;
-wire ax_rx_rd_en = init & ax_recv_rd_en;
+wire ax_rx_rd_en = /*init &*/ ax_recv_rd_en;
 afifo24_recv afifo24_recv(
   .rst(reset| RSTBTN),
 	.wr_clk(RXCLK),
