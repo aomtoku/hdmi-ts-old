@@ -982,7 +982,7 @@ wire fil_wr_en =  video_en & (in_hcnt <= 12'd1200);
 
 gmii_tx gmii_tx(
 	.id(DEBUG_SW[0]),
-	// FIFO
+	// FIFO_
 	.fifo_clk(rx0_pclk),
 	.sys_rst(RSTBTN),
 	.dout(tx_data), // 48bit
