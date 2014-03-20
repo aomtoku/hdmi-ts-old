@@ -989,7 +989,7 @@ gmii_tx gmii_tx(
 	.empty(send_empty),
 	.full(send_full),
 	.rd_en(rd_en),
-	.wr_en(/*fil_wr_en*/video_en),
+	.wr_en(fil_wr_en),
 	.vperi(vperi),
 	.sw(~DEBUG_SW[2]),
 
