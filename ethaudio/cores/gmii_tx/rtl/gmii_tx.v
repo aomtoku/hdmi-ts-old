@@ -474,7 +474,8 @@ always @(posedge tx_clk)begin
 				  state <= AUXID;
 				  ax_send_rd_en <= 1'b1;
 			   end
-			   txd   <= tmp;
+			   //txd   <= tmp;
+				 txd           <= axdout[7:0];
 			   count <= 11'd0;
 			 end else begin
 			   tx_en <= 1'b1;
