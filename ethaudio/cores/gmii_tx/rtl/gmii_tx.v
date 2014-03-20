@@ -408,7 +408,7 @@ always @(posedge tx_clk)begin
 							else
 								txd 	<= {dout[24], count[10:4]};  // X
 								cnt3 	<= 2'd2;
-				     	end
+				    end
 						//default: tx_en <= 1'b0;
 					endcase
 				end
@@ -479,25 +479,28 @@ always @(posedge tx_clk)begin
 			 end else begin
 			   tx_en <= 1'b1;
 			   count <= count + 11'd1;
-			   case(cnt3)
+				 txd           <= axdout[7:0];
+				 ax_send_rd_en <= 1'b1;
+			   /*
+				 case(cnt3)
 				  2'd0: begin
 				    txd           <= axdout[7:0];
-					tmp[3:0]      <= axdout[11:8];
-					ax_send_rd_en <= 1'b1;
-					cnt3          <= 2'd1;
+					  tmp[3:0]      <= axdout[11:8];
+					  ax_send_rd_en <= 1'b1;
+					  cnt3          <= 2'd1;
 				  end
 				  2'd1: begin
-					txd           <= {tmp,axdout[3:0]};
-					tmp           <= axdout[11:4];
-					cnt3          <= 2'd2;
-					ax_send_rd_en <= 1'b0;
+					  txd           <= {tmp,axdout[3:0]};
+					  tmp           <= axdout[11:4];
+					  cnt3          <= 2'd2;
+					  ax_send_rd_en <= 1'b0;
 				  end
 				  2'd2: begin
-					txd           <= tmp;
-					cnt3          <= 2'd0;
-					ax_send_rd_en <= 1'b1;
+					  txd           <= tmp;
+					  cnt3          <= 2'd0;
+					  ax_send_rd_en <= 1'b1;
 				  end
-				endcase
+				endcase*/
 			  end
 			end
 	 FCS: begin
