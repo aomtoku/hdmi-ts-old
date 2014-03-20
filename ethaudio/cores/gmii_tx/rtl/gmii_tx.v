@@ -125,7 +125,7 @@ always @(posedge fifo_clk) begin
 		buf2_wr_en <= buf1_wr_en;
 		buf1_tx_en <= tx_en;
 		buf2_tx_en <= buf1_tx_en;
-		if({buf1_wr_en,buf2_wr_en} == 2'b01)
+		if({buf1_wr_en,buf2_wr_en} == 2'b01) // Check buffering 1 line 
 			fstate   <= 1'b1;
 		if(vperi && ({buf1_tx_en,buf2_tx_en} == 2'b01)) begin
 			if(ppl)begin
@@ -201,10 +201,10 @@ always @(posedge tx_clk)begin
 					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 					if(ppl/*ade_num == 4'd0*/)begin
 						packet_size <= 12'd0;
-						pcktinfo   <= video;
+						pcktinfo    <= video;
 					end else begin
 						packet_size <= auxsize;
-						pcktinfo   <= vidax;
+						pcktinfo    <= vidax;
 					end
 				end else if(ax_send_empty == 1'b0 & adesig)begin
 					txd        <= 8'h55;
