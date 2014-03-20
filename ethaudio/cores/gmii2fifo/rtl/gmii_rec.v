@@ -277,10 +277,10 @@ always@(posedge clk125)begin
 					endcase
 					*/
 				  end
+				end
 				NO:begin
 					ax_wr_en <= 1'b0;
-				  end
-			  end
+				end
 			  default : ax_wr_en <= 1'b0;
 		  endcase
 	  end else begin
