@@ -724,13 +724,13 @@ dvi_encoder_top dvi_tx0 (
     .pclkx10     (pclkx10),
     .serdesstrobe(serdesstrobe),
     .rstin       (reset),
-	.serdes_rst  (serdes_rst),
+	  .serdes_rst  (serdes_rst),
     .blue_din    (blue_data),
     .green_din   (green_data),
     .red_din     (red_data),
-	.aux0_din	 (out_aux0),
-	.aux1_din	 (out_aux1),
-	.aux2_din	 (out_aux2),
+	  .aux0_din	   (out_aux0),
+	  .aux1_din	   (out_aux1),
+	  .aux2_din	   (out_aux2),
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
@@ -854,6 +854,7 @@ wire        ax_send_wr_en, ax_send_rd_en;
 wire [23:0] ax_din = ade_out;
 wire [23:0] ax_dout;
 
+//assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 wire     rx0_reset;
 wire     rx0_vde;
@@ -1074,7 +1075,7 @@ always @(RXCLK) begin
 		//1'b1 : LED <= aclkc[7:0];
 		//1'b0 : LED <= {anum,recv_full,recv_empty,ax_rx_rd_en,vde};
 		//1'b1 : LED <= {ax_recv_full,ax_recv_empty,ax_recv_wr_en,ax_recv_rd_en,ax_send_full,ax_send_empty,ax_send_wr_en,ax_send_rd_en};
-		1'b0 : LED <= {send_full, send_empty, ax_send_full, ax_send_empty,recv_full,recv_empty,ax_rx_rd_en,vde};
+		1'b0 : LED <= {send_full, send_empty, ax_send_full, ax_send_empty,ax_send_rd_en,ax_send_wr_en,ax_rx_rd_en,vde};
 		1'b1 : LED <= axdout[7:0];
 		//4'b1000 : LED <= {4'b0,recv_full,recv_empty,2'b0};
 		//4'b0001 : LED <= error[7:0];

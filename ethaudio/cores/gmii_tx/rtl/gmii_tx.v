@@ -157,7 +157,7 @@ parameter IFG         = 4'hb;
 
 parameter AUDIOMAX    = 5'd20;
 
-parameter auxsize     = 12'd50;
+parameter auxsize     = 12'd34;
 parameter video       = 8'b00000000;
 parameter audio       = 8'b00000001;
 parameter vidax       = 8'b00000010;
