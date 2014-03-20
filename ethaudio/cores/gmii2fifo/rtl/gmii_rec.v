@@ -212,8 +212,9 @@ reg       aux_state;
 assign aux_wr_en   = ax_wr_en;
 assign aux_data_in = daux;
 
-parameter AUXID = 1'b0;
-parameter AUX   = 1'b1;
+parameter AUXID = 2'b00;
+parameter AUX   = 2'b01;
+parameter NO    = 2'b10;
 
 always@(posedge clk125)begin
   if(sys_rst) begin
@@ -246,7 +247,10 @@ always@(posedge clk125)begin
 				    cnt2       <= 2'd0;
 						daux[ 7:0] <= rxd;
 				    ax_wr_en   <= 1'b0;
-			  	  aux_state  <= AUXID;
+						if(left == 4'd1)begin
+							aux_state <=  NO;
+						end else
+			  	    aux_state  <= AUXID;
 				 end else begin
 				    a_cnt <= a_cnt + 6'd1; // counting 32 clock cycles for audio data enable
 						ax_wr_en   <= 1'b1;
@@ -272,6 +276,9 @@ always@(posedge clk125)begin
 						end
 					endcase
 					*/
+				  end
+				NO:begin
+					ax_wr_en <= 1'b0;
 				  end
 			  end
 			  default : ax_wr_en <= 1'b0;
