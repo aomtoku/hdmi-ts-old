@@ -975,7 +975,7 @@ tmds_timing timing(
 
 //wire ade_tx = ((video_vcnt < 11'd22) || (video_vcnt > 11'd741)) && ((video_hcnt >= 11'd1) && (video_hcnt < 11'd80));
 wire ade_tx = ~video_en && ((video_hcnt >= 11'd1504) && (video_hcnt < 11'd1510));
-wire vperi = (video_vcnt >= 21) && (video_vcnt <= 741);
+wire vperi = ((video_vcnt >= 21) && (video_vcnt <= 741)) ? 1'b1 : 1'b0;
 
 gmii_tx gmii_tx(
 	.id(DEBUG_SW[0]),
