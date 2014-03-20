@@ -31,12 +31,14 @@ assign y_count = data[26:16];
 //------------------------------------------------------------
 `ifndef NO
 parameter hstart = 12'd1;
-parameter hfin   = 12'd1281;
+parameter hfin   = 12'd1201;
+//parameter hfin   = 12'd1281;
 parameter vstart = 12'd24;
 parameter vfin   = 12'd745;
 `else
 parameter hstart = 12'd1;
-parameter hfin   = 12'd1281;
+parameter hfin   = 12'd1201;
+//parameter hfin   = 12'd1281;
 parameter vstart = 12'd25;
 parameter vfin   = 12'd745;
 `endif
@@ -63,7 +65,7 @@ always @ (posedge i_clk_74M) begin
 			xblock  <= 1'b0;
 		end
 
-		if(i_hcnt == (hstart + 641))
+		if(i_hcnt == (hstart + 601))
 			xblock  <= 1'b1;
 
 		if(i_hcnt == hfin) 
