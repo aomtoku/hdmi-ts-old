@@ -121,7 +121,7 @@ always@(posedge clk125) begin
 					 x_info[ 3:0] <= rxd[7:4];
 					 pre_en       <= 1'b1;
 				end
-				11'd1252: begin // before 11'd1005
+				11'd1252: begin // before 11'd1005 --> 1200byte
 				    case(pcktinfo)
 						video:   audio_en  <= 1'b0;
 						vidax:   audio_en  <= 1'b1;
@@ -130,11 +130,6 @@ always@(posedge clk125) begin
 					packet_dv <= 1'b0;
 					vinvalid  <= 1'b1;
 					pre_en    <= 1'b0;
-				end
-				11'd1382:begin
-					if(pcktinfo == vidax)begin
-					    audio_en <= 1'b0;
-					end
 				end
 			endcase
 			if(left == 4'd1 && a_cnt == 6'd47)
