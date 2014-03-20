@@ -116,12 +116,12 @@ always@(posedge clk125) begin
 				11'h33: if(packet_dv) begin
 						y_info[7:0]	<= rxd;
 				end
-				11'h34: if(packet_dv) begin //11'd55
+				11'h34: if(packet_dv) begin //11'd52
 					 y_info[11:8]	<= rxd[3:0];
 					 x_info[ 3:0] <= rxd[7:4];
 					 pre_en       <= 1'b1;
 				end
-				11'd1332: begin // before 11'd1005
+				11'd1252: begin // before 11'd1005
 				    case(pcktinfo)
 						video:   audio_en  <= 1'b0;
 						vidax:   audio_en  <= 1'b1;
