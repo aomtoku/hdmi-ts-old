@@ -749,7 +749,7 @@ wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
 wire        rx0_pclk;           
 wire        rx0_hsync;          // hsync data
 wire        rx0_vsync;          // vsync data
-wire        send_fifo_wr_en = video_en & (in_hcnt < 12'd1200); /* & in_vcnt < 12'd720) & */
+wire        send_fifo_wr_en = video_en & (in_hcnt <= 12'd1200); /* & in_vcnt < 12'd720) & */
 
 fifo48_8k asfifo_send (
 	.rst(RSTBTN | rx0_vsync),
