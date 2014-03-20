@@ -645,15 +645,12 @@ always@(posedge pclk)begin
 		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 	end else begin
-      if(fifo_read) begin
-		    init <= 1'b1;
-	    end
-		if(bgnd_vblnk)begin
-			if(hcnt >= 1559 & hcnt <= 1590)
+		if(~vde & ~ax_recv_empty)
 				ax_recv_rd_en <= 1'b1;
-			else 
-				ax_recv_rd_en <= 1'b0;
 		end else begin
+				ax_recv_rd_en <= 1'b1;
+		end
+			/*
 			if(vcnt == 725)begin
 				if(hcnt > 8 & hcnt <= 200)
 					ax_recv_rd_en <= 1'b1;
@@ -666,6 +663,7 @@ always@(posedge pclk)begin
 					ax_recv_rd_en <= 1'b0;
 			end
 		end
+		*/
 	end
 end
 
