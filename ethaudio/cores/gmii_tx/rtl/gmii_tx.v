@@ -344,7 +344,7 @@ always @(posedge tx_clk)begin
 						txd   <= audio;
 						state <= AUXID;
 						count <= 11'd0;
-						ax_send_rd_en <= 1'b1;
+						ax_send_rd_en <= 1'b0;
 						if(ade_num > AUDIOMAX)
 							left_ade <= AUDIOMAX;
 						else
@@ -387,7 +387,7 @@ always @(posedge tx_clk)begin
 					  state <= FCS;
 					end else begin
 					  state <= AUXID;
-					  ax_send_rd_en <= 1'b1;
+					  ax_send_rd_en <= 1'b0;
 					end
 			 		txd   <= dout[23:16];
 					count <= 11'd0;
