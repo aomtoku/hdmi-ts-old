@@ -195,21 +195,19 @@ wire [11:0]dout_aux;
 
 wire dbg_empty,dbg_full;
 wire rd_en;
-reg [11:0]buf_aux;
-always@(posedge rx0_pclk)
-	buf_aux <= din_aux;
 
 auxfifo12 auxfifo(
-  .rst(~rstbtn_n),
+  .rst(~rstbtn_n /*| rx0_reset*/),
   .wr_clk(rx0_pclk),
   .rd_clk(rx0_pclk),
-  .din(buf_aux),
+  .din(din_aux),
   .wr_en(rx0_ade),
   .rd_en(rd_en),
   .dout(dout_aux),
   .full(dbg_full),
   .empty(dbg_empty)
 );
+
 wire [3:0]aux0 = dout_aux[3:0];
 wire [3:0]aux1 = dout_aux[7:4];
 wire [3:0]aux2 = dout_aux[11:8];
@@ -267,6 +265,7 @@ end
 // FIFO for aux data
 
 wire video_ade  = ((vcnt >= 21 && vcnt <= 740) && (hcnt >= 1569 && hcnt <= 1600)) ? 1'b1 : 1'b0;
+//wire nvideo_ade = ((vcnt < 21 || vcnt > 740) &&  ~dbg_empty ) ? 1'b1 : 1'b0;
 wire nvideo_ade = ((vcnt < 21 || vcnt > 740) && ((hcnt >= 1069 && hcnt <= 1100) || (hcnt >= 1169 && hcnt <= 1200) || (hcnt >= 1269 && hcnt <= 1300) || (hcnt >= 1569 && hcnt <= 1600)) && ~dbg_empty ) ? 1'b1 : 1'b0;
 
 /*
@@ -461,9 +460,10 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 
 	reg hsync_q,vsync_q,vde_q,ade_q;
 	reg [3:0]adin0_q,adin1_q,adin2_q;
-	reg ade_qq,ade_qqq;
+	reg ade_qq,ade_qqq,ade_qqqq;
 	reg [3:0]adin0_qq,adin1_qq,adin2_qq;
 	reg [3:0]adin0_qqq,adin1_qqq,adin2_qqq;
+	reg [3:0]adin0_qqqq,adin1_qqqq,adin2_qqqq;
 	reg hsync_qq,hsync_qqq, vsync_qq,vsync_qqq;
 	always @ (posedge rx0_pclk)begin
 		if(rx0_reset)begin
@@ -484,6 +484,7 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 			ade_q		<= rx0_ade;
 			ade_qq  <= ade_q;
 			ade_qqq <= ade_qq;
+			ade_qqqq<= ade_qqq;
 
 			adin0_q <= rx0_aux0;
 			adin1_q <= rx0_aux1;
@@ -496,6 +497,10 @@ wire ade = (vcnt <= 740 & vcnt >= 21) ? ade_q : (adep) ? ade_q : 1'b0;
 			adin0_qqq <= adin0_qq;
 			adin1_qqq <= adin1_qq;
 			adin2_qqq <= adin2_qq;
+
+			adin0_qqqq <= adin0_qqq;
+			adin1_qqqq <= adin1_qqq;
+			adin2_qqqq <= adin2_qqq;
 		end
 	end
 /*
@@ -503,15 +508,15 @@ wire [3:0]test0 = (ade_qqq) ? {1'b1, adin0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
 wire [3:0]test1 = (ade_qqq) ? adin1_qqq : 4'b0;
 wire [3:0]test2 = (ade_qqq) ? {1'b0, adin2_qqq[2:0]} : 4'b0;
 
-
 wire [3:0]test0 = {1'b1, aux0_qqq[2],vsync_qqq, hsync_qqq} : 4'b0;
 wire [3:0]test1 = adin1_qqq : 4'b0;
 wire [3:0]test2 = adin2_qqq[2:0]} : 4'b0;
 */
-assign rd_en = video_ade | nvideo_ade;
+//assign rd_en = video_ade | nvideo_ade;
 reg gade,ggade;
 reg dade, ddade, dddade, ddddade;
-//assign rd_en = dddade;
+reg rade, rrade, rrrade;
+assign rd_en = rrade;
 always@(posedge rx0_pclk)begin
 	gade  <= rd_en;
 	ggade <= gade;
@@ -520,11 +525,24 @@ always@(posedge rx0_pclk)begin
 	ddade   <= dade   ;
 	dddade  <= ddade  ;
 	ddddade <= dddade ;
+	rade    <= ddddade;
+	rrade   <= rade;
+	rrrade  <= rrade;
 end
 
-wire [3:0]test0 = (gade) ? {1'b1, aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
-wire [3:0]test1 = (gade) ? aux1 : 4'b0;
-wire [3:0]test2 = (gade) ? aux2 : 4'b0;
+wire nade = rd_en;
+wire made = (SW[2]) ? ((SW[3]) ? nade : dade) : ((SW[3]) ? dddade : ddddade);
+
+wire [3:0]test0 = {aux0[3:2],rx0_vsync, rx0_hsync};
+wire [3:0]test1 = aux1 ;
+wire [3:0]test2 = aux2 ;
+
+/*
+wire [3:0]test0 = (made) ? {1'b1, aux0[2],rx0_vsync, rx0_hsync} : 4'b0;
+wire [3:0]test1 = (made) ? aux1 : 4'b0;
+wire [3:0]test2 = (made) ? aux2 : 4'b0;
+*/
+
 /*
 wire [3:0]test0 = (ddddade) ? aux0 : (dade) ?  {1'b1, 1'b1, 1'b0, 1'b0} :4'b0;
 wire [3:0]test1 = (ddddade) ? aux1 : 4'b0;
@@ -539,13 +557,13 @@ dvi_encoder_top dvi_tx0 (
     .blue_din    (rx0_blue),
     .green_din   (rx0_green),
     .red_din     (rx0_red),
-	.aux0_din		 (test0/*rx0_aux0*//*adin0_q*/),
-	.aux1_din		 (test1/*adin1_q*/),
-	.aux2_din		 (test2/*adin2_q*/),
+	  .aux0_din		 (/*{aux0[3:2],rx0_vsync, rx0_hsync*/}/*test0*//*rx0_aux0*//*{adin0_qqqq[3:2],rx0_vsync, rx0_hsync}*/),
+	  .aux1_din		 (/*aux1*//*test1*//*adin1_qqqq*/),
+	  .aux2_din		 (/*aux2*//*test2*//*adin2_qqqq*/),
     .hsync       (rx0_hsync),
     .vsync       (rx0_vsync),
-    .vde          (rx0_vde),
-    .ade          (gade),
+    .vde         (rx0_vde),
+    .ade         (/*rrrade*/),
     .TMDS        (TX0_TMDS),
     .TMDSB       (TX0_TMDSB));
 
