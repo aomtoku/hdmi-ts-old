@@ -314,7 +314,7 @@ PCLK_GEN_INST (
 
 wire pllclk0, pllclk1, pllclk2;
 wire pclkx2, pclkx10, pll_lckd;
-wire clkfbout;
+wire clkfbout,clkfbin;
 
 //
 // Pixel Rate clock buffer
@@ -332,12 +332,12 @@ BUFG pclkx2bufg (.I(pllclk2), .O(pclkx2));
 // can be used by OSERDES2
 //////////////////////////////////////////////////////////////////
 PLL_BASE # (
-	.CLKIN_PERIOD(13),
+	.CLKIN_PERIOD(10),
 	.CLKFBOUT_MULT(10), //set VCO to 10x of CLKIN
 	.CLKOUT0_DIVIDE(1),
 	.CLKOUT1_DIVIDE(10),
 	.CLKOUT2_DIVIDE(5),
-	.COMPENSATION("INTERNAL")
+	.COMPENSATION("SOURCE_SYNCHRONOUS")
 ) PLL_OSERDES (
 	.CLKFBOUT(clkfbout),
 	.CLKOUT0(pllclk0),
@@ -347,10 +347,13 @@ PLL_BASE # (
 	.CLKOUT4(),
 	.CLKOUT5(),
 	.LOCKED(pll_lckd),
-	.CLKFBIN(clkfbout),
+	.CLKFBIN(clkfbin),
 	.CLKIN(clkfx),
 	.RST(~pclk_lckd)
 );
+
+
+BUFG tx0_clkfb_buf (.I(clkfbout), .O(clkfbin));
 
 wire serdesstrobe;
 wire bufpll_lock;
