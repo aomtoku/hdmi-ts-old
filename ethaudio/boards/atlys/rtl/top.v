@@ -929,7 +929,7 @@ tmds_timing timing(
 wire ade_tx = ~video_en && ((video_hcnt >= 11'd1504) && (video_hcnt < 11'd1510));
 //wire ade_tx = 1'b0;
 wire vperi = ((video_vcnt >= 21) && (video_vcnt <= 741)) ? 1'b1 : 1'b0;
-wire fil_wr_en =  video_en & ( in_hcnt < 12'd1200);
+wire fil_wr_en =  video_en & (in_hcnt >= 12'd220 & in_hcnt < 12'd1420);
 
 
 gmii_tx gmii_tx(
