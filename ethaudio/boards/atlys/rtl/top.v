@@ -580,6 +580,7 @@ reg active_q;
 reg vsync, hsync;
 reg VGA_HSYNC, VGA_VSYNC;
 reg vde;
+reg vvde, vvvde;
 
 assign active = !bgnd_hblnk && !bgnd_vblnk;
 
@@ -591,6 +592,9 @@ always @ (posedge pclk) begin
 
 	active_q <= active;
 	vde <= active_q;
+
+	vvde <= vde;
+	vvvde <= vvde;
 end
 `endif
 ///////////////////////////////////
@@ -684,7 +688,7 @@ dvi_encoder_top dvi_tx0 (
 	  .aux2_din	   (/*out_aux2*/),
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
-    .vde         (active),
+    .vde         (vvvde),
     .ade         (/*ax_rx_rd_en*/),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
