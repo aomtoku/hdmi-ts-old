@@ -700,7 +700,7 @@ wire        send_empty;
 wire [47:0] tx_data;
 wire        rd_en;
 wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
-wire        send_fifo_wr_en = video_en & (in_hcnt >= 12'd220 & in_hcnt < 12'd1420); /* & in_vcnt < 12'd720) & */
+wire        send_fifo_wr_en = video_en & (in_hcnt > 12'd220 & in_hcnt <= 12'd1420); /* & in_vcnt < 12'd720) & */
 
 fifo48_8k asfifo_send (
 	.rst(RSTBTN | rx0_vsync),
@@ -924,7 +924,7 @@ tmds_timing timing(
 wire ade_tx = ~video_en && ((video_hcnt >= 11'd1504) && (video_hcnt < 11'd1510));
 //wire ade_tx = 1'b0;
 wire vperi = ((video_vcnt >= 21) && (video_vcnt <= 741)) ? 1'b1 : 1'b0;
-wire fil_wr_en =  video_en & (in_hcnt >= 12'd220 & in_hcnt < 12'd1420);
+wire fil_wr_en =  video_en & (in_hcnt > 12'd220 & in_hcnt <= 12'd1420);
 
 
 gmii_tx gmii_tx(
