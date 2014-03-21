@@ -676,16 +676,17 @@ wire        rx0_hsync;          // hsync data
 wire        rx0_vsync;          // vsync data
 wire        rx0_vde, rx0_pclkx10, rx0_serdesstrobe, rx0_pclkx2;
 wire     rx0_reset;
-wire        rx0_pclk;           
+wire        rx0_pclk;
+
 dvi_encoder_top dvi_tx0 (
     .pclk        (pclk),
     .pclkx2      (pclkx2),
     .pclkx10     (pclkx10),
     .serdesstrobe(serdesstrobe),
     .rstin       (reset),
-    .blue_din    (8'd10/*blue_data*/),
-    .green_din   (8'd10/*green_data*/),
-    .red_din     (8'd10/*red_data*/),
+    .blue_din    (blue_data),
+    .green_din   (green_data),
+    .red_din     (red_data),
 	  .aux0_din	   (/*out_aux0*/),
 	  .aux1_din	   (/*out_aux1*/),
 	  .aux2_din	   (/*out_aux2*/),
