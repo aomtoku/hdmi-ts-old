@@ -99,7 +99,7 @@ always @ (posedge i_clk_74M) begin
 			end else begin
 				b_b <= i_hcnt[9:2];
 				b_g <= i_vcnt[8:1];
-				b_r <= 8'h0;
+				b_r <= 8'h00;
 			end
 		end else begin
 			b_b <= 8'h00;
