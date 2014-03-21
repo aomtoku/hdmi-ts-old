@@ -63,7 +63,7 @@ always@(posedge rx0_pclk) begin
 			
 		if(video_vcnt == 11'd0 && hcounter == 11'd219)
 			index <= 12'd0;
-		else if(hcounter == 11'd219 || hcounter == 11'd859)
+		else if(hcounter == 11'd219 || hcounter == 11'd819)
 			index <= index + 12'd1;
 	end
 end
