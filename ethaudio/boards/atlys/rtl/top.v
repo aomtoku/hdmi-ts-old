@@ -147,7 +147,7 @@ fifo29_32768 asfifo_recv (
 
 wire [23:0] axdout;
 reg init;
-wire ax_rx_rd_en = /*init &*/ ax_recv_rd_en;
+wire ax_rx_rd_en ;
 afifo24_recv afifo24_recv(
   .rst(reset| RSTBTN),
 	.wr_clk(RXCLK),
@@ -637,14 +637,13 @@ wire ad = (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
 // ax_recv_rd_en Generator
 //
 reg [3:0]b_left;
-reg fl,flg;
+reg fl;
 
 always@(posedge pclk)begin
 	if(RSTBTN)begin
 		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 	end else begin
-	  flg <= fl;
 	  b_left <= axdout[11:8];
 		if(vde)
 			init <= 1'b1;
@@ -653,16 +652,17 @@ always@(posedge pclk)begin
 		else
 			fl <= 1'b0;
 
-		if({fl,flg} == 2'b10)
+		if(fl & hcnt == 12'd1430)
 		  ax_recv_rd_en <= 1'b1;
-
 		if(ax_recv_rd_en & (b_left < axdout[11:8]))
-				ax_recv_rd_en <= 1'b0;
+			ax_recv_rd_en <= 1'b0;
 	end
 end
 
+assign ax_rx_rd_en = (DEBUG_SW[1]) ? ad : ax_recv_rd_en;
+
 //assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
-assign out_aux0 = {1'b1, 1'b0/*axdout[0]*/,VGA_VSYNC,VGA_HSYNC};
+assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
 assign out_aux2 = {1'b0,axdout[7:5]};
 wire        rx0_hsync;          // hsync data
@@ -681,12 +681,12 @@ dvi_encoder_top dvi_tx0 (
     .green_din   (green_data),
     .red_din     (red_data),
 	  .aux0_din	   (out_aux0),
-	  .aux1_din	   (/*out_aux1*/),
-	  .aux2_din	   (/*out_aux2*/),
+	  .aux1_din	   (out_aux1),
+	  .aux2_din	   (out_aux2),
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (ad/*ax_rx_rd_en*/),
+    .ade         (ax_rx_rd_en),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
