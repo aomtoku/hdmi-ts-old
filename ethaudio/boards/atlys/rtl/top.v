@@ -319,7 +319,7 @@ wire clkfbout,clkfbin;
 //
 // Pixel Rate clock buffer
 //
-BUFG pclkbufg (.I(pllclk0), .O(pclk));
+BUFG pclkbufg (.I(pllclk1), .O(pclk));
 
 //////////////////////////////////////////////////////////////////
 // 2x pclk is going to be used to drive OSERDES2
@@ -332,7 +332,7 @@ BUFG pclkx2bufg (.I(pllclk2), .O(pclkx2));
 // can be used by OSERDES2
 //////////////////////////////////////////////////////////////////
 PLL_BASE # (
-	.CLKIN_PERIOD(10),
+	.CLKIN_PERIOD(13),
 	.CLKFBOUT_MULT(10), //set VCO to 10x of CLKIN
 	.CLKOUT0_DIVIDE(1),
 	.CLKOUT1_DIVIDE(10),
