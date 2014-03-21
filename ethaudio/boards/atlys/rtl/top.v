@@ -353,7 +353,7 @@ PLL_BASE # (
 );
 
 
-BUFG tx0_clkfb_buf (.I(clkfbout), .O(clkfbin));
+BUFG clkfb_buf (.I(clkfbout), .O(clkfbin));
 
 wire serdesstrobe;
 wire bufpll_lock;
@@ -685,7 +685,7 @@ dvi_encoder_top dvi_tx0 (
     .pclk        (pclk),
     .pclkx2      (pclkx2),
     .pclkx10     (pclkx10),
-    .serdesstrobe(serdesstrobe),
+    .serdesstrobe(/*serdesstrobe*/),
     .rstin       (serdes_rst),
     .blue_din    (blue_data),
     .green_din   (green_data),
