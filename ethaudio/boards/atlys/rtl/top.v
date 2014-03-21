@@ -676,6 +676,7 @@ wire        rx0_hsync;          // hsync data
 wire        rx0_vsync;          // vsync data
 wire        rx0_vde, rx0_pclkx10, rx0_serdesstrobe, rx0_pclkx2;
 wire     rx0_reset;
+wire        rx0_pclk;           
 dvi_encoder_top dvi_tx0 (
     .pclk        (rx0_pclk),
     .pclkx2      (rx0_pclkx2),
@@ -705,7 +706,6 @@ wire        send_empty;
 wire [47:0] tx_data;
 wire        rd_en;
 wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
-wire        rx0_pclk;           
 wire        send_fifo_wr_en = video_en & (in_hcnt >= 12'd220 & in_hcnt < 12'd1420); /* & in_vcnt < 12'd720) & */
 
 fifo48_8k asfifo_send (
