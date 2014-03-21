@@ -674,14 +674,14 @@ assign out_aux1 = axdout[ 4:1];
 assign out_aux2 = {1'b0,axdout[7:5]};
 wire        rx0_hsync;          // hsync data
 wire        rx0_vsync;          // vsync data
-wire        rx0_vde;
-
+wire        rx0_vde, rx0_pclkx10, rx0_serdesstrobe, rx0_pclkx2;
+wire     rx0_reset;
 dvi_encoder_top dvi_tx0 (
-    .pclk        (pclk),
-    .pclkx2      (pclkx2),
-    .pclkx10     (pclkx10),
-    .serdesstrobe(serdesstrobe),
-    .rstin       (reset),
+    .pclk        (rx0_pclk),
+    .pclkx2      (rx0_pclkx2),
+    .pclkx10     (rx0_pclkx10),
+    .serdesstrobe(rx0_serdesstrobe),
+    .rstin       (rx0_reset),
     .blue_din    (8'd10/*blue_data*/),
     .green_din   (8'd10/*green_data*/),
     .red_din     (8'd10/*red_data*/),
@@ -812,7 +812,6 @@ wire [23:0] ax_dout;
 
 //assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
-wire     rx0_reset;
 wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [10:0] video_hcnt;
@@ -838,9 +837,8 @@ afifo24_recv auxfifo24_tx(
 //
 //////////////////////////////////////////////////
 wire        rx0_tmdsclk;
-wire        rx0_pclkx10, rx0_pllclk0;
+wire        rx0_pllclk0;
 wire        rx0_plllckd;
-wire        rx0_serdesstrobe;
 
 wire        rx0_psalgnerr;      // channel phase alignment error
 wire [3:0]  rx0_aux0;
