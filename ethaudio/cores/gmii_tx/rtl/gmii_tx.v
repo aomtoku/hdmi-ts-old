@@ -459,7 +459,7 @@ always @(posedge tx_clk)begin
 			    count         <= 11'd0;
 				  state         <= AUX;
 				  cnt3          <= 2'd0;
-				  ax_send_rd_en <= 1'b0;
+				  ax_send_rd_en <= 1'b1;
 				end else begin
 				  ax_send_rd_en <= 1'b0;
 				  count         <= 11'd1;
@@ -473,7 +473,7 @@ always @(posedge tx_clk)begin
 				  ax_send_rd_en <= 1'b0;
 			   end else begin
 				  state <= AUXID;
-				  ax_send_rd_en <= 1'b1;
+				  ax_send_rd_en <= 1'b0;
 			   end
 			   //txd   <= tmp;
 				 txd           <= axdout[7:0];
