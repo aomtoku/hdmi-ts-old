@@ -655,8 +655,9 @@ always@(posedge pclk)begin
 		else
 			fl <= 1'b0;
 
+		if(fl & )
 
-		if(b_left < axdout[11:8])
+		if(ax_recv_rd_en & (b_left < axdout[11:8]))
 				ax_recv_rd_en <= 1'b0;
 	
 		
@@ -678,9 +679,9 @@ dvi_encoder_top dvi_tx0 (
     .blue_din    (blue_data),
     .green_din   (green_data),
     .red_din     (red_data),
-	  .aux0_din	   (out_aux0),
-	  .aux1_din	   (out_aux1),
-	  .aux2_din	   (out_aux2),
+	  .aux0_din	   (/*out_aux0*/),
+	  .aux1_din	   (/*out_aux1*/),
+	  .aux2_din	   (/*out_aux2*/),
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
