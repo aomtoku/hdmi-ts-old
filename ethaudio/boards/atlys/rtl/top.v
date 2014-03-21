@@ -642,7 +642,7 @@ reg init, initq,initqq;
 */
 //assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
 //assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
-
+wire ad = (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
 //
 // ax_recv_rd_en Generator
 //
@@ -674,7 +674,7 @@ always@(posedge pclk)begin
 end
 
 //assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
-assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
+assign out_aux0 = {1'b1, 1'b0/*axdout[0]*/,VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
 assign out_aux2 = {1'b0,axdout[7:5]};
 wire        rx0_hsync;          // hsync data
@@ -698,7 +698,7 @@ dvi_encoder_top dvi_tx0 (
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (ax_rx_rd_en),
+    .ade         (ad/*ax_rx_rd_en*/),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
