@@ -583,7 +583,6 @@ reg active_q;
 reg vsync, hsync;
 reg VGA_HSYNC, VGA_VSYNC;
 reg vde;
-reg vvde, vvvde;
 
 assign active = !bgnd_hblnk && !bgnd_vblnk;
 
@@ -595,9 +594,6 @@ always @ (posedge pclk) begin
 
 	active_q <= active;
 	vde <= active_q;
-
-	vvde <= vde;
-	vvvde <= vvde;
 end
 `endif
 ///////////////////////////////////
@@ -634,12 +630,6 @@ assign JA[5] = fifo_read;
 wire [4:0] tmds_data0, tmds_data1, tmds_data2;
 wire serdes_rst = RSTBTN | ~bufpll_lock;
 
-/*reg [4:0] adecnt;
-reg [11:0]aclkc;
-reg ade;
-reg vde_h,ade_q;
-reg init, initq,initqq;
-*/
 //assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
 //assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
 wire ad = (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
@@ -668,8 +658,6 @@ always@(posedge pclk)begin
 
 		if(ax_recv_rd_en & (b_left < axdout[11:8]))
 				ax_recv_rd_en <= 1'b0;
-	
-		
 	end
 end
 
