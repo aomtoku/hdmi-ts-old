@@ -51,7 +51,6 @@ module dvi_encoder_top (
   input  wire       pclkx10,        // pixel clock x2
   input  wire       serdesstrobe,   // OSERDES2 serdesstrobe
   input  wire       rstin,          // reset
-	input  wire       serdes_rst,
   input  wire [7:0] blue_din,       // Blue data in
   input  wire [7:0] green_din,      // Green data in
   input  wire [7:0] red_din,        // Red data in
@@ -93,8 +92,8 @@ module dvi_encoder_top (
   reg [4:0] tmdsclkint = 5'b00000;
   reg toggle = 1'b0;
 
-  always @ (posedge pclkx2 or posedge serdes_rst) begin
-    if (serdes_rst)
+  always @ (posedge pclkx2 or posedge rstin) begin
+    if (rstin)
       toggle <= 1'b0;
     else
       toggle <= ~toggle;
@@ -116,7 +115,7 @@ module dvi_encoder_top (
     .ioclk        (pclkx10),
     .serdesstrobe (serdesstrobe),
     .gclk         (pclkx2),
-    .reset        (serdes_rst),
+    .reset        (rstin),
     .datain       (tmdsclkint));
 
   OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
@@ -127,7 +126,7 @@ module dvi_encoder_top (
   serdes_n_to_1 #(.SF(5)) oserdes0 (
              .ioclk(pclkx10),
              .serdesstrobe(serdesstrobe),
-             .reset(serdes_rst),
+             .reset(rstin),
              .gclk(pclkx2),
              .datain(tmds_data0),
              .iob_data_out(tmdsint[0])) ;
@@ -135,7 +134,7 @@ module dvi_encoder_top (
   serdes_n_to_1 #(.SF(5)) oserdes1 (
              .ioclk(pclkx10),
              .serdesstrobe(serdesstrobe),
-             .reset(serdes_rst),
+             .reset(rstin),
              .gclk(pclkx2),
              .datain(tmds_data1),
              .iob_data_out(tmdsint[1])) ;
@@ -143,7 +142,7 @@ module dvi_encoder_top (
   serdes_n_to_1 #(.SF(5)) oserdes2 (
              .ioclk(pclkx10),
              .serdesstrobe(serdesstrobe),
-             .reset(serdes_rst),
+             .reset(rstin),
              .gclk(pclkx2),
              .datain(tmds_data2),
              .iob_data_out(tmdsint[2])) ;
