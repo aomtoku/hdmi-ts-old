@@ -684,7 +684,7 @@ dvi_encoder_top dvi_tx0 (
 	  .aux2_din	   (/*out_aux2*/),
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
-    .vde         (vde),
+    .vde         (active),
     .ade         (/*ax_rx_rd_en*/),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
