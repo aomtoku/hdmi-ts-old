@@ -647,13 +647,14 @@ reg init, initq,initqq;
 // ax_recv_rd_en Generator
 //
 reg [3:0]b_left;
-reg fl;
+reg fl,flg;
 
 always@(posedge pclk)begin
 	if(RSTBTN)begin
 		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 	end else begin
+	  flg <= fl;
 	  b_left <= axdout[11:8];
 		if(vde)
 			init <= 1'b1;
@@ -662,7 +663,8 @@ always@(posedge pclk)begin
 		else
 			fl <= 1'b0;
 
-		//if(fl & )
+		if({fl,flg} == 2'b10)
+		  ax_recv_rd_en <= 1'b1;
 
 		if(ax_recv_rd_en & (b_left < axdout[11:8]))
 				ax_recv_rd_en <= 1'b0;
