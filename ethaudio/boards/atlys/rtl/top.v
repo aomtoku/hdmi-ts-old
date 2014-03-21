@@ -355,7 +355,7 @@ PLL_BASE # (
 wire serdesstrobe;
 wire bufpll_lock;
 BUFPLL #(.DIVIDE(5)) ioclk_buf (.PLLIN(pllclk0), .GCLK(pclkx2), .LOCKED(pll_lckd),
-	.IOCLK(pclkx10), .SERDESSTROBE(serdesstrobe), .LOCK(bufpll_lock));
+	.IOCLK(/*pclkx10*/), .SERDESSTROBE(serdesstrobe), .LOCK(bufpll_lock));
 
 synchro #(.INITIALIZE("LOGIC1"))
 synchro_reset (.async(!pll_lckd),.sync(reset),.clk(pclk));
@@ -677,10 +677,11 @@ wire        rx0_vsync;          // vsync data
 wire        rx0_vde, rx0_pclkx10, rx0_serdesstrobe, rx0_pclkx2;
 wire     rx0_reset;
 wire        rx0_pclk;           
+assign pclkx10 = rx0_pclkx10;
 dvi_encoder_top dvi_tx0 (
     .pclk        (rx0_pclk),
     .pclkx2      (rx0_pclkx2),
-    .pclkx10     (rx0_pclkx10),
+    .pclkx10     (pclkx10),
     .serdesstrobe(rx0_serdesstrobe),
     .rstin       (rx0_reset),
     .blue_din    (8'd10/*blue_data*/),
