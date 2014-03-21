@@ -639,78 +639,33 @@ reg init, initq,initqq;
 //
 // ax_recv_rd_en Generator
 //
+reg [3:0]b_left;
+reg fl;
 
 always@(posedge pclk)begin
 	if(RSTBTN)begin
 		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 	end else begin
-		if(~vde & ~ax_recv_empty)begin
-				ax_recv_rd_en <= 1'b1;
+	  b_left <= axdout[11:8];
+		if(vde)
+			init <= 1'b1;
+		if(~vde & ~ax_recv_empty & init) begin
+			fl <= 1'b1;
+		else
+			fl <= 1'b0;
+
+
+		if(b_left < axdout[11:8])
+				ax_recv_rd_en <= 1'b0;
+	
+		
 		end else begin
 				ax_recv_rd_en <= 1'b0;
 		end
-			/*
-			if(vcnt == 725)begin
-				if(hcnt > 8 & hcnt <= 200)
-					ax_recv_rd_en <= 1'b1;
-				else
-					ax_recv_rd_en <= 1'b0;
-			end else begin
-				if(hcnt >= 1559 & hcnt <= 1590)
-					ax_recv_rd_en <= 1'b1;
-				else 
-					ax_recv_rd_en <= 1'b0;
-			end
-		end
-		*/
 	end
 end
 
-/*
-always@(posedge pclk)begin
-    if(RSTBTN)begin
-		ade      <=  1'b0;
-		adecnt   <=  6'd0;
-		vde_h    <=  1'b0;
-		aclkc    <= 24'd0;
-		ade_q    <=  1'b0;
-		init     <=  1'b0;
-		initq    <=  1'b0;
-		initqq   <=  1'b0;
-	end else begin
-	    vde_h  <= vde;
-	    ade_q  <= ade;
-	    initq  <= init;
-		initqq <= initq; 
-        //first read signal
-        if(fifo_read) begin
-		    init <= 1'b1;
-	    end
-		if({initq,initqq}==2'b10 || {ade,ade_q}==2'b01) begin
-			aclkc <= axdout[23:12]; 
-		end
-		
-	    if(init & ~vde  & hcnt == aclkc) begin
-		    ade <= 1'b1;
-	    end
-		// Aux Data Enable period 
-	    if(ade)begin
-			case(adecnt)
-				//6'd0:  
-				6'd31: adecnt <= 6'd0;
-				default: adecnt <= adecnt + 6'd1;
-			endcase
-		    if(adecnt == 6'd31)begin
-			    ade    <= 1'b0;
-		        adecnt <= 6'd0;
-		    end else begin
-			    adecnt <= adecnt + 6'd1;
-		    end
-	    end
-    end
-end
-*/
 //assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
@@ -732,7 +687,7 @@ dvi_encoder_top dvi_tx0 (
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (ax_rx_rd_en),
+    .ade         (/*ax_rx_rd_en*/),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
