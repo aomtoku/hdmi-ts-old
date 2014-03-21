@@ -233,8 +233,9 @@ always@(posedge clk125)begin
 					a_cnt      <= 6'd0;
 					aux_state  <= AUX;
 					ax_wr_en   <= 1'b1;
-					daux[23:20] <= rxd[3:0];
+					//daux[23:20] <= rxd[3:0];
 					left       <= rxd[7:4];
+					daux[11:8] <= rxd[7:4];
 			   end else begin
 					ax_wr_en  <= 1'b0;
 				  a_cnt     <= 6'd1;

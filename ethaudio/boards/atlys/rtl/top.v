@@ -645,10 +645,10 @@ always@(posedge pclk)begin
 		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 	end else begin
-		if(~vde & ~ax_recv_empty)
+		if(~vde & ~ax_recv_empty)begin
 				ax_recv_rd_en <= 1'b1;
-		else begin
-				ax_recv_rd_en <= 1'b1;
+		end else begin
+				ax_recv_rd_en <= 1'b0;
 		end
 			/*
 			if(vcnt == 725)begin
