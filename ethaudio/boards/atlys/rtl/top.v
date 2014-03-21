@@ -672,6 +672,9 @@ end
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
 assign out_aux2 = {1'b0,axdout[7:5]};
+wire        rx0_hsync;          // hsync data
+wire        rx0_vsync;          // vsync data
+wire        rx0_vde;
 
 dvi_encoder_top dvi_tx0 (
     .pclk        (pclk),
@@ -685,9 +688,9 @@ dvi_encoder_top dvi_tx0 (
 	  .aux0_din	   (/*out_aux0*/),
 	  .aux1_din	   (/*out_aux1*/),
 	  .aux2_din	   (/*out_aux2*/),
-    .hsync       (VGA_HSYNC),
-    .vsync       (VGA_VSYNC),
-    .vde         (vde),
+    .hsync       (rx0_hsync/*VGA_HSYNC*/),
+    .vsync       (rx0_vsync/*VGA_VSYNC*/),
+    .vde         (rx0_vde),
     .ade         (/*ax_rx_rd_en*/),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
@@ -703,8 +706,6 @@ wire [47:0] tx_data;
 wire        rd_en;
 wire [47:0] din_fifo = {in_vcnt/*in_hcnt*/,index, rx0_red, rx0_green, rx0_blue};
 wire        rx0_pclk;           
-wire        rx0_hsync;          // hsync data
-wire        rx0_vsync;          // vsync data
 wire        send_fifo_wr_en = video_en & (in_hcnt >= 12'd220 & in_hcnt < 12'd1420); /* & in_vcnt < 12'd720) & */
 
 fifo48_8k asfifo_send (
@@ -812,7 +813,6 @@ wire [23:0] ax_dout;
 //assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
 wire     rx0_reset;
-wire     rx0_vde;
 wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [10:0] video_hcnt;
