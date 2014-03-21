@@ -650,7 +650,7 @@ always@(posedge pclk)begin
 	  b_left <= axdout[11:8];
 		if(vde)
 			init <= 1'b1;
-		if(~vde & ~ax_recv_empty & init) begin
+		if(~vde & ~ax_recv_empty & init)
 			fl <= 1'b1;
 		else
 			fl <= 1'b0;
@@ -660,8 +660,6 @@ always@(posedge pclk)begin
 				ax_recv_rd_en <= 1'b0;
 	
 		
-		end else begin
-				ax_recv_rd_en <= 1'b0;
 		end
 	end
 end
