@@ -655,7 +655,7 @@ always@(posedge pclk)begin
 		else
 			fl <= 1'b0;
 
-		if(fl & )
+		//if(fl & )
 
 		if(ax_recv_rd_en & (b_left < axdout[11:8]))
 				ax_recv_rd_en <= 1'b0;
