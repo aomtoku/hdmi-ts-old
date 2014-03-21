@@ -65,8 +65,8 @@ always @ (posedge i_clk_74M) begin
 			xblock  <= 1'b0;
 		end
 
-		if(i_hcnt == (hstart + 600)) //default is 641
-			xblock  <= 1'b1;
+		//if(i_hcnt == (hstart + 600)) //default is 641
+			//xblock  <= 1'b1;
 
 		if(i_hcnt == hfin) 
 			hactive <= 1'b0;
