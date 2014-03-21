@@ -686,7 +686,7 @@ dvi_encoder_top dvi_tx0 (
     .pclkx2      (pclkx2),
     .pclkx10     (pclkx10),
     .serdesstrobe(serdesstrobe),
-    .rstin       (reset),
+    .rstin       (serdes_rst),
     .blue_din    (blue_data),
     .green_din   (green_data),
     .red_din     (red_data),
