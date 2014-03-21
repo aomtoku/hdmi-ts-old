@@ -660,7 +660,6 @@ always@(posedge pclk)begin
 				ax_recv_rd_en <= 1'b0;
 	
 		
-		end
 	end
 end
 
