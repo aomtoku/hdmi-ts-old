@@ -557,7 +557,7 @@ dvi_encoder_top dvi_tx0 (
     .blue_din    (rx0_blue),
     .green_din   (rx0_green),
     .red_din     (rx0_red),
-	  .aux0_din		 ({aux0[3:2],rx0_vsync, rx0_hsync}/*test0*//*rx0_aux0*//*{adin0_qqqq[3:2],rx0_vsync, rx0_hsync}*/),
+	  .aux0_din		 ({1'b1,aux0[2],rx0_vsync, rx0_hsync}/*test0*//*rx0_aux0*//*{adin0_qqqq[3:2],rx0_vsync, rx0_hsync}*/),
 	  .aux1_din		 (4'd0/*aux1*//*test1*//*adin1_qqqq*/),
 	  .aux2_din		 (4'd0/*aux2*//*test2*//*adin2_qqqq*/),
     .hsync       (rx0_hsync),
