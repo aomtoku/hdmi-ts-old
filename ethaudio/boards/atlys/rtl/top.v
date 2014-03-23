@@ -632,7 +632,7 @@ wire serdes_rst = RSTBTN | ~bufpll_lock;
 
 //assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade;
 //assign ax_recv_rd_en = (bgnd_vblnk) ? : (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
-wire ad = (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;
+wire ad = (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;  //Debug mode ADE. forcing read enable
 //
 // ax_recv_rd_en Generator
 //
@@ -640,7 +640,7 @@ reg [3:0]b_left;
 reg fl;
 
 always@(posedge pclk)begin
-	if(RSTBTN)begin
+	if(RSTBTN | reset)begin
 		init <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 	end else begin
