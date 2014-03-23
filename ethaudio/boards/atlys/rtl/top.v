@@ -641,8 +641,10 @@ reg fl;
 
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
-		init <= 1'b0;
+		fl            <= 1'b0;
+		init          <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
+		b_left        <= 4'd0;
 	end else begin
 	  b_left <= axdout[11:8];
 		if(vde)
@@ -659,9 +661,8 @@ always@(posedge pclk)begin
 	end
 end
 
-assign ax_rx_rd_en =/* (DEBUG_SW[1]) ?*/ ad /*: ax_recv_rd_en*/;
+assign ax_rx_rd_en = (DEBUG_SW[1]) ? ad : ax_recv_rd_en;
 
-//assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
 assign out_aux2 = {1'b0,axdout[7:5]};
