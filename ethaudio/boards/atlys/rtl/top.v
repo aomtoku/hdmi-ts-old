@@ -659,7 +659,7 @@ always@(posedge pclk)begin
 	end
 end
 
-assign ax_rx_rd_en = (DEBUG_SW[1]) ? ad : ax_recv_rd_en;
+assign ax_rx_rd_en =/* (DEBUG_SW[1]) ?*/ ad /*: ax_recv_rd_en*/;
 
 //assign out_aux0 = {axdout[ 3:2],VGA_VSYNC, VGA_HSYNC};
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
