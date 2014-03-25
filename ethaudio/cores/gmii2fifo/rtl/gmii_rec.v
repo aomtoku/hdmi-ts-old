@@ -17,7 +17,7 @@ module gmii2fifo24#(
 	output reg         recv_en,
 	output wire        packet_en,
 	// AUX FIFO
-	output wire [23:0] aux_data_in,
+	output wire [11:0] aux_data_in,
 	output wire        aux_wr_en
 );
 
@@ -205,7 +205,7 @@ reg [ 3:0]tmp;
 reg [ 1:0]cnt2;
 reg [ 5:0]a_cnt;
 reg [ 3:0]left;
-reg [23:0]daux;
+reg [11:0]daux;
 reg       ax_wr_en;
 reg       aux_state;
 
@@ -239,7 +239,7 @@ always@(posedge clk125)begin
 			   end else begin
 					ax_wr_en  <= 1'b0;
 				  a_cnt     <= 6'd1;
-					daux[19:12] <= rxd;
+					//daux[19:12] <= rxd;
 			   end
 			end
 			AUX:begin
