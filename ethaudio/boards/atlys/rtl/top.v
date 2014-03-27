@@ -640,6 +640,8 @@ reg [3:0]b_left;
 reg fl;
 reg [5:0]acnt;
 reg axp;
+reg ck;
+reg auido;
 
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
@@ -649,8 +651,20 @@ always@(posedge pclk)begin
 		b_left        <= 4'd0;
 	  acnt          <= 6'd0;
 		axp           <= 1'b0;
+		ck            <= 1'b0;
+		audio         <= 1'b0;
 	end else begin
 	  b_left <= axdout[11:8];
+    if(~ax_recv_empty)
+	    ck <= 1'b1; 
+	  if(v_counter == 12'd0)begin
+		  if(ck)
+			  audio <= 1'b1;
+		  else
+			  audio <= 1'b0;
+		  ck <= 1'b0;
+		end
+
 		if(vde)
 			init <= 1'b1;
 		if(~vde & ~ax_recv_empty & init)
@@ -692,7 +706,7 @@ end
 	end
 end*/
 
-assign ax_rx_rd_en = (DEBUG_SW[1]) ? ad : ax_recv_rd_en;
+assign ax_rx_rd_en = (audio) ? ax_recv_rd_en : 1'b0;
 
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
