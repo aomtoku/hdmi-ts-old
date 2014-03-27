@@ -685,10 +685,11 @@ always@(posedge pclk)begin
 		if(axp)begin
 		  if(acnt == 6'd35)begin
 			  acnt <= 6'd0; 
-			  if(b_left <= axdout[11:8])
-			    ax_recv_rd_en <= 1'b0;
+			  //if(b_left <= axdout[11:8])
+			  if(b_left > 0)
+			    ax_recv_rd_en <= 1'b1; //0
 			  else
-			    ax_recv_rd_en <= 1'b1;
+			    ax_recv_rd_en <= 1'b0; //1
 		  end else if(acnt == 6'd31)begin
 		    ax_recv_rd_en <= 1'b0; 
 			  acnt <= acnt + 6'd1;
