@@ -682,13 +682,13 @@ always@(posedge pclk)begin
 	end
 end
 
-
+/*
 		if(fl & hcnt == 12'd1530)
 		  ax_recv_rd_en <= 1'b1;
 		if(ax_recv_rd_en & (b_left <= axdout[11:8]))
 			ax_recv_rd_en <= 1'b0;
 	end
-end
+end*/
 
 assign ax_rx_rd_en = (DEBUG_SW[1]) ? ad : ax_recv_rd_en;
 
