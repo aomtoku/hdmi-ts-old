@@ -113,7 +113,7 @@ wire recv_fifo_wr_en;
 wire ax_recv_wr_en;
 reg ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
-wire [23:0] axdin;
+wire [11:0] axdin;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(RXCLK),
@@ -145,10 +145,10 @@ fifo29_32768 asfifo_recv (
 	.empty(recv_empty)
 );
 
-wire [23:0] axdout;
+wire [11:0] axdout;
 reg init;
 wire ax_rx_rd_en ;
-afifo24_recv afifo24_recv(
+auxfifo12 aux_recv(
   .rst(reset| RSTBTN),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
@@ -713,7 +713,7 @@ always @ (posedge pclk)
 	end
 end*/
 
-assign ax_rx_rd_en = (audio) ? ade_m : 1'b0;
+assign ax_rx_rd_en = (audio) ? ax_recv_rd_en : 1'b0;
 
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
