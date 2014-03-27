@@ -699,6 +699,11 @@ always@(posedge pclk)begin
 	end
 end
 
+
+reg ade_m;
+always @ (posdedge pclk) 
+  ade_m <= ax_recv_rd_en;
+
 /*
 		if(fl & hcnt == 12'd1530)
 		  ax_recv_rd_en <= 1'b1;
@@ -707,7 +712,7 @@ end
 	end
 end*/
 
-assign ax_rx_rd_en = (audio) ? ax_recv_rd_en : 1'b0;
+assign ax_rx_rd_en = (audio) ? ade_m : 1'b0;
 
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
