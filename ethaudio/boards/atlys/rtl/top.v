@@ -655,8 +655,10 @@ always@(posedge pclk)begin
 			init <= 1'b1;
 		if(~vde & ~ax_recv_empty & init)
 			fl <= 1'b1;
-		else
+		else begin
 			fl <= 1'b0;
+			axp <= 1'b0;
+		end
 
 		// Start logic 
 		if(fl & hcnt == 12'd1530)begin
