@@ -638,6 +638,8 @@ wire ad = (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;  //Debug mode ADE. forcin
 //
 reg [3:0]b_left;
 reg fl;
+reg [5:0]acnt;
+reg axp;
 
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
@@ -645,6 +647,8 @@ always@(posedge pclk)begin
 		init          <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 		b_left        <= 4'd0;
+	  acnt          <= 6'd0;
+		axp           <= 1'b0;
 	end else begin
 	  b_left <= axdout[11:8];
 		if(vde)
@@ -653,6 +657,31 @@ always@(posedge pclk)begin
 			fl <= 1'b1;
 		else
 			fl <= 1'b0;
+
+		// Start logic 
+		if(fl & hcnt == 12'd1530)begin
+		  acnt          <= 6'd0;
+		  ax_recv_rd_en <= 1'b1;
+		  axp           <= 1'b1;
+		end
+		
+		if(axp)begin
+		  if(acnt == 6'd35)begin
+			  acnt <= 6'd0; 
+			  if(b_left <= axdout[11:8])
+			    ax_recv_rd_en <= 1'b0;
+			  else
+			    ax_recv_rd_en <= 1'b1;
+		  end else if(acnt == 6'd31)begin
+		    ax_recv_rd_en <= 1'b0; 
+			  acnt <= acnt + 6'd1;
+		  end else begin
+			  acnt <= acnt + 6'd1;
+		  end
+		end
+	end
+end
+
 
 		if(fl & hcnt == 12'd1530)
 		  ax_recv_rd_en <= 1'b1;
