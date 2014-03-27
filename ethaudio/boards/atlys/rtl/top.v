@@ -655,7 +655,8 @@ always@(posedge pclk)begin
 		audio         <= 1'b0;
 	end else begin
 	  b_left <= axdout[11:8];
-    if(~ax_recv_empty)
+    // Checking Audio onoff //
+		if(~ax_recv_empty)
 	    ck <= 1'b1; 
 	  if(vcnt == 12'd0)begin
 		  if(ck)
@@ -790,6 +791,7 @@ reg [23:0]ade_out;
 reg ade_gg;
 reg start;
 reg st,stc;
+/*
 always @ (posedge rx0_pclk)begin
 	if(rx0_reset)begin
 		ade_buf  <= 12'd0;
@@ -799,7 +801,7 @@ always @ (posedge rx0_pclk)begin
 		start    <=  1'b0;
 		st       <=  1'b0;
 		stc      <=  1'b0;
-	end else begin
+	end else begin*/
 		/*
 		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
 		ade_gg <= rx0_ade;
@@ -811,6 +813,7 @@ always @ (posedge rx0_pclk)begin
 		end
 		*/
 		// To 
+/*
 		if(video_en)begin
 			start <= 1'b1;
 			st    <= 1'b1;
@@ -844,14 +847,22 @@ always @ (posedge rx0_pclk)begin
 		end
 	end
 end
+*/
+
 
 wire        ax_send_full, ax_send_empty;
 wire        ax_send_wr_en, ax_send_rd_en;
-wire [23:0] ax_din = ade_out;
+wire [3:0]  rx0_aux0;
+wire [3:0]  rx0_aux1;
+wire [3:0]  rx0_aux2;
+//wire [23:0] ax_din = ade_out;
+wire [23:0] ax_din = {16'd0,rx0_aux2[2:0], rx0_aux1, rx0_aux0[2]};
 wire [23:0] ax_dout;
+wire        rx0_ade;
 
 //assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
-assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
+//assign   ax_send_wr_en = (start) ? ade_gg : 1'b0;
+assign   ax_send_wr_en = (start) ? rx0_ade : 1'b0;
 wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [10:0] video_hcnt;
@@ -881,13 +892,9 @@ wire        rx0_pllclk0;
 wire        rx0_plllckd;
 
 wire        rx0_psalgnerr;      // channel phase alignment error
-wire [3:0]  rx0_aux0;
-wire [3:0]  rx0_aux1;
-wire [3:0]  rx0_aux2;
 wire [7:0]  rx0_red;      // pixel data out
 wire [7:0]  rx0_green;    // pixel data out
 wire [7:0]  rx0_blue;     // pixel data out
-wire        rx0_ade;
 wire [29:0] rx0_sdata;
 wire        rx0_blue_vld;
 wire        rx0_green_vld;
