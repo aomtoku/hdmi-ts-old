@@ -641,7 +641,7 @@ reg fl;
 reg [5:0]acnt;
 reg axp;
 reg ck;
-reg auido;
+reg audio;
 
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
@@ -657,7 +657,7 @@ always@(posedge pclk)begin
 	  b_left <= axdout[11:8];
     if(~ax_recv_empty)
 	    ck <= 1'b1; 
-	  if(v_counter == 12'd0)begin
+	  if(vcnt == 12'd0)begin
 		  if(ck)
 			  audio <= 1'b1;
 		  else
