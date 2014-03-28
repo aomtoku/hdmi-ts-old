@@ -113,6 +113,8 @@ reg fstate,ppl;
 reg buf1_wr_en, buf2_wr_en; //To aboid Metastability
 reg buf1_tx_en, buf2_tx_en;
 wire send_enable = fstate;
+reg [11:0] vcnt;
+reg vp;
 
 always @(posedge fifo_clk) begin
 	if(sys_rst) begin
@@ -120,20 +122,32 @@ always @(posedge fifo_clk) begin
 		ppl        <= 1'b0;
 		buf1_wr_en <= 1'b0;
 		buf2_wr_en <= 1'b0;
+		vp         <= 1'b0;
+		vcnt       <= 12'd0;
 	end else begin
 		buf1_wr_en <= wr_en;
 		buf2_wr_en <= buf1_wr_en;
 		buf1_tx_en <= tx_en;
 		buf2_tx_en <= buf1_tx_en;
-		if({buf1_wr_en,buf2_wr_en} == 2'b01) // Check buffering 1 line 
+		if({buf1_wr_en,buf2_wr_en} == 2'b01)begin // Check buffering 1 line 
 			fstate   <= 1'b1;
+			vp <= 1'b1;
+			//vcnt <= 12'd0;
+		end
 		//if(vperi && ({buf1_tx_en,buf2_tx_en} == 2'b01)) begin
 		if({buf1_tx_en,buf2_tx_en} == 2'b01) begin
-			if(ppl)begin
-				ppl     <= 1'b0;
-				fstate  <= 1'b0;
-			end else begin
-				ppl     <= 1'b1;
+			if(vp)begin
+			  if(vcnt == 12'd1439)begin
+				  vp <= 1'b0;
+				  vcnt <= 12'd0;
+				end else
+			    vcnt <= vcnt + 12'd1;
+			  if(ppl)begin
+				  ppl     <= 1'b0;
+				  fstate  <= 1'b0;
+			  end else begin
+				  ppl     <= 1'b1;
+			  end
 			end
 		end
 	end
@@ -200,10 +214,10 @@ always @(posedge tx_clk)begin
 					tx_en      <= 1'b1;
 					state      <= PRE;
 					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
-`ifdef simulation
-          pcktinfo    <= video;
-					packet_size <= 12'd0;
-`else
+//`ifdef simulation
+          //pcktinfo    <= video;
+					//:wqpacket_size <= 12'd0;
+//`else
           if(ppl/*ade_num == 4'd0*/)begin
 						packet_size <= 12'd0;
 						pcktinfo    <= video;
@@ -211,7 +225,7 @@ always @(posedge tx_clk)begin
 						packet_size <= auxsize * ade_num;
 						pcktinfo    <= vidax;
 					end
-`endif
+//`endif
 				end else if(ax_send_empty == 1'b0 & adesig)begin
 					txd        <= 8'h55;
 					tx_en      <= 1'b1;
