@@ -1,0 +1,43 @@
+[*]
+[*] GTKWave Analyzer v3.3.52 (w)1999-2013 BSI
+[*] Fri Mar 28 12:41:42 2014
+[*]
+[dumpfile] "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/simulation/fifolevel/test.vcd"
+[dumpfile_mtime] "Fri Mar 28 12:41:07 2014"
+[dumpfile_size] 196941271
+[savefile] "/home/aom/Work/fpga_project/AtlysProjectAom/ethaudio/cores/gmii_tx/simulation/fifolevel/test.gtkw"
+[timestart] 639900000
+[size] 1151 975
+[pos] -1 -1
+*-24.642134 688236000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_gmiisend.
+[sst_width] 220
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 282
+@28
+tb_gmiisend.sys_clk
+tb_gmiisend.vsyn
+tb_gmiisend.video_en
+@29
+tb_gmiisend.send_fifo_wr_en
+@28
+tb_gmiisend.hsyn
+@24
+tb_gmiisend.hcnt[10:0]
+tb_gmiisend.vcnt[10:0]
+@22
+tb_gmiisend.tmds_data[23:0]
+tb_gmiisend.vdin[47:0]
+@28
+tb_gmiisend.rd_en
+@22
+tb_gmiisend.tx_data[47:0]
+tb_gmiisend.TXD[7:0]
+tb_gmiisend.gmiisend.state[3:0]
+@24
+tb_gmiisend.gmiisend.count[10:0]
+@28
+tb_gmiisend.TXEN
+[pattern_trace] 1
+[pattern_trace] 0

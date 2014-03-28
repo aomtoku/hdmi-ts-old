@@ -27,6 +27,8 @@ always #6.734 fifo_clk = ~fifo_clk;
 reg sys_rst;
 reg empty = 0;
 reg full  = 0;
+wire vsyn,hsyn;
+reg [23:0]tmds_data;
 wire rd_en;
 wire TXEN;
 wire [7:0]TXD;
@@ -63,13 +65,15 @@ always @ (posedge fifo_clk)begin
 end
 
 wire [47:0]vdin;
+assign vdin = {1'b0,vcnt,1'b0,hcnt,tmds_data};
 wire vempty,vfull;
+wire send_fifo_wr_en = video_en && (hcnt >= 12'd220 && hcnt < 12'd1420);
 
 afifo48 send_video_fifo(
      .Data(vdin),
      .WrClock(fifo_clk),
      .RdClock(gmii_tx_clk),
-     .WrEn(video_en),
+     .WrEn(send_fifo_wr_en),
      .RdEn(rd_en),
      .Reset(sys_rst),
      .RPReset(),
@@ -87,6 +91,7 @@ wire ax_send_rd_en;
 
 
 wire vperi = (vcnt >= 21) && (vcnt <= 741);
+wire fil_wr_en =  video_en & (hcnt >= 12'd220 & hcnt < 12'd1420);
 
 gmii_tx gmiisend(
     .id(1'b1),
@@ -94,25 +99,28 @@ gmii_tx gmiisend(
 	.fifo_clk(fifo_clk),
 	.sys_rst(sys_rst),
 	.dout(tx_data), //48bit
-	.empty(empty),
+	.empty(vempty),
 	.full(full),
 	.rd_en(rd_en),
-	.wr_en(vde),
-	.vperi(vperi),
+	.wr_en(fil_wr_en),
+	.vperi(/*vperi*/),
 	// AX FIFO
+	/*
 	.adesig(ade_tx),
 	.ade_num(ade_num),
 	.axdout(ax_dout),
 	.ax_send_full(ax_send_full),
 	.ax_send_empty(ax_send_empty),
 	.ax_send_rd_en(ax_send_rd_en),
-
+*/
 	/*** Ethernet PHY GMII ****/
 	.tx_clk(gmii_tx_clk),
 	.tx_en(TXEN),
-	.txd(TXD)
+	.txd(TXD),
+	.sw(1'b1)
 );
 
+/*
 reg hs,vs;
 reg hs_q,vs_q;
 reg [10:0]hc,vc;
@@ -148,7 +156,7 @@ always @ (posedge fifo_clk)begin
 
 	end
 end
-
+*/
 
 wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
 
@@ -159,7 +167,7 @@ wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740);
 // 
 reg [3:0]c15;
 reg [10:0]vc_b;
-reg ade;
+reg ade;/*
 always@(posedge fifo_clk)begin
   if(sys_rst)begin
 		ade <= 1'b0;
@@ -191,13 +199,13 @@ always@(posedge fifo_clk)begin
 				ade <= 1'b0;
 		end
 	end
-end
+end*/
 
 tmds_timing timing_inst (
   .rx0_pclk(fifo_clk),
   .rstbtn_n(sys_rst), 
-  .rx0_hsync(hs),
-  .rx0_vsync(vs),
+  .rx0_hsync(hsyn),
+  .rx0_vsync(vsyn),
   .video_en(video_en),
   .index(),
   .video_hcnt(),
@@ -206,7 +214,7 @@ tmds_timing timing_inst (
   .hcounter(hcnt)
 );
 
-assign rd_en = vde;
+//assign rd_en = vde;
 
 //
 // a clock
@@ -223,18 +231,25 @@ endtask
 // Scinario
 //
 
-reg [47:0] vrom [0:2024];
+reg [31:0] vrom [0:2475000];
 reg [11:0] arom [0:2024];
-reg [11:0]vcounter = 12'd0;
+reg [21:0]vcounter = 22'd0;
 reg [11:0]acounter = 12'd0;
+reg [3:0]vv,hh;
+assign vsyn = vv[0];
+assign hsyn = hh[0];
 
-always@(posedge sys_clk)begin
-  tmds_data     <= vrom[vcounter];
-	vcounter	<= vcounter + 12'd1;
-  /*if(rd_en)begin
+always@(posedge fifo_clk)begin
+  {vv,hh,tmds_data}     <= vrom[vcounter];
+	vcounter	<= vcounter + 22'd1;
+end
+/*if(rd_en)begin
 		//tx_data 	<= vrom[vcounter];
 		vcounter	<= vcounter + 12'd1;
-	end*/
+	end
+*/
+always@(posedge fifo_clk)begin
+
 	if(ax_send_rd_en)begin
 		ax_dout  <= arom[acounter];
 		acounter <= acounter + 12'd1;
@@ -245,8 +260,8 @@ end
 initial begin
 	$dumpfile("./test.vcd");
 	$dumpvars(0, tb_gmiisend);
-	$readmemh("vrequest.mem",vrom);
-	$readmemh("arequest.mem",arom);
+	$readmemh("request.mem",vrom);
+	//$readmemh("arequest.mem",arom);
 	sys_rst = 1'b1;
 	vcounter = 0;
 	acounter = 0;
@@ -259,7 +274,7 @@ initial begin
 	waitclock;
 	
 	
-	#1000000;
+	#3000000;
 	$finish;
 end
 
