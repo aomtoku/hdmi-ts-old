@@ -200,13 +200,18 @@ always @(posedge tx_clk)begin
 					tx_en      <= 1'b1;
 					state      <= PRE;
 					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
-					if(ppl/*ade_num == 4'd0*/)begin
+`ifdef simulation
+          pcktinfo    <= video;
+					packet_size <= 12'd0;
+`else
+          if(ppl/*ade_num == 4'd0*/)begin
 						packet_size <= 12'd0;
 						pcktinfo    <= video;
 					end else begin
 						packet_size <= auxsize * ade_num;
 						pcktinfo    <= vidax;
 					end
+`endif
 				end else if(ax_send_empty == 1'b0 & adesig)begin
 					txd        <= 8'h55;
 					tx_en      <= 1'b1;
@@ -534,6 +539,9 @@ always @(posedge tx_clk)begin
   end
 end
 
+`ifdef simulation
+assign rd_en = ((state == DATA_RGB & cnt3 == 2'd1 ) | (state == DATA_RESOL & cnt3 == 2'd3 )) ;
+`else
 assign rd_en = ((state == DATA_RGB & cnt3 == 2'd2 ) | (state == DATA_RESOL & cnt3 == 2'd3 ) | (state == PCKTIDNT & cnt3 == 2'd3 ));
-
+`endif
 endmodule
