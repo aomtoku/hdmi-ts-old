@@ -148,8 +148,9 @@ fifo29_32768 asfifo_recv (
 wire [11:0] axdout;
 reg init;
 wire ax_rx_rd_en ;
+wire rst;
 auxfifo12 aux_recv(
-  .rst(reset| RSTBTN),
+  .rst(reset| RSTBTN | rst),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
 	.din(axdin),
@@ -571,6 +572,7 @@ timing_gen timing_inst (
 	.clk74m(pclk),
 	.clk125m(RXCLK),
 	.fifo_wr_en(recv_fifo_wr_en),
+	.rst(rst),
 	.y_din(y_din)
 );
 
