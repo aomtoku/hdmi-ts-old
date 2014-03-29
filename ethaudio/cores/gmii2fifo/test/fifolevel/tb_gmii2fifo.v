@@ -65,6 +65,7 @@ afifo29 recv_video_fifo(
      .Full(rx_vfull)
 );
 
+wire rst;
 wire ax_rx_rd_en;
 afifo12 recv_audio_fifo(
      .Data(rx_axdin),
@@ -72,7 +73,7 @@ afifo12 recv_audio_fifo(
      .RdClock(fifo_clk),
      .WrEn(ax_recv_wr_en),
      .RdEn(ax_rx_rd_en),
-     .Reset(sys_rst),
+     .Reset(sys_rst | rst),
      .RPReset(),
      .Q(ax_rx_dout),
      .Empty(rx_aempty),
@@ -126,6 +127,7 @@ timing_gen timing_gen (
 	.clk74m(fifo_clk),
 	.clk125m(gmii_tx_clk),
 	.fifo_wr_en(rx_fifo_wr_en),
+	.rst(rst),
 	.y_din(y_din)
 );
 
