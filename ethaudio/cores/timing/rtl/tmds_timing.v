@@ -42,8 +42,8 @@ always@(posedge rx0_pclk) begin
 			hcounter <= hcounter + 11'd1;
 
 		// Active Verical line 
-		if(vcounter == 11'd19)   vactive <= 1'b1;
-		if(vcounter == 11'd739)  vactive <= 1'b0;
+		if(vcounter == 11'd21)   vactive <= 1'b1;
+		if(vcounter == 11'd741)  vactive <= 1'b0;
 
 		// Active Horizontal line 
 		if(hcounter == 11'd219)  hactive <= 1'b1;
