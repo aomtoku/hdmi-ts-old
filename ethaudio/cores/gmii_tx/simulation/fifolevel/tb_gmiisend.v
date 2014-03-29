@@ -38,8 +38,6 @@ wire [47:0]tx_data;
 wire [10:0]hcnt,vcnt;
 wire video_en;
 
-wire ade_tx = ~video_en && ((hcnt >= 11'd1504) && (hcnt < 11'd1510));
-
 // Generating a Number of audio enable period
 reg [3:0] ade_c;
 reg [3:0] ade_num;
@@ -48,7 +46,7 @@ reg       vde_b;
 
 always @ (posedge fifo_clk)begin
   vde_b <= vde;
-  if(sys_rst || hcnt == 11'd1502)begin
+  if(sys_rst || hcnt == 11'd1)begin
 	  ade_c   <= 4'd0;
 	  cnt_32  <= 5'd0; 
 	  ade_num <= ade_c;
@@ -83,15 +81,36 @@ afifo48 send_video_fifo(
 );
 
 
+wire [11:0] adin,ax_dout;
+wire aempty,afull;
+wire ade;
 
-reg [11:0]ax_dout;
-reg ax_send_full;
-reg ax_send_empty = 1'b0;
-wire ax_send_rd_en;
+reg ainit;
+always@(posedge fifo_clk)
+  if(sys_rst)
+		ainit <= 1'b0;
+	else if(video_en)
+		ainit <= 1'b1;
 
+wire a_wr_en = ainit & ade;
+
+afifo12 send_audio_fifo(
+     .Data(adin),
+     .WrClock(fifo_clk),
+     .RdClock(gmii_tx_clk),
+     .WrEn(a_wr_en),
+     .RdEn(ax_send_rd_en),
+     .Reset(sys_rst),
+     .RPReset(),
+     .Q(ax_dout),
+     .Empty(aempty),
+     .Full(afull)
+);
 
 wire vperi = (vcnt >= 21) && (vcnt <= 741);
 wire fil_wr_en =  video_en & (hcnt >= 12'd220 & hcnt < 12'd1420);
+wire [23:0] out = {12'd0,ax_dout};
+wire ade_tx = ~video_en && ((hcnt >= 11'd1504) && (hcnt < 11'd1510));
 
 gmii_tx gmiisend(
     .id(1'b1),
@@ -103,16 +122,16 @@ gmii_tx gmiisend(
 	.full(full),
 	.rd_en(rd_en),
 	.wr_en(fil_wr_en),
-	.vperi(/*vperi*/),
+	.vperi(vperi),
 	// AX FIFO
-	/*
+	
 	.adesig(ade_tx),
 	.ade_num(ade_num),
-	.axdout(ax_dout),
-	.ax_send_full(ax_send_full),
-	.ax_send_empty(ax_send_empty),
+	.axdout(out),
+	.ax_send_full(afull),
+	.ax_send_empty(aempty),
 	.ax_send_rd_en(ax_send_rd_en),
-*/
+
 	/*** Ethernet PHY GMII ****/
 	.tx_clk(gmii_tx_clk),
 	.tx_en(TXEN),
@@ -120,86 +139,8 @@ gmii_tx gmiisend(
 	.sw(1'b1)
 );
 
-/*
-reg hs,vs;
-reg hs_q,vs_q;
-reg [10:0]hc,vc;
-always @ (posedge fifo_clk)begin
-  if(sys_rst)begin
-		hs <= 1'b0;
-		vs <= 1'b0;
-		hc <= 11'b0;
-		vc <= 11'b0;
-	end else begin
-	  hs_q <= hs;
-	  vs_q <= vs;
-	  // hcounter , vcounter Generate 
-		if(hc == 11'd1649)begin
-			hc <= 11'd0;
-			if(vc == 11'd749)
-				vc <= 11'd0;
-			else
-				vc <= vc + 11'd1;
-		end else
-		  hc <= hc + 11'd1;
-
-		//hsync, vsync Generate
-		if((hc >= 110) && (hc <= 149))
-			hs <= 1'b1;
-		else 
-			hs <= 1'b0;
-
-		if((vc >= 0) && (vc <= 4))
-			vs <= 1'b1;
-		else 
-			vs <= 1'b0;
-
-	end
-end
-*/
 
 wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
-
-//ADE Generator
-//   *** ADE has 804 or 805 period in a Frame.
-//   *** entire 750 lines ---> at least, one ADE per line
-//   *** 2 ade periods every 15 lines.
-// 
-reg [3:0]c15;
-reg [10:0]vc_b;
-reg ade;/*
-always@(posedge fifo_clk)begin
-  if(sys_rst)begin
-		ade <= 1'b0;
-		c15 <= 4'd0;
-		vc_b <= 11'd0;
-	end else begin
-	  vc_b <= vc;
-		if(vc != vc_b)begin
-			if(c15 == 4'd14)
-				c15 <= 4'd0;
-			else
-				c15 <= c15 + 4'd1;
-		end
-
-	  if(vc == 0)begin
-			if( ((hcnt >= 1000) && (hcnt <= 1128)) || ((hc  >= 93) && (hc <= 125)) )
-				ade <= 1'b1;
-			else
-				ade <= 1'b0;
-		end else if(c15 == 4'd14)begin
-			if( ((hc >= 59) && (hc <= 91)) || ((hc >= 93) && (hc <= 125)) )
-				ade <= 1'b1;
-			else
-				ade <= 1'b0;
-		end else begin
-			if( (hc >= 59) && (hc <= 91) )
-				ade <= 1'b1;
-			else
-				ade <= 1'b0;
-		end
-	end
-end*/
 
 tmds_timing timing_inst (
   .rx0_pclk(fifo_clk),
@@ -231,16 +172,19 @@ endtask
 // Scinario
 //
 
-reg [31:0] vrom [0:2475000];
+reg [11:0] adata;
+reg [47:0] vrom [0:2475000];
 reg [11:0] arom [0:2024];
 reg [21:0]vcounter = 22'd0;
 reg [11:0]acounter = 12'd0;
-reg [3:0]vv,hh;
+reg [3:0]vv,hh,aa;
 assign vsyn = vv[0];
 assign hsyn = hh[0];
+assign ade  = aa[0];
+assign adin = adata;
 
 always@(posedge fifo_clk)begin
-  {vv,hh,tmds_data}     <= vrom[vcounter];
+  {vv,hh,aa,tmds_data,adata}     <= vrom[vcounter];
 	vcounter	<= vcounter + 22'd1;
 end
 /*if(rd_en)begin
@@ -248,6 +192,7 @@ end
 		vcounter	<= vcounter + 12'd1;
 	end
 */
+/*
 always@(posedge fifo_clk)begin
 
 	if(ax_send_rd_en)begin
@@ -255,7 +200,7 @@ always@(posedge fifo_clk)begin
 		acounter <= acounter + 12'd1;
   end
 end
-
+*/
 
 initial begin
 	$dumpfile("./test.vcd");
@@ -274,7 +219,7 @@ initial begin
 	waitclock;
 	
 	
-	#3000000;
+	#41000000;
 	$finish;
 end
 
