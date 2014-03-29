@@ -33,9 +33,10 @@ wire rx_vempty, rx_vfull;
 wire rx_fifo_wr_en;
 wire TXEN;
 wire [7:0]TXD;
-wire [11:0]rx_axdin;
+wire [11:0]rx_axdin, ax_rx_dout;
 wire ax_recv_wr_en, ax_send_rd_en;
 wire rx_aempty, rx_afull;
+
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(gmii_tx_clk),
@@ -54,7 +55,7 @@ wire fifo_read;
 afifo29 recv_video_fifo(
      .Data(rx_vdin),
      .WrClock(gmii_tx_clk),
-     .RdClock(),
+     .RdClock(fifo_clk),
      .WrEn(rx_fifo_wr_en),
      .RdEn(fifo_read),
      .Reset(sys_rst),
@@ -64,15 +65,16 @@ afifo29 recv_video_fifo(
      .Full(rx_vfull)
 );
 
+wire ax_rx_rd_en;
 afifo12 recv_audio_fifo(
      .Data(rx_axdin),
      .WrClock(gmii_tx_clk),
      .RdClock(fifo_clk),
      .WrEn(ax_recv_wr_en),
-     .RdEn(ax_send_rd_en),
+     .RdEn(ax_rx_rd_en),
      .Reset(sys_rst),
      .RPReset(),
-     .Q(ax_dout),
+     .Q(ax_rx_dout),
      .Empty(rx_aempty),
      .Full(rx_afull)
 );
@@ -172,7 +174,7 @@ always@(posedge fifo_clk)begin
 		ck            <= 1'b0;
 		audio         <= 1'b0;
 	end else begin
-	  b_left <= ax_dout[11:8];
+	  b_left <= ax_rx_dout[11:8];
     // Checking Audio onoff //
 		if(~rx_aempty)
 	    ck <= 1'b1; 
@@ -291,7 +293,7 @@ afifo48 send_video_fifo(
 );
 
 
-wire [11:0] adin,ax_dout;
+wire [11:0] adin,ax_tx_dout;
 wire aempty,afull;
 wire ade;
 
@@ -312,14 +314,14 @@ afifo12 send_audio_fifo(
      .RdEn(ax_send_rd_en),
      .Reset(sys_rst),
      .RPReset(),
-     .Q(ax_dout),
+     .Q(ax_tx_dout),
      .Empty(aempty),
      .Full(afull)
 );
 
 wire vperi = (vcnt >= 21) && (vcnt <= 741);
 wire fil_wr_en =  video_en & (hcnt >= 12'd220 & hcnt < 12'd1420);
-wire [23:0] out = {12'd0,ax_dout};
+wire [23:0] out = {12'd0,ax_tx_dout};
 wire ade_tx = ~video_en && ((hcnt >= 11'd1504) && (hcnt < 11'd1510));
 
 gmii_tx gmiisend(
@@ -394,20 +396,6 @@ always@(posedge fifo_clk)begin
   {vv,hh,aa,tmds_data,adata}     <= vrom[vcounter];
 	vcounter	<= vcounter + 22'd1;
 end
-/*if(rd_en)begin
-		//tx_data 	<= vrom[vcounter];
-		vcounter	<= vcounter + 12'd1;
-	end
-*/
-/*
-always@(posedge fifo_clk)begin
-
-	if(ax_send_rd_en)begin
-		ax_dout  <= arom[acounter];
-		acounter <= acounter + 12'd1;
-  end
-end
-*/
 
 initial begin
 	$dumpfile("./test.vcd");
@@ -426,7 +414,7 @@ initial begin
 	waitclock;
 	
 	
-	#4000000;
+	#40000000;
 	$finish;
 end
 
