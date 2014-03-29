@@ -70,6 +70,9 @@ always @ (posedge i_clk_74M) begin
 
 		if(i_hcnt == hfin) 
 			hactive <= 1'b0;
+
+		if(i_vcnt == 12'd0) // reset logic
+			vactive <= 1'b0;
 	
 		if(i_vcnt == vstart) 
 			vactive <= 1'b1;
