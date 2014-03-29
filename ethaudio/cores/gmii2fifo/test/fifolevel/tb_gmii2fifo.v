@@ -176,24 +176,24 @@ always@(posedge fifo_clk)begin
 	end else begin
 	  b_left <= ax_rx_dout[11:8];
     // Checking Audio onoff //
-		if(~rx_aempty)
+	  if(~rx_aempty)
 	    ck <= 1'b1; 
 	  if(rx_vcnt == 12'd0)begin
-		  if(ck)
-			  audio <= 1'b1;
-		  else
-			  audio <= 1'b0;
-		  ck <= 1'b0;
-		end
+		if(ck)
+		  audio <= 1'b1;
+		else
+		  audio <= 1'b0;
+		ck <= 1'b0;
+	  end
 
-		if(rx_vde)
-			init <= 1'b1;
-		if(~rx_vde & ~rx_aempty & init)
-			fl <= 1'b1;
-		else begin
-			fl <= 1'b0;
-			axp <= 1'b0;
-		end
+	  if(rx_vde)
+		init <= 1'b1;
+	  if(~rx_vde & ~rx_aempty & init)
+		fl <= 1'b1;
+  	  else begin
+		fl <= 1'b0;
+		axp <= 1'b0;
+	  end
 
 		// Start logic 
 		if(fl & rx_hcnt == 12'd1530)begin
