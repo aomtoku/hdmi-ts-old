@@ -24,11 +24,13 @@ module timing_gen (
 	input  wire        clk125m,
 
 	input  wire        fifo_wr_en,
+	output wire        rst,
 	input  wire [10:0] y_din
 );
 
 reg [10:0] y_din_q,y_din_qq;
 reg [10:0] vsync_f;
+assign rst = vsync_f[0];
 
 always@(posedge clk125m)begin
 	if(restart)begin
