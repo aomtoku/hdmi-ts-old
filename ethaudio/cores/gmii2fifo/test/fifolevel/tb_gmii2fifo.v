@@ -225,11 +225,12 @@ always@(posedge fifo_clk)begin
 		if(axp)begin
 		  if(acnt == 6'd35)begin
 		    acnt <= 6'd0; 
-			//if(b_left <= axdout[11:8])
-			if(flg)
+			if(flg) // next ade enable ? deable
 			  ax_recv_rd_en <= 1'b1; // 0
-			else
+			else begin
 			  ax_recv_rd_en <= 1'b0; // 1
+			  axp <= 1'b0;
+			end
 		  end else if(acnt == 6'd31)begin
 		    flg           <= 1'b0;
 		    ax_recv_rd_en <= 1'b0; 
@@ -237,8 +238,6 @@ always@(posedge fifo_clk)begin
 		  end else begin
 			if(b_left < bb_left)
 			  flg <= 1'b1; // 0
-			else
-			  axp <= 1'b0;
 			acnt <= acnt + 6'd1;
 		  end
 		end
