@@ -156,7 +156,7 @@ auxfifo12 aux_recv(
 	.rd_clk(pclk),
 	.din(axdin),
 	.wr_en(ax_recv_wr_en),
-	.rd_en(ax_rx_rd_en),
+	.rd_en(ax_recv_rd_en),
 	.dout(axdout),
 	.full(ax_recv_full),
 	.empty(ax_recv_empty)
