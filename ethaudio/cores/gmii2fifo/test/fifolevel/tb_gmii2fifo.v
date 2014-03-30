@@ -66,6 +66,7 @@ afifo29 recv_video_fifo(
 );
 
 wire rst;
+wire ax_reset;
 wire ax_rx_rd_en;
 afifo12 recv_audio_fifo(
      .Data(rx_axdin),
@@ -73,7 +74,7 @@ afifo12 recv_audio_fifo(
      .RdClock(fifo_clk),
      .WrEn(ax_recv_wr_en),
      .RdEn(ax_rx_rd_en),
-     .Reset(sys_rst | rst),
+     .Reset(sys_rst | ax_reset),
      .RPReset(),
      .Q(ax_rx_dout),
      .Empty(rx_aempty),
@@ -166,8 +167,21 @@ reg audio;
 reg ax_recv_rd_en;
 assign ax_rx_rd_en =  ax_recv_rd_en;
 
+reg rrst,ax_rst;
 always@(posedge fifo_clk)begin
-	if(sys_rst | rst)begin
+  if(sys_rst)
+		ax_rst <= 1'b0;
+  else begin
+	rrst <= rst;
+	if({rst,rrst} == 2'b01)
+	  ax_rst <= 1'b1;
+  end
+end
+
+assign ax_reset = ~ax_rst & rst
+
+always@(posedge fifo_clk)begin
+	if(sys_rst | ax_reset)begin
 		fl            <= 1'b0;
 		flg           <= 1'b0;
 		init          <= 1'b0;
