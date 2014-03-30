@@ -708,8 +708,10 @@ always@(posedge pclk)begin
 			  //if(b_left > 0)
 			  if(flg)
 			    ax_recv_rd_en <= 1'b1; // 0
-			  else
+			  else begin
 			    ax_recv_rd_en <= 1'b0; // 1
+					axp <= 1'b0;
+				end
 		  end else if(acnt == 6'd31)begin
 		    flg           <= 1'b0;
 				ax_recv_rd_en <= 1'b0; 
@@ -717,8 +719,6 @@ always@(posedge pclk)begin
 		  end else begin
 			  if(b_left < bb_left)
 					flg <= 1'b1;
-				else
-					axp <= 1'b0;
 			  acnt <= acnt + 6'd1;
 		  end
 		end
