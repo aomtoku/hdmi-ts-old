@@ -166,7 +166,7 @@ reg ax_recv_rd_en;
 assign ax_rx_rd_en =  ax_recv_rd_en;
 
 always@(posedge fifo_clk)begin
-	if(sys_rst)begin
+	if(sys_rst | rst)begin
 		fl            <= 1'b0;
 		init          <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
