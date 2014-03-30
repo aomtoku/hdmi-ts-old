@@ -660,7 +660,7 @@ end
 assign ax_reset = ~ax_rst & rst;
 
 always@(posedge pclk)begin
-	if(RSTBTN | reset | ax_reset))begin
+	if(RSTBTN | reset | ax_reset)begin
 		fl            <= 1'b0;
 		flg           <= 1'b0;
 		init          <= 1'b0;
