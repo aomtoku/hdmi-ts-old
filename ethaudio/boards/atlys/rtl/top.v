@@ -649,12 +649,13 @@ reg audio;
 
 reg rrst,ax_rst;
 always@(posedge pclk)begin
-  if(reset)
+  if(RSTBTN | reset )
 		ax_rst <= 1'b0;
-	else
+	else begin
 		rrst <= rst;
 		if({rst,rrst} == 2'b01)
 		  ax_rst <= 1'b1;
+  end
 end
 
 assign ax_reset = ~ax_rst & rst;
@@ -716,6 +717,8 @@ always@(posedge pclk)begin
 		  end else begin
 			  if(b_left < bb_left)
 					flg <= 1'b1;
+				else
+					axp <= 1'b0;
 			  acnt <= acnt + 6'd1;
 		  end
 		end
