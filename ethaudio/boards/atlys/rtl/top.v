@@ -149,8 +149,9 @@ wire [11:0] axdout;
 reg init;
 wire ax_rx_rd_en ;
 wire rst;
+wire ax_reset;
 auxfifo12 aux_recv(
-  .rst(reset| RSTBTN | rst),
+  .rst(reset| RSTBTN | ax_reset),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
 	.din(axdin),
@@ -646,8 +647,20 @@ reg axp;
 reg ck;
 reg audio;
 
+reg rrst,ax_rst;
 always@(posedge pclk)begin
-	if(RSTBTN | reset | rst)begin
+  if(reset)
+		ax_rst <= 1'b0;
+	else
+		rrst <= rst;
+		if({rst,rrst} == 2'b01)
+		  ax_rst <= 1'b1;
+end
+
+assign ax_reset = ~ax_rst & rst;
+
+always@(posedge pclk)begin
+	if(RSTBTN | reset | ax_reset))begin
 		fl            <= 1'b0;
 		flg           <= 1'b0;
 		init          <= 1'b0;
