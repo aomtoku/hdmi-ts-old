@@ -1,0 +1,49 @@
+[*]
+[*] GTKWave Analyzer v3.3.48 (w)1999-2013 BSI
+[*] Sun Mar 30 11:40:07 2014
+[*]
+[dumpfile] "/Users/toku1938/Work/AtlysProjectAom/ethaudio/cores/gmii2fifo/test/fifolevel/test.vcd"
+[dumpfile_mtime] "Sun Mar 30 11:39:32 2014"
+[dumpfile_size] 4383841438
+[savefile] "/Users/toku1938/Work/AtlysProjectAom/ethaudio/cores/gmii2fifo/test/fifolevel/test.gtkw"
+[timestart] 17908458000
+[size] 1132 1011
+[pos] -1 -1
+*-19.182343 17909939000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 219
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 299
+@28
+tb_gmii2fifo.TXEN
+@22
+tb_gmii2fifo.TXD[7:0]
+@28
+tb_gmii2fifo.ax_recv_wr_en
+@22
+tb_gmii2fifo.rx_axdin[11:0]
+@28
+tb_gmii2fifo.vde
+@22
+tb_gmii2fifo.ax_rx_dout[11:0]
+tb_gmii2fifo.b_left[3:0]
+tb_gmii2fifo.bb_left[3:0]
+@28
+tb_gmii2fifo.rx_vde
+tb_gmii2fifo.ax_rx_rd_en
+@24
+tb_gmii2fifo.acnt[5:0]
+@28
+tb_gmii2fifo.axp
+tb_gmii2fifo.init
+tb_gmii2fifo.rst
+@29
+tb_gmii2fifo.ax_reset
+@22
+tb_gmii2fifo.rx_hcnt[11:0]
+@24
+tb_gmii2fifo.rx_vcnt[11:0]
+@28
+tb_gmii2fifo.rx_aempty
+[pattern_trace] 1
+[pattern_trace] 0
