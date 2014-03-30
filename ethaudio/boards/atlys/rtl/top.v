@@ -1100,11 +1100,12 @@ endfunction
 `endif
 
 reg [3:0]anum = 4'd0;
-always @(RXCLK) begin
+/*always @(RXCLK) begin
 	//sw_dip <= DEBUG_SW;
 	if(anum < ade_num)begin
 	    anum <= ade_num;
-	end
+	end*/
+always @(*) begin
 	case(DEBUG_SW[1])
 		//1'b0 : LED <= {aclkc[11:8],recv_full,recv_empty,ade,vde};
 		//1'b1 : LED <= aclkc[7:0];
