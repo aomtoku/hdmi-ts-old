@@ -25,7 +25,7 @@ module top (
 	input  wire [3:0] SW,
 	input  wire [3:0] DEBUG_SW,
 
-	output reg  [7:0] LED,
+	output wire  [7:0] LED,
 	output wire [5:0] JA
 );
 
@@ -151,7 +151,7 @@ wire ax_rx_rd_en ;
 wire rst;
 wire ax_reset;
 auxfifo12 aux_recv(
-  .rst(reset| RSTBTN | ax_reset),
+  .rst(/*reset| RSTBTN | */ax_reset),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
 	.din(axdin),
@@ -661,7 +661,7 @@ end
 assign ax_reset = ~ax_rst & rst;
 
 always@(posedge pclk)begin
-	if(RSTBTN | reset | ax_reset)begin
+	if(RSTBTN | reset /*| ax_reset*/)begin
 		fl            <= 1'b0;
 		flg           <= 1'b0;
 		init          <= 1'b0;
@@ -1105,7 +1105,8 @@ reg [3:0]anum = 4'd0;
 	if(anum < ade_num)begin
 	    anum <= ade_num;
 	end*/
-always @(*) begin
+assign LED = {ax_recv_rd_en,ade_m,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
+/*always @(*) begin
 	case(DEBUG_SW[1])
 		//1'b0 : LED <= {aclkc[11:8],recv_full,recv_empty,ade,vde};
 		//1'b1 : LED <= aclkc[7:0];
@@ -1126,5 +1127,5 @@ always @(*) begin
 		//4'b1010 : LED <= {4'd0,dout[27:24]};
 	endcase
 end
-
+*/
 endmodule
