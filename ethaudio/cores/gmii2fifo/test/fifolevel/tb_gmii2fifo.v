@@ -178,7 +178,7 @@ always@(posedge fifo_clk)begin
   end
 end
 
-assign ax_reset = ~ax_rst & rst
+assign ax_reset = ~ax_rst & rst;
 
 always@(posedge fifo_clk)begin
 	if(sys_rst | ax_reset)begin
@@ -237,6 +237,8 @@ always@(posedge fifo_clk)begin
 		  end else begin
 			if(b_left < bb_left)
 			  flg <= 1'b1; // 0
+			else
+			  axp <= 1'b0;
 			acnt <= acnt + 6'd1;
 		  end
 		end
