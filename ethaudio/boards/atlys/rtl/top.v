@@ -638,8 +638,9 @@ wire ad = (hcnt >= 1559 & hcnt <= 1590) ? 1'b1 : 1'b0;  //Debug mode ADE. forcin
 //
 // ax_recv_rd_en Generator
 //
-reg [3:0]b_left;
+reg [3:0]b_left,bb_left;
 reg fl;
+reg flg;
 reg [5:0]acnt;
 reg axp;
 reg ck;
@@ -648,15 +649,18 @@ reg audio;
 always@(posedge pclk)begin
 	if(RSTBTN | reset | rst)begin
 		fl            <= 1'b0;
+		flg           <= 1'b0;
 		init          <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 		b_left        <= 4'd0;
+		bb_left       <= 4'd0;
 	  acnt          <= 6'd0;
 		axp           <= 1'b0;
 		ck            <= 1'b0;
 		audio         <= 1'b0;
 	end else begin
 	  b_left <= axdout[11:8];
+	  bb_left <= b_left;
     // Checking Audio onoff //
 		if(~ax_recv_empty)
 	    ck <= 1'b1; 
@@ -687,15 +691,18 @@ always@(posedge pclk)begin
 		if(axp)begin
 		  if(acnt == 6'd35)begin
 			  acnt <= 6'd0; 
-			  //if(b_left <= axdout[11:8])
-			  if(b_left > 0)
+			  //if(b_left > 0)
+			  if(flg)
 			    ax_recv_rd_en <= 1'b1; // 0
 			  else
 			    ax_recv_rd_en <= 1'b0; // 1
 		  end else if(acnt == 6'd31)begin
-		    ax_recv_rd_en <= 1'b0; 
+		    flg           <= 1'b0;
+				ax_recv_rd_en <= 1'b0; 
 			  acnt <= acnt + 6'd1;
 		  end else begin
+			  if(b_left < bb_left)
+					flg <= 1'b1;
 			  acnt <= acnt + 6'd1;
 		  end
 		end
@@ -1087,7 +1094,7 @@ always @(RXCLK) begin
 		//1'b1 : LED <= aclkc[7:0];
 		//1'b0 : LED <= {anum,recv_full,recv_empty,ax_rx_rd_en,vde};
 		//1'b1 : LED <= {ax_recv_full,ax_recv_empty,ax_recv_wr_en,ax_recv_rd_en,ax_send_full,ax_send_empty,ax_send_wr_en,ax_send_rd_en};
-		1'b0 : LED <= {send_full, send_empty, ax_send_full, ax_send_empty,ax_send_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
+		1'b0 : LED <= {send_full, send_empty, ax_send_full, ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
 		1'b1 : LED <= axdout[7:0];
 		//4'b1000 : LED <= {4'b0,recv_full,recv_empty,2'b0};
 		//4'b0001 : LED <= error[7:0];
