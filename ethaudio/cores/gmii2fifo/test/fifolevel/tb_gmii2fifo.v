@@ -66,6 +66,7 @@ afifo29 recv_video_fifo(
 );
 
 wire rst;
+wire ax_reset;
 wire ax_rx_rd_en;
 afifo12 recv_audio_fifo(
      .Data(rx_axdin),
@@ -73,7 +74,7 @@ afifo12 recv_audio_fifo(
      .RdClock(fifo_clk),
      .WrEn(ax_recv_wr_en),
      .RdEn(ax_rx_rd_en),
-     .Reset(sys_rst | rst),
+     .Reset(sys_rst | ax_reset),
      .RPReset(),
      .Q(ax_rx_dout),
      .Empty(rx_aempty),
@@ -156,27 +157,44 @@ reg rx_vde;
 // ax_recv_rd_en Generator
 //
 reg init;
-reg [3:0]b_left;
+reg [3:0]b_left,bb_left;
 reg fl;
 reg [5:0]acnt;
 reg axp;
 reg ck;
+reg flg;
 reg audio;
 reg ax_recv_rd_en;
 assign ax_rx_rd_en =  ax_recv_rd_en;
 
+reg rrst,ax_rst;
 always@(posedge fifo_clk)begin
-	if(sys_rst | rst)begin
+  if(sys_rst)
+		ax_rst <= 1'b0;
+  else begin
+	rrst <= rst;
+	if({rst,rrst} == 2'b01)
+	  ax_rst <= 1'b1;
+  end
+end
+
+assign ax_reset = ~ax_rst & rst;
+
+always@(posedge fifo_clk)begin
+	if(sys_rst | ax_reset)begin
 		fl            <= 1'b0;
+		flg           <= 1'b0;
 		init          <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 		b_left        <= 4'd0;
+		bb_left       <= 4'd0;
 	  acnt          <= 6'd0;
 		axp           <= 1'b0;
 		ck            <= 1'b0;
 		audio         <= 1'b0;
 	end else begin
 	  b_left <= ax_rx_dout[11:8];
+	  bb_left <= b_left;
     // Checking Audio onoff //
 	  if(~rx_aempty)
 	    ck <= 1'b1; 
@@ -206,17 +224,22 @@ always@(posedge fifo_clk)begin
 		
 		if(axp)begin
 		  if(acnt == 6'd35)begin
-			  acnt <= 6'd0; 
-			  //if(b_left <= axdout[11:8])
-			  if(b_left > 0)
-			    ax_recv_rd_en <= 1'b1; // 0
-			  else
-			    ax_recv_rd_en <= 1'b0; // 1
+		    acnt <= 6'd0; 
+			//if(b_left <= axdout[11:8])
+			if(flg)
+			  ax_recv_rd_en <= 1'b1; // 0
+			else
+			  ax_recv_rd_en <= 1'b0; // 1
 		  end else if(acnt == 6'd31)begin
+		    flg           <= 1'b0;
 		    ax_recv_rd_en <= 1'b0; 
-			  acnt <= acnt + 6'd1;
+			acnt <= acnt + 6'd1;
 		  end else begin
-			  acnt <= acnt + 6'd1;
+			if(b_left < bb_left)
+			  flg <= 1'b1; // 0
+			else
+			  axp <= 1'b0;
+			acnt <= acnt + 6'd1;
 		  end
 		end
 	end
@@ -384,10 +407,8 @@ endtask
 //
 
 reg [11:0] adata;
-reg [47:0] vrom [0:2475000];
-reg [11:0] arom [0:2024];
+reg [47:0] vrom [0:3712500];
 reg [21:0]vcounter = 22'd0;
-reg [11:0]acounter = 12'd0;
 reg [3:0]vv,hh,aa;
 assign vsyn = vv[0];
 assign hsyn = hh[0];
@@ -406,7 +427,6 @@ initial begin
 	//$readmemh("arequest.mem",arom);
 	sys_rst = 1'b1;
 	vcounter = 0;
-	acounter = 0;
 	
 	waitclock;
 	waitclock;
@@ -415,7 +435,7 @@ initial begin
 	
 	waitclock;
 	
-	
+	//#17910500;
 	#40000000;
 	$finish;
 end
