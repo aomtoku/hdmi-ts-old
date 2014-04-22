@@ -1,0 +1,18 @@
+# Output products list for <mb_mcs>
+mb_bootloop_le.elf
+mb_mcs/mb_bootloop_le.elf
+mb_mcs/microblaze_mcs_setup.tcl
+mb_mcs/system_template.tcl
+mb_mcs.asy
+mb_mcs.bmm
+mb_mcs.gise
+mb_mcs.ngc
+mb_mcs.sym
+mb_mcs.v
+mb_mcs.veo
+mb_mcs.xco
+mb_mcs.xise
+mb_mcs_flist.txt
+mb_mcs_readme.txt
+mb_mcs_sdk.xml
+microblaze_mcs_setup.tcl
