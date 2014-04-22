@@ -1,0 +1,9 @@
+elfcheck
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: elfcheck -hw ../../cputest_hw_platform/system.xml -pe microblaze_0
+axi_timer_test.elf 
+
+ELF file	: axi_timer_test.elf
+elfcheck passed.

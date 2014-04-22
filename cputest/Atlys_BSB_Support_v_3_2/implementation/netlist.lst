@@ -1,0 +1,21 @@
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system.ngc 1394110857
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_push_buttons_5bits_wrapper.ngc 1394110485
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_ethernet_lite_wrapper.ngc 1394110826
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_dip_switches_8bits_wrapper.ngc 1394110776
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_rs232_uart_1_wrapper.ngc 1394110473
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_proc_sys_reset_0_wrapper.ngc 1394110250
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_clock_generator_0_wrapper.ngc 1394110801
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_microblaze_0_ilmb_wrapper.ngc 1394110783
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_microblaze_0_dlmb_wrapper.ngc 1394110789
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_mcb_ddr2_wrapper.ngc 1394110820
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_axi4lite_0_wrapper.ngc 1394110807
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_axi4_0_wrapper.ngc 1394110814
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_microblaze_0_wrapper.ngc 1394110795
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_microblaze_0_i_bram_ctrl_wrapper.ngc 1394110284
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_microblaze_0_d_bram_ctrl_wrapper.ngc 1394110305
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_microblaze_0_intc_wrapper.ngc 1394110264
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_debug_module_wrapper.ngc 1394110398
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_axi_timer_0_wrapper.ngc 1394110422
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_leds_8bits_wrapper.ngc 1394110524
+/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_microblaze_0_bram_block_wrapper.ngc 1394110316
+OK

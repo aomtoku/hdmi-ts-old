@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;OFFSET = IN 6.000 BEFORE  &quot;PHY_rx_clk&quot;;&gt; [/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system_ethernet_lite_wrapper.ncf(4)], is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="135" delta="new" >Constraint <arg fmt="%s" index="1">&lt;INST /system/EXPANDED/system/axi4_0/axi4_0\/si_converter_bank\/gen_conv_slot[0].clock_conv_inst\/interconnect_aresetn_resync&lt;2&gt;_inv1_INV_0 TNM = FFS:axi4_0_reset_resync&gt;</arg>: No instances of type <arg fmt="%s" index="2">FFS</arg> were found under block &quot;<arg fmt="%s" index="3">axi4_0/axi4_0/si_converter_bank/gen_conv_slot[0].clock_conv_inst/interconnect_aresetn_resync&lt;2&gt;_inv1_INV_0</arg>&quot; (type=<arg fmt="%s" index="4">INV</arg>).
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="135" delta="new" >Constraint <arg fmt="%s" index="1">&lt;INST /system/EXPANDED/system/axi4lite_0/axi4lite_0\/si_converter_bank\/gen_conv_slot[0].clock_conv_inst\/interconnect_aresetn_resync&lt;2&gt;_inv1_INV_0 TNM = FFS:axi4lite_0_reset_resync&gt;</arg>: No instances of type <arg fmt="%s" index="2">FFS</arg> were found under block &quot;<arg fmt="%s" index="3">axi4lite_0/axi4lite_0/si_converter_bank/gen_conv_slot[0].clock_conv_inst/interconnect_aresetn_resync&lt;2&gt;_inv1_INV_0</arg>&quot; (type=<arg fmt="%s" index="4">INV</arg>).
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="58" delta="new" >Constraint <arg fmt="%s" index="1">&lt;TIMEGRP axi4lite_0_reset_source = FFS PADS CPUS;&gt;</arg>: <arg fmt="%s" index="2">CPUS &quot;*&quot;</arg> does not match any design objects.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="58" delta="new" >Constraint <arg fmt="%s" index="1">&lt;TIMEGRP axi4_0_reset_source = FFS PADS CPUS;&gt;</arg>: <arg fmt="%s" index="2">CPUS &quot;*&quot;</arg> does not match any design objects.
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="194" delta="new" >The <arg fmt="%s" index="1">TNM</arg> &apos;<arg fmt="%s" index="2">axi4_0_reset_resync</arg>&apos;, does not directly or indirectly drive any flip-flops, latches and/or RAMs and is not actively used by any referencing constraint.
+ </msg>
+
+<msg type="warning" file="ConstraintSystem" num="194" delta="new" >The <arg fmt="%s" index="1">TNM</arg> &apos;<arg fmt="%s" index="2">axi4lite_0_reset_resync</arg>&apos;, does not directly or indirectly drive any flip-flops, latches and/or RAMs and is not actively used by any referencing constraint.
+ </msg>
+
+<msg type="info" file="ConstraintSystem" num="178" delta="new" ><arg fmt="%s" index="1">TNM</arg> &apos;<arg fmt="%s" index="2">sys_clk_pin</arg>&apos;, used in period specification &apos;<arg fmt="%s" index="3">TS_sys_clk_pin</arg>&apos;, was traced into <arg fmt="%s" index="4">PLL_ADV</arg> instance <arg fmt="%s" index="5">clock_generator_0/PLL0_INST/Using_PLL_ADV.PLL_ADV_inst</arg>. The following new TNM groups and period specifications were generated at the <arg fmt="%s" index="6">PLL_ADV</arg> output(s): 
+<arg fmt="%s" index="7">CLKOUT1</arg>: <arg fmt="%s" index="8">&lt;TIMESPEC TS_clk_600_0000MHz180PLL0_nobuf = PERIOD &quot;clk_600_0000MHz180PLL0_nobuf&quot; TS_sys_clk_pin * 6 PHASE 0.833333333 ns HIGH 50%&gt;</arg>
+</msg>
+
+<msg type="info" file="ConstraintSystem" num="178" delta="new" ><arg fmt="%s" index="1">TNM</arg> &apos;<arg fmt="%s" index="2">sys_clk_pin</arg>&apos;, used in period specification &apos;<arg fmt="%s" index="3">TS_sys_clk_pin</arg>&apos;, was traced into <arg fmt="%s" index="4">PLL_ADV</arg> instance <arg fmt="%s" index="5">clock_generator_0/PLL0_INST/Using_PLL_ADV.PLL_ADV_inst</arg>. The following new TNM groups and period specifications were generated at the <arg fmt="%s" index="6">PLL_ADV</arg> output(s): 
+<arg fmt="%s" index="7">CLKOUT0</arg>: <arg fmt="%s" index="8">&lt;TIMESPEC TS_clk_600_0000MHzPLL0_nobuf = PERIOD &quot;clk_600_0000MHzPLL0_nobuf&quot; TS_sys_clk_pin * 6 HIGH 50%&gt;</arg>
+</msg>
+
+<msg type="info" file="ConstraintSystem" num="178" delta="new" ><arg fmt="%s" index="1">TNM</arg> &apos;<arg fmt="%s" index="2">sys_clk_pin</arg>&apos;, used in period specification &apos;<arg fmt="%s" index="3">TS_sys_clk_pin</arg>&apos;, was traced into <arg fmt="%s" index="4">PLL_ADV</arg> instance <arg fmt="%s" index="5">clock_generator_0/PLL0_INST/Using_PLL_ADV.PLL_ADV_inst</arg>. The following new TNM groups and period specifications were generated at the <arg fmt="%s" index="6">PLL_ADV</arg> output(s): 
+<arg fmt="%s" index="7">CLKOUT2</arg>: <arg fmt="%s" index="8">&lt;TIMESPEC TS_clock_generator_0_clock_generator_0_SIG_PLL0_CLKOUT2 = PERIOD &quot;clock_generator_0_clock_generator_0_SIG_PLL0_CLKOUT2&quot; TS_sys_clk_pin HIGH 50%&gt;</arg>
+</msg>
+
+<msg type="warning" file="ConstraintSystem" num="0" >The Offset constraint &lt;OFFSET = IN 6000.000000000 pS BEFORE Ethernet_Lite/PHY_rx_clk;&gt;, is specified without a duration.  This will result in a lack of hold time checks in timing reports.  If hold time checks are desired a duration value should be specified following the &apos;VALID&apos; keyword.
+</msg>
+
+<msg type="warning" file="NgdBuild" num="1012" delta="new" >The constraint <arg fmt="%s" index="1">&lt;NET &quot;zio&quot; IOSTANDARD = &quot;SSTL18_II&quot;&gt;</arg> is overridden on the design object <arg fmt="%s" index="2">zio</arg> by the constraint <arg fmt="%s" index="3">&lt;NET zio IOSTANDARD = &quot;LVCMOS18_JEDEC&quot;;&gt; [system.ucf(48)]</arg>.
+</msg>
+
+<msg type="warning" file="NgdBuild" num="1012" delta="new" >The constraint <arg fmt="%s" index="1">&lt;NET &quot;rzq&quot; IOSTANDARD = &quot;SSTL18_II&quot;&gt;</arg> is overridden on the design object <arg fmt="%s" index="2">rzq</arg> by the constraint <arg fmt="%s" index="3">&lt;NET rzq IOSTANDARD = &quot;LVCMOS18_JEDEC&quot;;&gt; [system.ucf(47)]</arg>.
+</msg>
+
+<msg type="warning" file="NgdBuild" num="443" delta="new" >SFF primitive &apos;<arg fmt="%s" index="1">Ethernet_Lite/Ethernet_Lite/XEMAC_I/EMAC_I/COLLISION_SYNC_2</arg>&apos; has unconnected output pin
+</msg>
+
+<msg type="warning" file="NgdBuild" num="443" delta="new" >SFF primitive &apos;<arg fmt="%s" index="1">microblaze_0/microblaze_0/MicroBlaze_Core_I/Performance.Decode_I/Using_FPGA.Gen_Bits[27].MEM_EX_Result_Inst</arg>&apos; has unconnected output pin
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N25</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N26</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N27</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N28</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N29</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N30</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N31</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N32</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N33</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N34</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N35</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N36</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N37</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N38</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N39</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N40</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N41</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N42</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N43</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N44</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N45</arg>&apos; has no driver
+</msg>
+
+<msg type="warning" file="NgdBuild" num="452" delta="new" ><arg fmt="%s" index="1">logical</arg> net &apos;<arg fmt="%s" index="2">N46</arg>&apos; has no driver
+</msg>
+
+</messages>
+

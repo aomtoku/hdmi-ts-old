@@ -1,0 +1,86 @@
+/*
+ * axi_timer_test.c
+ *
+ *  Created on: 2014/04/22
+ *      Author: aom
+ */
+/* * axi_timer_test.c * *  Created on: 2011/08/12 *      Author: Masaaki */
+
+#include "xbasic_types.h"
+#include "xio.h"
+#include "mb_interface.h"
+#include "xparameters.h"
+
+#define AXI_TIMER_0_TCSR0    XPAR_AXI_TIMER_0_BASEADDR    // Control/Status Register 0
+#define AXI_TIMER_0_TLR0    XPAR_AXI_TIMER_0_BASEADDR+0x4    // Load Register 0
+#define AXI_TIMER_0_TCR0    XPAR_AXI_TIMER_0_BASEADDR+0x8    // Timer/Counter Register 0
+#define AXI_TIMER_0_TCSR1    XPAR_AXI_TIMER_0_BASEADDR+0x10    // Control/Status Register 1
+#define AXI_TIMER_0_TLR1    XPAR_AXI_TIMER_0_BASEADDR+0x14    // Load Register 1
+#define AXI_TIMER_0_TCR1    XPAR_AXI_TIMER_0_BASEADDR+0x18    // Timer/Counter Register 1
+
+#define ENABLE_ALL_TIMERS                (0x1<<10)
+#define ENABLE_PULSE_WIDTH_MODULATION    (0x1<<9)
+#define    TIMER_INTERRUPT                    (0x1<<8)
+#define ENABLE_TIMER                    (0x1<<7)
+#define ENABLE_INTERRUPT                (0x1<<6)
+#define LOAD_TIMER                        (0x1<<5)
+#define AUTO_RELOAD_HOLD_TIMER            (0x1<<4)
+#define ENABLE_EXT_CAPTURE_TRIG            (0x1<<3)
+#define ENABLE_EXT_GENERATE_SIG            (0x1<<2)
+#define DOWN_UP_COUNT_TIMER                (0x1<<1)
+#define TIMER_MODE_CAP_GENE                (0x1)
+
+int interrupt = 0;
+
+void axi_timer_init(){
+    *(volatile *)(AXI_TIMER_0_TLR0) = 0x004C4B40; // 0.1秒
+    // *(volatile *)(AXI_TIMER_0_TLR0) = 0x00989680; // 0.2秒
+    *(volatile *)(AXI_TIMER_0_TCSR0) = ENABLE_ALL_TIMERS | LOAD_TIMER; // TLR0へロード
+    *(volatile *)(AXI_TIMER_0_TCSR0) = ENABLE_ALL_TIMERS | ENABLE_TIMER | ENABLE_INTERRUPT | AUTO_RELOAD_HOLD_TIMER | DOWN_UP_COUNT_TIMER; // GenerateモードでDWONカウント、割り込みあり、オートロードあり
+}
+
+void timer_int_handler(void * arg) {
+    interrupt = 1;
+}
+
+void write_data(unsigned int address, unsigned int data)
+{
+    *(volatile *)(XPAR_CHARDISPC_0_BASEADDR) = address;
+    *(volatile *)(XPAR_CHARDISPC_0_BASEADDR+4) = data;
+}
+
+int read_data(unsigned int address)
+{
+    *(volatile *)(XPAR_CHARDISPC_0_BASEADDR) = address;
+    return(*(volatile *)(XPAR_CHARDISPC_0_BASEADDR+4));
+}
+
+int main()
+{
+    unsigned int addr;
+    unsigned int color, char_code, data;
+    unsigned int temp;
+
+    axi_timer_init(); // axi_timerの初期化
+
+    // 割り込みハンドラ登録、割り込み許可
+    microblaze_register_handler(timer_int_handler, (void *) 0);
+    microblaze_enable_interrupts();
+
+    for(addr=0, color=1, char_code=0x21; addr < 100*75; addr++, color++, char_code++){
+        data = (color & 0x7)<<7 | char_code;
+        write_data(addr, data);
+        if (char_code == 0x7e) // キャラクタの~
+            char_code = 0x20; // キャラクタの!
+        if ((color & 0x7) == 7)
+            color = 0;
+
+        // axi_timter割り込み待ち
+        interrupt = 0;
+        while(interrupt==0);
+        *(volatile *)(AXI_TIMER_0_TCSR0) = ENABLE_ALL_TIMERS | ENABLE_TIMER | ENABLE_INTERRUPT | AUTO_RELOAD_HOLD_TIMER | DOWN_UP_COUNT_TIMER | TIMER_INTERRUPT;
+
+    }
+
+    return 0;
+}

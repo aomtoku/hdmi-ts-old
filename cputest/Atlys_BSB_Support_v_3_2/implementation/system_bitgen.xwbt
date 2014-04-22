@@ -1,0 +1,7 @@
+INFILE=/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system.ncd
+OUTFILE=/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation/system.bit
+FAMILY=Spartan6
+PART=xc6slx45-2csg324
+WORKINGDIR=/home/aom/Work/fpga_project/Atlys_BSB_Support_v_3_2/implementation
+LICENSE=ISE
+USER_INFO=174164967_174164968_174422871_144

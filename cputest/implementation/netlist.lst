@@ -1,0 +1,21 @@
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system.ngc 1398176187
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_push_buttons_5bits_wrapper.ngc 1398175820
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_ethernet_lite_wrapper.ngc 1398176155
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_dip_switches_8bits_wrapper.ngc 1398176105
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_rs232_uart_1_wrapper.ngc 1398175808
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_proc_sys_reset_0_wrapper.ngc 1398175587
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_clock_generator_0_wrapper.ngc 1398176130
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_microblaze_0_ilmb_wrapper.ngc 1398176111
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_microblaze_0_dlmb_wrapper.ngc 1398176118
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_mcb_ddr2_wrapper.ngc 1398176149
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_axi4lite_0_wrapper.ngc 1398176136
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_axi4_0_wrapper.ngc 1398176142
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_microblaze_0_wrapper.ngc 1398176124
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_microblaze_0_i_bram_ctrl_wrapper.ngc 1398175620
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_microblaze_0_d_bram_ctrl_wrapper.ngc 1398175640
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_microblaze_0_intc_wrapper.ngc 1398175600
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_debug_module_wrapper.ngc 1398175732
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_axi_timer_0_wrapper.ngc 1398175757
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_leds_8bits_wrapper.ngc 1398175859
+/home/aom/Work/fpga_project/AtlysProjectAom/cputest/implementation/system_microblaze_0_bram_block_wrapper.ngc 1398175651
+OK
