@@ -1,0 +1,3 @@
+PROCESSOR=mb_mcs
+REPOSITORIES=
+HWSPEC=../atlys_hello/system.xml

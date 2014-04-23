@@ -1,0 +1,8 @@
+elfcheck
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: elfcheck -hw ../../atlys_hello/system.xml -pe mb_mcs hello.elf 
+
+ELF file	: hello.elf
+elfcheck passed.

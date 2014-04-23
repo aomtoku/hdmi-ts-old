@@ -1,0 +1,32 @@
+
+**** Build of configuration Debug for project hello ****
+
+make all 
+Building file: ../src/hello.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -Wl,--no-relax -I../../hello_bsp/mb_mcs/include -mno-xl-reorder -mlittle-endian -mcpu=v8.40.a -mxl-soft-mul -MMD -MP -MF"src/hello.d" -MT"src/hello.d" -o"src/hello.o" "../src/hello.c"
+Finished building: ../src/hello.c
+ 
+Building target: hello.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,--no-relax -Wl,-T -Wl,../src/lscript.ld -L../../hello_bsp/mb_mcs/lib -mlittle-endian -mcpu=v8.40.a -mxl-soft-mul -o"hello.elf"  ./src/hello.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: hello.elf
+ 
+Invoking: MicroBlaze Print Size
+mb-size hello.elf  |tee "hello.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  11202	    500	   2178	  13880	   3638	hello.elf
+Finished building: hello.elf.size
+ 
+Invoking: Xilinx ELF Check
+elfcheck hello.elf -hw ../../atlys_hello/system.xml -pe mb_mcs  |tee "hello.elf.elfcheck"
+elfcheck
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: elfcheck -hw ../../atlys_hello/system.xml -pe mb_mcs hello.elf 
+
+ELF file	: hello.elf
+elfcheck passed.
+Finished building: hello.elf.elfcheck
+ 

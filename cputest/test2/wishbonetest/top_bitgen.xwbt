@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/top.ncd
+OUTFILE=/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/top.bit
+FAMILY=Spartan6
+PART=xc6slx45-3csg324
+WORKINGDIR=/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest
+LICENSE=ISE
+USER_INFO=174164967_174164968_174422871_144

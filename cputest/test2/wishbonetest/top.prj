@@ -1,0 +1,2 @@
+verilog work "ipcore_dir/mb_mcs.v"
+verilog work "top.v"

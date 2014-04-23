@@ -1,7 +1,7 @@
 NET "Clk" LOC = L15;
 NET "Reset" LOC = T15;
-NET "UART_Rx" LOC = B16;
-NET "UART_Tx" LOC = A16;
+NET "UART_Rx" LOC = A16;
+NET "UART_Tx" LOC = B16;
 NET "led[0]" LOC = U18;
 NET "led[1]" LOC = M14;
 NET "led[2]" LOC = N14;

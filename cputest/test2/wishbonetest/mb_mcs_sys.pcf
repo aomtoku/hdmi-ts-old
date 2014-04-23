@@ -1,0 +1,22 @@
+//! **************************************************************************
+// Written by: Map P.49d on Wed Apr 23 15:11:14 2014
+//! **************************************************************************
+
+SCHEMATIC START;
+NET
+        "mcs_0/U0/microblaze_I/MicroBlaze_Core_I/Area.Data_Flow_I/PC_Module_I/Using_FPGA.pc_write_I"
+        USELOWSKEWLINES;
+COMP "UART_Rx" LOCATE = SITE "A16" LEVEL 1;
+COMP "UART_Tx" LOCATE = SITE "B16" LEVEL 1;
+COMP "Clk" LOCATE = SITE "L15" LEVEL 1;
+COMP "dip_sw<0>" LOCATE = SITE "A10" LEVEL 1;
+COMP "dip_sw<1>" LOCATE = SITE "D14" LEVEL 1;
+COMP "dip_sw<2>" LOCATE = SITE "C14" LEVEL 1;
+COMP "dip_sw<3>" LOCATE = SITE "P15" LEVEL 1;
+COMP "Reset" LOCATE = SITE "T15" LEVEL 1;
+COMP "led<0>" LOCATE = SITE "U18" LEVEL 1;
+COMP "led<1>" LOCATE = SITE "M14" LEVEL 1;
+COMP "led<2>" LOCATE = SITE "N14" LEVEL 1;
+COMP "led<3>" LOCATE = SITE "L14" LEVEL 1;
+SCHEMATIC END;
+

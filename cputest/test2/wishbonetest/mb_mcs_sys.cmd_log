@@ -1,0 +1,51 @@
+xst -intstyle ise -ifn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.xst" -ofn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd  
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+xst -intstyle ise -ifn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.xst" -ofn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd  
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+xst -intstyle ise -ifn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.xst" -ofn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd  
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd -bm "ipcore_dir/mb_mcs.bmm" 
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+xst -intstyle ise -ifn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.xst" -ofn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd -bm "ipcore_dir/mb_mcs.bmm" 
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+xst -intstyle ise -ifn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.xst" -ofn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd -bm "ipcore_dir/mb_mcs.bmm" 
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+xst -intstyle ise -ifn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.xst" -ofn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd -bm "ipcore_dir/mb_mcs.bmm" 
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+xst -intstyle ise -ifn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.xst" -ofn "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd -bm "ipcore_dir/mb_mcs.bmm" 
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc top.ucf -p xc6slx45-csg324-3 mb_mcs_sys.ngc mb_mcs_sys.ngd -bm "ipcore_dir/mb_mcs.bmm" 
+map -intstyle ise -p xc6slx45-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o mb_mcs_sys_map.ncd mb_mcs_sys.ngd mb_mcs_sys.pcf 
+par -w -intstyle ise -ol high -mt off mb_mcs_sys_map.ncd mb_mcs_sys.ncd mb_mcs_sys.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml mb_mcs_sys.twx mb_mcs_sys.ncd -o mb_mcs_sys.twr mb_mcs_sys.pcf -ucf top.ucf 
+bitgen -intstyle ise -f mb_mcs_sys.ut mb_mcs_sys.ncd 

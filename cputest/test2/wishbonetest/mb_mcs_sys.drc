@@ -1,0 +1,8 @@
+Release 14.4 Drc P.49d (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Wed Apr 23 15:12:12 2014
+
+drc -z mb_mcs_sys.ncd mb_mcs_sys.pcf
+
+DRC detected 0 errors and 0 warnings.

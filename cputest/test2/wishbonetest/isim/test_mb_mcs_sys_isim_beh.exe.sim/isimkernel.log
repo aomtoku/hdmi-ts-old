@@ -1,0 +1,28 @@
+Command line:
+   test_mb_mcs_sys_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  36840
+
+Wed Apr 23 04:22:53 2014
+
+
+ Elaboration Time: 0.45 sec
+
+ Current Memory Usage: 169.882 Meg
+
+ Total Signals          : 18628
+ Total Nets             : 10560
+ Total Signal Drivers   : 6475
+ Total Blocks           : 4269
+ Total Primitive Blocks : 2880
+ Total Processes        : 12747
+ Total Traceable Variables  : 14895
+ Total Scalar Nets and Variables : 1098130
+
+ Total Simulation Time: 28.07 sec
+
+ Current Memory Usage: 179.458 Meg
+
+Wed Apr 23 04:41:00 2014
+

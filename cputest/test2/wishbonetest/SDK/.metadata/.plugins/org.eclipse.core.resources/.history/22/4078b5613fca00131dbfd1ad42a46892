@@ -1,0 +1,29 @@
+/*
+ * hello.c
+ *
+ *  Created on: 2014/04/23
+ *      Author: aom
+ */
+
+#include <stdio.h>
+#include "platform.h"
+#include "xbasic_types.h"
+#include "xiomodule.h"
+
+int main(){
+	u32 uDevId = XPAR_IOMODULE_0_DEVICE_ID;
+	XIOModule mcsIOModule;
+	init_platform();
+
+	// Initialize
+	XIOModule_Initialize(&mcsIOModule, uDevId);
+
+	// Set GPO1
+	XIOModule_DiscreteWrite(&mcsIOModule, 1, 2);
+
+	// UART
+	print("Hello World! aom! \n\r");
+	cleanup_platform();
+	return 0;
+}
+

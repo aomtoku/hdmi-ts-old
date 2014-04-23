@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/top.bit" key="atlys_hello-bitFile"/>
+	<item value="/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/ipcore_dir/mb_mcs.bmm" key="atlys_hello-bmmFile"/>
+	<item value="/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/SDK/hello/Debug/hello.elf" key="atlys_hello-mb_mcs-initElf"/>
+</section>

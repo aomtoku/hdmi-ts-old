@@ -1,0 +1,87 @@
+Running: /opt/Xilinx/14.4/ISE_DS/ISE/bin/lin/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o /home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/test_mb_mcs_sys_isim_beh.exe -prj /home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/test_mb_mcs_sys_beh.prj work.test_mb_mcs_sys work.glbl 
+ISim P.49d (signature 0xfbc00daa)
+Number of CPUs detected in this system: 2
+Turning on mult-threading, number of parallel sub-compilation jobs: 4 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/ipcore_dir/mb_mcs.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/mb_mcs_sys.v" into library work
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/test_mb_mcs_sys.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.4/ISE_DS/ISE//verilog/src/glbl.v" into library work
+WARNING:HDLCompiler:687 - "/opt/Xilinx/14.4/ISE_DS/ISE//verilog/src/glbl.v" Line 5: Illegal redeclaration of module <glbl>.
+Starting static elaboration
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1973: Element index 7 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 1985: Element index 15 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2000: Element index 7 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2006: Element index 15 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2012: Element index 23 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2018: Element index 31 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2081: Element index 7 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2095: Element index 15 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2110: Element index 7 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2116: Element index 15 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2122: Element index 23 into mem is out of bounds
+WARNING:HDLCompiler:1007 - "/build/xfndry10/P.49d/rtf/verilog/src/unisims/RAMB16BWER.v" Line 2128: Element index 31 into mem is out of bounds
+Completed static elaboration
+Fuse Memory Usage: 56160 KB
+Fuse CPU Usage: 3400 ms
+Compiling module VCC
+Compiling module GND
+Compiling module FDR
+Compiling module BSCAN_SPARTAN6(JTAG_CHAIN=2)
+Compiling module BUFG
+Compiling module FDS
+Compiling module FD
+Compiling module FDRE
+Compiling module SRL16E(INIT=16'b01)
+Compiling module FDE
+Compiling module MUXCY
+Compiling module LUT4(INIT=16'b1001000000001001)
+Compiling module LUT6(INIT=64'b100100000000100100...
+Compiling module MUXF7
+Compiling module XORCY
+Compiling module MUXCY_L
+Compiling module MULT_AND
+Compiling module LUT3(INIT=8'b01110010)
+Compiling module MUXF6
+Compiling module MUXF5
+Compiling module FDSE
+Compiling module RAM32X1D
+Compiling module LUT6_2(INIT=64'b1111111100000000...
+Compiling module FDCE
+Compiling module FDC
+Compiling module SRLC16E
+Compiling module FDC_1
+Compiling module FDP
+Compiling module FDRE_1
+Compiling module FDE_1
+Compiling module LUT2(INIT=4'b1110)
+Compiling module LUT5(INIT=32'b010000000000000000...
+Compiling module LUT1(INIT=2'b10)
+Compiling module INV
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module RAMB16BWER(DATA_WIDTH_A=2,DATA_W...
+Compiling module mb_mcs
+Compiling module mb_mcs_sys
+Compiling module test_mb_mcs_sys
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 17 sub-compilation(s) to finish...
+Compiled 278 Verilog Units
+Built simulation executable /home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/test_mb_mcs_sys_isim_beh.exe
+Fuse Memory Usage: 109472 KB
+Fuse CPU Usage: 10700 ms
+GCC CPU Usage: 145250 ms

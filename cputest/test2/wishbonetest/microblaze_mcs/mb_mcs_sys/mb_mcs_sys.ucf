@@ -1,0 +1,26 @@
+
+# PlanAhead Generated physical constraints 
+
+NET "Clk" LOC = C10;
+NET "Reset" LOC = V4;
+NET "UART_Rx" LOC = R7;
+NET "UART_Tx" LOC = T7;
+NET "led[0]" LOC = P4;
+NET "led[1]" LOC = L6;
+NET "led[2]" LOC = F5;
+NET "led[3]" LOC = C2;
+NET "dip_sw[0]" LOC = B3;
+NET "dip_sw[1]" LOC = A3;
+NET "dip_sw[2]" LOC = B4;
+NET "dip_sw[3]" LOC = A4;
+
+# PlanAhead Generated IO constraints 
+
+NET "dip_sw[3]" IOSTANDARD = LVCMOS33;
+NET "dip_sw[2]" IOSTANDARD = LVCMOS33;
+NET "dip_sw[1]" IOSTANDARD = LVCMOS33;
+NET "dip_sw[0]" IOSTANDARD = LVCMOS33;
+NET "Clk" IOSTANDARD = LVCMOS33;
+NET "UART_Rx" IOSTANDARD = LVCMOS33;
+NET "Reset" IOSTANDARD = LVCMOS33;
+NET "UART_Tx" IOSTANDARD = LVCMOS33;

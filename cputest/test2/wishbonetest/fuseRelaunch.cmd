@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/test_mb_mcs_sys_isim_beh.exe" -prj "/home/aom/Work/fpga_project/AtlysProjectAom/cputest/test2/wishbonetest/test_mb_mcs_sys_beh.prj" "work.test_mb_mcs_sys" "work.glbl" 

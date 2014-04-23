@@ -1,0 +1,2 @@
+verilog work "ipcore_dir/mb_mcs.v"
+verilog work "mb_mcs_sys.v"
