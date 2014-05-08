@@ -1,0 +1,2357 @@
+Release 14.4 - xst P.49d (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> 
+Reading design: top.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "top.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "top"
+Output Format                      : NGC
+Target Device                      : xc6slx45-3-csg324
+
+---- Source Options
+Top Module Name                    : top
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/DRAM16XN.v" into library work
+Parsing module <DRAM16XN>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" into library work
+Parsing module <serdes_1_to_5_diff_data>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" into library work
+Parsing module <phsaligner>.
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 65. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 66. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 67. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 68. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 133. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 134. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 135. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 136. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 137. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 138. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 139. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 169. parameter declaration becomes local in phsaligner with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/chnlbond.v" into library work
+Parsing module <chnlbond>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/encode.v" into library work
+Parsing module <encode>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/convert_30to15_fifo.v" into library work
+Parsing module <convert_30to15_fifo>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/decode.v" into library work
+Parsing module <decode>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/crc/rtl/crc_gen.v" into library work
+Parsing module <crc_gen>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/serdes_n_to_1.v" into library work
+Parsing module <serdes_n_to_1>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/dvi_encoder.v" into library work
+Parsing module <dvi_encoder>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" into library work
+Parsing module <dvi_decoder>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/timing/rtl/tmds_timing.v" into library work
+Parsing module <tmds_timing>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/timing/rtl/timing_gen.v" into library work
+Parsing module <timing_gen>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/sync/rtl/frame_checker.v" into library work
+Parsing module <frame_checker>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" into library work
+Parsing module <gmii_tx>.
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 133. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 134. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 135. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 136. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 137. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 138. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 139. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 140. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" Line 141. parameter declaration becomes local in gmii_tx with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii2fifo/rtl/gmii_rec.v" into library work
+Parsing module <gmii2fifo24>.
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii2fifo/rtl/gmii_rec.v" Line 129. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii2fifo/rtl/gmii_rec.v" Line 130. parameter declaration becomes local in gmii2fifo24 with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/fifo48_8k.v" into library work
+Parsing module <fifo48_8k>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/fifo29_32768.v" into library work
+Parsing module <fifo29_32768>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/clk_wiz_v3_6.v" into library work
+Parsing module <clk_wiz_v3_6>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v" into library work
+Parsing module <synchro>.
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v" Line 87: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v" Line 82: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v" Line 83: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v" Line 84: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v" Line 85: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v" Line 86: Attribute target identifier fda not found in this scope
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/debnce.v" into library work
+Parsing module <debnce>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/dcmspi.v" into library work
+Parsing module <dcmspi>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/datacontroller.v" into library work
+Parsing module <datacontroller>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" into library work
+Parsing module <top>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <top>.
+
+Elaborating module <IBUFG>.
+
+Elaborating module <BUFG>.
+
+Elaborating module <SRL16E(INIT=16'b01)>.
+
+Elaborating module <clk_wiz_v3_6>.
+
+Elaborating module <PLL_BASE(BANDWIDTH="OPTIMIZED",CLK_FEEDBACK="CLKFBOUT",COMPENSATION="SYSTEM_SYNCHRONOUS",DIVCLK_DIVIDE=1,CLKFBOUT_MULT=5,CLKFBOUT_PHASE=0.0,CLKOUT0_DIVIDE=4,CLKOUT0_PHASE=0.0,CLKOUT0_DUTY_CYCLE=0.5,CLKOUT1_DIVIDE=4,CLKOUT1_PHASE=90.0,CLKOUT1_DUTY_CYCLE=0.5,CLKIN_PERIOD=10.0,REF_JITTER=0.01)>.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/clk_wiz_v3_6.v" Line 124: Assignment to clkout2_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/clk_wiz_v3_6.v" Line 125: Assignment to clkout3_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/clk_wiz_v3_6.v" Line 126: Assignment to clkout4_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/clk_wiz_v3_6.v" Line 127: Assignment to clkout5_unused ignored, since the identifier is never used
+
+Elaborating module <gmii2fifo24>.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii2fifo/rtl/gmii_rec.v" Line 51: Assignment to ipv4_src ignored, since the identifier is never used
+
+Elaborating module <fifo29_32768>.
+WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/fifo29_32768.v" Line 39: Empty module <fifo29_32768> remains a black box.
+
+Elaborating module <synchro(INITIALIZE="LOGIC0")>.
+
+Elaborating module <FDC>.
+
+Elaborating module <debnce>.
+
+Elaborating module <SRL16E(INIT=16'b0)>.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/debnce.v" Line 114: Result of 17-bit expression is truncated to fit in 16-bit target.
+
+Elaborating module <dcmspi>.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 267: Assignment to busy ignored, since the identifier is never used
+
+Elaborating module <DCM_CLKGEN(CLKFX_DIVIDE=21,CLKFX_MULTIPLY=31,CLKIN_PERIOD=20.0)>.
+
+Elaborating module <PLL_BASE(CLKIN_PERIOD=13,CLKFBOUT_MULT=10,CLKOUT0_DIVIDE=1,CLKOUT1_DIVIDE=10,CLKOUT2_DIVIDE=5,COMPENSATION="INTERNAL")>.
+
+Elaborating module <BUFPLL(DIVIDE=5)>.
+
+Elaborating module <synchro(INITIALIZE="LOGIC1")>.
+
+Elaborating module <FDP>.
+
+Elaborating module <timing_gen>.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/timing/rtl/timing_gen.v" Line 44: Result of 12-bit expression is truncated to fit in 11-bit target.
+
+Elaborating module <datacontroller>.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/datacontroller.v" Line 20: Assignment to y_count ignored, since the identifier is never used
+
+Elaborating module <dvi_encoder>.
+
+Elaborating module <encode>.
+
+Elaborating module <convert_30to15_fifo>.
+
+Elaborating module <DRAM16XN(data_width=30)>.
+
+Elaborating module <RAM16X1D>.
+
+Elaborating module <FD>.
+
+Elaborating module <FDR>.
+
+Elaborating module <FDRE>.
+
+Elaborating module <FDE>.
+
+Elaborating module <serdes_n_to_1(SF=5)>.
+
+Elaborating module <OSERDES2(DATA_WIDTH=5,DATA_RATE_OQ="SDR",DATA_RATE_OT="SDR",SERDES_MODE="MASTER",OUTPUT_MODE="DIFFERENTIAL")>.
+
+Elaborating module <OSERDES2(DATA_WIDTH=5,DATA_RATE_OQ="SDR",DATA_RATE_OT="SDR",SERDES_MODE="SLAVE",OUTPUT_MODE="DIFFERENTIAL")>.
+
+Elaborating module <OBUFDS>.
+
+Elaborating module <fifo48_8k>.
+WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/fifo48_8k.v" Line 39: Empty module <fifo48_8k> remains a black box.
+
+Elaborating module <dvi_decoder>.
+
+Elaborating module <IBUFDS(IOSTANDARD="TMDS_33",DIFF_TERM="FALSE")>.
+
+Elaborating module <BUFIO2(DIVIDE_BYPASS="TRUE",DIVIDE=1)>.
+
+Elaborating module <PLL_BASE(CLKIN_PERIOD=10,CLKFBOUT_MULT=10,CLKOUT0_DIVIDE=1,CLKOUT1_DIVIDE=10,CLKOUT2_DIVIDE=5,COMPENSATION="INTERNAL")>.
+
+Elaborating module <decode>.
+
+Elaborating module <serdes_1_to_5_diff_data(DIFF_TERM="FALSE",BITSLIP_ENABLE="TRUE")>.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 248: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 250: Result of 2-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 251: Result of 2-bit expression is truncated to fit in 1-bit target.
+
+Elaborating module <IBUFDS(DIFF_TERM="FALSE")>.
+
+Elaborating module <IODELAY2(DATA_RATE="SDR",IDELAY_VALUE=0,IDELAY2_VALUE=0,IDELAY_MODE="NORMAL",ODELAY_VALUE=0,IDELAY_TYPE="DIFF_PHASE_DETECTOR",COUNTER_WRAPAROUND="STAY_AT_LIMIT",DELAY_SRC="IDATAIN",SERDES_MODE="MASTER",SIM_TAPDELAY_VALUE=49)>.
+
+Elaborating module <IODELAY2(DATA_RATE="SDR",IDELAY_VALUE=0,IDELAY2_VALUE=0,IDELAY_MODE="NORMAL",ODELAY_VALUE=0,IDELAY_TYPE="DIFF_PHASE_DETECTOR",COUNTER_WRAPAROUND="WRAPAROUND",DELAY_SRC="IDATAIN",SERDES_MODE="SLAVE",SIM_TAPDELAY_VALUE=49)>.
+
+Elaborating module <ISERDES2(DATA_WIDTH=5,DATA_RATE="SDR",BITSLIP_ENABLE="TRUE",SERDES_MODE="MASTER",INTERFACE_TYPE="RETIMED")>.
+
+Elaborating module <ISERDES2(DATA_WIDTH=5,DATA_RATE="SDR",BITSLIP_ENABLE="TRUE",SERDES_MODE="SLAVE",INTERFACE_TYPE="RETIMED")>.
+
+Elaborating module <phsaligner>.
+WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 174: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+WARNING:HDLCompiler:1308 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v" Line 221: Found full_case directive in module phsaligner. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+
+Elaborating module <chnlbond>.
+
+Elaborating module <DRAM16XN(data_width=10)>.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" Line 212: Assignment to de_g ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" Line 234: Assignment to de_r ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 763: Assignment to rx0_reset ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 765: Assignment to rx0_pclkx2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 766: Assignment to rx0_pclkx10 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 767: Assignment to rx0_pllclk0 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 768: Assignment to rx0_pllclk1 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 769: Assignment to rx0_pllclk2 ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 770: Assignment to rx0_plllckd ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 771: Assignment to rx0_tmdsclk ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 772: Assignment to rx0_serdesstrobe ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 775: Assignment to rx0_de ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 777: Assignment to rx0_blue_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 778: Assignment to rx0_green_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 779: Assignment to rx0_red_vld ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 780: Assignment to rx0_blue_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 781: Assignment to rx0_green_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 782: Assignment to rx0_red_rdy ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 784: Assignment to rx0_psalgnerr ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 786: Assignment to rx0_sdata ignored, since the identifier is never used
+
+Elaborating module <tmds_timing>.
+
+Elaborating module <gmii_tx>.
+
+Elaborating module <crc_gen>.
+
+Elaborating module <frame_checker>.
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 850: Assignment to hf_cnt ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 851: Assignment to vf_cnt ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 852: Assignment to hpwcnt ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 853: Assignment to vpwcnt ignored, since the identifier is never used
+WARNING:HDLCompiler:91 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 907: Signal <DEBUG_SW> missing in the sensitivity list is added for synthesis purposes. HDL and post-synthesis simulations may differ as a result.
+WARNING:HDLCompiler:91 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" Line 908: Signal <rxdvv> missing in the sensitivity list is added for synthesis purposes. HDL and post-synthesis simulations may differ as a result.
+WARNING:Xst:2972 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 845. All outputs of instance <frame_checker> of block <frame_checker> are unconnected in block <top>. Underlying logic will be removed.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <top>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v".
+        SW_VGA = 4'b0000
+        SW_SVGA = 4'b0001
+        SW_XGA = 4'b0011
+        SW_HDTV720P = 4'b0010
+        SW_SXGA = 4'b1000
+        SW_CAMERA = 4'b1001
+        HPIXELS_SXGA = 11'b10100000000
+        VLINES_SXGA = 11'b10000000000
+        HSYNCPW_SXGA = 11'b00001110000
+        VSYNCPW_SXGA = 11'b00000000011
+        HFNPRCH_SXGA = 11'b00000110000
+        VFNPRCH_SXGA = 11'b00000000001
+        HBKPRCH_SXGA = 11'b00011111000
+        VBKPRCH_SXGA = 11'b00000100110
+        HPIXELS_HDTV720P = 11'b10100000000
+        VLINES_HDTV720P = 11'b01011010000
+        HSYNCPW_HDTV720P = 11'b00000101000
+        VSYNCPW_HDTV720P = 11'b00000000101
+        HFNPRCH_HDTV720P = 11'b00001101110
+        VFNPRCH_HDTV720P = 11'b00000000101
+        HBKPRCH_HDTV720P = 11'b00011011100
+        VBKPRCH_HDTV720P = 11'b00000010100
+        HPIXELS_XGA = 11'b10000000000
+        VLINES_XGA = 11'b01100000000
+        HSYNCPW_XGA = 11'b00010001000
+        VSYNCPW_XGA = 11'b00000000110
+        HFNPRCH_XGA = 11'b00000011000
+        VFNPRCH_XGA = 11'b00000000011
+        HBKPRCH_XGA = 11'b00010100000
+        VBKPRCH_XGA = 11'b00000011101
+        HPIXELS_CAMERA = 11'b10100000000
+        VLINES_CAMERA = 11'b01011010000
+        HSYNCPW_CAMERA = 11'b00000100111
+        VSYNCPW_CAMERA = 11'b00000000100
+        HFNPRCH_CAMERA = 11'b00001101110
+        VFNPRCH_CAMERA = 11'b00000000100
+        HBKPRCH_CAMERA = 11'b00011011100
+        VBKPRCH_CAMERA = 11'b00000010110
+        HPIXELS_SVGA = 11'b01100100000
+        VLINES_SVGA = 11'b01001011000
+        HSYNCPW_SVGA = 11'b00010000000
+        VSYNCPW_SVGA = 11'b00000000100
+        HFNPRCH_SVGA = 11'b00000101000
+        VFNPRCH_SVGA = 11'b00000000001
+        HBKPRCH_SVGA = 11'b00001011000
+        VBKPRCH_SVGA = 11'b00000010111
+        HPIXELS_VGA = 11'b01010000000
+        VLINES_VGA = 11'b00111100000
+        HSYNCPW_VGA = 11'b00001100000
+        VSYNCPW_VGA = 11'b00000000010
+        HFNPRCH_VGA = 11'b00000010000
+        VFNPRCH_VGA = 11'b00000001011
+        HBKPRCH_VGA = 11'b00000110000
+        VBKPRCH_VGA = 11'b00000011111
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 80: Output port <CLK_OUT2> of the instance <clk125_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 80: Output port <LOCKED> of the instance <clk125_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 259: Output port <BUSY> of the instance <dcmspi_0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <sdout> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <reset> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <pclkx2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <pclkx10> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <pllclk0> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <pllclk1> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <pllclk2> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <pll_lckd> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <serdesstrobe> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <tmdsclk> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <de> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <blue_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <green_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <red_vld> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <blue_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <green_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <red_rdy> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 750: Output port <psalgnerr> of the instance <dvi_rx0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 806: Output port <video_hcnt> of the instance <timing> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 845: Output port <hcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 845: Output port <vcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 845: Output port <hpwcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/rtl/top.v" line 845: Output port <vpwcnt> of the instance <frame_checker> is unconnected or connected to loadless signal.
+    Found 21-bit register for signal <coldsys_rst>.
+    Found 4-bit register for signal <sws_sync_q>.
+    Found 1-bit register for signal <switch>.
+    Found 8-bit register for signal <pclk_M>.
+    Found 8-bit register for signal <pclk_D>.
+    Found 4-bit register for signal <sws_clk_sync>.
+    Found 1-bit register for signal <hsync>.
+    Found 1-bit register for signal <vsync>.
+    Found 1-bit register for signal <VGA_HSYNC>.
+    Found 1-bit register for signal <VGA_VSYNC>.
+    Found 1-bit register for signal <active_q>.
+    Found 1-bit register for signal <de>.
+    Found 1-bit register for signal <toggle>.
+    Found 5-bit register for signal <tmdsclkint>.
+    Found 1-bit register for signal <pcnt>.
+    Found 1-bit register for signal <rxdvd>.
+    Found 1-bit register for signal <clk_buf>.
+    Found 21-bit adder for signal <coldsys_rst[20]_GND_1_o_add_3_OUT> created at line 96.
+    Found 8x88-bit Read Only RAM for signal <_n0455>
+    Found 8x16-bit Read Only RAM for signal <_n0464>
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<7>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<6>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<5>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<4>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<3>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<2>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<1>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <LED<0>>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Summary:
+	inferred   2 RAM(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred  61 D-type flip-flop(s).
+	inferred   8 Latch(s).
+	inferred   8 Multiplexer(s).
+Unit <top> synthesized.
+
+Synthesizing Unit <clk_wiz_v3_6>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/coregen/clk_wiz_v3_6.v".
+    Summary:
+	no macro.
+Unit <clk_wiz_v3_6> synthesized.
+
+Synthesizing Unit <gmii2fifo24>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii2fifo/rtl/gmii_rec.v".
+        ipv4_dst_rec = 32'b11000000101010000000000000000001
+        ipv4_dst2_rec = 32'b11000000101010000000101000000001
+        dst_port_rec = 16'b0011000000111001
+        ethernet_type = 16'b0000100000000000
+        ip_version = 8'b01000101
+        ip_protcol = 8'b00010001
+WARNING:Xst:647 - Input <id> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <eth_type<15>>.
+    Found 1-bit register for signal <eth_type<14>>.
+    Found 1-bit register for signal <eth_type<13>>.
+    Found 1-bit register for signal <eth_type<12>>.
+    Found 1-bit register for signal <eth_type<11>>.
+    Found 1-bit register for signal <eth_type<10>>.
+    Found 1-bit register for signal <eth_type<9>>.
+    Found 1-bit register for signal <eth_type<8>>.
+    Found 1-bit register for signal <eth_type<7>>.
+    Found 1-bit register for signal <eth_type<6>>.
+    Found 1-bit register for signal <eth_type<5>>.
+    Found 1-bit register for signal <eth_type<4>>.
+    Found 1-bit register for signal <eth_type<3>>.
+    Found 1-bit register for signal <eth_type<2>>.
+    Found 1-bit register for signal <eth_type<1>>.
+    Found 1-bit register for signal <eth_type<0>>.
+    Found 8-bit register for signal <ip_ver>.
+    Found 8-bit register for signal <ipv4_proto>.
+    Found 1-bit register for signal <dst_port<15>>.
+    Found 1-bit register for signal <dst_port<14>>.
+    Found 1-bit register for signal <dst_port<13>>.
+    Found 1-bit register for signal <dst_port<12>>.
+    Found 1-bit register for signal <dst_port<11>>.
+    Found 1-bit register for signal <dst_port<10>>.
+    Found 1-bit register for signal <dst_port<9>>.
+    Found 1-bit register for signal <dst_port<8>>.
+    Found 1-bit register for signal <dst_port<7>>.
+    Found 1-bit register for signal <dst_port<6>>.
+    Found 1-bit register for signal <dst_port<5>>.
+    Found 1-bit register for signal <dst_port<4>>.
+    Found 1-bit register for signal <dst_port<3>>.
+    Found 1-bit register for signal <dst_port<2>>.
+    Found 1-bit register for signal <dst_port<1>>.
+    Found 1-bit register for signal <dst_port<0>>.
+    Found 1-bit register for signal <packet_dv>.
+    Found 1-bit register for signal <x_info<0>>.
+    Found 12-bit register for signal <y_info>.
+    Found 1-bit register for signal <pre_en>.
+    Found 1-bit register for signal <invalid>.
+    Found 2-bit register for signal <state_data>.
+    Found 29-bit register for signal <datain>.
+    Found 1-bit register for signal <recv_en>.
+    Found 11-bit register for signal <rx_count>.
+    Found finite state machine <FSM_0> for signal <state_data>.
+    -----------------------------------------------------------------------
+    | States             | 2                                              |
+    | Transitions        | 4                                              |
+    | Inputs             | 2                                              |
+    | Outputs            | 1                                              |
+    | Clock              | clk125 (rising_edge)                           |
+    | Reset              | sys_rst (positive)                             |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 00                                             |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 11-bit adder for signal <rx_count[10]_GND_7_o_add_1_OUT> created at line 68.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred 105 D-type flip-flop(s).
+	inferred  15 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <gmii2fifo24> synthesized.
+
+Synthesizing Unit <synchro_1>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v".
+        INITIALIZE = "LOGIC0"
+    Summary:
+	no macro.
+Unit <synchro_1> synthesized.
+
+Synthesizing Unit <debnce>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/debnce.v".
+        SATISFY = 16'b1111111111111111
+    Found 1-bit register for signal <transition>.
+    Found 1-bit register for signal <cntr_en>.
+    Found 16-bit register for signal <ctr>.
+    Found 1-bit register for signal <debnced>.
+    Found 1-bit register for signal <sync_q>.
+    Found 16-bit adder for signal <ctr[15]_GND_11_o_add_4_OUT> created at line 114.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  20 D-type flip-flop(s).
+Unit <debnce> synthesized.
+
+Synthesizing Unit <dcmspi>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/dcmspi.v".
+        TCQ = 1
+    Found 1-bit register for signal <dfslckd_rising>.
+    Found 1-bit register for signal <BUSY>.
+    Found 1-bit register for signal <sndd>.
+    Found 1-bit register for signal <sndm>.
+    Found 10-bit register for signal <sndval>.
+    Found 1-bit register for signal <PROGEN>.
+    Found 1-bit register for signal <PROGDATA>.
+    Found 1-bit register for signal <dfslckd_q>.
+    Summary:
+	inferred  17 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+Unit <dcmspi> synthesized.
+
+Synthesizing Unit <synchro_2>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/synchro.v".
+        INITIALIZE = "LOGIC1"
+    Summary:
+	no macro.
+Unit <synchro_2> synthesized.
+
+Synthesizing Unit <timing_gen>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/timing/rtl/timing_gen.v".
+WARNING:Xst:647 - Input <tc_vsblnk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <tc_vssync> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <tc_vesync> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 11-bit register for signal <y_din_qq>.
+    Found 11-bit register for signal <vsync_f>.
+    Found 1-bit register for signal <vsync_buf>.
+    Found 1-bit register for signal <vsync_buf_q>.
+    Found 1-bit register for signal <vsync_buf_r>.
+    Found 1-bit register for signal <vclr>.
+    Found 11-bit register for signal <hpos_cnt>.
+    Found 11-bit register for signal <vpos_cnt>.
+    Found 11-bit register for signal <y_din_q>.
+    Found 11-bit adder for signal <hpos_cnt[10]_hpos_cnt[10]_mux_14_OUT> created at line 84.
+    Found 11-bit adder for signal <vpos_cnt[10]_GND_19_o_add_18_OUT> created at line 100.
+    Found 11-bit comparator greater for signal <y_din_q[10]_y_din_qq[10]_LessThan_3_o> created at line 43
+    Found 11-bit comparator lessequal for signal <n0026> created at line 112
+    Found 11-bit comparator lessequal for signal <n0031> created at line 115
+    Found 11-bit comparator greater for signal <hblnk> created at line 138
+    Found 11-bit comparator greater for signal <tc_hssync[10]_hcount[10]_LessThan_27_o> created at line 139
+    Found 11-bit comparator lessequal for signal <n0039> created at line 139
+    Found 11-bit comparator lessequal for signal <n0043> created at line 161
+    Found 11-bit comparator greater for signal <vcount[10]_GND_19_o_LessThan_31_o> created at line 161
+    Found 11-bit comparator greater for signal <vsync> created at line 162
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  59 D-type flip-flop(s).
+	inferred   9 Comparator(s).
+Unit <timing_gen> synthesized.
+
+Synthesizing Unit <datacontroller>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/datacontroller.v".
+        hstart = 12'b000000000001
+        hfin = 12'b010100000001
+        vstart = 12'b000000011000
+        vfin = 12'b001011101001
+WARNING:Xst:647 - Input <i_format> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <data<26:16>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <vactive>.
+    Found 19-bit register for signal <a_r>.
+    Found 19-bit register for signal <a_g>.
+    Found 19-bit register for signal <a_b>.
+    Found 8-bit register for signal <b_r>.
+    Found 8-bit register for signal <b_g>.
+    Found 8-bit register for signal <b_b>.
+    Found 1-bit register for signal <xblock>.
+    Found 19-bit register for signal <Y>.
+    Found 19-bit register for signal <Cr>.
+    Found 19-bit register for signal <Cb>.
+    Found 1-bit register for signal <hactive>.
+    Found 19-bit subtractor for signal <n0106> created at line 86.
+    Found 19-bit subtractor for signal <Y[10]_PWR_20_o_sub_18_OUT> created at line 87.
+    Found 19-bit subtractor for signal <n0111> created at line 87.
+    Found 19-bit subtractor for signal <n0114> created at line 88.
+    Found 19-bit adder for signal <Y[10]_PWR_20_o_add_13_OUT> created at line 86.
+    Found 19-bit adder for signal <Y[10]_GND_20_o_add_15_OUT> created at line 87.
+    Found 19-bit adder for signal <Y[10]_PWR_20_o_add_21_OUT> created at line 88.
+    Found 9x19-bit multiplier for signal <n0104> created at line 86.
+    Found 8x19-bit multiplier for signal <n0108> created at line 87.
+    Found 7x19-bit multiplier for signal <n0110> created at line 87.
+    Found 9x19-bit multiplier for signal <n0112> created at line 88.
+    Found 1-bit comparator equal for signal <x_count[0]_xblock_equal_12_o> created at line 85
+    Found 19-bit comparator lessequal for signal <n0027> created at line 89
+    Found 19-bit comparator lessequal for signal <n0030> created at line 90
+    Found 19-bit comparator lessequal for signal <n0033> created at line 91
+    Summary:
+	inferred   4 Multiplier(s).
+	inferred   7 Adder/Subtractor(s).
+	inferred 141 D-type flip-flop(s).
+	inferred   4 Comparator(s).
+	inferred   9 Multiplexer(s).
+Unit <datacontroller> synthesized.
+
+Synthesizing Unit <dvi_encoder>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/dvi_encoder.v".
+    Summary:
+	no macro.
+Unit <dvi_encoder> synthesized.
+
+Synthesizing Unit <encode>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/encode.v".
+        CTRLTOKEN0 = 10'b1101010100
+        CTRLTOKEN1 = 10'b0010101011
+        CTRLTOKEN2 = 10'b0101010100
+        CTRLTOKEN3 = 10'b1010101011
+    Found 10-bit register for signal <dout>.
+    Found 5-bit register for signal <cnt>.
+    Found 8-bit register for signal <din_q>.
+    Found 4-bit register for signal <n1q_m>.
+    Found 4-bit register for signal <n0q_m>.
+    Found 1-bit register for signal <de_q>.
+    Found 1-bit register for signal <de_reg>.
+    Found 1-bit register for signal <c0_q>.
+    Found 1-bit register for signal <c0_reg>.
+    Found 1-bit register for signal <c1_q>.
+    Found 1-bit register for signal <c1_reg>.
+    Found 9-bit register for signal <q_m_reg>.
+    Found 4-bit register for signal <n1d>.
+    Found 4-bit subtractor for signal <PWR_23_o_BUS_0017_sub_29_OUT> created at line 110.
+    Found 5-bit subtractor for signal <n0233> created at line 169.
+    Found 5-bit subtractor for signal <n0235> created at line 175.
+    Found 5-bit subtractor for signal <n0236> created at line 175.
+    Found 2-bit adder for signal <n0183[1:0]> created at line 66.
+    Found 3-bit adder for signal <n0186[2:0]> created at line 66.
+    Found 2-bit adder for signal <n0204[1:0]> created at line 109.
+    Found 3-bit adder for signal <n0207[2:0]> created at line 109.
+    Found 5-bit adder for signal <n0232> created at line 169.
+    Found 5-bit adder for signal <cnt[4]_GND_25_o_add_47_OUT> created at line 169.
+    Found 5-bit adder for signal <cnt[4]_GND_25_o_add_50_OUT> created at line 175.
+    Found 4-bit adder for signal <_n0248> created at line 66.
+    Found 4-bit adder for signal <_n0249> created at line 66.
+    Found 4-bit adder for signal <_n0250> created at line 66.
+    Found 4-bit adder for signal <_n0251> created at line 66.
+    Found 4-bit adder for signal <BUS_0003_GND_25_o_add_7_OUT> created at line 66.
+    Found 4-bit adder for signal <_n0253> created at line 109.
+    Found 4-bit adder for signal <_n0254> created at line 109.
+    Found 4-bit adder for signal <_n0255> created at line 109.
+    Found 4-bit adder for signal <_n0256> created at line 109.
+    Found 4-bit adder for signal <BUS_0010_GND_25_o_add_20_OUT> created at line 109.
+    Found 5-bit adder for signal <cnt[4]_GND_25_o_sub_43_OUT> created at line 162.
+    Found 5-bit adder for signal <cnt[4]_GND_25_o_sub_41_OUT> created at line 162.
+    Found 4x10-bit Read Only RAM for signal <c1_reg_PWR_23_o_wide_mux_53_OUT>
+    Found 4-bit comparator greater for signal <GND_25_o_n1d[3]_LessThan_11_o> created at line 77
+    Found 4-bit comparator equal for signal <n1q_m[3]_n0q_m[3]_equal_33_o> created at line 121
+    Found 4-bit comparator greater for signal <n0q_m[3]_n1q_m[3]_LessThan_34_o> created at line 125
+    Found 4-bit comparator greater for signal <n1q_m[3]_n0q_m[3]_LessThan_35_o> created at line 125
+    Summary:
+	inferred   1 RAM(s).
+	inferred  23 Adder/Subtractor(s).
+	inferred  50 D-type flip-flop(s).
+	inferred   4 Comparator(s).
+	inferred  37 Multiplexer(s).
+Unit <encode> synthesized.
+
+Synthesizing Unit <convert_30to15_fifo>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/convert_30to15_fifo.v".
+        ADDR0 = 4'b0000
+        ADDR1 = 4'b0001
+        ADDR2 = 4'b0010
+        ADDR3 = 4'b0011
+        ADDR4 = 4'b0100
+        ADDR5 = 4'b0101
+        ADDR6 = 4'b0110
+        ADDR7 = 4'b0111
+        ADDR8 = 4'b1000
+        ADDR9 = 4'b1001
+        ADDR10 = 4'b1010
+        ADDR11 = 4'b1011
+        ADDR12 = 4'b1100
+        ADDR13 = 4'b1101
+        ADDR14 = 4'b1110
+        ADDR15 = 4'b1111
+    Set property "ASYNC_REG = TRUE" for instance <fdp_rst>.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/convert_30to15_fifo.v" line 64: Output port <O_DATA_OUT> of the instance <fifo_u> is unconnected or connected to loadless signal.
+    Found 16x4-bit Read Only RAM for signal <wa_d>
+    Found 16x4-bit Read Only RAM for signal <ra_d>
+    Summary:
+	inferred   2 RAM(s).
+	inferred   1 Multiplexer(s).
+Unit <convert_30to15_fifo> synthesized.
+
+Synthesizing Unit <DRAM16XN_1>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/DRAM16XN.v".
+        data_width = 30
+    Summary:
+	no macro.
+Unit <DRAM16XN_1> synthesized.
+
+Synthesizing Unit <serdes_n_to_1>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_tx/rtl/serdes_n_to_1.v".
+        SF = 5
+    Summary:
+	no macro.
+Unit <serdes_n_to_1> synthesized.
+
+Synthesizing Unit <dvi_decoder>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v".
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" line 194: Output port <c0> of the instance <dec_g> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" line 194: Output port <c1> of the instance <dec_g> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" line 194: Output port <de> of the instance <dec_g> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" line 216: Output port <c0> of the instance <dec_r> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" line 216: Output port <c1> of the instance <dec_r> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/dvi_decoder.v" line 216: Output port <de> of the instance <dec_r> is unconnected or connected to loadless signal.
+    Summary:
+	no macro.
+Unit <dvi_decoder> synthesized.
+
+Synthesizing Unit <decode>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/decode.v".
+        CTRLTOKEN0 = 10'b1101010100
+        CTRLTOKEN1 = 10'b0010101011
+        CTRLTOKEN2 = 10'b0101010100
+        CTRLTOKEN3 = 10'b1010101011
+    Found 1-bit register for signal <toggle>.
+    Found 5-bit register for signal <raw5bit_q>.
+    Found 10-bit register for signal <rawword>.
+    Found 1-bit register for signal <bitslip_q>.
+    Found 1-bit register for signal <bitslipx2>.
+    Found 1-bit register for signal <c0>.
+    Found 1-bit register for signal <c1>.
+    Found 1-bit register for signal <de>.
+    Found 8-bit register for signal <dout>.
+    Found 10-bit register for signal <sdout>.
+    Found 1-bit register for signal <flipgearx2>.
+    Summary:
+	inferred  40 D-type flip-flop(s).
+	inferred   8 Multiplexer(s).
+Unit <decode> synthesized.
+
+Synthesizing Unit <serdes_1_to_5_diff_data>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v".
+        DIFF_TERM = "FALSE"
+        SIM_TAP_DELAY = 49
+        BITSLIP_ENABLE = "TRUE"
+    Found 9-bit register for signal <counter>.
+    Found 5-bit register for signal <pdcounter>.
+    Found 4-bit register for signal <state>.
+    Found 1-bit register for signal <cal_data_master>.
+    Found 1-bit register for signal <cal_data_sint>.
+    Found 1-bit register for signal <enable>.
+    Found 1-bit register for signal <ce_data_inta>.
+    Found 1-bit register for signal <flag>.
+    Found 1-bit register for signal <rst_data>.
+    Found 1-bit register for signal <busy_data_d>.
+    Found 1-bit register for signal <incdec_data_d>.
+    Found 1-bit register for signal <valid_data_d>.
+    Found 1-bit register for signal <ce_data>.
+    Found 1-bit register for signal <inc_data_int>.
+    Found finite state machine <FSM_1> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 8                                              |
+    | Transitions        | 63                                             |
+    | Inputs             | 7                                              |
+    | Outputs            | 12                                             |
+    | Clock              | gclk (rising_edge)                             |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 0000                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 9-bit adder for signal <counter[8]_GND_43_o_add_2_OUT> created at line 122.
+    Found 5-bit adder for signal <pdcounter[4]_GND_43_o_add_54_OUT> created at line 224.
+    Found 5-bit adder for signal <pdcounter[4]_PWR_43_o_add_57_OUT> created at line 227.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  25 D-type flip-flop(s).
+	inferred  10 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <serdes_1_to_5_diff_data> synthesized.
+
+Synthesizing Unit <phsaligner>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/phsaligner.v".
+        OPENEYE_CNT_WD = 3
+        CTKNCNTWD = 7
+        SRCHTIMERWD = 12
+    Found 1-bit register for signal <ctkn_srh_rst>.
+    Found 1-bit register for signal <ctkn_cnt_rst>.
+    Found 3-bit register for signal <bitslip_cnt>.
+    Found 6-bit register for signal <cstate>.
+    Found 1-bit register for signal <psaligned>.
+    Found 1-bit register for signal <bitslip>.
+    Found 1-bit register for signal <flipgear>.
+    Found 1-bit register for signal <blnkprd_cnt>.
+    Found 1-bit register for signal <rcvd_ctkn_q>.
+    Found 1-bit register for signal <blnkbgn>.
+    Found 12-bit register for signal <ctkn_srh_timer>.
+    Found 1-bit register for signal <ctkn_srh_tout>.
+    Found 7-bit register for signal <ctkn_counter>.
+    Found 1-bit register for signal <ctkn_cnt_tout>.
+    Found 1-bit register for signal <rcvd_ctkn>.
+    Found finite state machine <FSM_2> for signal <cstate>.
+    -----------------------------------------------------------------------
+    | States             | 6                                              |
+    | Transitions        | 12                                             |
+    | Inputs             | 5                                              |
+    | Outputs            | 6                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | rst (positive)                                 |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 000001                                         |
+    | Power Up State     | 000001                                         |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 12-bit adder for signal <ctkn_srh_timer[11]_GND_51_o_add_6_OUT> created at line 98.
+    Found 7-bit adder for signal <ctkn_counter[6]_GND_51_o_add_12_OUT> created at line 122.
+    Found 3-bit adder for signal <bitslip_cnt[2]_GND_51_o_add_32_OUT> created at line 245.
+    Found 1-bit adder for signal <blnkprd_cnt[0]_PWR_50_o_add_33_OUT<0>> created at line 255.
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred  33 D-type flip-flop(s).
+	inferred   1 Finite State Machine(s).
+Unit <phsaligner> synthesized.
+
+Synthesizing Unit <chnlbond>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/chnlbond.v".
+        CTRLTOKEN0 = 10'b1101010100
+        CTRLTOKEN1 = 10'b0010101011
+        CTRLTOKEN2 = 10'b0101010100
+        CTRLTOKEN3 = 10'b1010101011
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/tmds_rx/rtl/chnlbond.v" line 86: Output port <O_DATA_OUT> of the instance <cbfifo_i> is unconnected or connected to loadless signal.
+    Register <we> equivalent to <rawdata_vld_q> has been removed
+    Found 4-bit register for signal <wa>.
+    Found 10-bit register for signal <sdata>.
+    Found 1-bit register for signal <rcvd_ctkn>.
+    Found 1-bit register for signal <rcvd_ctkn_q>.
+    Found 1-bit register for signal <blnkbgn>.
+    Found 1-bit register for signal <skip_line>.
+    Found 1-bit register for signal <iamrdy>.
+    Found 1-bit register for signal <rawdata_vld_q>.
+    Found 1-bit register for signal <rawdata_vld_rising>.
+    Found 1-bit register for signal <ra_en>.
+    Found 4-bit register for signal <ra>.
+    Found 4-bit adder for signal <wa[3]_GND_53_o_add_2_OUT> created at line 79.
+    Found 4-bit adder for signal <ra[3]_GND_53_o_add_17_OUT> created at line 167.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  26 D-type flip-flop(s).
+Unit <chnlbond> synthesized.
+
+Synthesizing Unit <DRAM16XN_2>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/common/rtl/DRAM16XN.v".
+        data_width = 10
+    Summary:
+	no macro.
+Unit <DRAM16XN_2> synthesized.
+
+Synthesizing Unit <tmds_timing>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/timing/rtl/tmds_timing.v".
+    Found 11-bit register for signal <hcounter>.
+    Found 11-bit register for signal <vcounter>.
+    Found 11-bit register for signal <video_hcnt>.
+    Found 11-bit register for signal <video_vcnt>.
+    Found 1-bit register for signal <vactive>.
+    Found 1-bit register for signal <hactive>.
+    Found 1-bit register for signal <hsync_buf>.
+    Found 12-bit register for signal <index>.
+    Found 11-bit adder for signal <vcounter[10]_GND_55_o_add_2_OUT> created at line 36.
+    Found 11-bit adder for signal <hcounter[10]_GND_55_o_add_5_OUT> created at line 40.
+    Found 11-bit adder for signal <video_hcnt[10]_GND_55_o_add_11_OUT> created at line 52.
+    Found 11-bit adder for signal <video_vcnt[10]_GND_55_o_add_14_OUT> created at line 58.
+    Found 12-bit adder for signal <index[11]_GND_55_o_add_21_OUT> created at line 65.
+    Summary:
+	inferred   5 Adder/Subtractor(s).
+	inferred  59 D-type flip-flop(s).
+	inferred   5 Multiplexer(s).
+Unit <tmds_timing> synthesized.
+
+Synthesizing Unit <gmii_tx>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v".
+        src_mac = 48'b000000000010001101000101011001111000100100000010
+        dst_mac = 48'b101000000011011010011111001010110101001010100111
+        ip_type = 16'b0000100000000000
+        ip_ver = 16'b0100010100000000
+        ip_len = 16'b0000010100011110
+        ip_iden = 16'b0000000000000000
+        ip_flag = 16'b0100000000000000
+        ip_ttl = 8'b01000000
+        ip_prot = 8'b00010001
+        ip_src_addr = 32'b11000000101010000000000000000001
+        ip_dst_addr = 32'b11000000101010000000101000000001
+        udp_len = 16'b0000010100001010
+WARNING:Xst:647 - Input <dout<7:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <dout<35:28>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <full> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/gmii_tx/rtl/gmii_tx.v" line 86: Output port <CRC_end> of the instance <crc_gen> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <ppl>.
+    Found 1-bit register for signal <buf1_wr_en>.
+    Found 1-bit register for signal <buf2_wr_en>.
+    Found 1-bit register for signal <buf1_tx_en>.
+    Found 1-bit register for signal <buf2_tx_en>.
+    Found 8-bit register for signal <txd>.
+    Found 1-bit register for signal <tx_en>.
+    Found 11-bit register for signal <count>.
+    Found 4-bit register for signal <state>.
+    Found 2-bit register for signal <cnt3>.
+    Found 2-bit register for signal <fcs_count>.
+    Found 1-bit register for signal <crc_rd>.
+    Found 32-bit register for signal <gap_count>.
+    Found 1-bit register for signal <crc_init>.
+    Found 24-bit register for signal <ip_check>.
+    Found 1-bit register for signal <fstate>.
+    Found finite state machine <FSM_3> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 9                                              |
+    | Transitions        | 19                                             |
+    | Inputs             | 10                                             |
+    | Outputs            | 10                                             |
+    | Clock              | tx_clk (rising_edge)                           |
+    | Reset              | sys_rst (positive)                             |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 0000                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_4> for signal <cnt3>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 56                                             |
+    | Inputs             | 13                                             |
+    | Outputs            | 4                                              |
+    | Clock              | tx_clk (rising_edge)                           |
+    | Reset              | sys_rst (positive)                             |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 00                                             |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 32-bit subtractor for signal <gap_count[31]_GND_56_o_sub_99_OUT> created at line 368.
+    Found 17-bit adder for signal <n0219[16:0]> created at line 181.
+    Found 11-bit adder for signal <count[10]_GND_56_o_add_37_OUT> created at line 302.
+    Found 2-bit adder for signal <fcs_count[1]_GND_56_o_add_93_OUT> created at line 349.
+    Found 8-bit 4-to-1 multiplexer for signal <fcs_count[1]_crc_out[7]_wide_mux_94_OUT> created at line 351.
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred  86 D-type flip-flop(s).
+	inferred  43 Multiplexer(s).
+	inferred   2 Finite State Machine(s).
+Unit <gmii_tx> synthesized.
+
+Synthesizing Unit <crc_gen>.
+    Related source file is "/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cores/crc/rtl/crc_gen.v".
+WARNING:Xst:647 - Input <CRC_rd> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:653 - Signal <CRC_end> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Found 32-bit register for signal <CRC_reg>.
+    Summary:
+	inferred  32 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+Unit <crc_gen> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 7
+ 16x4-bit single-port Read Only RAM                    : 2
+ 4x10-bit single-port Read Only RAM                    : 3
+ 8x16-bit single-port Read Only RAM                    : 1
+ 8x88-bit single-port Read Only RAM                    : 1
+# Multipliers                                          : 4
+ 19x7-bit multiplier                                   : 1
+ 19x8-bit multiplier                                   : 1
+ 19x9-bit multiplier                                   : 2
+# Adders/Subtractors                                   : 117
+ 1-bit adder                                           : 3
+ 11-bit adder                                          : 8
+ 12-bit adder                                          : 4
+ 16-bit adder                                          : 4
+ 17-bit adder                                          : 1
+ 19-bit adder                                          : 3
+ 19-bit subtractor                                     : 4
+ 2-bit adder                                           : 7
+ 21-bit adder                                          : 1
+ 3-bit adder                                           : 9
+ 32-bit subtractor                                     : 1
+ 4-bit adder                                           : 36
+ 4-bit subtractor                                      : 3
+ 5-bit adder                                           : 18
+ 5-bit subtractor                                      : 9
+ 7-bit adder                                           : 3
+ 9-bit adder                                           : 3
+# Registers                                            : 283
+ 1-bit register                                        : 181
+ 10-bit register                                       : 13
+ 11-bit register                                       : 11
+ 12-bit register                                       : 5
+ 16-bit register                                       : 7
+ 19-bit register                                       : 6
+ 2-bit register                                        : 4
+ 21-bit register                                       : 1
+ 24-bit register                                       : 1
+ 29-bit register                                       : 1
+ 3-bit register                                        : 3
+ 32-bit register                                       : 2
+ 4-bit register                                        : 17
+ 5-bit register                                        : 10
+ 7-bit register                                        : 3
+ 8-bit register                                        : 12
+ 9-bit register                                        : 6
+# Latches                                              : 8
+ 1-bit latch                                           : 8
+# Comparators                                          : 25
+ 1-bit comparator equal                                : 1
+ 11-bit comparator greater                             : 5
+ 11-bit comparator lessequal                           : 4
+ 19-bit comparator lessequal                           : 3
+ 4-bit comparator equal                                : 3
+ 4-bit comparator greater                              : 9
+# Multiplexers                                         : 249
+ 1-bit 2-to-1 multiplexer                              : 146
+ 10-bit 2-to-1 multiplexer                             : 5
+ 11-bit 2-to-1 multiplexer                             : 21
+ 12-bit 2-to-1 multiplexer                             : 1
+ 15-bit 2-to-1 multiplexer                             : 1
+ 24-bit 2-to-1 multiplexer                             : 1
+ 29-bit 2-to-1 multiplexer                             : 1
+ 32-bit 2-to-1 multiplexer                             : 2
+ 5-bit 2-to-1 multiplexer                              : 24
+ 8-bit 2-to-1 multiplexer                              : 43
+ 8-bit 4-to-1 multiplexer                              : 1
+ 9-bit 2-to-1 multiplexer                              : 3
+# FSMs                                                 : 9
+# Xors                                                 : 145
+ 1-bit xor2                                            : 126
+ 1-bit xor3                                            : 16
+ 1-bit xor4                                            : 3
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+INFO:Xst:2261 - The FF/Latch <a_r_11> in Unit <dataproc> is equivalent to the following 23 FFs/Latches, which will be removed : <a_r_12> <a_r_13> <a_r_14> <a_r_15> <a_r_16> <a_r_17> <a_r_18> <a_g_11> <a_g_12> <a_g_13> <a_g_14> <a_g_15> <a_g_16> <a_g_17> <a_g_18> <a_b_11> <a_b_12> <a_b_13> <a_b_14> <a_b_15> <a_b_16> <a_b_17> <a_b_18> 
+INFO:Xst:2261 - The FF/Latch <Cb_8> in Unit <dataproc> is equivalent to the following 10 FFs/Latches, which will be removed : <Cb_9> <Cb_10> <Cb_11> <Cb_12> <Cb_13> <Cb_14> <Cb_15> <Cb_16> <Cb_17> <Cb_18> 
+INFO:Xst:2261 - The FF/Latch <Cr_8> in Unit <dataproc> is equivalent to the following 10 FFs/Latches, which will be removed : <Cr_9> <Cr_10> <Cr_11> <Cr_12> <Cr_13> <Cr_14> <Cr_15> <Cr_16> <Cr_17> <Cr_18> 
+INFO:Xst:2261 - The FF/Latch <Y_8> in Unit <dataproc> is equivalent to the following 2 FFs/Latches, which will be removed : <Y_9> <Y_10> 
+WARNING:Xst:1710 - FF/Latch <Y_8> (without init value) has a constant value of 0 in block <dataproc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Cr_8> (without init value) has a constant value of 0 in block <dataproc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Cb_8> (without init value) has a constant value of 0 in block <dataproc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <a_r_11> (without init value) has a constant value of 0 in block <dataproc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <c1_q> (without init value) has a constant value of 0 in block <encg>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <c0_q> (without init value) has a constant value of 0 in block <encg>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <c1_q> (without init value) has a constant value of 0 in block <encr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <c0_q> (without init value) has a constant value of 0 in block <encr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <LED_7> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <c0_reg> (without init value) has a constant value of 0 in block <encg>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <c1_reg> (without init value) has a constant value of 0 in block <encg>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <c0_reg> (without init value) has a constant value of 0 in block <encr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <c1_reg> (without init value) has a constant value of 0 in block <encr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <Y_11> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2677 - Node <Y_12> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2677 - Node <Y_13> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2677 - Node <Y_14> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2677 - Node <Y_15> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2677 - Node <Y_16> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2677 - Node <Y_17> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2677 - Node <Y_18> of sequential type is unconnected in block <dataproc>.
+WARNING:Xst:2404 -  FFs/Latches <a_r<18:11>> (without init value) have a constant value of 0 in block <datacontroller>.
+WARNING:Xst:2404 -  FFs/Latches <a_g<18:11>> (without init value) have a constant value of 0 in block <datacontroller>.
+WARNING:Xst:2404 -  FFs/Latches <a_b<18:11>> (without init value) have a constant value of 0 in block <datacontroller>.
+WARNING:Xst:2404 -  FFs/Latches <Y<18:8>> (without init value) have a constant value of 0 in block <datacontroller>.
+WARNING:Xst:2404 -  FFs/Latches <Cr<18:8>> (without init value) have a constant value of 0 in block <datacontroller>.
+WARNING:Xst:2404 -  FFs/Latches <Cb<18:8>> (without init value) have a constant value of 0 in block <datacontroller>.
+
+Synthesizing (advanced) Unit <chnlbond>.
+The following registers are absorbed into counter <wa>: 1 register on signal <wa>.
+The following registers are absorbed into counter <ra>: 1 register on signal <ra>.
+Unit <chnlbond> synthesized (advanced).
+
+Synthesizing (advanced) Unit <convert_30to15_fifo>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_wa_d> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 4-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <wa>            |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <wa_d>          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_ra_d> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 4-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <ra>            |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <ra_d>          |          |
+    -----------------------------------------------------------------------
+Unit <convert_30to15_fifo> synthesized (advanced).
+
+Synthesizing (advanced) Unit <debnce>.
+The following registers are absorbed into counter <ctr>: 1 register on signal <ctr>.
+Unit <debnce> synthesized (advanced).
+
+Synthesizing (advanced) Unit <encode>.
+	The following adders/subtractors are grouped into adder tree <Madd_BUS_0010_GND_25_o_add_20_OUT_Madd1> :
+ 	<Madd__n0253> in block <encode>, 	<Madd__n0254> in block <encode>, 	<Madd__n0256_Madd> in block <encode>, 	<Madd_n0204[1:0]> in block <encode>, 	<Madd_BUS_0010_GND_25_o_add_20_OUT_Madd> in block <encode>.
+	The following adders/subtractors are grouped into adder tree <Madd_BUS_0003_GND_25_o_add_7_OUT_Madd1> :
+ 	<Madd__n0248> in block <encode>, 	<Madd__n0249> in block <encode>, 	<Madd__n0251_Madd> in block <encode>, 	<Madd_n0183[1:0]> in block <encode>, 	<Madd_BUS_0003_GND_25_o_add_7_OUT_Madd> in block <encode>.
+INFO:Xst:3231 - The small RAM <Mram_c1_reg_PWR_23_o_wide_mux_53_OUT> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 10-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(c1_reg,c0_reg)> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3217 - HDL ADVISOR - Register <dout> currently described with an asynchronous reset, could be combined with distributed RAM <Mram_c1_reg_PWR_23_o_wide_mux_53_OUT> for implementation on block RAM resources if you made this reset synchronous instead.
+Unit <encode> synthesized (advanced).
+
+Synthesizing (advanced) Unit <gmii2fifo24>.
+The following registers are absorbed into counter <rx_count>: 1 register on signal <rx_count>.
+Unit <gmii2fifo24> synthesized (advanced).
+
+Synthesizing (advanced) Unit <gmii_tx>.
+The following registers are absorbed into counter <fcs_count>: 1 register on signal <fcs_count>.
+The following registers are absorbed into counter <gap_count>: 1 register on signal <gap_count>.
+Unit <gmii_tx> synthesized (advanced).
+
+Synthesizing (advanced) Unit <phsaligner>.
+The following registers are absorbed into counter <ctkn_srh_timer>: 1 register on signal <ctkn_srh_timer>.
+The following registers are absorbed into counter <ctkn_counter>: 1 register on signal <ctkn_counter>.
+Unit <phsaligner> synthesized (advanced).
+
+Synthesizing (advanced) Unit <serdes_1_to_5_diff_data>.
+The following registers are absorbed into counter <counter>: 1 register on signal <counter>.
+Unit <serdes_1_to_5_diff_data> synthesized (advanced).
+
+Synthesizing (advanced) Unit <timing_gen>.
+The following registers are absorbed into counter <vpos_cnt>: 1 register on signal <vpos_cnt>.
+The following registers are absorbed into counter <hpos_cnt>: 1 register on signal <hpos_cnt>.
+Unit <timing_gen> synthesized (advanced).
+
+Synthesizing (advanced) Unit <tmds_timing>.
+The following registers are absorbed into counter <hcounter>: 1 register on signal <hcounter>.
+The following registers are absorbed into counter <video_hcnt>: 1 register on signal <video_hcnt>.
+The following registers are absorbed into counter <vcounter>: 1 register on signal <vcounter>.
+The following registers are absorbed into counter <video_vcnt>: 1 register on signal <video_vcnt>.
+The following registers are absorbed into counter <index>: 1 register on signal <index>.
+Unit <tmds_timing> synthesized (advanced).
+
+Synthesizing (advanced) Unit <top>.
+The following registers are absorbed into counter <coldsys_rst>: 1 register on signal <coldsys_rst>.
+INFO:Xst:3231 - The small RAM <Mram__n0455> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 88-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(sws_clk_sync<1>,sws_clk_sync<3>,sws_clk_sync<0>)> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3231 - The small RAM <Mram__n0464> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 16-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(sws_sync_q<1>,sws_sync_q<3>,sws_sync_q<0>)> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <top> synthesized (advanced).
+WARNING:Xst:2677 - Node <y_info_11> of sequential type is unconnected in block <gmii2fifo24>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 7
+ 16x4-bit single-port distributed Read Only RAM        : 2
+ 4x10-bit single-port distributed Read Only RAM        : 3
+ 8x16-bit single-port distributed Read Only RAM        : 1
+ 8x88-bit single-port distributed Read Only RAM        : 1
+# Multipliers                                          : 4
+ 9x7-bit multiplier                                    : 1
+ 9x8-bit multiplier                                    : 1
+ 9x9-bit multiplier                                    : 2
+# Adders/Subtractors                                   : 45
+ 1-bit adder                                           : 3
+ 11-bit adder                                          : 1
+ 17-bit adder                                          : 1
+ 19-bit adder                                          : 3
+ 19-bit subtractor                                     : 4
+ 3-bit adder                                           : 3
+ 4-bit subtractor                                      : 3
+ 5-bit adder                                           : 18
+ 5-bit subtractor                                      : 9
+# Adder Trees                                          : 6
+ 4-bit / 6-inputs adder tree                           : 6
+# Counters                                             : 30
+ 11-bit up counter                                     : 7
+ 12-bit up counter                                     : 4
+ 16-bit up counter                                     : 4
+ 2-bit up counter                                      : 1
+ 21-bit up counter                                     : 1
+ 32-bit down counter                                   : 1
+ 4-bit up counter                                      : 6
+ 7-bit up counter                                      : 3
+ 9-bit up counter                                      : 3
+# Registers                                            : 863
+ Flip-Flops                                            : 863
+# Comparators                                          : 25
+ 1-bit comparator equal                                : 1
+ 11-bit comparator greater                             : 5
+ 11-bit comparator lessequal                           : 4
+ 19-bit comparator lessequal                           : 3
+ 4-bit comparator equal                                : 3
+ 4-bit comparator greater                              : 9
+# Multiplexers                                         : 246
+ 1-bit 2-to-1 multiplexer                              : 153
+ 10-bit 2-to-1 multiplexer                             : 5
+ 11-bit 2-to-1 multiplexer                             : 17
+ 15-bit 2-to-1 multiplexer                             : 1
+ 24-bit 2-to-1 multiplexer                             : 1
+ 29-bit 2-to-1 multiplexer                             : 1
+ 32-bit 2-to-1 multiplexer                             : 1
+ 5-bit 2-to-1 multiplexer                              : 24
+ 8-bit 2-to-1 multiplexer                              : 42
+ 8-bit 4-to-1 multiplexer                              : 1
+# FSMs                                                 : 9
+# Xors                                                 : 145
+ 1-bit xor2                                            : 126
+ 1-bit xor3                                            : 16
+ 1-bit xor4                                            : 3
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch <LED_7> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <tmdsclkint_0> in Unit <top> is equivalent to the following 4 FFs/Latches, which will be removed : <tmdsclkint_1> <tmdsclkint_2> <tmdsclkint_3> <tmdsclkint_4> 
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <gmii2fifo24/FSM_0> on signal <state_data[1:1]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 0
+ 01    | 1
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <dvi_rx0/dec_b/des_0/FSM_1> on signal <state[1:4]> with user encoding.
+Optimizing FSM <dvi_rx0/dec_g/des_0/FSM_1> on signal <state[1:4]> with user encoding.
+Optimizing FSM <dvi_rx0/dec_r/des_0/FSM_1> on signal <state[1:4]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 0000  | 0000
+ 0101  | 0101
+ 0111  | 0111
+ 0100  | 0100
+ 0110  | 0110
+ 0011  | 0011
+ 0010  | 0010
+ 0001  | 0001
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <dvi_rx0/dec_b/phsalgn_0/FSM_2> on signal <cstate[1:6]> with user encoding.
+Optimizing FSM <dvi_rx0/dec_g/phsalgn_0/FSM_2> on signal <cstate[1:6]> with user encoding.
+Optimizing FSM <dvi_rx0/dec_r/phsalgn_0/FSM_2> on signal <cstate[1:6]> with user encoding.
+--------------------
+ State  | Encoding
+--------------------
+ 000001 | 000001
+ 000010 | 000010
+ 000100 | 000100
+ 001000 | 001000
+ 010000 | 010000
+ 100000 | 100000
+--------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <gmii_tx/FSM_3> on signal <state[1:4]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 0000  | 0000
+ 0001  | 0001
+ 0010  | 0010
+ 0011  | 0011
+ 0100  | 0100
+ 0101  | 0101
+ 0110  | 0110
+ 0111  | 0111
+ 1000  | 1000
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <gmii_tx/FSM_4> on signal <cnt3[1:2]> with gray encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 00
+ 11    | 01
+ 10    | 11
+ 01    | 10
+-------------------
+WARNING:Xst:1710 - FF/Latch <datain_28> (without init value) has a constant value of 0 in block <gmii2fifo24>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:1901 - Instance PLL_ISERDES in unit PLL_ISERDES of type PLL_BASE has been replaced by PLL_ADV
+INFO:Xst:1901 - Instance PLL_OSERDES in unit PLL_OSERDES of type PLL_BASE has been replaced by PLL_ADV
+INFO:Xst:1901 - Instance clk125_gen/pll_base_inst in unit clk125_gen/pll_base_inst of type PLL_BASE has been replaced by PLL_ADV
+INFO:Xst:2261 - The FF/Latch <pclk_M_4> in Unit <top> is equivalent to the following FF/Latch, which will be removed : <pclk_M_5> 
+INFO:Xst:2261 - The FF/Latch <pclk_D_5> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <pclk_D_7> <pclk_M_6> 
+INFO:Xst:2261 - The FF/Latch <ip_check_18> in Unit <gmii_tx> is equivalent to the following 5 FFs/Latches, which will be removed : <ip_check_19> <ip_check_20> <ip_check_21> <ip_check_22> <ip_check_23> 
+INFO:Xst:2261 - The FF/Latch <n1q_m_0> in Unit <encode> is equivalent to the following FF/Latch, which will be removed : <n0q_m_0> 
+WARNING:Xst:1898 - Due to constant pushing, FF/Latch <n1q_m_0> is unconnected in block <encode>.
+
+Optimizing unit <DRAM16XN_2> ...
+
+Optimizing unit <DRAM16XN_1> ...
+
+Optimizing unit <top> ...
+
+Optimizing unit <gmii2fifo24> ...
+
+Optimizing unit <dvi_decoder> ...
+
+Optimizing unit <decode> ...
+
+Optimizing unit <serdes_1_to_5_diff_data> ...
+
+Optimizing unit <phsaligner> ...
+
+Optimizing unit <chnlbond> ...
+
+Optimizing unit <tmds_timing> ...
+
+Optimizing unit <gmii_tx> ...
+
+Optimizing unit <crc_gen> ...
+
+Optimizing unit <timing_gen> ...
+
+Optimizing unit <datacontroller> ...
+
+Optimizing unit <encode> ...
+WARNING:Xst:1710 - FF/Latch <cnt_0> (without init value) has a constant value of 0 in block <encode>. This FF/Latch will be trimmed during the optimization process.
+
+Optimizing unit <convert_30to15_fifo> ...
+
+Optimizing unit <debnce> ...
+
+Optimizing unit <dcmspi> ...
+WARNING:Xst:1303 - From in and out of unit dvi_rx0, both signals exrst and RSTBTN have a KEEP attribute, signal exrst will be lost.
+WARNING:Xst:1710 - FF/Latch <enc0/encg/c1_q> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <enc0/encg/c0_q> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <enc0/encr/c1_q> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <enc0/encr/c0_q> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <enc0/encg/c1_reg> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <enc0/encg/c0_reg> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <enc0/encr/c1_reg> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <enc0/encr/c0_reg> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_9> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_8> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_7> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_6> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_5> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_4> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_3> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_2> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/sdout_0> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/de> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/c1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_r/c0> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_9> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_8> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_7> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_6> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_5> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_4> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_3> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_2> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/sdout_0> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/de> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/c1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_g/c0> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_9> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_8> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_7> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_6> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_5> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_4> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_3> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_2> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/sdout_0> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dvi_rx0/dec_b/de> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_10> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_9> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_8> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_7> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_6> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_5> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_4> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_3> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_2> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <timing/video_hcnt_0> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dcmspi_0/dfslckd_rising> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dcmspi_0/BUSY> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <dcmspi_0/dfslckd_q> of sequential type is unconnected in block <top>.
+WARNING:Xst:1710 - FF/Latch <gmii_tx/gap_count_4> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_5> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_6> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_7> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_8> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_9> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_10> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_11> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_12> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_13> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_14> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_15> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_16> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_17> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_18> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_19> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_20> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_21> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_22> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_23> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_24> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_25> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_26> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_27> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_28> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_29> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_30> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <gmii_tx/gap_count_31> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/cbnd/wa_0> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/cbnd/wa_0> <dvi_rx0/dec_r/cbnd/wa_0> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/cbnd/wa_1> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/cbnd/wa_1> <dvi_rx0/dec_r/cbnd/wa_1> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/cbnd/wa_2> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/cbnd/wa_2> <dvi_rx0/dec_r/cbnd/wa_2> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/cbnd/wa_3> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/cbnd/wa_3> <dvi_rx0/dec_r/cbnd/wa_3> 
+INFO:Xst:2261 - The FF/Latch <enc0/encb/de_reg> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <enc0/encg/de_reg> <enc0/encr/de_reg> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_0> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_0> <dvi_rx0/dec_r/des_0/counter_0> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_1> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_1> <dvi_rx0/dec_r/des_0/counter_1> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_2> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_2> <dvi_rx0/dec_r/des_0/counter_2> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_3> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_3> <dvi_rx0/dec_r/des_0/counter_3> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_4> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_4> <dvi_rx0/dec_r/des_0/counter_4> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_5> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_5> <dvi_rx0/dec_r/des_0/counter_5> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_6> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_6> <dvi_rx0/dec_r/des_0/counter_6> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_7> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_7> <dvi_rx0/dec_r/des_0/counter_7> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/counter_8> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/counter_8> <dvi_rx0/dec_r/des_0/counter_8> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/cbnd/rawdata_vld_q> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/cbnd/rawdata_vld_q> <dvi_rx0/dec_r/cbnd/rawdata_vld_q> 
+INFO:Xst:2261 - The FF/Latch <enc0/encb/de_q> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <enc0/encg/de_q> <enc0/encr/de_q> 
+INFO:Xst:2261 - The FF/Latch <dataproc/a_g_10> in Unit <top> is equivalent to the following FF/Latch, which will be removed : <dataproc/a_g_9> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/des_0/enable> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/des_0/enable> <dvi_rx0/dec_r/des_0/enable> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_b/cbnd/rawdata_vld_rising> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/cbnd/rawdata_vld_rising> <dvi_rx0/dec_r/cbnd/rawdata_vld_rising> 
+INFO:Xst:2261 - The FF/Latch <dvi_rx0/dec_r/toggle> in Unit <top> is equivalent to the following 2 FFs/Latches, which will be removed : <dvi_rx0/dec_g/toggle> <dvi_rx0/dec_b/toggle> 
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 8.
+FlipFlop dataproc/Cr_1 has been replicated 1 time(s)
+FlipFlop dataproc/Cr_3 has been replicated 1 time(s)
+FlipFlop dataproc/Cr_4 has been replicated 1 time(s)
+FlipFlop dataproc/Cr_5 has been replicated 1 time(s)
+FlipFlop dataproc/Cr_6 has been replicated 1 time(s)
+FlipFlop gmii_tx/crc_init has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+Processing Unit <top> :
+	Found 2-bit shift register for signal <enc0/encb/c1_reg>.
+	Found 2-bit shift register for signal <enc0/encb/c0_reg>.
+	Found 3-bit shift register for signal <enc0/encb/de_reg>.
+Unit <top> processed.
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 1064
+ Flip-Flops                                            : 1064
+# Shift Registers                                      : 3
+ 2-bit shift register                                  : 2
+ 3-bit shift register                                  : 1
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : top.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 2393
+#      GND                         : 1
+#      INV                         : 54
+#      LUT1                        : 166
+#      LUT2                        : 253
+#      LUT3                        : 248
+#      LUT4                        : 245
+#      LUT5                        : 213
+#      LUT6                        : 415
+#      MUXCY                       : 414
+#      MUXF7                       : 15
+#      VCC                         : 1
+#      XORCY                       : 368
+# FlipFlops/Latches                : 1074
+#      FD                          : 248
+#      FDC                         : 115
+#      FDCE                        : 12
+#      FDE                         : 111
+#      FDP                         : 10
+#      FDPE                        : 3
+#      FDR                         : 229
+#      FDRE                        : 306
+#      FDS                         : 1
+#      FDSE_1                      : 32
+#      LD                          : 7
+# RAMS                             : 60
+#      RAM16X1D                    : 60
+# Shift Registers                  : 13
+#      SRL16E                      : 10
+#      SRLC16E                     : 3
+# Clock Buffers                    : 10
+#      BUFG                        : 10
+# IO Buffers                       : 54
+#      BUFIO2                      : 1
+#      IBUF                        : 19
+#      IBUFDS                      : 4
+#      IBUFG                       : 1
+#      OBUF                        : 25
+#      OBUFDS                      : 4
+# DCMs                             : 1
+#      DCM_CLKGEN                  : 1
+# Others                           : 27
+#      BUFPLL                      : 2
+#      fifo29_32768                : 1
+#      fifo48_8k                   : 1
+#      IODELAY2                    : 6
+#      ISERDES2                    : 6
+#      OSERDES2                    : 8
+#      PLL_ADV                     : 3
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45csg324-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:            1067  out of  54576     1%  
+ Number of Slice LUTs:                 1727  out of  27288     6%  
+    Number used as Logic:              1594  out of  27288     5%  
+    Number used as Memory:              133  out of   6408     2%  
+       Number used as RAM:              120
+       Number used as SRL:               13
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   1936
+   Number with an unused Flip Flop:     869  out of   1936    44%  
+   Number with an unused LUT:           209  out of   1936    10%  
+   Number of fully used LUT-FF pairs:   858  out of   1936    44%  
+   Number of unique control sets:        74
+
+IO Utilization: 
+ Number of IOs:                          61
+ Number of bonded IOBs:                  61  out of    218    27%  
+    IOB Flip Flops/Latches:               7
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:               10  out of     16    62%  
+ Number of PLL_ADVs:                      3  out of      4    75%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+DEBUG_SW<1>                        | IBUF                   | 7     |
+dvi_rx0/PLL_ISERDES/CLKOUT1        | BUFG                   | 294   |
+clk125_gen/pll_base_inst/CLKOUT0   | BUFG                   | 87    |
+clk_buf                            | BUFG                   | 130   |
+PLL_OSERDES/CLKOUT2                | BUFG                   | 55    |
+PLL_OSERDES/CLKOUT1                | BUFG                   | 296   |
+SYS_CLK                            | IBUFG                  | 22    |
+RXCLK                              | IBUF                   | 137   |
+dvi_rx0/PLL_ISERDES/CLKOUT2        | BUFG                   | 119   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 7.328ns (Maximum Frequency: 136.456MHz)
+   Minimum input arrival time before clock: 5.984ns
+   Maximum output required time after clock: 6.462ns
+   Maximum combinational path delay: 4.864ns
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'dvi_rx0/PLL_ISERDES/CLKOUT1'
+  Clock period: 5.135ns (frequency: 194.742MHz)
+  Total number of paths / destination ports: 2901 / 718
+-------------------------------------------------------------------------
+Delay:               5.135ns (Levels of Logic = 4)
+  Source:            timing/hcounter_2 (FF)
+  Destination:       timing/index_11 (FF)
+  Source Clock:      dvi_rx0/PLL_ISERDES/CLKOUT1 rising
+  Destination Clock: dvi_rx0/PLL_ISERDES/CLKOUT1 rising
+
+  Data Path: timing/hcounter_2 to timing/index_11
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              2   0.447   0.721  timing/hcounter_2 (timing/hcounter_2)
+     LUT2:I0->O            1   0.203   0.580  timing/Reset_OR_DriverANDClockEnable1_SW0 (N30)
+     LUT6:I5->O            3   0.205   0.651  timing/Reset_OR_DriverANDClockEnable1 (timing/Reset_OR_DriverANDClockEnable1)
+     LUT5:I4->O            1   0.205   0.580  timing/Reset_OR_DriverANDClockEnable21 (timing/Reset_OR_DriverANDClockEnable2)
+     LUT3:I2->O           12   0.205   0.908  timing/Reset_OR_DriverANDClockEnable4 (timing/Reset_OR_DriverANDClockEnable)
+     FDRE:R                    0.430          timing/index_0
+    ----------------------------------------
+    Total                      5.135ns (1.695ns logic, 3.440ns route)
+                                       (33.0% logic, 67.0% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk_buf'
+  Clock period: 3.857ns (frequency: 259.242MHz)
+  Total number of paths / destination ports: 1019 / 287
+-------------------------------------------------------------------------
+Delay:               3.857ns (Levels of Logic = 1)
+  Source:            SRL16E_0 (FF)
+  Destination:       dcmspi_0/sndval_9 (FF)
+  Source Clock:      clk_buf rising
+  Destination Clock: clk_buf rising
+
+  Data Path: SRL16E_0 to dcmspi_0/sndval_9
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     SRL16E:CLK->Q        13   1.313   1.161  SRL16E_0 (gopclk)
+     LUT4:I1->O           10   0.205   0.856  dcmspi_0/_n0046_inv1 (dcmspi_0/_n0046_inv)
+     FDRE:CE                   0.322          dcmspi_0/sndval_0
+    ----------------------------------------
+    Total                      3.857ns (1.840ns logic, 2.017ns route)
+                                       (47.7% logic, 52.3% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'PLL_OSERDES/CLKOUT2'
+  Clock period: 2.881ns (frequency: 347.120MHz)
+  Total number of paths / destination ports: 219 / 93
+-------------------------------------------------------------------------
+Delay:               2.881ns (Levels of Logic = 1)
+  Source:            enc0/pixel2x/sync_gen (FF)
+  Destination:       enc0/pixel2x/sync_gen (FF)
+  Source Clock:      PLL_OSERDES/CLKOUT2 rising
+  Destination Clock: PLL_OSERDES/CLKOUT2 rising
+
+  Data Path: enc0/pixel2x/sync_gen to enc0/pixel2x/sync_gen
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             50   0.447   1.547  enc0/pixel2x/sync_gen (enc0/pixel2x/sync)
+     INV:I->O              1   0.206   0.579  enc0/pixel2x/sync_INV_64_o1_INV_0 (enc0/pixel2x/sync_INV_64_o)
+     FDR:D                     0.102          enc0/pixel2x/sync_gen
+    ----------------------------------------
+    Total                      2.881ns (0.755ns logic, 2.126ns route)
+                                       (26.2% logic, 73.8% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'PLL_OSERDES/CLKOUT1'
+  Clock period: 7.328ns (frequency: 136.456MHz)
+  Total number of paths / destination ports: 523822 / 583
+-------------------------------------------------------------------------
+Delay:               7.328ns (Levels of Logic = 7)
+  Source:            enc0/encb/din_q_0 (FF)
+  Destination:       enc0/encb/n0q_m_3 (FF)
+  Source Clock:      PLL_OSERDES/CLKOUT1 rising
+  Destination Clock: PLL_OSERDES/CLKOUT1 rising
+
+  Data Path: enc0/encb/din_q_0 to enc0/encb/n0q_m_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q              16   0.447   1.005  enc0/encb/din_q_0 (enc0/encb/din_q_0)
+     LUT5:I4->O            6   0.205   0.745  enc0/encb/Mmux_q_m<4>11 (enc0/encb/q_m<4>)
+     LUT3:I2->O            2   0.205   0.617  enc0/encb/Mmux_q_m<6>11 (enc0/encb/q_m<6>)
+     LUT5:I4->O            9   0.205   0.830  enc0/encb/Mmux_q_m<7>11 (enc0/encb/q_m<7>)
+     LUT6:I5->O            3   0.205   0.879  enc0/encb/ADDERTREE_INTERNAL_Madd91 (enc0/encb/ADDERTREE_INTERNAL_Madd9)
+     LUT6:I3->O            3   0.205   0.651  enc0/encb/Msub_PWR_23_o_BUS_0017_sub_29_OUT_xor<2>131 (enc0/encb/Msub_PWR_23_o_BUS_0017_sub_29_OUT_xor<2>13)
+     LUT5:I4->O            2   0.205   0.617  enc0/encb/Msub_PWR_23_o_BUS_0017_sub_29_OUT_xor<2>1411 (enc0/encb/ADDERTREE_INTERNAL_Madd9_cy<0>2)
+     LUT6:I5->O            1   0.205   0.000  enc0/encb/Msub_PWR_23_o_BUS_0017_sub_29_OUT_xor<3>1 (enc0/encb/PWR_23_o_BUS_0017_sub_29_OUT<3>)
+     FD:D                      0.102          enc0/encb/n0q_m_3
+    ----------------------------------------
+    Total                      7.328ns (1.984ns logic, 5.344ns route)
+                                       (27.1% logic, 72.9% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SYS_CLK'
+  Clock period: 4.321ns (frequency: 231.420MHz)
+  Total number of paths / destination ports: 673 / 42
+-------------------------------------------------------------------------
+Delay:               4.321ns (Levels of Logic = 2)
+  Source:            coldsys_rst_20 (FF)
+  Destination:       coldsys_rst_0 (FF)
+  Source Clock:      SYS_CLK rising
+  Destination Clock: SYS_CLK rising
+
+  Data Path: coldsys_rst_20 to coldsys_rst_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               2   0.447   0.981  coldsys_rst_20 (coldsys_rst_20)
+     LUT6:I0->O            1   0.203   0.924  RESET<20>1 (RESET<20>)
+     LUT6:I1->O           22   0.203   1.133  RESET<20>4 (RESET_OBUF)
+     FDR:R                     0.430          coldsys_rst_0
+    ----------------------------------------
+    Total                      4.321ns (1.283ns logic, 3.038ns route)
+                                       (29.7% logic, 70.3% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'RXCLK'
+  Clock period: 4.944ns (frequency: 202.265MHz)
+  Total number of paths / destination ports: 2442 / 204
+-------------------------------------------------------------------------
+Delay:               4.944ns (Levels of Logic = 3)
+  Source:            gmii2fifo24/rx_count_10 (FF)
+  Destination:       gmii2fifo24/ipv4_proto_7 (FF)
+  Source Clock:      RXCLK rising
+  Destination Clock: RXCLK rising
+
+  Data Path: gmii2fifo24/rx_count_10 to gmii2fifo24/ipv4_proto_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              7   0.447   1.118  gmii2fifo24/rx_count_10 (gmii2fifo24/rx_count_10)
+     LUT5:I0->O            4   0.203   0.684  gmii2fifo24/rx_count[10]_y_info[11]_select_35_OUT<0>21 (gmii2fifo24/rx_count[10]_y_info[11]_select_35_OUT<0>2)
+     LUT4:I3->O            2   0.205   0.961  gmii2fifo24/rx_count[10]_GND_7_o_equal_10_o11 (gmii2fifo24/rx_count[10]_GND_7_o_equal_10_o11)
+     LUT5:I0->O            8   0.203   0.802  gmii2fifo24/rx_count[10]_GND_7_o_equal_10_o2 (gmii2fifo24/rx_count[10]_GND_7_o_equal_10_o1)
+     FDRE:CE                   0.322          gmii2fifo24/ipv4_proto_0
+    ----------------------------------------
+    Total                      4.944ns (1.380ns logic, 3.564ns route)
+                                       (27.9% logic, 72.1% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'dvi_rx0/PLL_ISERDES/CLKOUT2'
+  Clock period: 5.028ns (frequency: 198.876MHz)
+  Total number of paths / destination ports: 1157 / 119
+-------------------------------------------------------------------------
+Delay:               5.028ns (Levels of Logic = 3)
+  Source:            dvi_rx0/dec_g/des_0/pdcounter_4 (FF)
+  Destination:       dvi_rx0/dec_g/des_0/pdcounter_4 (FF)
+  Source Clock:      dvi_rx0/PLL_ISERDES/CLKOUT2 rising
+  Destination Clock: dvi_rx0/PLL_ISERDES/CLKOUT2 rising
+
+  Data Path: dvi_rx0/dec_g/des_0/pdcounter_4 to dvi_rx0/dec_g/des_0/pdcounter_4
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             7   0.447   1.118  dvi_rx0/dec_g/des_0/pdcounter_4 (dvi_rx0/dec_g/des_0/pdcounter_4)
+     LUT5:I0->O            6   0.203   0.992  dvi_rx0/dec_g/des_0/pdcounter[4]_GND_43_o_equal_50_o<4>1 (dvi_rx0/dec_g/des_0/pdcounter[4]_GND_43_o_equal_50_o)
+     LUT6:I2->O            1   0.203   0.827  dvi_rx0/dec_g/des_0/_n0282_inv1 (dvi_rx0/dec_g/des_0/_n0282_inv1)
+     LUT4:I0->O            5   0.203   0.714  dvi_rx0/dec_g/des_0/_n0282_inv2 (dvi_rx0/dec_g/des_0/_n0282_inv)
+     FDCE:CE                   0.322          dvi_rx0/dec_g/des_0/pdcounter_0
+    ----------------------------------------
+    Total                      5.028ns (1.378ns logic, 3.650ns route)
+                                       (27.4% logic, 72.6% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk125_gen/pll_base_inst/CLKOUT0'
+  Clock period: 6.864ns (frequency: 145.685MHz)
+  Total number of paths / destination ports: 3228 / 161
+-------------------------------------------------------------------------
+Delay:               6.864ns (Levels of Logic = 6)
+  Source:            gmii_tx/count_1 (FF)
+  Destination:       gmii_tx/txd_3 (FF)
+  Source Clock:      clk125_gen/pll_base_inst/CLKOUT0 rising
+  Destination Clock: clk125_gen/pll_base_inst/CLKOUT0 rising
+
+  Data Path: gmii_tx/count_1 to gmii_tx/txd_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q            35   0.447   1.563  gmii_tx/count_1 (gmii_tx/count_1)
+     LUT3:I0->O            1   0.205   0.580  gmii_tx/_n0522_inv11 (gmii_tx/_n0522_inv1)
+     LUT6:I5->O           14   0.205   0.958  gmii_tx/count[10]_PWR_54_o_equal_81_o<10> (gmii_tx/count[10]_PWR_54_o_equal_81_o)
+     LUT4:I3->O            3   0.205   0.651  gmii_tx/Mmux__n040516211 (gmii_tx/Mmux__n04051621)
+     LUT6:I5->O            3   0.205   0.755  gmii_tx/Mmux__n0405162 (gmii_tx/Mmux__n0405162)
+     LUT6:I4->O            1   0.203   0.580  gmii_tx/Mmux__n0405168 (gmii_tx/Mmux__n0405168)
+     LUT5:I4->O            1   0.205   0.000  gmii_tx/Mmux__n04051613 (gmii_tx/_n0405<3>)
+     FDRE:D                    0.102          gmii_tx/txd_3
+    ----------------------------------------
+    Total                      6.864ns (1.777ns logic, 5.087ns route)
+                                       (25.9% logic, 74.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'DEBUG_SW<1>'
+  Total number of paths / destination ports: 5 / 5
+-------------------------------------------------------------------------
+Offset:              2.330ns (Levels of Logic = 1)
+  Source:            RXDV (PAD)
+  Destination:       LED_6 (LATCH)
+  Destination Clock: DEBUG_SW<1> rising
+
+  Data Path: RXDV to LED_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            19   1.222   1.071  RXDV_IBUF (JA_0_OBUF)
+     LD:D                      0.037          LED_6
+    ----------------------------------------
+    Total                      2.330ns (1.259ns logic, 1.071ns route)
+                                       (54.0% logic, 46.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'dvi_rx0/PLL_ISERDES/CLKOUT1'
+  Total number of paths / destination ports: 100 / 100
+-------------------------------------------------------------------------
+Offset:              4.996ns (Levels of Logic = 2)
+  Source:            RSTBTN (PAD)
+  Destination:       timing/index_11 (FF)
+  Destination Clock: dvi_rx0/PLL_ISERDES/CLKOUT1 rising
+
+  Data Path: RSTBTN to timing/index_11
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           148   1.222   2.231  RSTBTN_IBUF (RSTBTN_IBUF)
+     LUT3:I0->O           12   0.205   0.908  timing/Reset_OR_DriverANDClockEnable4 (timing/Reset_OR_DriverANDClockEnable)
+     FDRE:R                    0.430          timing/index_0
+    ----------------------------------------
+    Total                      4.996ns (1.857ns logic, 3.139ns route)
+                                       (37.2% logic, 62.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk125_gen/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 177 / 124
+-------------------------------------------------------------------------
+Offset:              5.435ns (Levels of Logic = 5)
+  Source:            DEBUG_SW<2> (PAD)
+  Destination:       gmii_tx/txd_6 (FF)
+  Destination Clock: clk125_gen/pll_base_inst/CLKOUT0 rising
+
+  Data Path: DEBUG_SW<2> to gmii_tx/txd_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            11   1.222   1.247  DEBUG_SW_2_IBUF (DEBUG_SW_2_IBUF)
+     LUT6:I0->O            1   0.203   0.684  gmii_tx/Mmux__n04052012 (gmii_tx/Mmux__n04052011)
+     LUT2:I0->O            1   0.203   0.684  gmii_tx/Mmux__n04052013 (gmii_tx/Mmux__n04052012)
+     LUT6:I4->O            1   0.203   0.684  gmii_tx/Mmux__n04052014 (gmii_tx/Mmux__n04052013)
+     LUT6:I4->O            1   0.203   0.000  gmii_tx/Mmux__n04052015 (gmii_tx/_n0405<4>)
+     FDRE:D                    0.102          gmii_tx/txd_4
+    ----------------------------------------
+    Total                      5.435ns (2.136ns logic, 3.299ns route)
+                                       (39.3% logic, 60.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'PLL_OSERDES/CLKOUT2'
+  Total number of paths / destination ports: 2 / 1
+-------------------------------------------------------------------------
+Offset:              4.689ns (Levels of Logic = 2)
+  Source:            RSTBTN (PAD)
+  Destination:       toggle (FF)
+  Destination Clock: PLL_OSERDES/CLKOUT2 rising
+
+  Data Path: RSTBTN to toggle
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           148   1.222   2.003  RSTBTN_IBUF (RSTBTN_IBUF)
+     LUT2:I1->O            9   0.205   0.829  serdes_rst1 (serdes_rst)
+     FDC:CLR                   0.430          toggle
+    ----------------------------------------
+    Total                      4.689ns (1.857ns logic, 2.832ns route)
+                                       (39.6% logic, 60.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk_buf'
+  Total number of paths / destination ports: 5 / 5
+-------------------------------------------------------------------------
+Offset:              1.940ns (Levels of Logic = 1)
+  Source:            SW<0> (PAD)
+  Destination:       synchro_sws_0/use_fdc.fda (FF)
+  Destination Clock: clk_buf rising
+
+  Data Path: SW<0> to synchro_sws_0/use_fdc.fda
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             2   1.222   0.616  SW_0_IBUF (SW_0_IBUF)
+     FD:D                      0.102          synchro_sws_0/use_fdc.fda
+    ----------------------------------------
+    Total                      1.940ns (1.324ns logic, 0.616ns route)
+                                       (68.2% logic, 31.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'RXCLK'
+  Total number of paths / destination ports: 270 / 208
+-------------------------------------------------------------------------
+Offset:              5.480ns (Levels of Logic = 2)
+  Source:            RSTBTN (PAD)
+  Destination:       gmii2fifo24/rx_count_9 (FF)
+  Destination Clock: RXCLK rising
+
+  Data Path: RSTBTN to gmii2fifo24/rx_count_9
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           148   1.222   2.003  RSTBTN_IBUF (RSTBTN_IBUF)
+     LUT2:I1->O           61   0.205   1.620  gmii2fifo24/Mcount_rx_count_val1 (gmii2fifo24/Mcount_rx_count_val)
+     FDR:R                     0.430          gmii2fifo24/rx_count_0
+    ----------------------------------------
+    Total                      5.480ns (1.857ns logic, 3.623ns route)
+                                       (33.9% logic, 66.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'dvi_rx0/PLL_ISERDES/CLKOUT2'
+  Total number of paths / destination ports: 110 / 104
+-------------------------------------------------------------------------
+Offset:              3.652ns (Levels of Logic = 1)
+  Source:            dvi_rx0/ioclk_buf:LOCK (PAD)
+  Destination:       dvi_rx0/dec_r/toggle (FF)
+  Destination Clock: dvi_rx0/PLL_ISERDES/CLKOUT2 rising
+
+  Data Path: dvi_rx0/ioclk_buf:LOCK to dvi_rx0/dec_r/toggle
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+    BUFPLL:LOCK           25   0.000   1.192  dvi_rx0/ioclk_buf (dvi_rx0/bufpll_lock)
+     INV:I->O             92   0.206   1.824  dvi_rx0/reset1_INV_0 (dvi_rx0/reset)
+     FDC:CLR                   0.430          dvi_rx0/dec_r/toggle
+    ----------------------------------------
+    Total                      3.652ns (0.636ns logic, 3.016ns route)
+                                       (17.4% logic, 82.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'PLL_OSERDES/CLKOUT1'
+  Total number of paths / destination ports: 209 / 89
+-------------------------------------------------------------------------
+Offset:              5.984ns (Levels of Logic = 4)
+  Source:            DEBUG_SW<3> (PAD)
+  Destination:       dataproc/b_g_7 (FF)
+  Destination Clock: PLL_OSERDES/CLKOUT1 rising
+
+  Data Path: DEBUG_SW<3> to dataproc/b_g_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            17   1.222   1.275  DEBUG_SW_3_IBUF (DEBUG_SW_3_IBUF)
+     LUT5:I1->O           59   0.203   1.971  dataproc/Mmux_GND_20_o_i_hcnt[9]_mux_49_OUT111 (dataproc/Mmux_GND_20_o_i_hcnt[9]_mux_49_OUT11)
+     LUT6:I0->O            8   0.203   0.803  dataproc/_n01893 (dataproc/_n0189)
+     LUT2:I1->O            1   0.205   0.000  dataproc/b_b_7_glue_set (dataproc/b_b_7_glue_set)
+     FDR:D                     0.102          dataproc/b_b_7
+    ----------------------------------------
+    Total                      5.984ns (1.935ns logic, 4.049ns route)
+                                       (32.3% logic, 67.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk125_gen/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 14 / 10
+-------------------------------------------------------------------------
+Offset:              3.950ns (Levels of Logic = 1)
+  Source:            gmii_tx/txd_1 (FF)
+  Destination:       TXD<1> (PAD)
+  Source Clock:      clk125_gen/pll_base_inst/CLKOUT0 rising
+
+  Data Path: gmii_tx/txd_1 to TXD<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q            13   0.447   0.932  gmii_tx/txd_1 (gmii_tx/txd_1)
+     OBUF:I->O                 2.571          TXD_1_OBUF (TXD<1>)
+    ----------------------------------------
+    Total                      3.950ns (3.018ns logic, 0.932ns route)
+                                       (76.4% logic, 23.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'DEBUG_SW<1>'
+  Total number of paths / destination ports: 7 / 7
+-------------------------------------------------------------------------
+Offset:              3.648ns (Levels of Logic = 1)
+  Source:            LED_6 (LATCH)
+  Destination:       LED<6> (PAD)
+  Source Clock:      DEBUG_SW<1> rising
+
+  Data Path: LED_6 to LED<6>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q               1   0.498   0.579  LED_6 (LED_6)
+     OBUF:I->O                 2.571          LED_6_OBUF (LED<6>)
+    ----------------------------------------
+    Total                      3.648ns (3.069ns logic, 0.579ns route)
+                                       (84.1% logic, 15.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'dvi_rx0/PLL_ISERDES/CLKOUT1'
+  Total number of paths / destination ports: 52 / 51
+-------------------------------------------------------------------------
+Offset:              3.668ns (Levels of Logic = 1)
+  Source:            pcnt (FF)
+  Destination:       JA<4> (PAD)
+  Source Clock:      dvi_rx0/PLL_ISERDES/CLKOUT1 rising
+
+  Data Path: pcnt to JA<4>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              3   0.447   0.650  pcnt (pcnt)
+     OBUF:I->O                 2.571          JA_4_OBUF (JA<4>)
+    ----------------------------------------
+    Total                      3.668ns (3.018ns logic, 0.650ns route)
+                                       (82.3% logic, 17.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'PLL_OSERDES/CLKOUT1'
+  Total number of paths / destination ports: 5 / 4
+-------------------------------------------------------------------------
+Offset:              3.634ns (Levels of Logic = 1)
+  Source:            VGA_VSYNC (FF)
+  Destination:       JA<2> (PAD)
+  Source Clock:      PLL_OSERDES/CLKOUT1 rising
+
+  Data Path: VGA_VSYNC to JA<2>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               2   0.447   0.616  VGA_VSYNC (VGA_VSYNC)
+     OBUF:I->O                 2.571          JA_2_OBUF (JA<2>)
+    ----------------------------------------
+    Total                      3.634ns (3.018ns logic, 0.616ns route)
+                                       (83.0% logic, 17.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SYS_CLK'
+  Total number of paths / destination ports: 22 / 2
+-------------------------------------------------------------------------
+Offset:              6.462ns (Levels of Logic = 3)
+  Source:            coldsys_rst_20 (FF)
+  Destination:       RESET (PAD)
+  Source Clock:      SYS_CLK rising
+
+  Data Path: coldsys_rst_20 to RESET
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               2   0.447   0.981  coldsys_rst_20 (coldsys_rst_20)
+     LUT6:I0->O            1   0.203   0.924  RESET<20>1 (RESET<20>)
+     LUT6:I1->O           22   0.203   1.133  RESET<20>4 (RESET_OBUF)
+     OBUF:I->O                 2.571          RESET_OBUF (RESET)
+    ----------------------------------------
+    Total                      6.462ns (3.424ns logic, 3.038ns route)
+                                       (53.0% logic, 47.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'RXCLK'
+  Total number of paths / destination ports: 29 / 29
+-------------------------------------------------------------------------
+Offset:              1.329ns (Levels of Logic = 0)
+  Source:            gmii2fifo24/recv_en (FF)
+  Destination:       asfifo_recv:wr_en (PAD)
+  Source Clock:      RXCLK rising
+
+  Data Path: gmii2fifo24/recv_en to asfifo_recv:wr_en
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q              11   0.447   0.882  gmii2fifo24/recv_en (gmii2fifo24/recv_en)
+    fifo29_32768:wr_en         0.000          asfifo_recv
+    ----------------------------------------
+    Total                      1.329ns (0.447ns logic, 0.882ns route)
+                                       (33.6% logic, 66.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk_buf'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              1.026ns (Levels of Logic = 0)
+  Source:            dcmspi_0/PROGDATA (FF)
+  Destination:       PCLK_GEN_INST:PROGDATA (PAD)
+  Source Clock:      clk_buf rising
+
+  Data Path: dcmspi_0/PROGDATA to PCLK_GEN_INST:PROGDATA
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               1   0.447   0.579  dcmspi_0/PROGDATA (dcmspi_0/PROGDATA)
+    DCM_CLKGEN:PROGDATA        0.000          PCLK_GEN_INST
+    ----------------------------------------
+    Total                      1.026ns (0.447ns logic, 0.579ns route)
+                                       (43.6% logic, 56.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'PLL_OSERDES/CLKOUT2'
+  Total number of paths / destination ports: 20 / 20
+-------------------------------------------------------------------------
+Offset:              1.161ns (Levels of Logic = 0)
+  Source:            tmdsclkint_0 (FF)
+  Destination:       clkout/oserdes_s:D2 (PAD)
+  Source Clock:      PLL_OSERDES/CLKOUT2 rising
+
+  Data Path: tmdsclkint_0 to clkout/oserdes_s:D2
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               5   0.447   0.714  tmdsclkint_0 (tmdsclkint_0)
+    OSERDES2:D1                0.000          clkout/oserdes_s
+    ----------------------------------------
+    Total                      1.161ns (0.447ns logic, 0.714ns route)
+                                       (38.5% logic, 61.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'dvi_rx0/PLL_ISERDES/CLKOUT2'
+  Total number of paths / destination ports: 30 / 30
+-------------------------------------------------------------------------
+Offset:              1.097ns (Levels of Logic = 0)
+  Source:            dvi_rx0/dec_b/des_0/inc_data_int (FF)
+  Destination:       dvi_rx0/dec_b/des_0/iodelay_s:INC (PAD)
+  Source Clock:      dvi_rx0/PLL_ISERDES/CLKOUT2 rising
+
+  Data Path: dvi_rx0/dec_b/des_0/inc_data_int to dvi_rx0/dec_b/des_0/iodelay_s:INC
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               3   0.447   0.650  dvi_rx0/dec_b/des_0/inc_data_int (dvi_rx0/dec_b/des_0/inc_data_int)
+    IODELAY2:INC               0.000          dvi_rx0/dec_b/des_0/iodelay_m
+    ----------------------------------------
+    Total                      1.097ns (0.447ns logic, 0.650ns route)
+                                       (40.7% logic, 59.3% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 109 / 94
+-------------------------------------------------------------------------
+Delay:               4.864ns (Levels of Logic = 2)
+  Source:            RXDV (PAD)
+  Destination:       JA<0> (PAD)
+
+  Data Path: RXDV to JA<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            19   1.222   1.071  RXDV_IBUF (JA_0_OBUF)
+     OBUF:I->O                 2.571          JA_0_OBUF (JA<0>)
+    ----------------------------------------
+    Total                      4.864ns (3.793ns logic, 1.071ns route)
+                                       (78.0% logic, 22.0% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock DEBUG_SW<1>
+--------------------------------+---------+---------+---------+---------+
+                                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                    |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+--------------------------------+---------+---------+---------+---------+
+RXCLK                           |    1.366|         |         |         |
+clk125_gen/pll_base_inst/CLKOUT0|    1.063|         |         |         |
+--------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock PLL_OSERDES/CLKOUT1
+-------------------+---------+---------+---------+---------+
+                   | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-------------------+---------+---------+---------+---------+
+PLL_OSERDES/CLKOUT1|    7.328|         |         |         |
+PLL_OSERDES/CLKOUT2|    1.767|         |         |         |
+RXCLK              |    1.128|         |         |         |
+-------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock PLL_OSERDES/CLKOUT2
+-------------------+---------+---------+---------+---------+
+                   | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-------------------+---------+---------+---------+---------+
+PLL_OSERDES/CLKOUT1|    2.882|         |         |         |
+PLL_OSERDES/CLKOUT2|    2.881|         |         |         |
+-------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock RXCLK
+-------------------+---------+---------+---------+---------+
+                   | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock       |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-------------------+---------+---------+---------+---------+
+PLL_OSERDES/CLKOUT1|    2.882|         |         |         |
+RXCLK              |    4.944|         |         |         |
+-------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock SYS_CLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+SYS_CLK        |    4.321|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock clk125_gen/pll_base_inst/CLKOUT0
+--------------------------------+---------+---------+---------+---------+
+                                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                    |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+--------------------------------+---------+---------+---------+---------+
+clk125_gen/pll_base_inst/CLKOUT0|    6.864|    3.335|    3.869|         |
+dvi_rx0/PLL_ISERDES/CLKOUT1     |    3.887|         |         |         |
+--------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock clk_buf
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk_buf        |    3.857|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock dvi_rx0/PLL_ISERDES/CLKOUT1
+--------------------------------+---------+---------+---------+---------+
+                                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                    |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+--------------------------------+---------+---------+---------+---------+
+clk125_gen/pll_base_inst/CLKOUT0|    1.232|         |         |         |
+dvi_rx0/PLL_ISERDES/CLKOUT1     |    5.135|         |         |         |
+dvi_rx0/PLL_ISERDES/CLKOUT2     |    2.634|         |         |         |
+--------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock dvi_rx0/PLL_ISERDES/CLKOUT2
+---------------------------+---------+---------+---------+---------+
+                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------------------+---------+---------+---------+---------+
+dvi_rx0/PLL_ISERDES/CLKOUT1|    1.507|         |         |         |
+dvi_rx0/PLL_ISERDES/CLKOUT2|    5.028|         |         |         |
+---------------------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 30.00 secs
+Total CPU time to Xst completion: 21.36 secs
+ 
+--> 
+
+
+Total memory usage is 137496 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  188 (   0 filtered)
+Number of infos    :   74 (   0 filtered)
+

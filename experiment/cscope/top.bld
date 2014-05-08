@@ -1,0 +1,80 @@
+Release 14.4 ngdbuild P.49d (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: /opt/Xilinx/14.4/ISE_DS/ISE/bin/lin/unwrapped/ngdbuild -intstyle
+ise -dd _ngo -sd ../cores/coregen -nt timestamp -uc
+/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/synthesis/bu
+ild/top.ucf -p xc6slx45-csg324-3 top_cs.ngc top.ngd
+
+Reading NGO file
+"/home/aom/Work/fpga_project/AtlysProjectAom/experiment/cscope/top_cs.ngc" ...
+INFO:NgdBuild:1317 - Using core chipscope_ila_v1 requires a ChipScopePro
+   license.  The following blocks are instances of core chipscope_ila_v1:
+	/top/U_ila_pro_0
+
+-----------------------------------------------
+INFO:Security:71 - If a license for part 'xc6slx45' is available, it will be
+possible to use 'ChipScopePro_TDP' instead of 'ChipScopePro'.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current
+version of Xilinx tools will continue to function, but you no longer qualify for
+Xilinx software updates or new releases.
+
+-----------------------------------------------
+
+-----------------------------------------------
+Gathering constraint information from source properties...
+Done.
+
+Annotating constraints to design from ucf file
+"/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/synthesis/b
+uild/top.ucf" ...
+Resolving constraint associations...
+Checking Constraint Associations...
+INFO:ConstraintSystem:178 - TNM 'DVI_CLOCK0', used in period specification
+   'TS_DVI_CLOCK0', was traced into PLL_ADV instance PLL_ADV. The following new
+   TNM groups and period specifications were generated at the PLL_ADV output(s):
+    
+   CLKOUT1: <TIMESPEC TS_dvi_rx0_pllclk1 = PERIOD "dvi_rx0_pllclk1"
+   TS_DVI_CLOCK0 HIGH 50%>
+
+INFO:ConstraintSystem:178 - TNM 'DVI_CLOCK0', used in period specification
+   'TS_DVI_CLOCK0', was traced into PLL_ADV instance PLL_ADV. The following new
+   TNM groups and period specifications were generated at the PLL_ADV output(s):
+    
+   CLKOUT0: <TIMESPEC TS_dvi_rx0_pllclk0 = PERIOD "dvi_rx0_pllclk0"
+   TS_DVI_CLOCK0 * 10 HIGH 50%>
+
+INFO:ConstraintSystem:178 - TNM 'DVI_CLOCK0', used in period specification
+   'TS_DVI_CLOCK0', was traced into PLL_ADV instance PLL_ADV. The following new
+   TNM groups and period specifications were generated at the PLL_ADV output(s):
+    
+   CLKOUT2: <TIMESPEC TS_dvi_rx0_pllclk2 = PERIOD "dvi_rx0_pllclk2"
+   TS_DVI_CLOCK0 * 2 HIGH 50%>
+
+INFO:ConstraintSystem - The Period constraint <PERIOD = 100 MHz;>
+   [/home/aom/Work/fpga_project/AtlysProjectAom/experiment/boards/atlys/synthesi
+   s/build/top.ucf(28)], is specified using the Net Period method which is not
+   recommended. Please use the Timespec PERIOD method.
+
+Done...
+
+Checking expanded design ...
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   0
+
+Total memory usage is 123720 kilobytes
+
+Writing NGD file "top.ngd" ...
+Total REAL time to NGDBUILD completion:  16 sec
+Total CPU time to NGDBUILD completion:   16 sec
+
+Writing NGDBUILD log file "top.bld"...
