@@ -41,6 +41,7 @@ reg [15:0] dst_port;
 //					& Check each Header
 //----------------------------------------------------------
 reg        pre_en;
+reg        data_en;
 reg        invalid;
 reg [11:0] x_info;
 reg [11:0] y_info;
@@ -59,28 +60,32 @@ always@(posedge clk125) begin
 		x_info      <= 12'h0;
 		y_info      <= 12'h0;
 		pre_en      <= 1'b0;
+		data_en     <= 1'b0;
 		invalid     <= 1'b0;
 	end else begin
-		if(rx_dv) begin
+	  if(rx_dv && rxd == 8'hd5)
+			data_en <= 1'b1;
+		if(data_en)
 			rx_count <= rx_count + 11'd1;
-			case(rx_count)
-				11'h14: eth_type  [15:8]  <= rxd;
-				11'h15: eth_type  [7:0]   <= rxd;
-				11'h16: ip_ver    [7:0]   <= rxd;
-				11'h1f: ipv4_proto[7:0]   <= rxd;
-				11'h22: ipv4_src  [31:24] <= rxd;
-				11'h23: ipv4_src  [23:16] <= rxd;
-				11'h24: ipv4_src  [15:8]  <= rxd;
-				11'h25: ipv4_src  [7:0]   <= rxd;
-				11'h26: ipv4_dst  [31:24] <= rxd;
-				11'h27: ipv4_dst  [23:16] <= rxd;
-				11'h28: ipv4_dst  [15:8]  <= rxd;
-				11'h29: ipv4_dst  [7:0]   <= rxd;
-				11'h2a: src_port  [15:8]  <= rxd;
-				11'h2b: src_port  [7:0]   <= rxd;
-				11'h2c: dst_port  [15:8]  <= rxd;
-				11'h2d: dst_port  [7:0]   <= rxd;
-				11'h32: begin
+
+		case(rx_count)
+				11'h0c: eth_type  [15:8]  <= rxd;
+				11'h0d: eth_type  [7:0]   <= rxd;
+				11'h0e: ip_ver    [7:0]   <= rxd;
+				11'h17: ipv4_proto[7:0]   <= rxd;
+				11'h1a: ipv4_src  [31:24] <= rxd;
+				11'h1b: ipv4_src  [23:16] <= rxd;
+				11'h1c: ipv4_src  [15:8]  <= rxd;
+				11'h1d: ipv4_src  [7:0]   <= rxd;
+				11'h1e: ipv4_dst  [31:24] <= rxd;
+				11'h1f: ipv4_dst  [23:16] <= rxd;
+				11'h20: ipv4_dst  [15:8]  <= rxd;
+				11'h21: ipv4_dst  [7:0]   <= rxd;
+				11'h22: src_port  [15:8]  <= rxd;
+				11'h23: src_port  [7:0]   <= rxd;
+				11'h24: dst_port  [15:8]  <= rxd;
+				11'h25: dst_port  [7:0]   <= rxd;
+				11'h2a: begin
 					if(eth_type[15:0] == ethernet_type &&
 						ip_ver    [7:0]  == ip_version &&
 						ipv4_proto[7:0]  == ip_protcol &&
@@ -91,18 +96,18 @@ always@(posedge clk125) begin
 						y_info[7:0]	<= rxd;
 					end
 				end
-				11'h33: if(packet_dv) begin
+				11'h2b: if(packet_dv) begin
 					y_info[11:8]  <= rxd[3:0];
 					x_info[3:0]   <= rxd[7:4];
 					pre_en        <= 1'b1;
 				end
-				11'd1331: begin // before 11'd1005
+				11'd1323: begin // before 11'd1005
 					packet_dv <= 1'b0;
 					invalid   <= 1'b1;
 					pre_en    <= 1'b0;
 				end
 			endcase
-		end else begin
+		if(~rx_dv) begin
 			rx_count    <= 11'd0;
 			eth_type    <= 16'h0;
 			ip_ver      <= 8'h0;
