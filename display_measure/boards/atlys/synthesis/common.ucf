@@ -4,8 +4,8 @@ CONFIG VCCAUX = 3.3;
 #
 # Constraint for RX0
 #
-NET "dvi_rx0/rxclk" TNM_NET = DVI_CLOCK0;
-TIMESPEC TS_DVI_CLOCK0 = PERIOD "DVI_CLOCK0" 100 MHz HIGH 50%;
+#NET "dvi_rx0/rxclk" TNM_NET = DVI_CLOCK0;
+#TIMESPEC TS_DVI_CLOCK0 = PERIOD "DVI_CLOCK0" 100 MHz HIGH 50%;
 
 
 ########################################
@@ -68,8 +68,8 @@ TIMESPEC "TS_PCLKX2" = PERIOD "TNM_PCLKX2" TS_PCLK * 2;
 NET "pclkx10" TNM_NET = "TNM_PCLKX10";
 TIMESPEC "TS_PCLKX10" = PERIOD "TNM_PCLKX10" TS_PCLK * 10;
 
-NET "RXCLK" TNM_NET = "TNM_RXCLK";
-TIMESPEC "TS_RXCLK" = PERIOD "TNM_RXCLK" 125 MHz HIGH 50 % PRIORITY 0 ;
+#NET "RXCLK" TNM_NET = "TNM_RXCLK";
+#TIMESPEC "TS_RXCLK" = PERIOD "TNM_RXCLK" 125 MHz HIGH 50 % PRIORITY 0 ;
 
 #
 # Multi-cycle paths
@@ -97,14 +97,14 @@ TIMESPEC "TS_ramra" = FROM "bramra" TO "fddbgrp" TS_PCLK;
 ##############################################################
 # TMDS pairs on the top TMDS IN (FPGA Bank 1): J3 
 ##############################################################
-NET "RX0_TMDS(0)"  	LOC = "K17" | IOSTANDARD = TMDS_33 ; # Blue
-NET "RX0_TMDSB(0)"  LOC = "K18" | IOSTANDARD = TMDS_33 ;
-NET "RX0_TMDS(1)"  	LOC = "L17" | IOSTANDARD = TMDS_33 ; # Red
-NET "RX0_TMDSB(1)"  LOC = "L18" | IOSTANDARD = TMDS_33 ;
-NET "RX0_TMDS(2)"  	LOC = "J16" | IOSTANDARD = TMDS_33 ; # Green
-NET "RX0_TMDSB(2)"  LOC = "J18" | IOSTANDARD = TMDS_33 ;
-NET "RX0_TMDS(3)"  	LOC = "H17" | IOSTANDARD = TMDS_33 ; # Clock
-NET "RX0_TMDSB(3)"  LOC = "H18" | IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(0)"  	LOC = "K17" | IOSTANDARD = TMDS_33 ; # Blue
+#NET "RX0_TMDSB(0)"  LOC = "K18" | IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(1)"  	LOC = "L17" | IOSTANDARD = TMDS_33 ; # Red
+#NET "RX0_TMDSB(1)"  LOC = "L18" | IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(2)"  	LOC = "J16" | IOSTANDARD = TMDS_33 ; # Green
+#NET "RX0_TMDSB(2)"  LOC = "J18" | IOSTANDARD = TMDS_33 ;
+#NET "RX0_TMDS(3)"  	LOC = "H17" | IOSTANDARD = TMDS_33 ; # Clock
+#NET "RX0_TMDSB(3)"  LOC = "H18" | IOSTANDARD = TMDS_33 ;
 
 ##############################################################
 # TMDS pairs on the top TMDS OUT (FPGA Bank 0): J2 
