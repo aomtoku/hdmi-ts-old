@@ -568,9 +568,9 @@ module top (
 		 state <= IDLE;
    end else begin
 	   case(state)
-		   IDLE    : if(btn) state <= START;
-			 START   : if(light) state <= STOP;
-			 STOP    : state <= IDLE;
+		   IDLE  : if(btn) state <= START;
+			 START : if(light) state <= STOP;
+			 STOP  : state <= IDLE;
 		 endcase
 	 end
  end
@@ -583,9 +583,10 @@ module top (
 		 cnt  <= 28'd0;
 		 dcnt <= 28'd0;
 	 end else begin
-		 if(state == START)
+		 if(state == START)begin
 			 cnt <= cnt + 28'd1;
 			 dcnt <= 28'd0;
+		 end
 		 if(state == STOP)begin
 			 dcnt <= cnt;
 			 cnt <= 28'd0;

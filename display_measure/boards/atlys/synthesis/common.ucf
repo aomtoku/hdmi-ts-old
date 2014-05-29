@@ -27,6 +27,7 @@ NET "LED<7>"        LOC = "N12" | IOSTANDARD = LVCMOS33;
 
 NET "SYS_CLK"       LOC = "L15" | IOSTANDARD = LVCMOS33 | PERIOD = 100 MHz;
 
+NET "SYS_CLK" CLOCK_DEDICATED_ROUTE = FALSE; 
 ##############################################################################
 # Mechanical Switches (SW)
 ##############################################################################
