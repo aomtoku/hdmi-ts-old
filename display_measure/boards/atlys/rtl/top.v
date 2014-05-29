@@ -55,12 +55,13 @@ module top (
   input  wire RSTBTN_,
 
   input  wire SYS_CLK,
+	input  wire [1:0] swled,
 
   input  wire [3:0] SW,
   
   output wire [3:0] TMDS,
   output wire [3:0] TMDSB,
-  output wire [3:0] LED,
+  output reg  [7:0] LED,
 	input  wire       JA,
 	input  wire       BTNU
 );
@@ -465,9 +466,6 @@ module top (
     .o_g(green_data),
     .o_b(blue_data)
   );*/
-	assign red_data   = 8'd0;
-  assign green_data = 8'd0;
-	assign blue_data  = 8'd0;
   
 	////////////////////////////////////////////////////////////////
   // DVI Encoder
@@ -552,11 +550,7 @@ module top (
     .datain       (tmdsclkint));
 
   OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
-
- // LEDs
- assign LED = {bufpll_lock, ~RSTBTN_, VGA_HSYNC, VGA_VSYNC} ;
  
-
  wire light = JA;
  wire btn   = BTNU;
 
@@ -591,7 +585,7 @@ module top (
 		 if(state == START)
 			 cnt <= cnt + 28'd1;
 			 dcnt <= 28'd0;
-		 if(state = STOP)begin
+		 if(state == STOP)begin
 			 dcnt <= cnt;
 			 cnt <= 28'd0;
 		 end
@@ -600,5 +594,15 @@ module top (
 	assign red_data   = (state == IDLE | STOP) ? 8'd0 : 8'd255;
   assign green_data = (state == IDLE | STOP) ? 8'd0 : 8'd255;
 	assign blue_data  = (state == IDLE | STOP) ? 8'd0 : 8'd255;
+
+  always @ (*) begin
+		case(swled)
+		  2'b00 : LED <= dcnt[7:0];
+		  2'b01 : LED <= dcnt[15:8];
+		  2'b10 : LED <= dcnt[23:16];
+		  2'b11 : LED <= {4'd0,dcnt[27:24]};
+		endcase
+	end
+
 
 endmodule
