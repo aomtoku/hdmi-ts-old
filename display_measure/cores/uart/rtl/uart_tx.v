@@ -65,21 +65,21 @@ module uart_tx(
                  state <= DATA;
                  wr    <= 1'b1;
                end
-			 DATA  : begin
+       DATA  : begin
                  tx <= sfd[0]; 
                  sfd <= {1'b0, sfd[7:1]};
-								 if(dcnt == 3'd7)
-									 state <= STOP;
-								 else
-									 dcnt <= dcnt + 3'd1;
-							 end
-			 STOP  : begin
-                 tx <= 1'b1;
-								 state <= IDLE;
-								 wr <= 1'b0;
+                 if(dcnt == 3'd7)
+                   state <= STOP;
+                 else
+                   dcnt <= dcnt + 3'd1;
                end
-     endcase
-	 end
+       STOP  : begin
+                 tx <= 1'b1;
+                 state <= IDLE;
+                 wr <= 1'b0;
+               end
+       endcase
+   end
  end
 
 endmodule
