@@ -491,7 +491,7 @@ module top (
 
   wire [2:0] tmdsint;
 
-  wire serdes_rst = ~RSTBTN | ~bufpll_lock;
+  wire serdes_rst = ~RSTBTN_ | ~bufpll_lock;
 
 
   serdes_n_to_1 #(.SF(5)) oserdes0 (
@@ -554,7 +554,7 @@ module top (
   OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
 
  // LEDs
- assign LED = {bufpll_lock, ~RSTBTN, VGA_HSYNC, VGA_VSYNC} ;
+ assign LED = {bufpll_lock, ~RSTBTN_, VGA_HSYNC, VGA_VSYNC} ;
  
 
  wire light = JA;
