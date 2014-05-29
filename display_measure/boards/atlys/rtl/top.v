@@ -49,7 +49,7 @@
 
 `timescale 1 ps / 1 ps
 
-//`define apple
+`include "setup.v"
 
 module top (
   input  wire RSTBTN,
@@ -61,7 +61,6 @@ module top (
   output wire [3:0] TMDS,
   output wire [3:0] TMDSB,
   output wire [3:0] LED,
-  output wire [1:0] DEBUG
 );
 
   //******************************************************************//
@@ -79,16 +78,11 @@ module top (
   reg clk_buf;
 	always @(posedge sysclk) clk_buf <= ~clk_buf;
 	assign clk50m = clk_buf;
-	//BUFIO2 #(.DIVIDE_BYPASS("FALSE"), .DIVIDE(2))
-  //sysclk_div (.DIVCLK(clk50m), .IOCLK(), .SERDESSTROBE(), .I(sysclk));
 
   BUFG clk50m_bufgbufg (.I(clk50m), .O(clk50m_bufg));
 
   wire pclk_lckd;
 
-//`ifdef SIMULATION
-//  assign pwrup = 1'b0;
-//`else
   SRL16E #(.INIT(16'h1)) pwrup_0 (
     .Q(pwrup),
     .A0(1'b1),
@@ -99,7 +93,6 @@ module top (
     .CLK(clk50m_bufg),
     .D(1'b0)
   );
-//`endif
 
   //////////////////////////////////////
   /// Switching screen formats
@@ -301,69 +294,6 @@ module top (
   synchro #(.INITIALIZE("LOGIC1"))
   synchro_reset (.async(!pll_lckd),.sync(reset),.clk(pclk));
 
-///////////////////////////////////////////////////////////////////////////
-// Video Timing Parameters
-///////////////////////////////////////////////////////////////////////////
-  //1280x1024@60HZ
-  parameter HPIXELS_SXGA = 11'd1280; //Horizontal Live Pixels
-  parameter  VLINES_SXGA = 11'd1024;  //Vertical Live ines
-  parameter HSYNCPW_SXGA = 11'd112;  //HSYNC Pulse Width
-  parameter VSYNCPW_SXGA = 11'd3;    //VSYNC Pulse Width
-  parameter HFNPRCH_SXGA = 11'd48;   //Horizontal Front Portch
-  parameter VFNPRCH_SXGA = 11'd1;    //Vertical Front Portch
-  parameter HBKPRCH_SXGA = 11'd248;  //Horizontal Front Portch
-  parameter VBKPRCH_SXGA = 11'd38;   //Vertical Front Portch
-
-  //1280x720@60HZ
-  /*
-  parameter HPIXELS_HDTV720P = 11'd1280; //Horizontal Live Pixels
-  parameter VLINES_HDTV720P  = 11'd720;  //Vertical Live ines
-  parameter HSYNCPW_HDTV720P = 11'd80;  //HSYNC Pulse Width
-  parameter VSYNCPW_HDTV720P = 11'd5;    //VSYNC Pulse Width
-  parameter HFNPRCH_HDTV720P = 11'd72;   //Horizontal Front Portch hotoha72
-  parameter VFNPRCH_HDTV720P = 11'd3;    //Vertical Front Portch
-  parameter HBKPRCH_HDTV720P = 11'd216;  //Horizontal Front Portch
-  parameter VBKPRCH_HDTV720P = 11'd22;   //Vertical Front Portch
-*/
-  parameter HPIXELS_HDTV720P = 11'd1280; //Horizontal Live Pixels
-  parameter VLINES_HDTV720P  = 11'd720;  //Vertical Live ines
-  parameter HSYNCPW_HDTV720P = 11'd40;  //HSYNC Pulse Width
-  parameter VSYNCPW_HDTV720P = 11'd5;    //VSYNC Pulse Width
-  parameter HFNPRCH_HDTV720P = 11'd110;   //Horizontal Front Portch hotoha72
-  parameter VFNPRCH_HDTV720P = 11'd5;    //Vertical Front Portch
-  parameter HBKPRCH_HDTV720P = 11'd220;  //Horizontal Front Portch
-  parameter VBKPRCH_HDTV720P = 11'd25;   //Vertical Front Portch
-
-  //1024x768@60HZ
-  parameter HPIXELS_XGA = 11'd1024; //Horizontal Live Pixels
-  parameter VLINES_XGA  = 11'd768;  //Vertical Live ines
-  parameter HSYNCPW_XGA = 11'd136;  //HSYNC Pulse Width
-  parameter VSYNCPW_XGA = 11'd6;    //VSYNC Pulse Width
-  parameter HFNPRCH_XGA = 11'd24;   //Horizontal Front Portch
-  parameter VFNPRCH_XGA = 11'd3;    //Vertical Front Portch
-  parameter HBKPRCH_XGA = 11'd160;  //Horizontal Front Portch
-  parameter VBKPRCH_XGA = 11'd29;   //Vertical Front Portch
-
-  //800x600@60HZ
-  parameter HPIXELS_SVGA = 11'd800; //Horizontal Live Pixels
-  parameter VLINES_SVGA  = 11'd600; //Vertical Live ines
-  parameter HSYNCPW_SVGA = 11'd128; //HSYNC Pulse Width
-  parameter VSYNCPW_SVGA = 11'd4;   //VSYNC Pulse Width
-  parameter HFNPRCH_SVGA = 11'd40;  //Horizontal Front Portch
-  parameter VFNPRCH_SVGA = 11'd1;   //Vertical Front Portch
-  parameter HBKPRCH_SVGA = 11'd88;  //Horizontal Front Portch
-  parameter VBKPRCH_SVGA = 11'd23;  //Vertical Front Portch
-
-  //640x480@60HZ
-  parameter HPIXELS_VGA = 11'd640; //Horizontal Live Pixels
-  parameter VLINES_VGA  = 11'd480; //Vertical Live ines
-  parameter HSYNCPW_VGA = 11'd96;  //HSYNC Pulse Width
-  parameter VSYNCPW_VGA = 11'd2;   //VSYNC Pulse Width
-  parameter HFNPRCH_VGA = 11'd16;  //Horizontal Front Portch
-  parameter VFNPRCH_VGA = 11'd11;  //Vertical Front Portch
-  parameter HBKPRCH_VGA = 11'd48;  //Horizontal Front Portch
-  parameter VBKPRCH_VGA = 11'd31;  //Vertical Front Portch
-
   reg [10:0] tc_hsblnk;
   reg [10:0] tc_hssync;
   reg [10:0] tc_hesync;
@@ -522,34 +452,7 @@ module top (
   ///////////////////////////////////
   wire [7:0] red_data, green_data, blue_data;
 
-`ifdef SIMULATION
-  reg [23:0] pixel_buffer [1279:0];
-  reg [23:0] active_pixel;
-  integer i;
-  initial begin
-    for (i = 0; i < 1280; i = i + 1) begin
-      pixel_buffer[i] = $random(dvi_tb.rx0_seed);
-    end
-
-    i = 0;
-  end
-
-  always @ (posedge pclk) begin
-    if(active_q) begin
-      active_pixel = pixel_buffer[i];
-      i = i + 1;
-    end else begin
-      i = 0;
-      active_pixel = 24'hx;
-    end
-  end
-
-  assign {red_data, green_data, blue_data} = active_pixel;
-`else
-`ifdef apple
-  apple_out clrbar(
-`else 
-  hdcolorbar clrbar(
+  /*hdcolorbar clrbar(
     .i_clk_74M(pclk),
     .i_rst(reset),
     .i_hcnt(bgnd_hcount),
@@ -559,10 +462,12 @@ module top (
     .o_r(red_data),
     .o_g(green_data),
     .o_b(blue_data)
-  );
-`endif
-`endif
-  ////////////////////////////////////////////////////////////////
+  );*/
+	assign red_data   = 8'd0;
+  assign green_data = 8'd0;
+	assign blue_data  = 8'd0;
+  
+	////////////////////////////////////////////////////////////////
   // DVI Encoder
   ////////////////////////////////////////////////////////////////
   wire [4:0] tmds_data0, tmds_data1, tmds_data2;
@@ -586,41 +491,7 @@ module top (
 
   wire serdes_rst = RSTBTN | ~bufpll_lock;
 
-//`define DEBUG
 
-`ifdef DEBUG
-
-  wire [4:0] pattern = 5'b00011;
-
-  serdes_n_to_1 #(.SF(5)) oserdes0 (
-             .ioclk(pclkx10),
-             .serdesstrobe(serdesstrobe),
-             .reset(serdes_rst),
-             .gclk(pclkx2),
-             .datain(pattern),
-             .iob_data_out(tmdsint[0])) ;
-
-  serdes_n_to_1 #(.SF(5)) oserdes1 (
-             .ioclk(pclkx10),
-             .serdesstrobe(serdesstrobe),
-             .reset(serdes_rst),
-             .gclk(pclkx2),
-             .datain(pattern),
-             .iob_data_out(tmdsint[1])) ;
-
-  serdes_n_to_1 #(.SF(5)) oserdes2 (
-             .ioclk(pclkx10),
-             .serdesstrobe(serdesstrobe),
-             .reset(serdes_rst),
-             .gclk(pclkx2),
-             .datain(pattern),
-             .iob_data_out(tmdsint[2])) ;
-
-  OBUFDS TMDS0 (.I(tmdsint[0]), .O(TMDS[0]), .OB(TMDSB[0])) ;
-  OBUFDS TMDS1 (.I(tmdsint[1]), .O(TMDS[1]), .OB(TMDSB[1])) ;
-  OBUFDS TMDS2 (.I(tmdsint[2]), .O(TMDS[2]), .OB(TMDSB[2])) ;
-  
-`else                             
   serdes_n_to_1 #(.SF(5)) oserdes0 (
              .ioclk(pclkx10),
              .serdesstrobe(serdesstrobe),
@@ -648,7 +519,6 @@ module top (
   OBUFDS TMDS0 (.I(tmdsint[0]), .O(TMDS[0]), .OB(TMDSB[0])) ;
   OBUFDS TMDS1 (.I(tmdsint[1]), .O(TMDS[1]), .OB(TMDSB[1])) ;
   OBUFDS TMDS2 (.I(tmdsint[2]), .O(TMDS[2]), .OB(TMDSB[2])) ;
-`endif
 
   reg [4:0] tmdsclkint = 5'b00000;
   reg toggle = 1'b0;
@@ -680,13 +550,6 @@ module top (
     .datain       (tmdsclkint));
 
   OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
-
-  //
-  // Debug Ports
-  //
-
- assign DEBUG[0] = VGA_HSYNC;
- assign DEBUG[1] = VGA_VSYNC;
 
  // LEDs
  assign LED = {bufpll_lock, RSTBTN, VGA_HSYNC, VGA_VSYNC} ;
