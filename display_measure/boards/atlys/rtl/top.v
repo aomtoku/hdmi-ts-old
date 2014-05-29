@@ -52,7 +52,7 @@
 `include "setup.v"
 
 module top (
-  input  wire RSTBTN,
+  input  wire RSTBTN_,
 
   input  wire SYS_CLK,
 
@@ -61,6 +61,8 @@ module top (
   output wire [3:0] TMDS,
   output wire [3:0] TMDSB,
   output wire [3:0] LED,
+	input  wire       JA,
+	input  wire       BTNU
 );
 
   //******************************************************************//
@@ -489,7 +491,7 @@ module top (
 
   wire [2:0] tmdsint;
 
-  wire serdes_rst = RSTBTN | ~bufpll_lock;
+  wire serdes_rst = ~RSTBTN | ~bufpll_lock;
 
 
   serdes_n_to_1 #(.SF(5)) oserdes0 (
@@ -552,5 +554,51 @@ module top (
   OBUFDS TMDS3 (.I(tmdsclk), .O(TMDS[3]), .OB(TMDSB[3])) ;// clock
 
  // LEDs
- assign LED = {bufpll_lock, RSTBTN, VGA_HSYNC, VGA_VSYNC} ;
+ assign LED = {bufpll_lock, ~RSTBTN, VGA_HSYNC, VGA_VSYNC} ;
+ 
+
+ wire light = JA;
+ wire btn   = BTNU;
+
+ parameter IDLE  = 2'b00;
+ parameter START = 2'b01;
+ parameter STOP  = 2'b10;
+
+ reg [1:0] state;
+ 
+ /* FSM of Counter */
+ always @ (posedge sysclk) begin
+   if(~RSTBTN_)begin
+		 state <= IDLE;
+   end else begin
+	   case(state)
+		   IDLE    : if(btn) state <= START;
+			 START   : if(light) state <= STOP;
+			 STOP    : state <= IDLE;
+			 default : state <= IDLE;
+		 endcase
+	 end
+ end
+
+ /* Counter */
+ reg [27:0] cnt;
+ reg [27:0] dcnt;
+ always @ (posedge sysclk)
+   if(~RSTBTN_)begin
+		 cnt <= 28'd0;
+		 dcnt <= 28'd0;
+	 end else begin
+		 if(state == START)
+			 cnt <= cnt + 28'd1;
+			 dcnt <= 28'd0;
+		 if(state = STOP)begin
+			 dcnt <= cnt;
+			 cnt <= 28'd0;
+		 end
+   end
+
+	assign red_data   = (state == IDLE | STOP) ? 8'd0 : 8'd255;
+  assign green_data = (state == IDLE | STOP) ? 8'd0 : 8'd255;
+	assign blue_data  = (state == IDLE | STOP) ? 8'd0 : 8'd255;
+
 endmodule

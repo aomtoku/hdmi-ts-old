@@ -11,7 +11,7 @@ CONFIG VCCAUX = 3.3;
 ########################################
 # Reset button and LEDs
 ########################################
-NET "RSTBTN"        LOC = "N4" | IOSTANDARD = LVCMOS33;
+NET "RSTBTN_"       LOC = "T15" | IOSTANDARD = LVCMOS33;
 NET "LED<0>"        LOC = "U18" | IOSTANDARD = LVCMOS33;
 NET "LED<1>"        LOC = "M14" | IOSTANDARD = LVCMOS33;
 NET "LED<2>"        LOC = "N14" | IOSTANDARD = LVCMOS33;
@@ -177,7 +177,7 @@ NET "TMDSB(3)"  LOC = "A6" | IOSTANDARD = TMDS_33 ;
 #
 ##############################################################################
 
-#NET "JA<0>"		LOC = "T3" | IOSTANDARD = LVCMOS33 | SLEW = FAST;
+NET "JA"		LOC = "T3" | IOSTANDARD = LVCMOS33 | SLEW = FAST;
 #NET "JA<1>"		LOC = "R3" | IOSTANDARD = LVCMOS33 | SLEW = FAST;
 #NET "JA<2>"		LOC = "P6" | IOSTANDARD = LVCMOS33 | SLEW = FAST;
 #NET "JA<3>"		LOC = "N5" | IOSTANDARD = LVCMOS33 | SLEW = FAST;
@@ -185,3 +185,16 @@ NET "TMDSB(3)"  LOC = "A6" | IOSTANDARD = TMDS_33 ;
 #NET "JA<5>"		LOC = "T9";
 #NET "JA<6>"		LOC = "V4";
 #NET "JA<7>"		LOC = "T4";
+
+
+##############################################################################
+#
+# PushButtons
+#
+##############################################################################
+
+NET "BTNU"	LOC = "N4" | IOSTANDARD = LVCMOS33 ;
+#NET "BTNC"	LOC = "F5" | IOSTANDARD = LVCMOS33 ;
+#NET "BTNR"	LOC = "F6" | IOSTANDARD = LVCMOS33 ;
+#NET "BTNL"	LOC = "P4" | IOSTANDARD = LVCMOS33 ;
+#NET "BTND"	LOC = "P3" | IOSTANDARD = LVCMOS33 ;
