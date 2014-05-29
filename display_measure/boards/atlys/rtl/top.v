@@ -75,8 +75,10 @@ module top (
   wire          clk50m, clk50m_bufg;
 
   wire          pwrup;
+	wire          clk100;
 
   IBUF sysclk_buf (.I(SYS_CLK), .O(sysclk));
+	BUFG sysclk_bufg (.I(sysclk), .O(clk100));
 
   reg clk_buf;
 	always @(posedge sysclk) clk_buf <= ~clk_buf;
@@ -558,10 +560,10 @@ module top (
  parameter START = 2'b01;
  parameter STOP  = 2'b10;
 
- reg [1:0] state;
+ reg [1:0] state = IDLE;
  
  /* FSM of Counter */
- always @ (posedge sysclk) begin
+ always @ (posedge clk100) begin
    if(~RSTBTN_)begin
 		 state <= IDLE;
    end else begin
@@ -569,7 +571,6 @@ module top (
 		   IDLE    : if(btn) state <= START;
 			 START   : if(light) state <= STOP;
 			 STOP    : state <= IDLE;
-			 default : state <= IDLE;
 		 endcase
 	 end
  end
@@ -577,9 +578,9 @@ module top (
  /* Counter */
  reg [27:0] cnt;
  reg [27:0] dcnt;
- always @ (posedge sysclk)
+ always @ (posedge clk100)
    if(~RSTBTN_)begin
-		 cnt <= 28'd0;
+		 cnt  <= 28'd0;
 		 dcnt <= 28'd0;
 	 end else begin
 		 if(state == START)
@@ -591,16 +592,16 @@ module top (
 		 end
    end
 
-	assign red_data   = (state == IDLE | STOP) ? 8'd0 : 8'd255;
-  assign green_data = (state == IDLE | STOP) ? 8'd0 : 8'd255;
-	assign blue_data  = (state == IDLE | STOP) ? 8'd0 : 8'd255;
+	assign red_data   = (state == IDLE) ? 8'd15 : 8'd240;
+  assign green_data = (state == IDLE) ? 8'd15 : 8'd240;
+	assign blue_data  = (state == IDLE) ? 8'd15 : 8'd240;
 
   always @ (*) begin
 		case(swled)
 		  2'b00 : LED <= dcnt[7:0];
 		  2'b01 : LED <= dcnt[15:8];
 		  2'b10 : LED <= dcnt[23:16];
-		  2'b11 : LED <= {4'd0,dcnt[27:24]};
+		  2'b11 : LED <= {state,2'd0,dcnt[27:24]};
 		endcase
 	end
 
