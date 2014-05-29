@@ -2,31 +2,32 @@
  *
  *   Uart Module for Atlys
  *      30th May, 2014
- *      Developed by Yuta TOKUSAHI
+ *      Developed by Yuta TOKUSASHI
  * 
  * **********************************************************/
 
-module uart_tx()
+module uart_tx(
   input  wire clk,
-	input  wire rst,
-	input  wire [7:0] data,
-	input  wire we,
-	output reg  tx,
-	output reg  wr
+  input  wire rst,
+  input  wire [7:0] data,
+  input  wire we,
+  output reg  tx,
+  output reg  wr
 );
 
+ /* Baud Rate Clock Generator */
  reg [3:0] cnt;
  reg dclk;
- always @ (posedge clk)begin
-	 if(rst)begin
-		 cnt16 <= 4'd0;
-		 dclk  <= 1'b0;
-	 end else begin
-	   if(cnt == 4'd15)begin
-			 cnt  <= 4'd0;
-			 dclk <= ~dclk;
-		 end else
-			 cnt <= cnt + 4'd1;
+ always @ (posedge clk or posedge rst)begin
+   if(rst)begin
+     cnt   <= 4'd0;
+     dclk  <= 1'b0;
+   end else begin
+     if(cnt == 4'd15)begin
+       cnt  <= 4'd0;
+       dclk <= ~dclk;
+     end else
+       cnt <= cnt + 4'd1;
    end
  end
 	 
@@ -40,35 +41,35 @@ module uart_tx()
  parameter DATA  = 2'b10;
  parameter STOP  = 2'b11;
 
- always @ (posedge dclk) begin
+ always @ (posedge dclk or posedge rst) begin
    if(rst) begin
-		 wr    <= 1'b0;
-		 tx    <= 1'b0;
-		 state <= 2'd0;
-		 sfd   <= 8'd0;
-		 dcnt  <= 3'd0;
-	 end else begin
-		 case(state)
-		   IDLE  : begin
+     wr    <= 1'b0;
+     tx    <= 1'b0;
+     state <= 2'd0;
+     sfd   <= 8'd0;
+     dcnt  <= 3'd0;
+   end else begin
+     case(state)
+       IDLE  : begin
                  tx   <= 1'b1;
-								 dcnt <= 3'd0;
-								 wr   <= 1'b0;
-								 if(we)begin
-									 state <= START;
-									 sfd   <= data;
-								 end
+                 dcnt <= 3'd0;
+                 wr   <= 1'b0;
+                 if(we)begin
+                   state <= START;
+                   sfd   <= data;
+                 end
                end
-			 START : begin
+       START : begin
                  tx    <= 1'b0;
-								 dcnt  <= 3'd0;
-								 state <= DATA;
-								 wr    <= 1'b1;
+                 dcnt  <= 3'd0;
+                 state <= DATA;
+                 wr    <= 1'b1;
                end
 			 DATA  : begin
                  tx <= sfd[0]; 
                  sfd <= {1'b0, sfd[7:1]};
 								 if(dcnt == 3'd7)
-									 state <= DATA;
+									 state <= STOP;
 								 else
 									 dcnt <= dcnt + 3'd1;
 							 end
@@ -78,6 +79,7 @@ module uart_tx()
 								 wr <= 1'b0;
                end
      endcase
+	 end
  end
 
 endmodule
