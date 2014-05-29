@@ -1,3 +1,11 @@
+/*************************************************************
+ *
+ *   Uart Module for Atlys
+ *      30th May, 2014
+ *      Developed by Yuta TOKUSAHI
+ * 
+ * **********************************************************/
+
 module uart_tx()
   input  wire clk,
 	input  wire rst,
