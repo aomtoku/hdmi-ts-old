@@ -12,7 +12,7 @@ module uart_tx(
   input  wire [7:0] data,
   input  wire we,
   output reg  tx,
-  output reg  wr
+  output reg  busy
 );
 
  /* Baud Rate Clock Generator */
@@ -43,7 +43,7 @@ module uart_tx(
 
  always @ (posedge dclk or posedge rst) begin
    if(rst) begin
-     wr    <= 1'b0;
+     busy  <= 1'b0;
      tx    <= 1'b0;
      state <= 2'd0;
      sfd   <= 8'd0;
@@ -53,7 +53,7 @@ module uart_tx(
        IDLE  : begin
                  tx   <= 1'b1;
                  dcnt <= 3'd0;
-                 wr   <= 1'b0;
+                 busy <= 1'b0;
                  if(we)begin
                    state <= START;
                    sfd   <= data;
@@ -63,7 +63,7 @@ module uart_tx(
                  tx    <= 1'b0;
                  dcnt  <= 3'd0;
                  state <= DATA;
-                 wr    <= 1'b1;
+                 busy  <= 1'b1;
                end
        DATA  : begin
                  tx <= sfd[0]; 
@@ -74,9 +74,9 @@ module uart_tx(
                    dcnt <= dcnt + 3'd1;
                end
        STOP  : begin
-                 tx <= 1'b1;
+                 tx    <= 1'b1;
                  state <= IDLE;
-                 wr <= 1'b0;
+                 busy  <= 1'b0;
                end
        endcase
    end
