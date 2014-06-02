@@ -70,5 +70,3 @@ $ ruby stat.rb output.txt
 
 
 
-ちなみにaomのLGディスプレイを
-225ラインつまりほぼ1/３の遅延
