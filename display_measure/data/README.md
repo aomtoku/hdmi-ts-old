@@ -25,17 +25,19 @@ $ make load
   解像度     1280x720 progressive 60fps   
   Interface  HDMI  
 
-- ASUS VG236H   
+- ASUS VG236H  
     max/avg/min 23079130/21960587/21685040 ns
-- LG   22EN43   
+- LG   22EN43    
     max/avg/min 5773830/4611593/4239510 ns
 - LG  Flatron L246WH   
     max/avg/min 6305190/4509470/3637290 ns
 - Alienware  OptX AW2310   
     max/avg/min 11949510/11211753/10205540 ns
-- BENQ G2420HD    
+- BENQ G2420HD   
     max/avg/min 5056710/3977415/3731210 ns  
 
+ ![画像2](http://web.sfc.wide.ad.jp/~aom/img/latency_dis.png)
+ 
 
 ## まとめ ##
 
@@ -53,7 +55,7 @@ $ bash bc.sh input.txt > output.txt
 $ ruby stat.rb output.txt  
 
 計測結果  
-  最大値/平均/最小値 
+  最大値/平均/中央値/標準偏差/最小値 
 
 
 
@@ -67,6 +69,5 @@ $ ruby stat.rb output.txt
   1フレーム -> 16.666 msec  
   1ライン   -> 14.814 μsec  
   1ピクセル ->  6.734 nsec 
-
 
 
