@@ -62,6 +62,8 @@ module top (
   output wire [3:0] TMDS,
   output wire [3:0] TMDSB,
   output reg  [7:0] LED,
+	//input  wire       UART_TX,
+	//output wire       UART_RX,
 	input  wire       JA,
 	input  wire       BTNU
 );
@@ -170,6 +172,7 @@ module top (
   parameter SW_XGA       = 4'b0011;
   parameter SW_HDTV720P  = 4'b0010;
   parameter SW_SXGA      = 4'b1000;
+  parameter SW_FLHD      = 4'b1100;
 
   reg [7:0] pclk_M, pclk_D;
   always @ (posedge clk50m_bufg)
@@ -198,6 +201,12 @@ module top (
         begin
           pclk_M <= 8'd54 - 8'd1;
           pclk_D <= 8'd25 - 8'd1;
+        end
+
+        SW_FLHD: //148.5 MHz pixel clock
+        begin
+          pclk_M <= 8'd199 - 8'd1;
+          pclk_D <= 8'd67  - 8'd1;
         end
 
         default: //74.25 MHz pixel clock
@@ -387,6 +396,20 @@ module top (
         tc_vesync =  VLINES_SXGA - 11'd1 + VFNPRCH_SXGA + VSYNCPW_SXGA;
         tc_veblnk =  VLINES_SXGA - 11'd1 + VFNPRCH_SXGA + VSYNCPW_SXGA + VBKPRCH_SXGA;
       end
+      
+			SW_FLHD:
+      begin
+        hvsync_polarity = 1'b0; // positive polarity
+
+        tc_hsblnk = HPIXELS_FLHD - 11'd1;
+        tc_hssync = HPIXELS_FLHD - 11'd1 + HFNPRCH_FLHD;
+        tc_hesync = HPIXELS_FLHD - 11'd1 + HFNPRCH_FLHD + HSYNCPW_FLHD;
+        tc_heblnk = HPIXELS_FLHD - 11'd1 + HFNPRCH_FLHD + HSYNCPW_FLHD + HBKPRCH_FLHD;
+        tc_vsblnk =  VLINES_FLHD - 11'd1;
+        tc_vssync =  VLINES_FLHD - 11'd1 + VFNPRCH_FLHD;
+        tc_vesync =  VLINES_FLHD - 11'd1 + VFNPRCH_FLHD + VSYNCPW_FLHD;
+        tc_veblnk =  VLINES_FLHD - 11'd1 + VFNPRCH_FLHD + VSYNCPW_FLHD + VBKPRCH_FLHD;
+      end
 
       default: //SW_HDTV720P:
       begin
@@ -556,11 +579,14 @@ module top (
  wire light = JA;
  wire btn   = BTNU;
 
- parameter IDLE  = 2'b00;
- parameter START = 2'b01;
- parameter STOP  = 2'b10;
+ parameter IDLE  = 3'b000;
+ parameter READY = 3'b001; // Waiting 1 second for save button input
+ parameter WAIT  = 3'b010;
+ parameter START = 3'b011;
+ parameter STOP  = 3'b100;
 
- reg [1:0] state = IDLE;
+ reg [2:0] state = IDLE;
+ reg       flg;
  
  /* FSM of Counter */
  always @ (posedge clk100) begin
@@ -568,7 +594,9 @@ module top (
 		 state <= IDLE;
    end else begin
 	   case(state)
-		   IDLE  : if(btn) state <= START;
+		   IDLE  : if(btn) state <= READY;
+			 READY : if(flg) state <= WAIT;
+			 WAIT  : if(start) state <= START;
 			 START : if(light) state <= STOP;
 			 STOP  : state <= IDLE;
 		 endcase
@@ -578,33 +606,109 @@ module top (
  /* Counter */
  reg [27:0] cnt;
  reg [27:0] dcnt;
+ reg        blank, start;
  always @ (posedge clk100)
    if(~RSTBTN_)begin
 		 cnt  <= 28'd0;
 		 dcnt <= 28'd0;
+		 flg  <= 1'b0;
+		 blank <= 1'b0;
+		 start <= 1'b0;
 	 end else begin
+	   if(state == IDLE)begin
+		   cnt <= 28'd0;
+			 flg <= 1'b0;
+			 blank <= 1'b0;
+			 start <= 1'b0;
+		 end
+	   if(state == READY)begin
+		   if(cnt == 28'd100000000)begin
+				 flg <= 1'b1;
+				 cnt <= 28'd0;
+			 end else
+			   cnt <= cnt + 28'd1;
+		 end
+	   if(state == WAIT)begin
+			 if(bgnd_vblnk)
+				 blank <= 1'b1;
+			 if(blank & !bgnd_vblnk)
+				 start <= 1'b1;
+		 end
 		 if(state == START)begin
-			 cnt <= cnt + 28'd1;
+			 flg  <= 1'b0;
+			 cnt  <= cnt + 28'd1;
 			 dcnt <= 28'd0;
 		 end
 		 if(state == STOP)begin
 			 dcnt <= cnt;
-			 cnt <= 28'd0;
 		 end
    end
 
-	assign red_data   = (state == IDLE) ? 8'd15 : 8'd240;
-  assign green_data = (state == IDLE) ? 8'd15 : 8'd240;
-	assign blue_data  = (state == IDLE) ? 8'd15 : 8'd240;
+	assign red_data   = (state == IDLE | state == READY | state == WAIT) ? 8'd15 : 8'd240;
+  assign green_data = (state == IDLE | state == READY | state == WAIT) ? 8'd15 : 8'd240;
+	assign blue_data  = (state == IDLE | state == READY | state == WAIT) ? 8'd15 : 8'd240;
 
   always @ (*) begin
 		case(swled)
 		  2'b00 : LED <= dcnt[7:0];
 		  2'b01 : LED <= dcnt[15:8];
 		  2'b10 : LED <= dcnt[23:16];
-		  2'b11 : LED <= {state,2'd0,dcnt[27:24]};
+		  2'b11 : LED <= {state,3'd0,dcnt[27:24]};
 		endcase
 	end
+ 
+ // UART module
+ /* wire err;
+ reg [31:0] mem;
+ reg we, wr, err_b;
+ reg [1:0]mcnt;
+ always @ (posedge clk100 or negedge RSTBTN)
+   if(~RSTBTN)begin
+     mem  <= 32'd0;
+		 we   <= 1'b0;
+		 wr   <= 1'b0;
+		 mcnt <= 2'd0;
+   end else begin
+		 if(state == STOP) begin
+			 mem <= {8'd0,dcnt};
+			 we  <= 1'd1;
+     end
+		 if(mcnt == 2'd2) begin
+       we   <= 1'd0;
+       mcnt <= 2'd0;
+     end else if(~err & we & ~wr) begin
+			 mem <= {8'd0,mem[31:8]};
+			 mcnt <= mcnt + 1;
+			 wr  <= 1'd1;
+		 end
 
+		 err_b <= err;
+		 if({err,err_b} == 2'b01)
+			 wr <= 1'd0;
+   end
 
+ reg [9:0] clkcnt;
+ reg uclk = 1'b0;
+ always @ (posedge clk100 or negedge RSTBTN)
+   if(~RSTBTN) begin
+     clkcnt <= 10'd0;
+     uclk   <= 1'd0;
+   end else begin
+	   if(clkcnt == 10'd651)begin
+       clkcnt <= 10'd0;
+			 uclk <= ~uclk;
+     end else
+       clkcnt <= clkcnt + 10'd1;
+	 end
+		 
+
+ uart_tx uart(
+   .clk(uclk),
+	 .rst(~RSTBTN),
+	 .data(mem[7:0]),
+	 .we(we),
+	 .tx(UART_RX),
+	 .busy(err)
+ );
+*/
 endmodule

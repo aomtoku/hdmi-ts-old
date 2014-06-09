@@ -1,6 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////
 // Video Timing Parameters
 ///////////////////////////////////////////////////////////////////////////
+  //1920x1080@60HZ
+  parameter HPIXELS_FLHD = 11'd1920; //Horizontal Live Pixels
+  parameter  VLINES_FLHD = 11'd1080;  //Vertical Live ines
+  parameter HSYNCPW_FLHD = 11'd44;  //HSYNC Pulse Width
+  parameter VSYNCPW_FLHD = 11'd5;    //VSYNC Pulse Width
+  parameter HFNPRCH_FLHD = 11'd88;   //Horizontal Front Portch
+  parameter VFNPRCH_FLHD = 11'd4;    //Vertical Front Portch
+  parameter HBKPRCH_FLHD = 11'd148;  //Horizontal Front Portch
+  parameter VBKPRCH_FLHD = 11'd36;   //Vertical Front Portch
+
   //1280x1024@60HZ
   parameter HPIXELS_SXGA = 11'd1280; //Horizontal Live Pixels
   parameter  VLINES_SXGA = 11'd1024;  //Vertical Live ines
