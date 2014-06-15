@@ -23,13 +23,13 @@ $ make load
 
 
 *  解像度     1280x720 progressive 60fps   
-  Interface  HDMI -> 50cm
+  Interface  HDMI -> 1m, 2m  
 
 16 クロックサイクル (クロック74.25MHz)
   --> 215.5 ns
 
 *  解像度     1920x1080 progressive 60fps   
-  Interface  HDMI  
+  Interface  HDMI -> 1m, 2m  
 
 18 クロックサイクル (クロック148.5MHz)
   --> 121.212 ns
@@ -38,7 +38,8 @@ $ make load
 
 TMDSのデコード - エンコード間でのlatencyを計測した。
 この計測では、HDMIケーブルの長さにより、数ns影響を与える。
-50cmのHDMIケーブルでは、720pで215.5 ns 程の遅延があった。
+しかし、1m, 2mの変化では、結果は変わらなかった。
+1m, 2mのHDMIケーブルでは、720pで215.5 ns 程の遅延があった。
 16クロックサイクル程度。
 1080pでは121.212nsの遅延があった。
 18クロックサイクル程度。
