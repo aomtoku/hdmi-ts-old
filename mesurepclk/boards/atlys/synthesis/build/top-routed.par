@@ -1,0 +1,275 @@
+Release 14.4 par P.49d (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+aom.sfc.wide.ad.jp::  Thu May 08 22:13:31 2014
+
+par -ol high -xe n -w top.ncd top-routed.ncd 
+
+
+Constraints file: top.pcf.
+Loading device for application Rf_Device from file '6slx45.nph' in environment /opt/Xilinx/14.4/ISE_DS/ISE/.
+   "top" is an NCD, version 3.2, device xc6slx45, package csg324, speed -3
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+INFO:Security:54 - 'xc6slx45' is a WebPack part.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue
+to function, but you no longer qualify for Xilinx software updates or new releases.
+
+----------------------------------------------------------------------
+
+Initializing temperature to 85.000 Celsius. (default - Range: 0.000 to 85.000 Celsius)
+Initializing voltage to 1.140 Volts. (default - Range: 1.140 to 1.260 Volts)
+
+
+Device speed data version:  "PRODUCTION 1.23 2012-12-04".
+
+
+WARNING:Par:251 - Map -timing was run with a lower effort level setting than you are using for PAR.  Xilinx recommends that you rerun Map
+   -timing with the effort level that you have set in PAR to achieve better design performance.
+
+
+Device Utilization Summary:
+
+Slice Logic Utilization:
+  Number of Slice Registers:                   917 out of  54,576    1%
+    Number used as Flip Flops:                 907
+    Number used as Latches:                      0
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:               10
+  Number of Slice LUTs:                      1,363 out of  27,288    4%
+    Number used as logic:                    1,268 out of  27,288    4%
+      Number using O6 output only:             992
+      Number using O5 output only:              59
+      Number using O5 and O6:                  217
+      Number used as ROM:                        0
+    Number used as Memory:                      87 out of   6,408    1%
+      Number used as Dual Port RAM:             64
+        Number using O6 output only:             8
+        Number using O5 output only:             0
+        Number using O5 and O6:                 56
+      Number used as Single Port RAM:            0
+      Number used as Shift Register:            23
+        Number using O6 output only:             5
+        Number using O5 output only:             0
+        Number using O5 and O6:                 18
+    Number used exclusively as route-thrus:      8
+      Number with same-slice register load:      3
+      Number with same-slice carry load:         5
+      Number with other load:                    0
+
+Slice Logic Distribution:
+  Number of occupied Slices:                   547 out of   6,822    8%
+  Number of MUXCYs used:                       280 out of  13,644    2%
+  Number of LUT Flip Flop pairs used:        1,494
+    Number with an unused Flip Flop:           682 out of   1,494   45%
+    Number with an unused LUT:                 131 out of   1,494    8%
+    Number of fully used LUT-FF pairs:         681 out of   1,494   45%
+    Number of slice register sites lost
+      to control set restrictions:               0 out of  54,576    0%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                        31 out of     218   14%
+    Number of LOCed IOBs:                       31 out of      31  100%
+    IOB Master Pads:                             4
+    IOB Slave Pads:                              4
+
+Specific Feature Utilization:
+  Number of RAMB16BWERs:                         0 out of     116    0%
+  Number of RAMB8BWERs:                          0 out of     232    0%
+  Number of BUFIO2/BUFIO2_2CLKs:                 1 out of      32    3%
+    Number used as BUFIO2s:                      1
+    Number used as BUFIO2_2CLKs:                 0
+  Number of BUFIO2FB/BUFIO2FB_2CLKs:             0 out of      32    0%
+  Number of BUFG/BUFGMUXs:                       6 out of      16   37%
+    Number used as BUFGs:                        6
+    Number used as BUFGMUX:                      0
+  Number of DCM/DCM_CLKGENs:                     0 out of       8    0%
+  Number of ILOGIC2/ISERDES2s:                   6 out of     376    1%
+    Number used as ILOGIC2s:                     0
+    Number used as ISERDES2s:                    6
+  Number of IODELAY2/IODRP2/IODRP2_MCBs:         6 out of     376    1%
+    Number used as IODELAY2s:                    6
+    Number used as IODRP2s:                      0
+    Number used as IODRP2_MCBs:                  0
+  Number of OLOGIC2/OSERDES2s:                   8 out of     376    2%
+    Number used as OLOGIC2s:                     0
+    Number used as OSERDES2s:                    8
+  Number of BSCANs:                              0 out of       4    0%
+  Number of BUFHs:                               0 out of     256    0%
+  Number of BUFPLLs:                             2 out of       8   25%
+  Number of BUFPLL_MCBs:                         0 out of       4    0%
+  Number of DSP48A1s:                            0 out of      58    0%
+  Number of ICAPs:                               0 out of       1    0%
+  Number of MCBs:                                0 out of       2    0%
+  Number of PCILOGICSEs:                         0 out of       2    0%
+  Number of PLL_ADVs:                            2 out of       4   50%
+  Number of PMVs:                                0 out of       1    0%
+  Number of STARTUPs:                            0 out of       1    0%
+  Number of SUSPEND_SYNCs:                       0 out of       1    0%
+
+
+Overall effort level (-ol):   High 
+Router effort level (-rl):    High 
+
+Starting initial Timing Analysis.  REAL time: 9 secs 
+Finished initial Timing Analysis.  REAL time: 9 secs 
+
+WARNING:Par:288 - The signal SW<2>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal SW<3>_IBUF has no load.  PAR will not attempt to route this signal.
+Starting Router
+
+
+Phase  1  : 8067 unrouted;      REAL time: 10 secs 
+
+Phase  2  : 7043 unrouted;      REAL time: 14 secs 
+
+Phase  3  : 2854 unrouted;      REAL time: 23 secs 
+
+Phase  4  : 2854 unrouted; (Setup:0, Hold:2630, Component Switching Limit:0)     REAL time: 26 secs 
+
+Updating file: top-routed.ncd with current fully routed design.
+
+Phase  5  : 0 unrouted; (Setup:0, Hold:2630, Component Switching Limit:0)     REAL time: 35 secs 
+
+Phase  6  : 0 unrouted; (Setup:0, Hold:2630, Component Switching Limit:0)     REAL time: 35 secs 
+
+Phase  7  : 0 unrouted; (Setup:0, Hold:2630, Component Switching Limit:0)     REAL time: 35 secs 
+
+Phase  8  : 0 unrouted; (Setup:0, Hold:2630, Component Switching Limit:0)     REAL time: 35 secs 
+
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 35 secs 
+
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 36 secs 
+Total REAL time to Router completion: 36 secs 
+Total CPU time to Router completion: 37 secs 
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+Generating "PAR" statistics.
+
+**************************
+Generating Clock Report
+**************************
+
++---------------------+--------------+------+------+------------+-------------+
+|        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
++---------------------+--------------+------+------+------------+-------------+
+|             clk100m |  BUFGMUX_X2Y4| No   |    5 |  0.007     |  1.225      |
++---------------------+--------------+------+------+------------+-------------+
+|            tx0_pclk |  BUFGMUX_X2Y1| No   |  126 |  0.058     |  1.271      |
++---------------------+--------------+------+------+------------+-------------+
+|          tx0_pclkx2 | BUFGMUX_X3Y13| No   |   40 |  0.236     |  1.456      |
++---------------------+--------------+------+------+------------+-------------+
+|            rx0_pclk |  BUFGMUX_X2Y2| No   |  176 |  0.061     |  1.273      |
++---------------------+--------------+------+------+------------+-------------+
+|      dvi_rx0/pclkx2 |  BUFGMUX_X2Y3| No   |   72 |  0.242     |  1.456      |
++---------------------+--------------+------+------+------------+-------------+
+|         tx0_pclkx10 |         Local|      |    8 |  0.000     |  1.463      |
++---------------------+--------------+------+------+------------+-------------+
+|     dvi_rx0/pclkx10 |         Local|      |   12 |  0.029     |  1.502      |
++---------------------+--------------+------+------+------------+-------------+
+
+* Net Skew is the difference between the minimum and maximum routing
+only delays for the net. Note this is different from Clock Skew which
+is reported in TRCE timing report. Clock Skew is the difference between
+the minimum and maximum path delays which includes logic delays.
+
+* The fanout is the number of component pins not the individual BEL loads,
+for example SLICE loads not FF loads.
+
+Timing Score: 0 (Setup: 0, Hold: 0, Component Switching Limit: 0)
+
+Number of Timing Constraints that were not applied: 3
+
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+----------------------------------------------------------------------------------------------------------
+  Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
+                                            |             |    Slack   | Achievable | Errors |    Score   
+----------------------------------------------------------------------------------------------------------
+  TS_DVI_CLOCK0 = PERIOD TIMEGRP "DVI_CLOCK | MINLOWPULSE |     6.666ns|     3.334ns|       0|           0
+  0" 100 MHz HIGH 50%                       |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_rx0_pllclk1 = PERIOD TIMEGRP "rx0_pllc | SETUP       |     0.916ns|     9.084ns|       0|           0
+  lk1" TS_DVI_CLOCK0 HIGH 50%               | HOLD        |     0.182ns|            |       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_tx0_pllclk2 = PERIOD TIMEGRP "tx0_pllc | SETUP       |     0.223ns|     4.777ns|       0|           0
+  lk2" TS_rx0_pllclk1 * 2 HIGH 50%          | HOLD        |     0.120ns|            |       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_dvi_rx0_pllclk2 = PERIOD TIMEGRP "dvi_ | SETUP       |     0.634ns|     4.366ns|       0|           0
+  rx0_pllclk2" TS_DVI_CLOCK0 * 2 HIGH       | HOLD        |     0.391ns|            |       0|           0
+     50%                                    |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  NET "clk100_IBUFG" PERIOD = 10 ns HIGH 50 | SETUP       |     5.722ns|     4.278ns|       0|           0
+  %                                         | HOLD        |     0.432ns|            |       0|           0
+----------------------------------------------------------------------------------------------------------
+  TS_dvi_rx0_pllclk0 = PERIOD TIMEGRP "dvi_ | N/A         |         N/A|         N/A|     N/A|         N/A
+  rx0_pllclk0" TS_DVI_CLOCK0 * 10 HIGH      |             |            |            |        |            
+      50%                                   |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+  TS_tx0_pllclk0 = PERIOD TIMEGRP "tx0_pllc | N/A         |         N/A|         N/A|     N/A|         N/A
+  lk0" TS_rx0_pllclk1 * 10 HIGH 50%         |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Review Timing Report for more details on the following derived constraints.
+To create a Timing Report, run "trce -v 12 -fastpaths -o design_timing_report design.ncd design.pcf"
+or "Run Timing Analysis" from Timing Analyzer (timingan).
+Derived Constraints for TS_DVI_CLOCK0
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_DVI_CLOCK0                  |     10.000ns|      3.334ns|      9.554ns|            0|            0|            0|        37089|
+| TS_rx0_pllclk1                |     10.000ns|      9.084ns|      9.554ns|            0|            0|        35454|          269|
+|  TS_tx0_pllclk0               |      1.000ns|          N/A|          N/A|            0|            0|            0|            0|
+|  TS_tx0_pllclk2               |      5.000ns|      4.777ns|          N/A|            0|            0|          269|            0|
+| TS_dvi_rx0_pllclk0            |      1.000ns|          N/A|          N/A|            0|            0|            0|            0|
+| TS_dvi_rx0_pllclk2            |      5.000ns|      4.366ns|          N/A|            0|            0|         1366|            0|
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+All constraints were met.
+INFO:Timing:2761 - N/A entries in the Constraints List may indicate that the 
+   constraint is not analyzed due to the following: No paths covered by this 
+   constraint; Other constraints intersect with this constraint; or This 
+   constraint was disabled by a Path Tracing Control. Please run the Timespec 
+   Interaction Report (TSI) via command line (trce tsi) or Timing Analyzer GUI.
+
+
+Generating Pad Report.
+
+All signals are completely routed.
+
+WARNING:Par:283 - There are 2 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+
+Total REAL time to PAR completion: 37 secs 
+Total CPU time to PAR completion: 38 secs 
+
+Peak Memory Usage:  255 MB
+
+Placer: Placement generated during map.
+Routing: Completed - No errors found.
+Timing: Completed - No errors found.
+
+Number of error messages: 0
+Number of warning messages: 5
+Number of info messages: 0
+
+Writing design to file top-routed.ncd
+
+
+
+PAR done!
