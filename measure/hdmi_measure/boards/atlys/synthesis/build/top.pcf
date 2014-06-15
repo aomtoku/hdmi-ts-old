@@ -1,0 +1,488 @@
+//! **************************************************************************
+// Written by: Map P.49d on Sun Jun 15 18:33:33 2014
+//! **************************************************************************
+
+SCHEMATIC START;
+CONFIG VCCAUX = "3.3";
+COMP "JA" LOCATE = SITE "T3" LEVEL 1;
+COMP "btn" LOCATE = SITE "F5" LEVEL 1;
+COMP "SW<0>" LOCATE = SITE "A10" LEVEL 1;
+COMP "SW<1>" LOCATE = SITE "D14" LEVEL 1;
+COMP "SW<2>" LOCATE = SITE "C14" LEVEL 1;
+COMP "SW<3>" LOCATE = SITE "P15" LEVEL 1;
+COMP "RX0_TMDS<0>" LOCATE = SITE "G9" LEVEL 1;
+COMP "RX0_TMDS<1>" LOCATE = SITE "B11" LEVEL 1;
+COMP "RX0_TMDS<2>" LOCATE = SITE "B12" LEVEL 1;
+COMP "RX0_TMDS<3>" LOCATE = SITE "D11" LEVEL 1;
+COMP "LED<0>" LOCATE = SITE "U18" LEVEL 1;
+COMP "LED<1>" LOCATE = SITE "M14" LEVEL 1;
+COMP "LED<2>" LOCATE = SITE "N14" LEVEL 1;
+COMP "LED<3>" LOCATE = SITE "L14" LEVEL 1;
+COMP "LED<4>" LOCATE = SITE "M13" LEVEL 1;
+COMP "LED<5>" LOCATE = SITE "D4" LEVEL 1;
+COMP "LED<6>" LOCATE = SITE "P16" LEVEL 1;
+COMP "LED<7>" LOCATE = SITE "N12" LEVEL 1;
+COMP "TSW<0>" LOCATE = SITE "P12" LEVEL 1;
+COMP "TSW<1>" LOCATE = SITE "R5" LEVEL 1;
+COMP "RX0_TMDSB<0>" LOCATE = SITE "F9" LEVEL 1;
+COMP "RX0_TMDSB<1>" LOCATE = SITE "A11" LEVEL 1;
+COMP "RX0_TMDSB<2>" LOCATE = SITE "A12" LEVEL 1;
+COMP "RX0_TMDSB<3>" LOCATE = SITE "C11" LEVEL 1;
+COMP "rstbtn_n" LOCATE = SITE "T15" LEVEL 1;
+PIN dvi_rx0/dec_b/des_0/iodelay_s_pins<3> = BEL
+        "dvi_rx0/dec_b/des_0/iodelay_s" PINNAME CLK;
+PIN dvi_rx0/dec_b/des_0/iodelay_m_pins<2> = BEL
+        "dvi_rx0/dec_b/des_0/iodelay_m" PINNAME CLK;
+PIN dvi_rx0/dec_g/des_0/iodelay_s_pins<3> = BEL
+        "dvi_rx0/dec_g/des_0/iodelay_s" PINNAME CLK;
+PIN dvi_rx0/dec_g/des_0/iodelay_m_pins<2> = BEL
+        "dvi_rx0/dec_g/des_0/iodelay_m" PINNAME CLK;
+PIN dvi_rx0/dec_r/des_0/iodelay_s_pins<3> = BEL
+        "dvi_rx0/dec_r/des_0/iodelay_s" PINNAME CLK;
+PIN dvi_rx0/dec_r/des_0/iodelay_m_pins<2> = BEL
+        "dvi_rx0/dec_r/des_0/iodelay_m" PINNAME CLK;
+PIN dvi_rx0/dec_b/des_0/iserdes_m_pins<3> = BEL
+        "dvi_rx0/dec_b/des_0/iserdes_m" PINNAME CLKDIV;
+PIN dvi_rx0/dec_b/des_0/iserdes_s_pins<3> = BEL
+        "dvi_rx0/dec_b/des_0/iserdes_s" PINNAME CLKDIV;
+PIN dvi_rx0/dec_g/des_0/iserdes_m_pins<3> = BEL
+        "dvi_rx0/dec_g/des_0/iserdes_m" PINNAME CLKDIV;
+PIN dvi_rx0/dec_g/des_0/iserdes_s_pins<3> = BEL
+        "dvi_rx0/dec_g/des_0/iserdes_s" PINNAME CLKDIV;
+PIN dvi_rx0/dec_r/des_0/iserdes_m_pins<3> = BEL
+        "dvi_rx0/dec_r/des_0/iserdes_m" PINNAME CLKDIV;
+PIN dvi_rx0/dec_r/des_0/iserdes_s_pins<3> = BEL
+        "dvi_rx0/dec_r/des_0/iserdes_s" PINNAME CLKDIV;
+TIMEGRP dvi_rx0_pllclk2 = BEL "dvi_rx0/pclkx2bufg" BEL
+        "dvi_rx0/dec_r/bitslip_q" BEL "dvi_rx0/dec_r/rawword_9" BEL
+        "dvi_rx0/dec_r/rawword_8" BEL "dvi_rx0/dec_r/rawword_7" BEL
+        "dvi_rx0/dec_r/rawword_6" BEL "dvi_rx0/dec_r/rawword_5" BEL
+        "dvi_rx0/dec_r/rawword_4" BEL "dvi_rx0/dec_r/rawword_3" BEL
+        "dvi_rx0/dec_r/rawword_2" BEL "dvi_rx0/dec_r/rawword_1" BEL
+        "dvi_rx0/dec_r/rawword_0" BEL "dvi_rx0/dec_r/raw5bit_q_4" BEL
+        "dvi_rx0/dec_r/raw5bit_q_3" BEL "dvi_rx0/dec_r/raw5bit_q_2" BEL
+        "dvi_rx0/dec_r/raw5bit_q_1" BEL "dvi_rx0/dec_r/raw5bit_q_0" BEL
+        "dvi_rx0/dec_r/bitslipx2" BEL "dvi_rx0/dec_r/flipgearx2" BEL
+        "dvi_rx0/dec_r/toggle" BEL "dvi_rx0/dec_g/bitslip_q" BEL
+        "dvi_rx0/dec_g/rawword_9" BEL "dvi_rx0/dec_g/rawword_8" BEL
+        "dvi_rx0/dec_g/rawword_7" BEL "dvi_rx0/dec_g/rawword_6" BEL
+        "dvi_rx0/dec_g/rawword_5" BEL "dvi_rx0/dec_g/rawword_4" BEL
+        "dvi_rx0/dec_g/rawword_3" BEL "dvi_rx0/dec_g/rawword_2" BEL
+        "dvi_rx0/dec_g/rawword_1" BEL "dvi_rx0/dec_g/rawword_0" BEL
+        "dvi_rx0/dec_g/raw5bit_q_4" BEL "dvi_rx0/dec_g/raw5bit_q_3" BEL
+        "dvi_rx0/dec_g/raw5bit_q_2" BEL "dvi_rx0/dec_g/raw5bit_q_1" BEL
+        "dvi_rx0/dec_g/raw5bit_q_0" BEL "dvi_rx0/dec_g/bitslipx2" BEL
+        "dvi_rx0/dec_g/flipgearx2" BEL "dvi_rx0/dec_b/bitslip_q" BEL
+        "dvi_rx0/dec_b/rawword_9" BEL "dvi_rx0/dec_b/rawword_8" BEL
+        "dvi_rx0/dec_b/rawword_7" BEL "dvi_rx0/dec_b/rawword_6" BEL
+        "dvi_rx0/dec_b/rawword_5" BEL "dvi_rx0/dec_b/rawword_4" BEL
+        "dvi_rx0/dec_b/rawword_3" BEL "dvi_rx0/dec_b/rawword_2" BEL
+        "dvi_rx0/dec_b/rawword_1" BEL "dvi_rx0/dec_b/rawword_0" BEL
+        "dvi_rx0/dec_b/raw5bit_q_4" BEL "dvi_rx0/dec_b/raw5bit_q_3" BEL
+        "dvi_rx0/dec_b/raw5bit_q_2" BEL "dvi_rx0/dec_b/raw5bit_q_1" BEL
+        "dvi_rx0/dec_b/raw5bit_q_0" BEL "dvi_rx0/dec_b/bitslipx2" BEL
+        "dvi_rx0/dec_b/flipgearx2" PIN "dvi_rx0/dec_b/des_0/iodelay_s_pins<3>"
+        PIN "dvi_rx0/dec_b/des_0/iodelay_m_pins<2>" BEL
+        "dvi_rx0/dec_b/des_0/state_FSM_FFd2" BEL
+        "dvi_rx0/dec_b/des_0/state_FSM_FFd3" BEL
+        "dvi_rx0/dec_b/des_0/state_FSM_FFd4" BEL
+        "dvi_rx0/dec_b/des_0/counter_8" BEL "dvi_rx0/dec_b/des_0/counter_7"
+        BEL "dvi_rx0/dec_b/des_0/counter_6" BEL
+        "dvi_rx0/dec_b/des_0/counter_5" BEL "dvi_rx0/dec_b/des_0/counter_4"
+        BEL "dvi_rx0/dec_b/des_0/counter_3" BEL
+        "dvi_rx0/dec_b/des_0/counter_2" BEL "dvi_rx0/dec_b/des_0/counter_1"
+        BEL "dvi_rx0/dec_b/des_0/counter_0" BEL
+        "dvi_rx0/dec_b/des_0/valid_data_d" BEL
+        "dvi_rx0/dec_b/des_0/incdec_data_d" BEL
+        "dvi_rx0/dec_b/des_0/pdcounter_4" BEL
+        "dvi_rx0/dec_b/des_0/pdcounter_3" BEL
+        "dvi_rx0/dec_b/des_0/pdcounter_2" BEL
+        "dvi_rx0/dec_b/des_0/pdcounter_1" BEL
+        "dvi_rx0/dec_b/des_0/busy_data_d" PIN
+        "dvi_rx0/dec_g/des_0/iodelay_s_pins<3>" PIN
+        "dvi_rx0/dec_g/des_0/iodelay_m_pins<2>" BEL
+        "dvi_rx0/dec_g/des_0/state_FSM_FFd2" BEL
+        "dvi_rx0/dec_g/des_0/state_FSM_FFd3" BEL
+        "dvi_rx0/dec_g/des_0/state_FSM_FFd4" BEL
+        "dvi_rx0/dec_g/des_0/valid_data_d" BEL
+        "dvi_rx0/dec_g/des_0/incdec_data_d" BEL
+        "dvi_rx0/dec_g/des_0/pdcounter_4" BEL
+        "dvi_rx0/dec_g/des_0/pdcounter_3" BEL
+        "dvi_rx0/dec_g/des_0/pdcounter_2" BEL
+        "dvi_rx0/dec_g/des_0/pdcounter_1" BEL
+        "dvi_rx0/dec_g/des_0/busy_data_d" PIN
+        "dvi_rx0/dec_r/des_0/iodelay_s_pins<3>" PIN
+        "dvi_rx0/dec_r/des_0/iodelay_m_pins<2>" BEL
+        "dvi_rx0/dec_r/des_0/state_FSM_FFd2" BEL
+        "dvi_rx0/dec_r/des_0/state_FSM_FFd3" BEL
+        "dvi_rx0/dec_r/des_0/state_FSM_FFd4" BEL
+        "dvi_rx0/dec_r/des_0/valid_data_d" BEL
+        "dvi_rx0/dec_r/des_0/incdec_data_d" BEL
+        "dvi_rx0/dec_r/des_0/pdcounter_4" BEL
+        "dvi_rx0/dec_r/des_0/pdcounter_3" BEL
+        "dvi_rx0/dec_r/des_0/pdcounter_2" BEL
+        "dvi_rx0/dec_r/des_0/pdcounter_1" BEL
+        "dvi_rx0/dec_r/des_0/busy_data_d" BEL
+        "dvi_rx0/dec_b/des_0/ce_data_inta" BEL "dvi_rx0/dec_b/des_0/enable"
+        BEL "dvi_rx0/dec_b/des_0/flag" BEL "dvi_rx0/dec_g/des_0/ce_data_inta"
+        BEL "dvi_rx0/dec_g/des_0/flag" BEL "dvi_rx0/dec_r/des_0/ce_data_inta"
+        BEL "dvi_rx0/dec_r/des_0/flag" BEL "dvi_rx0/dec_b/des_0/ce_data" BEL
+        "dvi_rx0/dec_g/des_0/ce_data" BEL "dvi_rx0/dec_r/des_0/ce_data" BEL
+        "dvi_rx0/dec_b/des_0/rst_data" BEL "dvi_rx0/dec_g/des_0/rst_data" BEL
+        "dvi_rx0/dec_r/des_0/rst_data" BEL "dvi_rx0/dec_b/des_0/pdcounter_0"
+        BEL "dvi_rx0/dec_g/des_0/pdcounter_0" BEL
+        "dvi_rx0/dec_r/des_0/pdcounter_0" BEL
+        "dvi_rx0/dec_b/des_0/_n0276_inv19_SW1_FRB" BEL
+        "dvi_rx0/dec_g/des_0/_n0276_inv19_SW1_FRB" BEL
+        "dvi_rx0/dec_r/des_0/_n0276_inv19_SW1_FRB" BEL
+        "dvi_rx0/dec_b/des_0/cal_data_master_BRB0" BEL
+        "dvi_rx0/dec_b/des_0/cal_data_master_BRB1" BEL
+        "dvi_rx0/dec_b/des_0/cal_data_master_BRB2" BEL
+        "dvi_rx0/dec_b/des_0/cal_data_sint_BRB0" BEL
+        "dvi_rx0/dec_b/des_0/cal_data_sint_BRB1" BEL
+        "dvi_rx0/dec_g/des_0/cal_data_master_BRB0" BEL
+        "dvi_rx0/dec_g/des_0/cal_data_master_BRB1" BEL
+        "dvi_rx0/dec_g/des_0/cal_data_master_BRB2" BEL
+        "dvi_rx0/dec_g/des_0/cal_data_sint_BRB0" BEL
+        "dvi_rx0/dec_g/des_0/cal_data_sint_BRB1" BEL
+        "dvi_rx0/dec_r/des_0/cal_data_master_BRB0" BEL
+        "dvi_rx0/dec_r/des_0/cal_data_master_BRB1" BEL
+        "dvi_rx0/dec_r/des_0/cal_data_master_BRB2" BEL
+        "dvi_rx0/dec_r/des_0/cal_data_sint_BRB0" BEL
+        "dvi_rx0/dec_r/des_0/cal_data_sint_BRB1" BEL
+        "dvi_rx0/dec_b/des_0/inc_data_int_BRB0" BEL
+        "dvi_rx0/dec_b/des_0/inc_data_int_BRB1" BEL
+        "dvi_rx0/dec_b/des_0/inc_data_int_BRB2" BEL
+        "dvi_rx0/dec_b/des_0/inc_data_int_BRB3" BEL
+        "dvi_rx0/dec_b/des_0/inc_data_int_BRB4" BEL
+        "dvi_rx0/dec_b/des_0/inc_data_int_BRB5" BEL
+        "dvi_rx0/dec_g/des_0/inc_data_int_BRB0" BEL
+        "dvi_rx0/dec_g/des_0/inc_data_int_BRB1" BEL
+        "dvi_rx0/dec_g/des_0/inc_data_int_BRB2" BEL
+        "dvi_rx0/dec_g/des_0/inc_data_int_BRB3" BEL
+        "dvi_rx0/dec_g/des_0/inc_data_int_BRB4" BEL
+        "dvi_rx0/dec_g/des_0/inc_data_int_BRB5" BEL
+        "dvi_rx0/dec_r/des_0/inc_data_int_BRB0" BEL
+        "dvi_rx0/dec_r/des_0/inc_data_int_BRB1" BEL
+        "dvi_rx0/dec_r/des_0/inc_data_int_BRB2" BEL
+        "dvi_rx0/dec_r/des_0/inc_data_int_BRB3" BEL
+        "dvi_rx0/dec_r/des_0/inc_data_int_BRB4" BEL
+        "dvi_rx0/dec_r/des_0/inc_data_int_BRB5" BEL
+        "dvi_rx0/dec_b/des_0/busy_data_d_1" BEL
+        "dvi_rx0/dec_g/des_0/busy_data_d_1" BEL
+        "dvi_rx0/dec_r/des_0/busy_data_d_1" PIN
+        "dvi_rx0/dec_b/des_0/iserdes_m_pins<3>" PIN
+        "dvi_rx0/dec_b/des_0/iserdes_s_pins<3>" PIN
+        "dvi_rx0/dec_g/des_0/iserdes_m_pins<3>" PIN
+        "dvi_rx0/dec_g/des_0/iserdes_s_pins<3>" PIN
+        "dvi_rx0/dec_r/des_0/iserdes_m_pins<3>" PIN
+        "dvi_rx0/dec_r/des_0/iserdes_s_pins<3>";
+TIMEGRP dvi_rx0_pllclk1 = BEL "dvi_rx0/pclkbufg" BEL "dvi_rx0/dec_r/dout_7"
+        BEL "dvi_rx0/dec_r/dout_6" BEL "dvi_rx0/dec_r/dout_5" BEL
+        "dvi_rx0/dec_r/dout_4" BEL "dvi_rx0/dec_r/dout_3" BEL
+        "dvi_rx0/dec_r/dout_2" BEL "dvi_rx0/dec_r/dout_1" BEL
+        "dvi_rx0/dec_r/dout_0" BEL "dvi_rx0/dec_g/dout_7" BEL
+        "dvi_rx0/dec_g/dout_6" BEL "dvi_rx0/dec_g/dout_5" BEL
+        "dvi_rx0/dec_g/dout_4" BEL "dvi_rx0/dec_g/dout_3" BEL
+        "dvi_rx0/dec_g/dout_2" BEL "dvi_rx0/dec_g/dout_1" BEL
+        "dvi_rx0/dec_g/dout_0" BEL "dvi_rx0/dec_b/dout_7" BEL
+        "dvi_rx0/dec_b/dout_6" BEL "dvi_rx0/dec_b/dout_5" BEL
+        "dvi_rx0/dec_b/dout_4" BEL "dvi_rx0/dec_b/dout_3" BEL
+        "dvi_rx0/dec_b/dout_2" BEL "dvi_rx0/dec_b/dout_1" BEL
+        "dvi_rx0/dec_b/dout_0" BEL "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_11"
+        BEL "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_10" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_9" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_8" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_7" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_6" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_5" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_4" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_3" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_1" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_timer_0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_3" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_1" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/cstate_FSM_FFd1" BEL
+        "dvi_rx0/dec_b/phsalgn_0/cstate_FSM_FFd2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/cstate_FSM_FFd4" BEL
+        "dvi_rx0/dec_b/phsalgn_0/cstate_FSM_FFd5" BEL
+        "dvi_rx0/dec_b/phsalgn_0/cstate_FSM_FFd3" BEL
+        "dvi_rx0/dec_b/phsalgn_0/cstate_FSM_FFd6" BEL
+        "dvi_rx0/dec_b/phsalgn_0/rcvd_ctkn_q" BEL
+        "dvi_rx0/dec_b/phsalgn_0/rcvd_ctkn" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_tout" BEL
+        "dvi_rx0/dec_b/phsalgn_0/blnkprd_cnt_0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/flipgear" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip" BEL
+        "dvi_rx0/dec_b/phsalgn_0/psaligned" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_cnt_rst" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_srh_rst" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_11" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_10" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_9" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_8" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_7" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_6" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_5" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_4" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_3" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_1" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_timer_0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_3" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_1" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/cstate_FSM_FFd1" BEL
+        "dvi_rx0/dec_g/phsalgn_0/cstate_FSM_FFd2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/cstate_FSM_FFd4" BEL
+        "dvi_rx0/dec_g/phsalgn_0/cstate_FSM_FFd5" BEL
+        "dvi_rx0/dec_g/phsalgn_0/cstate_FSM_FFd3" BEL
+        "dvi_rx0/dec_g/phsalgn_0/cstate_FSM_FFd6" BEL
+        "dvi_rx0/dec_g/phsalgn_0/rcvd_ctkn_q" BEL
+        "dvi_rx0/dec_g/phsalgn_0/rcvd_ctkn" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_tout" BEL
+        "dvi_rx0/dec_g/phsalgn_0/blnkprd_cnt_0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/flipgear" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip" BEL
+        "dvi_rx0/dec_g/phsalgn_0/psaligned" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_cnt_rst" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_srh_rst" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_11" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_10" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_9" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_8" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_7" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_6" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_5" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_4" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_3" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_1" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_timer_0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_3" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_1" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/cstate_FSM_FFd1" BEL
+        "dvi_rx0/dec_r/phsalgn_0/cstate_FSM_FFd2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/cstate_FSM_FFd4" BEL
+        "dvi_rx0/dec_r/phsalgn_0/cstate_FSM_FFd5" BEL
+        "dvi_rx0/dec_r/phsalgn_0/cstate_FSM_FFd3" BEL
+        "dvi_rx0/dec_r/phsalgn_0/cstate_FSM_FFd6" BEL
+        "dvi_rx0/dec_r/phsalgn_0/rcvd_ctkn_q" BEL
+        "dvi_rx0/dec_r/phsalgn_0/rcvd_ctkn" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_tout" BEL
+        "dvi_rx0/dec_r/phsalgn_0/blnkprd_cnt_0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/flipgear" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip" BEL
+        "dvi_rx0/dec_r/phsalgn_0/psaligned" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_cnt_rst" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_srh_rst" BEL "dvi_rx0/dec_b/cbnd/wa_3"
+        BEL "dvi_rx0/dec_b/cbnd/wa_2" BEL "dvi_rx0/dec_b/cbnd/wa_1" BEL
+        "dvi_rx0/dec_b/cbnd/wa_0" BEL "dvi_rx0/dec_b/cbnd/ra_3" BEL
+        "dvi_rx0/dec_b/cbnd/ra_2" BEL "dvi_rx0/dec_b/cbnd/ra_1" BEL
+        "dvi_rx0/dec_b/cbnd/ra_0" BEL "dvi_rx0/dec_b/cbnd/sdata_9" BEL
+        "dvi_rx0/dec_b/cbnd/sdata_8" BEL "dvi_rx0/dec_b/cbnd/sdata_7" BEL
+        "dvi_rx0/dec_b/cbnd/sdata_6" BEL "dvi_rx0/dec_b/cbnd/sdata_5" BEL
+        "dvi_rx0/dec_b/cbnd/sdata_4" BEL "dvi_rx0/dec_b/cbnd/sdata_3" BEL
+        "dvi_rx0/dec_b/cbnd/sdata_2" BEL "dvi_rx0/dec_b/cbnd/sdata_1" BEL
+        "dvi_rx0/dec_b/cbnd/sdata_0" BEL "dvi_rx0/dec_b/cbnd/rcvd_ctkn_q" BEL
+        "dvi_rx0/dec_b/cbnd/rawdata_vld_rising" BEL
+        "dvi_rx0/dec_b/cbnd/rawdata_vld_q" BEL "dvi_rx0/dec_b/cbnd/rcvd_ctkn"
+        BEL "dvi_rx0/dec_g/cbnd/ra_3" BEL "dvi_rx0/dec_g/cbnd/ra_2" BEL
+        "dvi_rx0/dec_g/cbnd/ra_1" BEL "dvi_rx0/dec_g/cbnd/ra_0" BEL
+        "dvi_rx0/dec_g/cbnd/sdata_9" BEL "dvi_rx0/dec_g/cbnd/sdata_8" BEL
+        "dvi_rx0/dec_g/cbnd/sdata_7" BEL "dvi_rx0/dec_g/cbnd/sdata_6" BEL
+        "dvi_rx0/dec_g/cbnd/sdata_5" BEL "dvi_rx0/dec_g/cbnd/sdata_4" BEL
+        "dvi_rx0/dec_g/cbnd/sdata_3" BEL "dvi_rx0/dec_g/cbnd/sdata_2" BEL
+        "dvi_rx0/dec_g/cbnd/sdata_1" BEL "dvi_rx0/dec_g/cbnd/sdata_0" BEL
+        "dvi_rx0/dec_g/cbnd/rcvd_ctkn_q" BEL "dvi_rx0/dec_g/cbnd/rcvd_ctkn"
+        BEL "dvi_rx0/dec_r/cbnd/ra_3" BEL "dvi_rx0/dec_r/cbnd/ra_2" BEL
+        "dvi_rx0/dec_r/cbnd/ra_1" BEL "dvi_rx0/dec_r/cbnd/ra_0" BEL
+        "dvi_rx0/dec_r/cbnd/sdata_9" BEL "dvi_rx0/dec_r/cbnd/sdata_8" BEL
+        "dvi_rx0/dec_r/cbnd/sdata_7" BEL "dvi_rx0/dec_r/cbnd/sdata_6" BEL
+        "dvi_rx0/dec_r/cbnd/sdata_5" BEL "dvi_rx0/dec_r/cbnd/sdata_4" BEL
+        "dvi_rx0/dec_r/cbnd/sdata_3" BEL "dvi_rx0/dec_r/cbnd/sdata_2" BEL
+        "dvi_rx0/dec_r/cbnd/sdata_1" BEL "dvi_rx0/dec_r/cbnd/sdata_0" BEL
+        "dvi_rx0/dec_r/cbnd/rcvd_ctkn_q" BEL "dvi_rx0/dec_r/cbnd/rcvd_ctkn"
+        BEL "ch" BEL "ch1" BEL "dvi_rx0/dec_b/cbnd/skip_line" BEL
+        "dvi_rx0/dec_b/cbnd/iamrdy" BEL "dvi_rx0/dec_g/cbnd/skip_line" BEL
+        "dvi_rx0/dec_g/cbnd/iamrdy" BEL "dvi_rx0/dec_r/cbnd/skip_line" BEL
+        "dvi_rx0/dec_r/cbnd/iamrdy" BEL "dvi_rx0/dec_b/de" BEL
+        "dvi_rx0/dec_b/phsalgn_0/blnkbgn" BEL
+        "dvi_rx0/dec_g/phsalgn_0/blnkbgn" BEL
+        "dvi_rx0/dec_r/phsalgn_0/blnkbgn" BEL "dvi_rx0/dec_b/cbnd/blnkbgn" BEL
+        "dvi_rx0/dec_g/cbnd/blnkbgn" BEL "dvi_rx0/dec_r/cbnd/blnkbgn" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_5_BRB0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_5_BRB1" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_5_BRB2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip_cnt_0_BRB0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip_cnt_0_BRB1" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip_cnt_0_BRB2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_5_BRB0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_5_BRB1" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_5_BRB2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip_cnt_0_BRB0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip_cnt_0_BRB1" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip_cnt_0_BRB2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_5_BRB0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_5_BRB1" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_5_BRB2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip_cnt_0_BRB0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip_cnt_0_BRB1" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip_cnt_0_BRB2" BEL
+        "dvi_rx0/dec_b/cbnd/ra_en_BRB0" BEL "dvi_rx0/dec_b/cbnd/ra_en_BRB1"
+        BEL "dvi_rx0/dec_b/cbnd/ra_en_BRB2" BEL
+        "dvi_rx0/dec_g/cbnd/ra_en_BRB0" BEL "dvi_rx0/dec_g/cbnd/ra_en_BRB2"
+        BEL "dvi_rx0/dec_r/cbnd/ra_en_BRB0" BEL
+        "dvi_rx0/dec_r/cbnd/ra_en_BRB2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_6_BRB0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_6_BRB2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_cnt_tout_BRB1" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_cnt_tout_BRB2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip_cnt_1_BRB0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip_cnt_1_BRB2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_6_BRB0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_6_BRB2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_cnt_tout_BRB1" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_cnt_tout_BRB2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip_cnt_1_BRB0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip_cnt_1_BRB2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_6_BRB0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_6_BRB2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_cnt_tout_BRB1" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_cnt_tout_BRB2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip_cnt_1_BRB0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip_cnt_1_BRB2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip_cnt_2_BRB0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/bitslip_cnt_2_BRB3" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip_cnt_2_BRB0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/bitslip_cnt_2_BRB3" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip_cnt_2_BRB0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/bitslip_cnt_2_BRB3" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_4_BRB0" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_4_BRB1" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_4_BRB2" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_4_BRB3" BEL
+        "dvi_rx0/dec_b/phsalgn_0/ctkn_counter_4_BRB4" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_4_BRB0" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_4_BRB1" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_4_BRB2" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_4_BRB3" BEL
+        "dvi_rx0/dec_g/phsalgn_0/ctkn_counter_4_BRB4" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_4_BRB0" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_4_BRB1" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_4_BRB2" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_4_BRB3" BEL
+        "dvi_rx0/dec_r/phsalgn_0/ctkn_counter_4_BRB4" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[9].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[9].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[8].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[8].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[7].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[7].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[6].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[6].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[5].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[5].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[4].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[4].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[3].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[3].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[2].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[2].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[1].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[1].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[0].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_r/cbnd/cbfifo_i/dram16s[0].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[9].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[9].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[8].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[8].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[7].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[7].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[6].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[6].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[5].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[5].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[4].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[4].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[3].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[3].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[2].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[2].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[1].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[1].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[0].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_g/cbnd/cbfifo_i/dram16s[0].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[9].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[9].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[8].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[8].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[7].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[7].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[6].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[6].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[5].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[5].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[4].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[4].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[3].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[3].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[2].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[2].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[1].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[1].i_RAM16X1D_U/DP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[0].i_RAM16X1D_U/SP" BEL
+        "dvi_rx0/dec_b/cbnd/cbfifo_i/dram16s[0].i_RAM16X1D_U/DP";
+PIN dvi_rx0/dec_b/des_0/iodelay_s_pins<7> = BEL
+        "dvi_rx0/dec_b/des_0/iodelay_s" PINNAME IOCLK0;
+PIN dvi_rx0/dec_b/des_0/iodelay_m_pins<6> = BEL
+        "dvi_rx0/dec_b/des_0/iodelay_m" PINNAME IOCLK0;
+PIN dvi_rx0/dec_g/des_0/iodelay_s_pins<7> = BEL
+        "dvi_rx0/dec_g/des_0/iodelay_s" PINNAME IOCLK0;
+PIN dvi_rx0/dec_g/des_0/iodelay_m_pins<6> = BEL
+        "dvi_rx0/dec_g/des_0/iodelay_m" PINNAME IOCLK0;
+PIN dvi_rx0/dec_r/des_0/iodelay_s_pins<7> = BEL
+        "dvi_rx0/dec_r/des_0/iodelay_s" PINNAME IOCLK0;
+PIN dvi_rx0/dec_r/des_0/iodelay_m_pins<6> = BEL
+        "dvi_rx0/dec_r/des_0/iodelay_m" PINNAME IOCLK0;
+PIN dvi_rx0/dec_b/des_0/iserdes_m_pins<2> = BEL
+        "dvi_rx0/dec_b/des_0/iserdes_m" PINNAME CLK0;
+PIN dvi_rx0/dec_b/des_0/iserdes_s_pins<2> = BEL
+        "dvi_rx0/dec_b/des_0/iserdes_s" PINNAME CLK0;
+PIN dvi_rx0/dec_g/des_0/iserdes_m_pins<2> = BEL
+        "dvi_rx0/dec_g/des_0/iserdes_m" PINNAME CLK0;
+PIN dvi_rx0/dec_g/des_0/iserdes_s_pins<2> = BEL
+        "dvi_rx0/dec_g/des_0/iserdes_s" PINNAME CLK0;
+PIN dvi_rx0/dec_r/des_0/iserdes_m_pins<2> = BEL
+        "dvi_rx0/dec_r/des_0/iserdes_m" PINNAME CLK0;
+PIN dvi_rx0/dec_r/des_0/iserdes_s_pins<2> = BEL
+        "dvi_rx0/dec_r/des_0/iserdes_s" PINNAME CLK0;
+TIMEGRP dvi_rx0_pllclk0 = PIN "dvi_rx0/dec_b/des_0/iodelay_s_pins<7>" PIN
+        "dvi_rx0/dec_b/des_0/iodelay_m_pins<6>" PIN
+        "dvi_rx0/dec_g/des_0/iodelay_s_pins<7>" PIN
+        "dvi_rx0/dec_g/des_0/iodelay_m_pins<6>" PIN
+        "dvi_rx0/dec_r/des_0/iodelay_s_pins<7>" PIN
+        "dvi_rx0/dec_r/des_0/iodelay_m_pins<6>" PIN
+        "dvi_rx0/dec_b/des_0/iserdes_m_pins<2>" PIN
+        "dvi_rx0/dec_b/des_0/iserdes_s_pins<2>" PIN
+        "dvi_rx0/dec_g/des_0/iserdes_m_pins<2>" PIN
+        "dvi_rx0/dec_g/des_0/iserdes_s_pins<2>" PIN
+        "dvi_rx0/dec_r/des_0/iserdes_m_pins<2>" PIN
+        "dvi_rx0/dec_r/des_0/iserdes_s_pins<2>";
+PIN dvi_rx0/PLL_ISERDES/PLL_ADV_pins<2> = BEL "dvi_rx0/PLL_ISERDES/PLL_ADV"
+        PINNAME CLKIN1;
+TIMEGRP DVI_CLOCK0 = PIN "dvi_rx0/PLL_ISERDES/PLL_ADV_pins<2>";
+TS_DVI_CLOCK0 = PERIOD TIMEGRP "DVI_CLOCK0" 100 MHz HIGH 50%;
+TS_dvi_rx0_pllclk1 = PERIOD TIMEGRP "dvi_rx0_pllclk1" TS_DVI_CLOCK0 HIGH 50%;
+TS_dvi_rx0_pllclk0 = PERIOD TIMEGRP "dvi_rx0_pllclk0" TS_DVI_CLOCK0 * 10 HIGH
+        50%;
+TS_dvi_rx0_pllclk2 = PERIOD TIMEGRP "dvi_rx0_pllclk2" TS_DVI_CLOCK0 * 2 HIGH
+        50%;
+SCHEMATIC END;
+

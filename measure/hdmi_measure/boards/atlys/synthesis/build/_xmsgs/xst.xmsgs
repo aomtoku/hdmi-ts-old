@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="924" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/common/rtl/synchro.v" Line 87: Attribute target identifier <arg fmt="%s" index="1">fdb</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/common/rtl/synchro.v" Line 82: Attribute target identifier <arg fmt="%s" index="1">fda</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/common/rtl/synchro.v" Line 83: Attribute target identifier <arg fmt="%s" index="1">fdb</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/common/rtl/synchro.v" Line 84: Attribute target identifier <arg fmt="%s" index="1">fda</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/common/rtl/synchro.v" Line 85: Attribute target identifier <arg fmt="%s" index="1">fdb</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/common/rtl/synchro.v" Line 86: Attribute target identifier <arg fmt="%s" index="1">fda</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 98: Assignment to <arg fmt="%s" index="1">clk100m</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 112: Assignment to <arg fmt="%s" index="1">switch</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="413" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 248: Result of <arg fmt="%d" index="1">2</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="413" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 250: Result of <arg fmt="%d" index="1">2</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="413" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/serdes_1_to_5_diff_data.v" Line 251: Result of <arg fmt="%d" index="1">2</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1308" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/phsaligner.v" Line 174: Found full_case directive in module <arg fmt="%s" index="1">phsaligner</arg>. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1308" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/phsaligner.v" Line 221: Found full_case directive in module <arg fmt="%s" index="1">phsaligner</arg>. Use of full_case directives may cause differences between RTL and post-synthesis simulation
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v" Line 212: Assignment to <arg fmt="%s" index="1">de_g</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v" Line 234: Assignment to <arg fmt="%s" index="1">de_r</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 164: Assignment to <arg fmt="%s" index="1">rx0_pclkx2</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 165: Assignment to <arg fmt="%s" index="1">rx0_pclkx10</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 166: Assignment to <arg fmt="%s" index="1">rx0_pllclk0</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 167: Assignment to <arg fmt="%s" index="1">rx0_pllclk1</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 168: Assignment to <arg fmt="%s" index="1">rx0_pllclk2</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 169: Assignment to <arg fmt="%s" index="1">rx0_plllckd</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 170: Assignment to <arg fmt="%s" index="1">rx0_tmdsclk</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 171: Assignment to <arg fmt="%s" index="1">rx0_serdesstrobe</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 172: Assignment to <arg fmt="%s" index="1">rx0_hsync</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 173: Assignment to <arg fmt="%s" index="1">rx0_vsync</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 176: Assignment to <arg fmt="%s" index="1">rx0_blue_vld</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 177: Assignment to <arg fmt="%s" index="1">rx0_green_vld</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 178: Assignment to <arg fmt="%s" index="1">rx0_red_vld</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 179: Assignment to <arg fmt="%s" index="1">rx0_blue_rdy</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 180: Assignment to <arg fmt="%s" index="1">rx0_green_rdy</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 181: Assignment to <arg fmt="%s" index="1">rx0_red_rdy</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 183: Assignment to <arg fmt="%s" index="1">rx0_psalgnerr</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v" Line 186: Assignment to <arg fmt="%s" index="1">rx0_sdata</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">TSW</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="647" delta="new" >Input &lt;<arg fmt="%s" index="1">btn</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">103</arg>: Output port &lt;<arg fmt="%s" index="3">sync</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">synchro_sws_0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">106</arg>: Output port &lt;<arg fmt="%s" index="3">sync</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">synchro_sws_1</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">sdout</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">pclkx2</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">pclkx10</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">pllclk0</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">pllclk1</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">pllclk2</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">pll_lckd</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">serdesstrobe</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">tmdsclk</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">hsync</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">vsync</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">blue_vld</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">green_vld</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">red_vld</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">blue_rdy</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">green_rdy</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">red_rdy</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">149</arg>: Output port &lt;<arg fmt="%s" index="3">psalgnerr</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dvi_rx0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;7&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;6&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;5&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;4&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;3&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;2&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;1&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="new" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">LED&lt;0&gt;</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v</arg>&quot; line <arg fmt="%s" index="2">194</arg>: Output port &lt;<arg fmt="%s" index="3">c0</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dec_g</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v</arg>&quot; line <arg fmt="%s" index="2">194</arg>: Output port &lt;<arg fmt="%s" index="3">c1</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dec_g</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v</arg>&quot; line <arg fmt="%s" index="2">194</arg>: Output port &lt;<arg fmt="%s" index="3">de</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dec_g</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v</arg>&quot; line <arg fmt="%s" index="2">216</arg>: Output port &lt;<arg fmt="%s" index="3">c0</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dec_r</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v</arg>&quot; line <arg fmt="%s" index="2">216</arg>: Output port &lt;<arg fmt="%s" index="3">c1</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dec_r</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/dvi_decoder.v</arg>&quot; line <arg fmt="%s" index="2">216</arg>: Output port &lt;<arg fmt="%s" index="3">de</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">dec_r</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/hdmi-ts/measure/hdmi_com_measure/cores/tmds_rx/rtl/chnlbond.v</arg>&quot; line <arg fmt="%s" index="2">86</arg>: Output port &lt;<arg fmt="%s" index="3">O_DATA_OUT</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">cbfifo_i</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="1767" delta="new" >HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+</msg>
+
+<msg type="info" file="Xst" num="1901" delta="new" >Instance <arg fmt="%s" index="1">PLL_ISERDES</arg> in unit <arg fmt="%s" index="2">PLL_ISERDES</arg> of type <arg fmt="%s" index="3">PLL_BASE</arg> has been replaced by <arg fmt="%s" index="4">PLL_ADV</arg>
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_9</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_8</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_7</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/sdout_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/de</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/c1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/c0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_9</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_8</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_7</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/sdout_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/de</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/c1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_g/c0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_9</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_8</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_7</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_6</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_5</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_4</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_3</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/sdout_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/c1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="new" >Node &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/c0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">top</arg>&gt;.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/cbnd/wa_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/cbnd/wa_0&gt; &lt;dvi_rx0/dec_r/cbnd/wa_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/cbnd/wa_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/cbnd/wa_1&gt; &lt;dvi_rx0/dec_r/cbnd/wa_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/cbnd/wa_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/cbnd/wa_2&gt; &lt;dvi_rx0/dec_r/cbnd/wa_2&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/cbnd/wa_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/cbnd/wa_3&gt; &lt;dvi_rx0/dec_r/cbnd/wa_3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_0</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_0&gt; &lt;dvi_rx0/dec_r/des_0/counter_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_1</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_1&gt; &lt;dvi_rx0/dec_r/des_0/counter_1&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_2&gt; &lt;dvi_rx0/dec_r/des_0/counter_2&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_3&gt; &lt;dvi_rx0/dec_r/des_0/counter_3&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_4</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_4&gt; &lt;dvi_rx0/dec_r/des_0/counter_4&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_5</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_5&gt; &lt;dvi_rx0/dec_r/des_0/counter_5&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_6</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_6&gt; &lt;dvi_rx0/dec_r/des_0/counter_6&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_7</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_7&gt; &lt;dvi_rx0/dec_r/des_0/counter_7&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/counter_8</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/counter_8&gt; &lt;dvi_rx0/dec_r/des_0/counter_8&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/cbnd/rawdata_vld_q</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/cbnd/rawdata_vld_q&gt; &lt;dvi_rx0/dec_r/cbnd/rawdata_vld_q&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/des_0/enable</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/des_0/enable&gt; &lt;dvi_rx0/dec_r/des_0/enable&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_b/cbnd/rawdata_vld_rising</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/cbnd/rawdata_vld_rising&gt; &lt;dvi_rx0/dec_r/cbnd/rawdata_vld_rising&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">dvi_rx0/dec_r/toggle</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">2 FFs/Latches</arg>, which will be removed : <arg fmt="%s" index="4">&lt;dvi_rx0/dec_g/toggle&gt; &lt;dvi_rx0/dec_b/toggle&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2169" delta="new" >HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+</msg>
+
+</messages>
+
