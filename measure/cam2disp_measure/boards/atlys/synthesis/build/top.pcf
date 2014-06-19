@@ -1,0 +1,26 @@
+//! **************************************************************************
+// Written by: Map P.49d on Thu Jun 19 14:54:57 2014
+//! **************************************************************************
+
+SCHEMATIC START;
+CONFIG VCCAUX = "3.3";
+COMP "LED<6>" LOCATE = SITE "P16" LEVEL 1;
+COMP "JA" LOCATE = SITE "T3" LEVEL 1;
+COMP "swled<0>" LOCATE = SITE "P12" LEVEL 1;
+COMP "swled<1>" LOCATE = SITE "R5" LEVEL 1;
+COMP "LED<0>" LOCATE = SITE "U18" LEVEL 1;
+COMP "REDLED" LOCATE = SITE "R3" LEVEL 1;
+COMP "LED<1>" LOCATE = SITE "M14" LEVEL 1;
+COMP "SYS_CLK" LOCATE = SITE "L15" LEVEL 1;
+PIN SYS_CLK_pin<0> = BEL "SYS_CLK" PINNAME PAD;
+PIN "SYS_CLK_pin<0>" CLOCK_DEDICATED_ROUTE = FALSE;
+COMP "LED<2>" LOCATE = SITE "N14" LEVEL 1;
+COMP "LED<3>" LOCATE = SITE "L14" LEVEL 1;
+COMP "LED<4>" LOCATE = SITE "M13" LEVEL 1;
+COMP "LED<5>" LOCATE = SITE "D4" LEVEL 1;
+COMP "LED<7>" LOCATE = SITE "N12" LEVEL 1;
+COMP "RSTBTN_" LOCATE = SITE "T15" LEVEL 1;
+COMP "BTNU" LOCATE = SITE "N4" LEVEL 1;
+NET "sysclk" PERIOD = 10 ns HIGH 50%;
+SCHEMATIC END;
+
