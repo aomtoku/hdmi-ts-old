@@ -17,7 +17,7 @@ $ make load
   
 - 照度センサをディスプレイの左上に固定
 - Atlysボードのpushボタン上を押すと計測開始
-- UARTで結果表示 (Baud Rate 1000000)
+- UARTで結果表示 (Baud Rate 1000000) (現在Windowsでしか動作していない)
 
 ## 計測対象機器と結果 ##
 
