@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 5: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 6: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 7: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 8: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 9: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 10: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 11: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 12: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 15: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 16: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 17: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 18: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 19: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 20: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 21: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 22: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 35: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 36: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 37: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 38: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 39: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 40: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 41: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 42: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 45: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 46: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 47: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 48: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 49: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 50: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 51: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 52: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 55: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 56: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 57: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 58: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 59: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 60: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 61: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 62: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 65: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 66: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 67: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 68: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 69: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 70: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 71: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1591" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 72: Root scope declaration is not allowed in verilog 95/2K mode
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 87: Attribute target identifier <arg fmt="%s" index="1">fdb</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 82: Attribute target identifier <arg fmt="%s" index="1">fda</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 83: Attribute target identifier <arg fmt="%s" index="1">fdb</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 84: Attribute target identifier <arg fmt="%s" index="1">fda</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 85: Attribute target identifier <arg fmt="%s" index="1">fdb</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="924" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 86: Attribute target identifier <arg fmt="%s" index="1">fda</arg> not found in this scope
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v" Line 183: Result of <arg fmt="%d" index="1">6</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">5</arg>-bit target.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1499" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/cores/coregen/uart_fifo.v" Line 39: Empty module &lt;<arg fmt="%s" index="1">uart_fifo</arg>&gt; remains a black box.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="old" >"/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v" Line 139: Net &lt;<arg fmt="%s" index="1">ledd</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v</arg>&quot; line <arg fmt="%s" index="2">195</arg>: Output port &lt;<arg fmt="%s" index="3">full</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">u1</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">ledd</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">request</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">GND</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">data_6</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">top</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">data_7</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">top</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">data_4</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;data_5&gt; </arg>
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">u0/waitnum_11</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">top</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">u0/waitnum_10</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">top</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">u0/waitnum_9</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">top</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">u0/waitnum_8</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">top</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">u0/waitnum_7</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">top</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
+</msg>
+
+<msg type="info" file="Xst" num="2261" delta="new" >The FF/Latch &lt;<arg fmt="%s" index="1">data_3</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">top</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg>, which will be removed : <arg fmt="%s" index="4">&lt;data_0_BRB0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2260" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">u1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg> : <arg fmt="%s" index="4">&lt;U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2260" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">u1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg> : <arg fmt="%s" index="4">&lt;U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2260" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">u1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg> : <arg fmt="%s" index="4">&lt;U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2260" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">u1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg> : <arg fmt="%s" index="4">&lt;U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2260" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_2</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">u1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg> : <arg fmt="%s" index="4">&lt;U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_0&gt; </arg>
+</msg>
+
+<msg type="info" file="Xst" num="2260" delta="old" >The FF/Latch &lt;<arg fmt="%s" index="1">U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i</arg>&gt; in Unit &lt;<arg fmt="%s" index="2">u1</arg>&gt; is equivalent to the following <arg fmt="%s" index="3">FF/Latch</arg> : <arg fmt="%s" index="4">&lt;U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i&gt; </arg>
+</msg>
+
+</messages>
+

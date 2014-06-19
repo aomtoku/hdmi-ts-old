@@ -1,0 +1,645 @@
+Release 14.4 - xst P.49d (lin)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "top.prj"
+Input Format                       : MIXED
+
+---- Target Parameters
+Output File Name                   : "top.ngc"
+Target Device                      : xc6slx45-3-csg324
+
+---- Source Options
+Top Module Name                    : top
+Automatic Register Balancing       : yes
+Signal Encoding Algorithm          : user
+
+---- General Options
+Optimization Goal                  : SPEED
+Optimization Effort                : 2
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v" into library work
+Parsing verilog file "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" included at line 52.
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 5: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 6: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 7: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 8: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 9: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 10: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 11: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 12: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 15: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 16: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 17: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 18: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 19: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 20: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 21: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 22: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 35: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 36: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 37: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 38: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 39: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 40: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 41: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 42: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 45: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 46: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 47: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 48: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 49: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 50: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 51: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 52: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 55: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 56: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 57: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 58: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 59: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 60: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 61: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 62: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 65: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 66: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 67: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 68: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 69: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 70: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 71: Root scope declaration is not allowed in verilog 95/2K mode
+WARNING:HDLCompiler:1591 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/setup.v" Line 72: Root scope declaration is not allowed in verilog 95/2K mode
+Parsing module <top>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/timing.v" into library work
+Parsing module <timing>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/dcmspi.v" into library work
+Parsing module <dcmspi>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/debnce.v" into library work
+Parsing module <debnce>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/hdclrbar.v" into library work
+Parsing module <hdcolorbar>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" into library work
+Parsing module <synchro>.
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 87: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 82: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 83: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 84: Attribute target identifier fda not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 85: Attribute target identifier fdb not found in this scope
+WARNING:HDLCompiler:924 - "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/synchro.v" Line 86: Attribute target identifier fda not found in this scope
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/common/rtl/DRAM16XN.v" into library work
+Parsing module <DRAM16XN>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" into library work
+Parsing module <phsaligner>.
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 65. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 66. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 67. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 68. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 133. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 134. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 135. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 136. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 137. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 138. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 139. parameter declaration becomes local in phsaligner with formal parameter declaration list
+INFO:HDLCompiler:693 - "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/phsaligner.v" Line 169. parameter declaration becomes local in phsaligner with formal parameter declaration list
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/serdes_1_to_5_diff_data.v" into library work
+Parsing module <serdes_1_to_5_diff_data>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/dvi_decoder.v" into library work
+Parsing module <dvi_decoder>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/decode.v" into library work
+Parsing module <decode>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/rx/rtl/chnlbond.v" into library work
+Parsing module <chnlbond>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/tx/rtl/vtc_demo.v" into library work
+Parsing module <vtc_demo>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/tx/rtl/serdes_n_to_1.v" into library work
+Parsing module <serdes_n_to_1>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/tx/rtl/encode.v" into library work
+Parsing module <encode>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/tx/rtl/dvi_encoder.v" into library work
+Parsing module <dvi_encoder>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/tx/rtl/dvi_encoder_top.v" into library work
+Parsing module <dvi_encoder_top>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/tx/rtl/convert_30to15_fifo.v" into library work
+Parsing module <convert_30to15_fifo>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/coregen/fifo16_32768.v" into library work
+Parsing module <fifo16_32768>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/coregen/fifo29_32768.v" into library work
+Parsing module <fifo29_32768>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/coregen/fifo48_8k.v" into library work
+Parsing module <fifo48_8k>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/coregen/ram_out.v" into library work
+Parsing module <ram_out>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/coregen/uart_fifo.v" into library work
+Parsing module <uart_fifo>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/coregen/clk_wiz_v3_6.v" into library work
+Parsing module <clk_wiz_v3_6>.
+Analyzing Verilog file "/home/aom/Work/fpga_project/test/uart_test/cores/uart_r/rtl/uart.v" into library work
+Parsing module <uart>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <top>.
+
+Elaborating module <$unit_1>.
+
+Elaborating module <IBUF>.
+
+Elaborating module <BUFG>.
+WARNING:HDLCompiler:413 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v" Line 183: Result of 6-bit expression is truncated to fit in 5-bit target.
+
+Elaborating module <uart_fifo>.
+WARNING:HDLCompiler:1499 - "/home/aom/Work/fpga_project/test/uart_test/cores/coregen/uart_fifo.v" Line 39: Empty module <uart_fifo> remains a black box.
+
+Elaborating module <uart>.
+WARNING:HDLCompiler:634 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v" Line 139: Net <ledd> does not have a driver.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <top>.
+    Related source file is "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v".
+        IDLE = 3'b000
+        READY = 3'b001
+        WAIT = 3'b010
+        START = 3'b011
+        STOP = 3'b100
+INFO:Xst:3210 - "/home/aom/Work/fpga_project/test/uart_test/boards/atlys/rtl/top.v" line 195: Output port <full> of the instance <u1> is unconnected or connected to loadless signal.
+WARNING:Xst:653 - Signal <ledd> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <request> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Found 1-bit register for signal <send>.
+    Found 5-bit register for signal <xcnt>.
+    Found 28-bit register for signal <mem>.
+    Found 8-bit register for signal <data>.
+    Found 28-bit register for signal <cnt>.
+    Found 28-bit register for signal <dcnt>.
+    Found 1-bit register for signal <flg>.
+    Found 1-bit register for signal <REDLED>.
+    Found 1-bit register for signal <wr_en>.
+    Found 3-bit register for signal <state>.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 7                                              |
+    | Inputs             | 4                                              |
+    | Outputs            | 7                                              |
+    | Clock              | clk100 (rising_edge)                           |
+    | Reset              | RSTBTN__INV_7_o (positive)                     |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 000                                            |
+    | Power Up State     | 000                                            |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 28-bit adder for signal <cnt[27]_GND_1_o_add_17_OUT> created at line 125.
+    Found 5-bit adder for signal <xcnt[4]_GND_1_o_add_36_OUT> created at line 183.
+    Found 8-bit 4-to-1 multiplexer for signal <LED> created at line 142.
+    Found 1-bit 4-to-1 multiplexer for signal <_n0114> created at line 127.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred 101 D-type flip-flop(s).
+	inferred  20 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <top> synthesized.
+
+Synthesizing Unit <uart>.
+    Related source file is "/home/aom/Work/fpga_project/test/uart_test/cores/uart_r/rtl/uart.v".
+    Found 1-bit register for signal <ready>.
+    Found 1-bit register for signal <tx>.
+    Found 9-bit register for signal <cmd>.
+    Found 12-bit register for signal <waitnum>.
+    Found 4-bit register for signal <cnt>.
+    Found 4-bit subtractor for signal <cnt[3]_GND_6_o_sub_5_OUT> created at line 36.
+    Found 12-bit adder for signal <waitnum[11]_GND_6_o_add_5_OUT> created at line 38.
+    Found 12-bit comparator greater for signal <n0004> created at line 31
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  27 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   6 Multiplexer(s).
+Unit <uart> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 4
+ 12-bit adder                                          : 1
+ 28-bit adder                                          : 1
+ 4-bit subtractor                                      : 1
+ 5-bit adder                                           : 1
+# Registers                                            : 14
+ 1-bit register                                        : 6
+ 12-bit register                                       : 1
+ 28-bit register                                       : 3
+ 4-bit register                                        : 1
+ 5-bit register                                        : 1
+ 8-bit register                                        : 1
+ 9-bit register                                        : 1
+# Comparators                                          : 1
+ 12-bit comparator greater                             : 1
+# Multiplexers                                         : 26
+ 1-bit 2-to-1 multiplexer                              : 10
+ 1-bit 4-to-1 multiplexer                              : 1
+ 12-bit 2-to-1 multiplexer                             : 2
+ 28-bit 2-to-1 multiplexer                             : 6
+ 4-bit 2-to-1 multiplexer                              : 1
+ 5-bit 2-to-1 multiplexer                              : 2
+ 8-bit 2-to-1 multiplexer                              : 2
+ 8-bit 4-to-1 multiplexer                              : 1
+ 9-bit 2-to-1 multiplexer                              : 1
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Reading core <uart_fifo.ngc>.
+Loading core <uart_fifo> for timing and area information for instance <u1>.
+
+Synthesizing (advanced) Unit <uart>.
+The following registers are absorbed into counter <cnt>: 1 register on signal <cnt>.
+Unit <uart> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 3
+ 12-bit adder                                          : 1
+ 28-bit adder                                          : 1
+ 5-bit adder                                           : 1
+# Counters                                             : 1
+ 4-bit down counter                                    : 1
+# Registers                                            : 124
+ Flip-Flops                                            : 124
+# Comparators                                          : 1
+ 12-bit comparator greater                             : 1
+# Multiplexers                                         : 25
+ 1-bit 2-to-1 multiplexer                              : 10
+ 1-bit 4-to-1 multiplexer                              : 1
+ 12-bit 2-to-1 multiplexer                             : 2
+ 28-bit 2-to-1 multiplexer                             : 6
+ 5-bit 2-to-1 multiplexer                              : 2
+ 8-bit 2-to-1 multiplexer                              : 2
+ 8-bit 4-to-1 multiplexer                              : 1
+ 9-bit 2-to-1 multiplexer                              : 1
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <state[1:2]> with gray encoding.
+-------------------
+ State | Encoding
+-------------------
+ 000   | 00
+ 001   | 01
+ 011   | 11
+ 100   | 10
+-------------------
+WARNING:Xst:1710 - FF/Latch <data_6> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <data_7> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <data_4> in Unit <top> is equivalent to the following FF/Latch, which will be removed : <data_5> 
+
+Optimizing unit <top> ...
+
+Optimizing unit <uart> ...
+WARNING:Xst:1710 - FF/Latch <u0/waitnum_11> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <u0/waitnum_10> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <u0/waitnum_9> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <u0/waitnum_8> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <u0/waitnum_7> (without init value) has a constant value of 0 in block <top>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 0) on block top, actual ratio is 0.
+INFO:Xst:2261 - The FF/Latch <data_3> in Unit <top> is equivalent to the following FF/Latch, which will be removed : <data_0_BRB0> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i> in Unit <u1> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_2> in Unit <u1> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_0> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i> in Unit <u1> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i> in Unit <u1> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_2> in Unit <u1> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_0> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_i> in Unit <u1> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_full_fb_i> 
+
+Pipelining and Register Balancing Report ...
+
+Processing Unit <top> :
+	Register(s) data_0 has(ve) been backward balanced into : data_0_BRB1 data_0_BRB2.
+	Register(s) mem_0 has(ve) been backward balanced into : mem_0_BRB0 mem_0_BRB1 mem_0_BRB2 mem_0_BRB3.
+	Register(s) mem_1 has(ve) been backward balanced into : mem_1_BRB2 mem_1_BRB3 mem_1_BRB4.
+	Register(s) mem_10 has(ve) been backward balanced into : mem_10_BRB2 mem_10_BRB3 mem_10_BRB4.
+	Register(s) mem_11 has(ve) been backward balanced into : mem_11_BRB2 mem_11_BRB3 mem_11_BRB4.
+	Register(s) mem_12 has(ve) been backward balanced into : mem_12_BRB2 mem_12_BRB3 mem_12_BRB4.
+	Register(s) mem_13 has(ve) been backward balanced into : mem_13_BRB2 mem_13_BRB3 mem_13_BRB4.
+	Register(s) mem_14 has(ve) been backward balanced into : mem_14_BRB2 mem_14_BRB3 mem_14_BRB4.
+	Register(s) mem_15 has(ve) been backward balanced into : mem_15_BRB2 mem_15_BRB3 mem_15_BRB4.
+	Register(s) mem_16 has(ve) been backward balanced into : mem_16_BRB2 mem_16_BRB3 mem_16_BRB4.
+	Register(s) mem_17 has(ve) been backward balanced into : mem_17_BRB2 mem_17_BRB3 mem_17_BRB4.
+	Register(s) mem_18 has(ve) been backward balanced into : mem_18_BRB2 mem_18_BRB3 mem_18_BRB4.
+	Register(s) mem_19 has(ve) been backward balanced into : mem_19_BRB2 mem_19_BRB3 mem_19_BRB4.
+	Register(s) mem_2 has(ve) been backward balanced into : mem_2_BRB2 mem_2_BRB3 mem_2_BRB4.
+	Register(s) mem_20 has(ve) been backward balanced into : mem_20_BRB2 mem_20_BRB3 mem_20_BRB4.
+	Register(s) mem_21 has(ve) been backward balanced into : mem_21_BRB2 mem_21_BRB3 mem_21_BRB4.
+	Register(s) mem_22 has(ve) been backward balanced into : mem_22_BRB2 mem_22_BRB3 mem_22_BRB4.
+	Register(s) mem_23 has(ve) been backward balanced into : mem_23_BRB2 mem_23_BRB3 mem_23_BRB4.
+	Register(s) mem_24 has(ve) been backward balanced into : mem_24_BRB2 mem_24_BRB3 mem_24_BRB4.
+	Register(s) mem_25 has(ve) been backward balanced into : mem_25_BRB2 mem_25_BRB3 mem_25_BRB4.
+	Register(s) mem_26 has(ve) been backward balanced into : mem_26_BRB2 mem_26_BRB3 mem_26_BRB4.
+	Register(s) mem_27 has(ve) been backward balanced into : mem_27_BRB2 mem_27_BRB3 mem_27_BRB4.
+	Register(s) mem_3 has(ve) been backward balanced into : mem_3_BRB2 mem_3_BRB3 mem_3_BRB4.
+	Register(s) mem_4 has(ve) been backward balanced into : mem_4_BRB2 mem_4_BRB3 mem_4_BRB4.
+	Register(s) mem_5 has(ve) been backward balanced into : mem_5_BRB2 mem_5_BRB3 mem_5_BRB4.
+	Register(s) mem_6 has(ve) been backward balanced into : mem_6_BRB2 mem_6_BRB3 mem_6_BRB4.
+	Register(s) mem_7 has(ve) been backward balanced into : mem_7_BRB2 mem_7_BRB3 mem_7_BRB4.
+	Register(s) mem_8 has(ve) been backward balanced into : mem_8_BRB2 mem_8_BRB3 mem_8_BRB4.
+	Register(s) mem_9 has(ve) been backward balanced into : mem_9_BRB2 mem_9_BRB3 mem_9_BRB4.
+	Register(s) u0/cmd_1 has(ve) been backward balanced into : u0/cmd_1_BRB1 u0/cmd_1_BRB2.
+	Register(s) u0/cmd_2 has(ve) been backward balanced into : u0/cmd_2_BRB1 u0/cmd_2_BRB2.
+	Register(s) u0/cmd_3 has(ve) been backward balanced into : u0/cmd_3_BRB1 u0/cmd_3_BRB2.
+	Register(s) u0/cmd_4 has(ve) been backward balanced into : u0/cmd_4_BRB1 u0/cmd_4_BRB2.
+	Register(s) u0/cmd_5 has(ve) been backward balanced into : u0/cmd_5_BRB1 u0/cmd_5_BRB2.
+	Register(s) u0/cmd_6 has(ve) been backward balanced into : u0/cmd_6_BRB1 u0/cmd_6_BRB2.
+	Register(s) u0/cmd_7 has(ve) been backward balanced into : u0/cmd_7_BRB0 u0/cmd_7_BRB1 u0/cmd_7_BRB2.
+	Register(s) u0/cmd_8 has(ve) been backward balanced into : u0/cmd_8_BRB0 u0/cmd_8_BRB1.
+	Register(s) u0/tx has(ve) been backward balanced into : u0/tx_BRB0 u0/tx_BRB1 u0/tx_BRB2.
+Unit <top> processed.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 191
+ Flip-Flops                                            : 191
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : top.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 327
+#      GND                         : 3
+#      INV                         : 6
+#      LUT1                        : 33
+#      LUT2                        : 17
+#      LUT3                        : 25
+#      LUT4                        : 63
+#      LUT5                        : 73
+#      LUT6                        : 17
+#      MUXCY                       : 53
+#      VCC                         : 2
+#      XORCY                       : 35
+# FlipFlops/Latches                : 246
+#      FD                          : 92
+#      FDC                         : 38
+#      FDCE                        : 51
+#      FDE                         : 8
+#      FDP                         : 14
+#      FDPE                        : 12
+#      FDR                         : 2
+#      FDRE                        : 29
+# RAMS                             : 1
+#      RAMB8BWER                   : 1
+# Clock Buffers                    : 1
+#      BUFG                        : 1
+# IO Buffers                       : 17
+#      IBUF                        : 7
+#      OBUF                        : 10
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45csg324-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             246  out of  54576     0%  
+ Number of Slice LUTs:                  234  out of  27288     0%  
+    Number used as Logic:               234  out of  27288     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    327
+   Number with an unused Flip Flop:      81  out of    327    24%  
+   Number with an unused LUT:            93  out of    327    28%  
+   Number of fully used LUT-FF pairs:   153  out of    327    46%  
+   Number of unique control sets:        16
+
+IO Utilization: 
+ Number of IOs:                          17
+ Number of bonded IOBs:                  17  out of    218     7%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                1  out of    116     0%  
+    Number using Block RAM only:          1
+ Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+SYS_CLK                            | IBUF+BUFG              | 247   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 4.129ns (Maximum Frequency: 242.201MHz)
+   Minimum input arrival time before clock: 5.014ns
+   Maximum output required time after clock: 5.694ns
+   Maximum combinational path delay: 5.741ns
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SYS_CLK'
+  Clock period: 4.129ns (frequency: 242.201MHz)
+  Total number of paths / destination ports: 2632 / 418
+-------------------------------------------------------------------------
+Delay:               4.129ns (Levels of Logic = 3)
+  Source:            u0/ready (FF)
+  Destination:       u1/U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc0.count_d1_9 (FF)
+  Source Clock:      SYS_CLK rising
+  Destination Clock: SYS_CLK rising
+
+  Data Path: u0/ready to u1/U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc0.count_d1_9
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDPE:C->Q            20   0.447   1.093  u0/ready (u0/ready)
+     LUT2:I1->O            4   0.205   0.788  rd_en1 (rd_en)
+     begin scope: 'u1:rd_en'
+     LUT2:I0->O           19   0.203   1.071  U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/ram_rd_en_i1 (U0/xst_fifo_generator/gconvfifo.rf/grf.rf/ram_rd_en)
+     FDPE:CE                   0.322          U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/rpntr/gc0.count_0
+    ----------------------------------------
+    Total                      4.129ns (1.177ns logic, 2.952ns route)
+                                       (28.5% logic, 71.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'SYS_CLK'
+  Total number of paths / destination ports: 133 / 132
+-------------------------------------------------------------------------
+Offset:              5.014ns (Levels of Logic = 2)
+  Source:            RSTBTN_ (PAD)
+  Destination:       flg (FF)
+  Destination Clock: SYS_CLK rising
+
+  Data Path: RSTBTN_ to flg
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            31   1.222   1.277  RSTBTN__IBUF (RSTBTN__IBUF)
+     INV:I->O            101   0.206   1.879  RSTBTN__inv1_INV_0 (RSTBTN__inv)
+     FDCE:CLR                  0.430          xcnt_0
+    ----------------------------------------
+    Total                      5.014ns (1.858ns logic, 3.156ns route)
+                                       (37.1% logic, 62.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SYS_CLK'
+  Total number of paths / destination ports: 35 / 10
+-------------------------------------------------------------------------
+Offset:              5.694ns (Levels of Logic = 3)
+  Source:            u0/tx_BRB0 (FF)
+  Destination:       LED<5> (PAD)
+  Source Clock:      SYS_CLK rising
+
+  Data Path: u0/tx_BRB0 to LED<5>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDP:C->Q              1   0.447   0.808  u0/tx_BRB0 (u0/tx_BRB0)
+     LUT3:I0->O            3   0.205   0.879  u0/tx_rstpot (u0/tx)
+     LUT6:I3->O            1   0.205   0.579  Mmux_LED61 (LED_5_OBUF)
+     OBUF:I->O                 2.571          LED_5_OBUF (LED<5>)
+    ----------------------------------------
+    Total                      5.694ns (3.428ns logic, 2.266ns route)
+                                       (60.2% logic, 39.8% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 17 / 8
+-------------------------------------------------------------------------
+Delay:               5.741ns (Levels of Logic = 3)
+  Source:            swled<0> (PAD)
+  Destination:       LED<6> (PAD)
+
+  Data Path: swled<0> to LED<6>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             8   1.222   1.167  swled_0_IBUF (swled_0_IBUF)
+     LUT6:I0->O            1   0.203   0.579  Mmux_LED11 (LED_0_OBUF)
+     OBUF:I->O                 2.571          LED_0_OBUF (LED<0>)
+    ----------------------------------------
+    Total                      5.741ns (3.996ns logic, 1.745ns route)
+                                       (69.6% logic, 30.4% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock SYS_CLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+SYS_CLK        |    4.129|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 10.35 secs
+ 
+--> 
+
+
+Total memory usage is 125508 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   66 (   0 filtered)
+Number of infos    :    9 (   0 filtered)
+
