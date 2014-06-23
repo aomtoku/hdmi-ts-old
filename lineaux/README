@@ -1,3 +1,36 @@
+HDMI aux 分析用レポ
+-----------------------
+
+hdmi の音声出力の分析を行う。
+
+- aux(音声)の位置
+- aux(音声)のデータ数
+
+の把握を行う。
+
+
+aux
+  CHANNEL0 --> [0] hsync
+	             [1] vsync
+							 [2] Packet Header
+							 [3] always positive 
+	CHANNEL1 --> [0] Packet contents
+	             [1] 
+							 [2]
+							 [3]
+  CHANNEL2 --> [0]
+	             [1]
+							 [2]
+							 [3]
+
+
+  8bit x 32クロックサイクル --> 32バイトのデータ
+	
+ 
+
+
+
+
 HDMI Transport Stream over IP
 -----------------------------
 [> Directory Structure
