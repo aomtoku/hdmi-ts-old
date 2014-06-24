@@ -62,6 +62,8 @@ module top (
   output wire [3:0] TX0_TMDSB,
 
   input  wire [3:0] SW,
+  output wire       UART_TX,
+	input  wire       UART_RX,
 	//output wire [7:0] PMOD,
 
   output wire [7:0] LED
@@ -75,20 +77,17 @@ module top (
   BUFIO2 #(.DIVIDE_BYPASS("FALSE"), .DIVIDE(5))
   sysclk_div (.DIVCLK(clk25m), .IOCLK(), .SERDESSTROBE(), .I(clk100));
 	*/
+  wire clk100m;
+  IBUFG ibug100(.I(clk100),.O(clk100m));
+
 	reg buf_c;
 	wire clk50m = buf_c;
-	always@(posedge clk100)
-		if(rstbtn_n)
-			buf_c <= 1'b0;
-		else
+	always@(posedge clk100m)
 			buf_c <= ~buf_c;
 
 	reg buf_d;
 	assign clk25m = buf_d;
 	always@(posedge clk50m)
-		if(rstbtn_n)
-			buf_d <= 1'b0;
-		else
 			buf_d <= ~buf_d;
 
   BUFG clk25_buf (.I(clk25m), .O(clk25));
@@ -214,7 +213,7 @@ wire [3:0]aux2 = dout_aux[11:8];
 
 wire vde;
 wire [10:0]hcnt,vcnt;
-tmds_timing(
+tmds_timing tim(
 	.rx0_pclk(rx0_pclk),
 	.rstbtn_n(~rstbtn_n), 
 	.rx0_hsync(rx0_hsync),
@@ -233,6 +232,57 @@ reg adep;
 reg ap = 1'b0;
 reg apb = 1'b0;
 reg apa = 1'b0;
+
+reg [4:0] acnt;
+
+always @ (posedge rx0_pclk)
+  if(~rstbtn_n)begin
+    acnt <= 5'd0;
+  end else begin
+    if(rx0_ade)begin
+      if(acnt == 5'd31)
+        acnt <= 5'd0;
+      else
+        acnt <= acnt + 5'd1;
+    end else
+      acnt <= 5'd0;
+  end 
+
+
+reg [9:0]apckt;
+always @ (posedge rx0_pclk)
+  if(~rstbtn_n)begin
+    apckt   <= 10'd0;
+  end else begin
+
+    if(rx0_ade & acnt == 5'd0)
+      apckt <= apckt + 10'd1;
+    if(vcnt == 0 && hcnt == 0)
+      apckt <= 10'd0;
+  end
+
+
+reg [7:0]head;
+always @ (posedge rx0_pclk)
+  if(~rstbtn_n)
+    head <= 8'd0;
+  else begin
+    if(rx0_ade && acnt <= 5'd7)begin
+			case(acnt)
+			  5'd0 : head[0] <= rx0_aux0[2];
+			  5'd1 : head[1] <= rx0_aux0[2];
+			  5'd2 : head[2] <= rx0_aux0[2];
+			  5'd3 : head[3] <= rx0_aux0[2];
+			  5'd4 : head[4] <= rx0_aux0[2];
+			  5'd5 : head[5] <= rx0_aux0[2];
+			  5'd6 : head[6] <= rx0_aux0[2];
+			  5'd7 : head[7] <= rx0_aux0[2];
+      endcase
+			//head[0] <= rx0_aux0[2];
+      //head <= {head[6:0],1'd0};
+    end
+ end
+
 
 reg [7:0]hsycnt;
 
@@ -533,6 +583,7 @@ end
 wire nade = rd_en;
 wire made = (SW[2]) ? ((SW[3]) ? nade : dade) : ((SW[3]) ? dddade : ddddade);
 
+
 wire [3:0]test0 = {aux0[3:2],rx0_vsync, rx0_hsync};
 wire [3:0]test1 = aux1 ;
 wire [3:0]test2 = aux2 ;
@@ -607,17 +658,119 @@ dvi_encoder_top dvi_tx0 (
 		end
 	end
 
-	
- // assign LED = (SW[2]) ? cnt_q : (SW[3]) ? q_reg[7:0] : q_reg[15:8] ;
-	//assign LED = {5'd0,apa, ap,apb};
-assign LED = {5'd0,rd_en,dbg_full,dbg_empty};
-	//assign PMOD = debug;
-/*	assign PMOD[1] = rx0_vsync;
-	assign PMOD[2] = rx0_vde;
-	assign PMOD[3] = debug;
-	assign PMOD[4] = debug;
-	assign PMOD[5] = debug;
-	assign PMOD[6] = debug;
-	assign PMOD[7] = debug;
-*/
+
+ 
+reg [7:0] data;
+
+reg we;
+reg [5:0]xcnt;
+wire ready;
+reg [39:0]mem;
+reg wr_en, send;
+
+always @ (posedge rx0_pclk or negedge rstbtn_n)begin
+  if(~rstbtn_n) begin
+		xcnt <= 6'd0;
+		mem <= 40'd0;
+		data <= 8'd0;
+		send <= 1'b0;
+	end else begin
+		if(rx0_ade & acnt == 5'd31)begin
+			mem[39:29] <= vcnt;
+      mem[28:18] <= hcnt;
+      mem[17:8]  <= apckt;
+      mem[7:0]   <= head;
+			send <= 1'b1;
+		end
+		if(send)begin
+			if(xcnt == 6'd11)begin
+			  wr_en <= 1'b1;
+			  data  <= 8'h0a;
+			  send  <= 1'b0;
+				xcnt  <= 6'd0;
+		  end else if(xcnt == 6'd10) begin
+			  wr_en <= 1'b1;
+			  data  <= 8'h0d;
+				xcnt  <= 6'd11;
+      /*end else if(xcnt == 6'd11 || xcnt == 6'd23 || xcnt == 6'd34)begin
+        wr_en <= 1'b1;
+        xcnt  <= xcnt + 1;
+        data  <= 8'h20;*/
+		  end else begin
+		    wr_en <= 1'b1;
+			  //mem   <= {mem[38:0],1'b0};
+			  //data  <= (mem[39]) ? 8'h31 : 8'h30 ;
+			  mem  <= {mem[35:0],4'd0};
+				data <= ascii(mem[39:36]);
+				xcnt  <= xcnt + 1;
+		  end
+		end else begin
+		  wr_en <= 1'b0;
+		end
+	end
+end
+
+function [7:0]ascii;
+ input  [3:0] bit;
+
+ begin
+   case(bit)
+	   4'h0: ascii = 8'h30;
+	   4'h1: ascii = 8'h31;
+	   4'h2: ascii = 8'h32;
+	   4'h3: ascii = 8'h33;
+	   4'h4: ascii = 8'h34;
+	   4'h5: ascii = 8'h35;
+	   4'h6: ascii = 8'h36;
+	   4'h7: ascii = 8'h37;
+	   4'h8: ascii = 8'h38;
+	   4'h9: ascii = 8'h39;
+	   4'ha: ascii = 8'h41;
+	   4'hb: ascii = 8'h42;
+	   4'hc: ascii = 8'h43;
+	   4'hd: ascii = 8'h44;
+	   4'he: ascii = 8'h45;
+	   4'hf: ascii = 8'h46;
+   endcase
+ end
+endfunction
+
+
+
+
+reg empty_buf;
+wire [7:0] dout;
+wire empty,full;
+wire ard_en = ~empty_buf & ready;
+
+always @ (posedge clk100m)
+  empty_buf <= empty;
+
+
+uart_fifo_p u1(
+  .rst(~rstbtn_n),
+  .wr_clk(rx0_pclk),
+  .rd_clk(clk100m),
+  .din(data),
+  .wr_en(wr_en),
+  .rd_en(ard_en),
+  .dout(dout),
+  .full(full),
+  .empty(empty)
+);
+
+
+uart u0 (
+ .clk(clk100m),
+ .rst_(rstbtn_n),
+ .data(dout),
+ .we(ard_en),
+ .tx(UART_TX),
+ .ready(ready)
+);
+
+
+
+assign LED = {empty, full,wr_en,ready,ard_en,UART_TX,UART_RX,send};
+
 endmodule
