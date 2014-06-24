@@ -648,7 +648,7 @@ end
 assign ax_reset = ~ax_rst & rst;
 
 always@(posedge pclk)begin
-	if(RSTBTN | reset /*| ax_reset*/)begin
+	if(RSTBTN | reset )begin
 		fl            <= 1'b0;
 		flg           <= 1'b0;
 		init          <= 1'b0;
@@ -737,7 +737,7 @@ dvi_encoder_top dvi_tx0 (
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (ade_m),
+    .ade         (),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
@@ -948,37 +948,6 @@ gmii_tx gmii_tx(
 	.tx_en(TXEN),
 	.txd(TXD)
 );
-
-//////////////////////////////////////
-// Status LED 
-//////////////////////////////////////
-`ifdef NO
-assign LED = LED_out(	.SW(SW), .TXD(TXD), .empty(send_empty), .full(send_full), .rx0_vde(rx0_vde));
-
-function [7:0]LED_out;
-	input [3:0]SW;
-	input [7:0]TXD;
-	input empty;
-	input full;
-	input rx0_vde;
-	begin
-		case(SW)
-			4'b0000: LED_out ={empty,full, rx0_vde, 5'd0};
-			4'b0001: LED_out = TXD;
-`ifdef FRAME_CHECK
-			4'b0010: LED_out = hf_cnt[7:0];
-			4'b0011: LED_out = hf_cnt[15:8];
-			4'b0100: LED_out = vf_cnt[7:0];
-			4'b0101: LED_out = vf_cnt[15:8];
-			4'b0110: LED_out = hpwcnt[7:0];
-			4'b0111: LED_out = hpwcnt[15:8];
-			4'b1000: LED_out = vpwcnt[7:0];
-			4'b1001: LED_out = vpwcnt[15:8];
-`endif
-		endcase
-	end
-endfunction
-`endif
 
 reg [3:0]anum = 4'd0;
 assign LED = {ax_recv_rd_en,ade_m,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
