@@ -109,7 +109,7 @@ wire recv_fifo_wr_en;
 wire ax_recv_wr_en;
 reg ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
-wire [12:0] axdin;
+wire [24:0] axdin;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(RXCLK),
@@ -141,11 +141,11 @@ fifo29_32768 asfifo_recv (
 	.empty(recv_empty)
 );
 
-wire [12:0] axdout;
+wire [24:0] axdout;
 reg init;
 wire ax_rx_rd_en ;
 wire rst;
-auxfifo12r aux_recv(
+fifo25 aux_recv(
   .rst(reset| RSTBTN  ),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
@@ -630,7 +630,7 @@ reg [3:0]b_left,bb_left;
 reg fl;
 reg flg;
 reg [5:0]acnt;
-reg axp;
+reg vblnk;
 reg ck;
 reg audio;
 
@@ -647,87 +647,51 @@ end
 
 assign ax_reset = ~ax_rst & rst;
 
-reg [10:0] ctim;
-
+wire [10:0] ctim = axdout[24:14];
+reg initb;
 always@(posedge pclk)begin
 	if(RSTBTN | reset )begin
-		fl            <= 1'b0;
-		flg           <= 1'b0;
 		init          <= 1'b0;
+		initb         <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 		b_left        <= 4'd0;
 		bb_left       <= 4'd0;
 	  acnt          <= 6'd0;
-		axp           <= 1'b0;
-		ck            <= 1'b0;
-		audio         <= 1'b0;
-		ctim          <= 11'd0;
+		vblnk         <= 1'b0;
 	end else begin
-	  b_left <= axdout[11:8];
 	  bb_left <= b_left;
-    // Checking Audio onoff //
-		if(~ax_recv_empty)
-	    ck <= 1'b1; 
-	  if(vcnt == 12'd0)begin
-		  if(ck)
-			  audio <= 1'b1;
-		  else
-			  audio <= 1'b0;
-		  ck <= 1'b0;
-		end
+		initb <= vde;
 
-		if(vde)
-			init <= 1'b1;
-		if(~vde & ~ax_recv_empty & init)
-			fl <= 1'b1;
-		else begin
-			fl <= 1'b0;
-			axp <= 1'b0;
-		end
-
-		// Start logic 
-		if(fl & hcnt == 12'd1530)begin
-		  acnt          <= 6'd0;
-		  ax_recv_rd_en <= 1'b1;
-		  axp           <= 1'b1;
-		end
+	  if(~axdout[13])
+	    b_left <= axdout[12:9];
 		
-		if(axp)begin
+		/* Intial AUX FIFO Control*/
+		if(vde & ~init)begin
+		  if({vde,initb} == 2'b10)
+			  ax_recv_rd_en <= 1'b1;
+		  else begin
+			  ax_recv_rd_en <= 1'b0;
+				init <= 1'b1;
+			end
+		end
 
-			if(axdout[13]) //AUX Clock Information
-				ctim <= axdout[10:0];
+		if(~vde & ~ax_recv_empty & init)
+			vblnk <= 1'b1;
+		else 
+			vblnk <= 1'b0;
 
+		if(vblnk)begin
 			if(hcnt == ctim)begin  // ADE start point, equals Clock Timing
 				ax_recv_rd_en <= 1'b1;
 				acnt <= 6'd0;
 			end
 
 			if(ax_recv_rd_en)begin
-				if(acnt == 6'd32)
-					ac_recv_rd_en <= 1'd0;
+				if(acnt == 6'd31 && hcnt != ctim)
+					ax_recv_rd_en <= 1'd0;
 			  else
 				  acnt <= acnt + 1;
 			end
-
-
-		  if(acnt == 6'd35)begin
-			  acnt <= 6'd0; 
-			  //if(b_left > 0)
-			  if(flg)
-			    ax_recv_rd_en <= 1'b1; // 0
-			  else begin
-			    ax_recv_rd_en <= 1'b0; // 1
-					axp <= 1'b0;
-				end
-		  end else if(acnt == 6'd31)begin
-		    flg           <= 1'b0;
-				ax_recv_rd_en <= 1'b0; 
-			  acnt <= acnt + 6'd1;
-		  end else begin
-			  if(b_left < bb_left)
-					flg <= 1'b1;
-			  acnt <= acnt + 6'd1;
-		  end
 		end
 	end
 end
@@ -972,6 +936,6 @@ gmii_tx gmii_tx(
 );
 
 reg [3:0]anum = 4'd0;
-assign LED = {ax_recv_rd_en,ade_m,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
+assign LED = {ax_recv_rd_en,ade,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
 
 endmodule
