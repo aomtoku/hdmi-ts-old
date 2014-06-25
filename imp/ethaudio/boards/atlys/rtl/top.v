@@ -631,21 +631,7 @@ reg fl;
 reg flg;
 reg [5:0]acnt;
 reg vblnk;
-reg ck;
-reg audio;
 
-reg rrst,ax_rst;
-always@(posedge pclk)begin
-  if(RSTBTN | reset )
-		ax_rst <= 1'b0;
-	else begin
-		rrst <= rst;
-		if({rst,rrst} == 2'b01)
-		  ax_rst <= 1'b1;
-  end
-end
-
-assign ax_reset = ~ax_rst & rst;
 
 wire [10:0] ctim = axdout[24:14];
 reg initb;
@@ -681,24 +667,24 @@ always@(posedge pclk)begin
 			vblnk <= 1'b0;
 
 		if(vblnk)begin
-			if(hcnt == ctim)begin  // ADE start point, equals Clock Timing
+			if(hcnt[10:0] == ctim)begin  // ADE start point, equals Clock Timing
 				ax_recv_rd_en <= 1'b1;
 				acnt <= 6'd0;
 			end
 
 			if(ax_recv_rd_en)begin
-				if(acnt == 6'd31 && hcnt != ctim)
+				if(acnt == 6'd31 && hcnt[10:0] != ctim)begin
 					ax_recv_rd_en <= 1'd0;
-			  else
+			  end else if(acnt == 6'd31 && hcnt[10:0] == ctim)begin
+				  acnt <= 6'd0;
+				end else
 				  acnt <= acnt + 1;
 			end
 		end
 	end
 end
 
-wire ade = (ax_recv_rd_en & ~axdout[13]);
-
-
+wire ade = ax_recv_rd_en;
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
 assign out_aux1 = axdout[ 4:1];
 assign out_aux2 = axdout[ 8:5];
@@ -904,7 +890,7 @@ tmds_timing timing(
 //-----------------------------------------------------------
 
 wire ade_tx = ~video_en && ((video_hcnt >= 11'd1504) && (video_hcnt < 11'd1510));
-wire vperi = ((video_vcnt >= 21) && (video_vcnt <= 741)) ? 1'b1 : 1'b0;
+wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
 wire fil_wr_en =  video_en & (in_hcnt > 12'd220 & in_hcnt <= 12'd1420);
 
 
