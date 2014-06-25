@@ -25,7 +25,7 @@ module top (
 	input  wire [3:0] SW,
 	input  wire [3:0] DEBUG_SW,
 
-	output wire  [7:0] LED,
+	output reg  [7:0] LED,
 	output wire [5:0] JA
 );
 
@@ -608,11 +608,16 @@ datacontroller dataproc(
 	.i_format(2'b00),
 	.fifo_read(fifo_read),
 	.data(dout),
-	.sw(~DEBUG_SW[3]),
-	.o_r(red_data),
-	.o_g(green_data),
-	.o_b(blue_data)
+	.sw(/*~DEBUG_SW[3]*/),
+	.o_r(/*red_data*/),
+	.o_g(/*green_data*/),
+	.o_b(/*blue_data*/)
 );
+
+assign red_data   = 8'd0;
+assign green_data = dout[15:8];
+assign blue_data  = dout[7:0];
+
 
 assign JA[0] = RXDV;
 assign JA[1] = VGA_HSYNC;
@@ -675,6 +680,7 @@ always@(posedge pclk)begin
 			if(ax_recv_rd_en)begin
 				if(acnt == 6'd31 && hcnt[10:0] != ctim)begin
 					ax_recv_rd_en <= 1'd0;
+					acnt <= acnt + 1;
 			  end else if(acnt == 6'd31 && hcnt[10:0] == ctim)begin
 				  acnt <= 6'd0;
 				end else
@@ -745,15 +751,15 @@ reg       vde_b;
 
 always @ (posedge rx0_pclk)begin
   vde_b <= rx0_vde;
-  if(rx0_reset || video_hcnt == 11'd1)begin
+  if(rx0_reset || video_hcnt == 11'd1506)begin
 	  ade_c  <= 4'd0;
 	  cnt_32 <= 5'd0; 
 	  ade_num <= ade_c;
 	end else begin
 	  if(rx0_ade)begin
 		  if(cnt_32 == 5'd31)begin
-			cnt_32 <= 5'd0;
-			ade_c  <= ade_c + 4'd1;
+			  cnt_32 <= 5'd0;
+			  ade_c  <= ade_c + 4'd1;
 		  end else begin
 		    cnt_32 <= cnt_32 + 5'd1;
 		  end
@@ -780,7 +786,7 @@ wire [23:0] ax_din = {video_hcnt, 4'd0, rx0_aux2, rx0_aux1, rx0_aux0[2]};
 wire [23:0] ax_dout;
 wire        rx0_ade;
 
-assign   ax_send_wr_en = (start) ? rx0_ade : 1'b0;
+assign   ax_send_wr_en = (init) ? rx0_ade : 1'b0;
 wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [11:0] index;
@@ -905,7 +911,7 @@ gmii_tx gmii_tx(
 	.rd_en(rd_en),
 	.wr_en(fil_wr_en),
 	.vperi(vperi),
-	.sw(~DEBUG_SW[2]),
+	.sw(DEBUG_SW[1]),
 
 	// AX FIFO
 	.adesig(ade_tx),
@@ -922,6 +928,124 @@ gmii_tx gmii_tx(
 );
 
 reg [3:0]anum = 4'd0;
-assign LED = {ax_recv_rd_en,ade,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
+//assign LED = (DEBUG_SW[1]) ? {7'd0,ax_recv_wr_en} : {ax_recv_rd_en,ade,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
+
+always @ (*)
+  case(DEBUG_SW[3:2])
+	  2'b00 : LED <= {ax_recv_rd_en,ade,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
+    2'b01 : LED <= ctim[7:0];
+    2'b10 : LED <= {ax_recv_wr_en,4'd0,ctim[10:8]};
+    2'b11 : LED <= 8'd0;
+	endcase
+
+
+`ifdef DEBUG
+ 
+reg [7:0] data;
+
+reg we;
+reg [5:0]xcnt;
+wire ready;
+reg [39:0]mem;
+reg wr_en, send;
+
+always @ (posedge rx0_pclk or negedge rstbtn_n)begin
+  if(~rstbtn_n) begin
+		xcnt <= 6'd0;
+		mem <= 40'd0;
+		data <= 8'd0;
+		send <= 1'b0;
+	end else begin
+		if(rx0_ade & acnt == 5'd31)begin
+			mem[39:29] <= vcnt;
+      mem[28:18] <= hcnt;
+      mem[17:8]  <= apckt;
+      mem[7:0]   <= head;
+			send <= 1'b1;
+		end
+		if(send)begin
+			if(xcnt == 6'd11)begin
+			  wr_en <= 1'b1;
+			  data  <= 8'h0a;
+			  send  <= 1'b0;
+				xcnt  <= 6'd0;
+		  end else if(xcnt == 6'd10) begin
+			  wr_en <= 1'b1;
+			  data  <= 8'h0d;
+				xcnt  <= 6'd11;
+		  end else begin
+		    wr_en <= 1'b1;
+			  mem  <= {mem[35:0],4'd0};
+				data <= ascii(mem[39:36]);
+				xcnt  <= xcnt + 1;
+		  end
+		end else begin
+		  wr_en <= 1'b0;
+		end
+	end
+end
+
+function [7:0]ascii;
+ input  [3:0] bit;
+ begin
+   case(bit)
+	   4'h0: ascii = 8'h30;
+	   4'h1: ascii = 8'h31;
+	   4'h2: ascii = 8'h32;
+	   4'h3: ascii = 8'h33;
+	   4'h4: ascii = 8'h34;
+	   4'h5: ascii = 8'h35;
+	   4'h6: ascii = 8'h36;
+	   4'h7: ascii = 8'h37;
+	   4'h8: ascii = 8'h38;
+	   4'h9: ascii = 8'h39;
+	   4'ha: ascii = 8'h41;
+	   4'hb: ascii = 8'h42;
+	   4'hc: ascii = 8'h43;
+	   4'hd: ascii = 8'h44;
+	   4'he: ascii = 8'h45;
+	   4'hf: ascii = 8'h46;
+   endcase
+ end
+endfunction
+
+
+
+
+reg empty_buf;
+wire [7:0] dout;
+wire empty,full;
+wire ard_en = ~empty_buf & ready;
+
+always @ (posedge sysclk)
+  empty_buf <= empty;
+
+
+uart_fifo_p u1(
+  .rst(~rstbtn_n),
+  .wr_clk(rx0_pclk),
+  .rd_clk(sysclk),
+  .din(data),
+  .wr_en(wr_en),
+  .rd_en(ard_en),
+  .dout(dout),
+  .full(full),
+  .empty(empty)
+);
+
+
+uart u0 (
+ .clk(sysclk),
+ .rst_(rstbtn_n),
+ .data(dout),
+ .we(ard_en),
+ .tx(UART_TX),
+ .ready(ready)
+);
+
+
+
+`endif
+
 
 endmodule

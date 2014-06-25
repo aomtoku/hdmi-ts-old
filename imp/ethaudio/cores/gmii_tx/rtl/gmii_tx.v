@@ -172,7 +172,7 @@ parameter IFG         = 4'hb;
 
 parameter AUDIOMAX    = 5'd20;
 
-parameter auxsize     = 12'd34;
+parameter auxsize     = 12'd38;
 parameter video       = 8'b00000000;
 parameter audio       = 8'b00000001;
 parameter vidax       = 8'b00000010;
@@ -191,6 +191,7 @@ reg [11:0]  packet_size;
 reg [7:0]   tmp;
 reg [4:0]   c9;
 reg [4:0]   left_ade;
+reg [3:0]   adecnt;
 always @(posedge tx_clk)begin
 	if(sys_rst)begin
 		txd       <= 8'd0;
@@ -207,6 +208,7 @@ always @(posedge tx_clk)begin
 		packet_size <= 12'd0;
 		tmp       <= 8'd0;
 		c9        <= 5'd0;
+		adecnt    <= 4'd0;
 	end else begin
 		crc_rd    <= 1'b0; 
 		case(state)
@@ -215,7 +217,9 @@ always @(posedge tx_clk)begin
 					txd        <= 8'h55;
 					tx_en      <= 1'b1;
 					state      <= PRE;
-					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					ip_check   <= {8'd0,ip_ver} + {8'd0,ip_len} + {8'd0,ip_iden} + {8'd0,ip_flag} 
+                        + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} +           
+												{8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 //`ifdef simulation
           //pcktinfo    <= video;
 					//:wqpacket_size <= 12'd0;
@@ -224,17 +228,21 @@ always @(posedge tx_clk)begin
 						packet_size <= 12'd0;
 						pcktinfo    <= video;
 					end else begin
+					  adecnt      <= ade_num;
 						packet_size <= auxsize * ade_num;
 						pcktinfo    <= vidax;
 					end
 //`endif
 				end else if(ax_send_empty == 1'b0 & adesig)begin
-					txd        <= 8'h55;
-					tx_en      <= 1'b1;
-					state      <= PRE;
+					txd         <= 8'h55;
+					tx_en       <= 1'b1;
+					state       <= PRE;
 					packet_size <= auxsize * ({8'd0,ade_num} + 12'd1);
-					ip_check   <= {8'd0,ip_ver} + {8'd0,12'd43} + {8'd0,ip_iden} + {8'd0,ip_flag} + {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} + {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
-					pcktinfo   <= audio;
+					adecnt      <= ade_num;
+					ip_check    <= {8'd0,ip_ver} + {8'd0,12'd43} + {8'd0,ip_iden} + {8'd0,ip_flag} + 
+                         {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} +               
+                         {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
+					pcktinfo    <= audio;
 				end
 			end
 			PRE: begin
@@ -366,10 +374,10 @@ always @(posedge tx_clk)begin
 						state <= AUXID;
 						count <= 11'd0;
 						ax_send_rd_en <= 1'b0;
-						if(ade_num > AUDIOMAX)
+						if(adecnt > AUDIOMAX)
 							left_ade <= AUDIOMAX;
 						else
-							left_ade <= ade_num;
+							left_ade <= adecnt;
 					end
 					video:begin
 						state <= DATA_RESOL;
@@ -382,7 +390,7 @@ always @(posedge tx_clk)begin
 						txd   <= vidax;
 						cnt3  <= 2'd0; //read X,Y om FIRO
 						count <= 11'd0;
-						left_ade <= ade_num;
+						left_ade <= adecnt;
 					end
 				endcase
 			end
@@ -473,7 +481,7 @@ always @(posedge tx_clk)begin
       // 16bit AUXID : left audio ade number -> 4bit | clock 12bit
       AUXID: begin
 				if(count == 11'd1)begin
-				  txd   <= {left_ade, axdout[23:20]};
+				  txd   <= {left_ade, 1'b0,axdout[23:21]};
 				  if(left_ade != 4'd0)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
@@ -485,7 +493,7 @@ always @(posedge tx_clk)begin
 				end else begin
 				  ax_send_rd_en <= 1'b0;
 				  count         <= 11'd1;
-			    txd           <= axdout[19:12];
+			    txd           <= axdout[19:13];
 				end
 			end
       AUX: begin

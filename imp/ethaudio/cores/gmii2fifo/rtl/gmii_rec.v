@@ -132,7 +132,7 @@ always@(posedge clk125) begin
 					pre_en    <= 1'b0;
 				end
 			endcase
-			if(left == 4'd1 && a_cnt == 6'd31)
+			if(left == 4'd1 && a_cnt == 6'd35)
 				audio_en <= 1'b0;
 		end else begin
 			rx_count    <= 11'd0;
@@ -243,7 +243,7 @@ always@(posedge clk125)begin
 					ax_wr_en  <= 1'b0;
 				  a_cnt     <= 6'd1;
 					daux[21:14] <= rxd;
-					daux[12 ] <= 1'b1;
+					daux[13 ] <= 1'b1;
 
 			   end
 			end
