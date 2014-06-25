@@ -17,7 +17,7 @@ module gmii2fifo24#(
 	output reg         recv_en,
 	output wire        packet_en,
 	// AUX FIFO
-	output wire [12:0] aux_data_in,
+	output wire [24:0] aux_data_in,
 	output wire        aux_wr_en
 );
 
@@ -204,7 +204,7 @@ end
 reg [ 1:0]cnt2;
 reg [ 5:0]a_cnt;
 reg [ 3:0]left;
-reg [12:0]daux;
+reg [24:0]daux;
 reg [7:0] tmp;
 reg [3:0] c9;
 reg       ax_wr_en;
@@ -226,7 +226,7 @@ always@(posedge clk125)begin
 		ax_wr_en  <=  1'b0;
 		aux_state <=  1'b0;
 		a_cnt     <=  6'd0;
-		daux      <= 13'd0;
+		daux      <= 25'd0;
 	end else begin
 	  if(audio_en) begin
       case(aux_state)
@@ -235,14 +235,14 @@ always@(posedge clk125)begin
 					a_cnt      <= 6'd0;
 					aux_state  <= AUX;
 					ax_wr_en   <= 1'b1;
-					daux[12:8] <= rxd[3:0];
+					daux[24:22] <= rxd[2:0];
 					left       <= rxd[7:4]; //
-					//daux[11:8] <= rxd[7:4];
+					daux[12:9] <= rxd[7:4];
 			   end else begin
 				  
 					ax_wr_en  <= 1'b0;
 				  a_cnt     <= 6'd1;
-					daux[7:0] <= rxd;
+					daux[21:14] <= rxd;
 					daux[12 ] <= 1'b1;
 
 			   end
@@ -260,8 +260,8 @@ always@(posedge clk125)begin
 			  	    aux_state  <= AUXID;
 				 end else begin
 				    a_cnt <= a_cnt + 6'd1; // counting 32 clock cycles for audio data enable
-						daux[12] <= 1'b0;
-						daux[11:9] <= left[2:0];
+						//daux[12] <= 1'b0;
+						//daux[11:9] <= left[2:0];
 						//ax_wr_en   <= 1'b1;
 						//daux[ 7:0] <= rxd;
 					  case(c9)
