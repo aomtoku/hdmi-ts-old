@@ -631,32 +631,73 @@ assign JA[5] = fifo_read;
 wire [4:0] tmds_data0, tmds_data1, tmds_data2;
 wire serdes_rst = RSTBTN | ~bufpll_lock;
 
-reg [3:0]b_left,bb_left;
+//reg [3:0]b_left,bb_left;
 reg fl;
 reg flg;
 reg [5:0]acnt;
 reg vblnk;
+reg [2:0]astate;
+reg [10:0]clk_ade;
 
+parameter FIRST = 3'd0;
+parameter READY = 3'd1;
+parameter IDLE  = 3'd2;
+parameter ADE   = 3'd3;
+parameter ADE_L = 3'd4;
 
 wire [10:0] ctim = axdout[24:14];
 reg initb;
 always@(posedge pclk)begin
-	if(RSTBTN | reset )begin
+	if(RSTBTN | rst )begin
 		init          <= 1'b0;
 		initb         <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
-		b_left        <= 4'd0;
-		bb_left       <= 4'd0;
+		astate        <= 3'd0; 
+		clk_ade       <= 11'd0;
+		//b_left        <= 4'd0;
+		//bb_left       <= 4'd0;
 	  acnt          <= 6'd0;
 		vblnk         <= 1'b0;
 	end else begin
-	  bb_left <= b_left;
-		initb <= vde;
+	  case(astate)
+		  FIRST : begin
+			          if(ax_recv_wr_en)begin
+                  clk_ade <= axdin[24:14];
+									astate  <= READY;
+								end
+			        end
+		  READY : if(vde)   astate <= IDLE;
+	    IDLE  : begin
+			          if(clk_ade == hcnt[10:0])begin
+									ax_recv_rd_en <= 1'b0;
+									astate <= ADE;
+									acnt <= 6'd0;
+								end
+              end
+			ADE   : begin
+			          acnt <= acnt + 6'd1;
+			          ax_recv_rd_en <= 1'b1;
+								if(acnt == 6'd30)
+									astate <= ADE_L
+			        end
+			ADE_L : begin
+			          if(hcnt[10:0] == ctim)begin
+									astate  <= ADE;
+									acnt    <= 6'd0;
+								end else begin
+									astate  <= READE;
+									clk_ade <= ctim;
+								end
+			        end
+		endcase
+	  //bb_left <= b_left;
+		//initb <= vde;
 
-	  if(~axdout[13])
-	    b_left <= axdout[12:9];
+	  //if(~axdout[13])
+	  //  b_left <= axdout[12:9];
 		
 		/* Intial AUX FIFO Control*/
+		/*
 		if(vde & ~init)begin
 		  if({vde,initb} == 2'b10)
 			  ax_recv_rd_en <= 1'b1;
@@ -672,7 +713,7 @@ always@(posedge pclk)begin
 			vblnk <= 1'b0;
 
 		if(vblnk)begin
-			if(hcnt[10:0] == ctim)begin  // ADE start point, equals Clock Timing
+			if(hcnt[10:0] == ctim && ~ax_recv_rd_en )begin  // ADE start point, equals Clock Timing
 				ax_recv_rd_en <= 1'b1;
 				acnt <= 6'd0;
 			end
@@ -686,7 +727,7 @@ always@(posedge pclk)begin
 				end else
 				  acnt <= acnt + 1;
 			end
-		end
+		end*/
 	end
 end
 
@@ -793,7 +834,7 @@ wire [11:0] index;
 wire        video_en;
 
 afifo24_recv auxfifo24_tx(
-  .rst(rx0_reset | RSTBTN | ((video_vcnt == 11'd21) && rx0_vde) ),
+  .rst(rx0_reset | RSTBTN /*| ((video_vcnt == 11'd25) && rx0_vde)*/ ),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
@@ -932,9 +973,9 @@ reg [3:0]anum = 4'd0;
 
 always @ (*)
   case(DEBUG_SW[3:2])
-	  2'b00 : LED <= {ax_recv_rd_en,ade,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
+	  2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full , ax_send_empty, ax_recv_full,ax_recv_empty};
     2'b01 : LED <= ctim[7:0];
-    2'b10 : LED <= {ax_recv_wr_en,4'd0,ctim[10:8]};
+    2'b10 : LED <= {ax_recv_wr_en,init,vblnk,2'd0,ctim[10:8]};
     2'b11 : LED <= 8'd0;
 	endcase
 
