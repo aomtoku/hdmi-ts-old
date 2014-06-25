@@ -647,6 +647,8 @@ end
 
 assign ax_reset = ~ax_rst & rst;
 
+reg [10:0] ctim;
+
 always@(posedge pclk)begin
 	if(RSTBTN | reset )begin
 		fl            <= 1'b0;
@@ -659,6 +661,7 @@ always@(posedge pclk)begin
 		axp           <= 1'b0;
 		ck            <= 1'b0;
 		audio         <= 1'b0;
+		ctim          <= 11'd0;
 	end else begin
 	  b_left <= axdout[11:8];
 	  bb_left <= b_left;
@@ -690,6 +693,23 @@ always@(posedge pclk)begin
 		end
 		
 		if(axp)begin
+
+			if(axdout[13]) //AUX Clock Information
+				ctim <= axdout[10:0];
+
+			if(hcnt == ctim)begin  // ADE start point, equals Clock Timing
+				ax_recv_rd_en <= 1'b1;
+				acnt <= 6'd0;
+			end
+
+			if(ax_recv_rd_en)begin
+				if(acnt == 6'd32)
+					ac_recv_rd_en <= 1'd0;
+			  else
+				  acnt <= acnt + 1;
+			end
+
+
 		  if(acnt == 6'd35)begin
 			  acnt <= 6'd0; 
 			  //if(b_left > 0)
@@ -711,6 +731,8 @@ always@(posedge pclk)begin
 		end
 	end
 end
+
+wire ade = (ax_recv_rd_en & ~axdout[13]);
 
 
 assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
@@ -737,7 +759,7 @@ dvi_encoder_top dvi_tx0 (
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
-    .ade         (),
+    .ade         (ade),
     .TMDS        (TMDS),
     .TMDSB       (TMDSB)
 );
@@ -802,15 +824,15 @@ wire        ax_send_wr_en, ax_send_rd_en;
 wire [3:0]  rx0_aux0;
 wire [3:0]  rx0_aux1;
 wire [3:0]  rx0_aux2;
-wire [23:0] ax_din = {15'd0,rx0_aux2, rx0_aux1, rx0_aux0[2]};
+wire [10:0] video_hcnt;
+wire [10:0] video_vcnt;
+wire [23:0] ax_din = {video_hcnt, 4'd0, rx0_aux2, rx0_aux1, rx0_aux0[2]};
 wire [23:0] ax_dout;
 wire        rx0_ade;
 
 assign   ax_send_wr_en = (start) ? rx0_ade : 1'b0;
 wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
-wire [10:0] video_hcnt;
-wire [10:0] video_vcnt;
 wire [11:0] index;
 wire        video_en;
 
