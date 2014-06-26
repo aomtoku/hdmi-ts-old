@@ -21,6 +21,8 @@ module top (
 	input  wire       RXCLK,
 	input  wire       RXDV,
 	input  wire [7:0] RXD,
+	output wire       UART_TX,
+	input  wire       UART_RX,
 
 	input  wire [3:0] SW,
 	input  wire [3:0] DEBUG_SW,
@@ -109,7 +111,7 @@ wire recv_fifo_wr_en;
 wire ax_recv_wr_en;
 reg ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
-wire [24:0] axdin;
+wire [23:0] axdin;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(RXCLK),
@@ -141,11 +143,11 @@ fifo29_32768 asfifo_recv (
 	.empty(recv_empty)
 );
 
-wire [24:0] axdout;
+wire [23:0] axdout;
 reg init;
 wire ax_rx_rd_en ;
 wire rst;
-fifo25 aux_recv(
+afifo24_recv aux_recv(
   .rst(reset| RSTBTN  ),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
@@ -645,24 +647,22 @@ parameter IDLE  = 3'd2;
 parameter ADE   = 3'd3;
 parameter ADE_L = 3'd4;
 
-wire [10:0] ctim = axdout[24:14];
+wire [10:0] ctim = axdout[23:13];
 reg initb;
 always@(posedge pclk)begin
-	if(RSTBTN | rst )begin
-		init          <= 1'b0;
+	if(RSTBTN | reset)begin
 		initb         <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 		astate        <= 3'd0; 
 		clk_ade       <= 11'd0;
-		//b_left        <= 4'd0;
-		//bb_left       <= 4'd0;
 	  acnt          <= 6'd0;
 		vblnk         <= 1'b0;
 	end else begin
 	  case(astate)
 		  FIRST : begin
+			          ax_recv_rd_en <= 1'b0;
 			          if(ax_recv_wr_en)begin
-                  clk_ade <= axdin[24:14];
+                  clk_ade <= axdin[23:13];
 									astate  <= READY;
 								end
 			        end
@@ -672,29 +672,26 @@ always@(posedge pclk)begin
 									ax_recv_rd_en <= 1'b0;
 									astate <= ADE;
 									acnt <= 6'd0;
-								end
+								end else
+								  ax_recv_rd_en <= 1'b0;
               end
 			ADE   : begin
 			          acnt <= acnt + 6'd1;
 			          ax_recv_rd_en <= 1'b1;
 								if(acnt == 6'd30)
-									astate <= ADE_L
+									astate <= ADE_L;
 			        end
 			ADE_L : begin
 			          if(hcnt[10:0] == ctim)begin
 									astate  <= ADE;
 									acnt    <= 6'd0;
 								end else begin
-									astate  <= READE;
+									astate  <= IDLE;
 									clk_ade <= ctim;
+									ax_recv_rd_en <= 1'b0;
 								end
 			        end
 		endcase
-	  //bb_left <= b_left;
-		//initb <= vde;
-
-	  //if(~axdout[13])
-	  //  b_left <= axdout[12:9];
 		
 		/* Intial AUX FIFO Control*/
 		/*
@@ -815,7 +812,6 @@ reg ade_gg;
 reg start;
 reg st,stc;
 
-
 wire        ax_send_full, ax_send_empty;
 wire        ax_send_wr_en, ax_send_rd_en;
 wire [3:0]  rx0_aux0;
@@ -827,7 +823,7 @@ wire [23:0] ax_din = {video_hcnt, 4'd0, rx0_aux2, rx0_aux1, rx0_aux0[2]};
 wire [23:0] ax_dout;
 wire        rx0_ade;
 
-assign   ax_send_wr_en = (init) ? rx0_ade : 1'b0;
+assign   ax_send_wr_en = (init & rx0_ade) ;
 wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [11:0] index;
@@ -932,6 +928,13 @@ tmds_timing timing(
 	.hcounter(video_hcnt)
 );
 
+always @ (posedge rx0_pclk)
+  if(RSTBTN | rx0_reset)
+		init <= 0;
+	else 
+		if(video_en)
+			init <= 1;
+
 //-----------------------------------------------------------
 //  GMII TX
 //-----------------------------------------------------------
@@ -968,18 +971,15 @@ gmii_tx gmii_tx(
 	.txd(TXD)
 );
 
-reg [3:0]anum = 4'd0;
-//assign LED = (DEBUG_SW[1]) ? {7'd0,ax_recv_wr_en} : {ax_recv_rd_en,ade,rx0_ade , ax_send_empty,ax_rx_rd_en,ax_send_wr_en,ax_recv_full,ax_recv_empty};
-
 always @ (*)
   case(DEBUG_SW[3:2])
 	  2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full , ax_send_empty, ax_recv_full,ax_recv_empty};
     2'b01 : LED <= ctim[7:0];
     2'b10 : LED <= {ax_recv_wr_en,init,vblnk,2'd0,ctim[10:8]};
-    2'b11 : LED <= 8'd0;
+    2'b11 : LED <= {5'd0,astate};
 	endcase
 
-
+`define DEBUG
 `ifdef DEBUG
  
 reg [7:0] data;
@@ -990,18 +990,18 @@ wire ready;
 reg [39:0]mem;
 reg wr_en, send;
 
-always @ (posedge rx0_pclk or negedge rstbtn_n)begin
-  if(~rstbtn_n) begin
+always @ (posedge pclk)begin
+  if(RSTBTN) begin
 		xcnt <= 6'd0;
 		mem <= 40'd0;
 		data <= 8'd0;
 		send <= 1'b0;
 	end else begin
-		if(rx0_ade & acnt == 5'd31)begin
-			mem[39:29] <= vcnt;
-      mem[28:18] <= hcnt;
-      mem[17:8]  <= apckt;
-      mem[7:0]   <= head;
+		if(astate == ADE_L)begin
+			mem[39:29] <= vcnt[10:0];
+      mem[28:18] <= hcnt[10:0];
+      mem[17:11] <= 7'd0;
+      mem[10:0]  <= axdout[23:13];
 			send <= 1'b1;
 		end
 		if(send)begin
@@ -1054,7 +1054,7 @@ endfunction
 
 
 reg empty_buf;
-wire [7:0] dout;
+wire [7:0] udout;
 wire empty,full;
 wire ard_en = ~empty_buf & ready;
 
@@ -1063,13 +1063,13 @@ always @ (posedge sysclk)
 
 
 uart_fifo_p u1(
-  .rst(~rstbtn_n),
-  .wr_clk(rx0_pclk),
+  .rst(RSTBTN),
+  .wr_clk(pclk),
   .rd_clk(sysclk),
   .din(data),
   .wr_en(wr_en),
   .rd_en(ard_en),
-  .dout(dout),
+  .dout(udout),
   .full(full),
   .empty(empty)
 );
@@ -1077,8 +1077,8 @@ uart_fifo_p u1(
 
 uart u0 (
  .clk(sysclk),
- .rst_(rstbtn_n),
- .data(dout),
+ .rst_(~RSTBTN),
+ .data(udout),
  .we(ard_en),
  .tx(UART_TX),
  .ready(ready)
