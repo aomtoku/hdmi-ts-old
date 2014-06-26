@@ -233,7 +233,7 @@ always @(posedge tx_clk)begin
 						pcktinfo    <= vidax;
 					end
 //`endif
-				end else if(ax_send_empty == 1'b0 & adesig)begin
+				end else if(ax_send_empty == 1'b0 && adesig)begin
 					txd         <= 8'h55;
 					tx_en       <= 1'b1;
 					state       <= PRE;
@@ -373,7 +373,7 @@ always @(posedge tx_clk)begin
 						txd   <= audio;
 						state <= AUXID;
 						count <= 11'd0;
-						ax_send_rd_en <= 1'b0;
+						ax_send_rd_en <= 1'b1;
 						if(adecnt > AUDIOMAX)
 							left_ade <= AUDIOMAX;
 						else
@@ -488,7 +488,7 @@ always @(posedge tx_clk)begin
 			    count         <= 11'd0;
 				  state         <= AUX;
 				  cnt3          <= 2'd0;
-				  ax_send_rd_en <= 1'b1;
+				  ax_send_rd_en <= 1'b0;
 					c9            <= 5'd0;
 				end else begin
 				  ax_send_rd_en <= 1'b0;
@@ -512,44 +512,58 @@ always @(posedge tx_clk)begin
 			 end else begin
 			   tx_en <= 1'b1;
 			   count <= count + 11'd1;
-				 c9 <= c9 + 5'd1;
+				 if(c9 == 5'd8)
+					 c9 <= 5'd0;
+				 else
+					 c9 <= c9 + 5'd1;
 				 case(c9)
 				   4'd0 : begin
 					          txd <= axdout[7:0];
 										tmp[0] <= axdout[8];
+										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd1 : begin
 					          txd <= {axdout[6:0],tmp[0]};
 										tmp[1:0] <= axdout[8:7];
+										ax_send_rd_en <= 1'b1;
 									end
 				   4'd2 : begin
 					          txd <= {axdout[5:0],tmp[1:0]};
 										tmp[2:0] <= axdout[8:6];
+										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd3 : begin
 					          txd <= {axdout[4:0],tmp[2:0]};
 										tmp[3:0] <= axdout[8:5];
+										ax_send_rd_en <= 1'b1;
 									end
 				   4'd4 : begin
 					          txd <= {axdout[3:0],tmp[3:0]};
 										tmp[4:0] <= axdout[8:4];
+										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd5 : begin
 					          txd <= {axdout[2:0],tmp[4:0]};
 										tmp[5:0] <= axdout[8:3];
+										ax_send_rd_en <= 1'b1;
 									end
 				   4'd6 : begin
 					          txd <= {axdout[1:0],tmp[5:0]};
 										tmp[6:0] <= axdout[8:2];
+										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd7 : begin
 					          txd <= {axdout[0],tmp[6:0]};
 										tmp[7:0] <= axdout[8:1];
+										ax_send_rd_en <= 1'b0;
 									end
-				   4'd8 : txd <= tmp;
+				   4'd8 : begin
+					          txd <= tmp;
+										ax_send_rd_en <= 1'b1;
+									end
 				 endcase
 				 //txd           <= axdout[7:0];
-				 ax_send_rd_en <= 1'b1;
+				 //ax_send_rd_en <= 1'b1;
 			   /*
 				 case(cnt3)
 				  2'd0: begin
