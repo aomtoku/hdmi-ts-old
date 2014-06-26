@@ -55,12 +55,12 @@ module gmii_tx#(
 	input   wire        full,
 	output  wire        rd_en,
 	input   wire        wr_en,
-	input   wire        vperi,
+//	input   wire        vperi,
   /*** AUX ***/
 	input   wire        adesig,
 	input   wire [3:0]  ade_num,
 	input   wire [23:0] axdout,
-	input   wire        ax_send_full,
+	//input   wire        ax_send_full,
 	input   wire        ax_send_empty,
 	output  reg         ax_send_rd_en,
 
@@ -224,7 +224,7 @@ always @(posedge tx_clk)begin
           //pcktinfo    <= video;
 					//:wqpacket_size <= 12'd0;
 //`else
-          if(ppl/*ade_num == 4'd0*/)begin
+          if(ppl /*& ax_send_empty ade_num == 4'd0*/)begin
 						packet_size <= 12'd0;
 						pcktinfo    <= video;
 					end else begin

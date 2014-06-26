@@ -126,7 +126,6 @@ gmii2fifo24 gmii2fifo24(
 	.aux_wr_en(ax_recv_wr_en)
 );
 
-
 //------------------------------------------------------------
 // FIFO
 //------------------------------------------------------------
@@ -351,7 +350,6 @@ PLL_BASE # (
 	.CLKIN(clkfx),
 	.RST(~pclk_lckd)
 );
-
 
 BUFG clkfb_buf (.I(clkfbout), .O(clkfbin));
 
@@ -633,12 +631,9 @@ assign JA[5] = fifo_read;
 wire [4:0] tmds_data0, tmds_data1, tmds_data2;
 wire serdes_rst = RSTBTN | ~bufpll_lock;
 
-//reg [3:0]b_left,bb_left;
-reg fl;
-reg flg;
-reg [5:0]acnt;
-reg vblnk;
-reg [2:0]astate;
+reg       vblnk;
+reg [ 5:0]acnt;
+reg [ 2:0]astate;
 reg [10:0]clk_ade;
 
 parameter FIRST = 3'd0;
@@ -648,10 +643,8 @@ parameter ADE   = 3'd3;
 parameter ADE_L = 3'd4;
 
 wire [10:0] ctim = axdout[23:13];
-reg initb;
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
-		initb         <= 1'b0;
 		ax_recv_rd_en <= 1'b0;
 		astate        <= 3'd0; 
 		clk_ade       <= 11'd0;
@@ -693,38 +686,6 @@ always@(posedge pclk)begin
 			        end
 		endcase
 		
-		/* Intial AUX FIFO Control*/
-		/*
-		if(vde & ~init)begin
-		  if({vde,initb} == 2'b10)
-			  ax_recv_rd_en <= 1'b1;
-		  else begin
-			  ax_recv_rd_en <= 1'b0;
-				init <= 1'b1;
-			end
-		end
-
-		if(~vde & ~ax_recv_empty & init)
-			vblnk <= 1'b1;
-		else 
-			vblnk <= 1'b0;
-
-		if(vblnk)begin
-			if(hcnt[10:0] == ctim && ~ax_recv_rd_en )begin  // ADE start point, equals Clock Timing
-				ax_recv_rd_en <= 1'b1;
-				acnt <= 6'd0;
-			end
-
-			if(ax_recv_rd_en)begin
-				if(acnt == 6'd31 && hcnt[10:0] != ctim)begin
-					ax_recv_rd_en <= 1'd0;
-					acnt <= acnt + 1;
-			  end else if(acnt == 6'd31 && hcnt[10:0] == ctim)begin
-				  acnt <= 6'd0;
-				end else
-				  acnt <= acnt + 1;
-			end
-		end*/
 	end
 end
 
@@ -787,20 +748,28 @@ reg [3:0] ade_num;
 reg [4:0] cnt_32;
 reg       vde_b;
 
+wire txx = init & ~video_en & (video_hcnt == 11'd1447); // The count timing ADE period
+wire vadx = init & ({rx0_vde,vde_b} == 2'b10); // The count timing ADE periods
+
 always @ (posedge rx0_pclk)begin
   vde_b <= rx0_vde;
-  if(rx0_reset || video_hcnt == 11'd1506)begin
-	  ade_c  <= 4'd0;
-	  cnt_32 <= 5'd0; 
-	  ade_num <= ade_c;
+  if(rx0_reset)begin
+	  cnt_32  <= 5'd0; 
+	  ade_c   <= 4'd0;
+	  ade_num <= 4'd0;
 	end else begin
+	  if(rx0_ade & cnt_32 == 5'd0)
+			ade_c <= ade_c + 4'd1;
+	  if(txx | vadx)begin
+	    ade_c  <= 4'd0;
+	    ade_num <= ade_c;
+	  end
 	  if(rx0_ade)begin
-		  if(cnt_32 == 5'd31)begin
-			  cnt_32 <= 5'd0;
-			  ade_c  <= ade_c + 4'd1;
-		  end else begin
-		    cnt_32 <= cnt_32 + 5'd1;
-		  end
+	    if(cnt_32 == 5'd31)begin
+	      cnt_32 <= 5'd0;
+	    end else begin
+	      cnt_32 <= cnt_32 + 5'd1;
+	    end
 		end
 	end
 end
@@ -830,7 +799,7 @@ wire [11:0] index;
 wire        video_en;
 
 afifo24_recv auxfifo24_tx(
-  .rst(rx0_reset | RSTBTN /*| ((video_vcnt == 11'd25) && rx0_vde)*/ ),
+  .rst(rx0_reset | RSTBTN),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
@@ -939,8 +908,8 @@ always @ (posedge rx0_pclk)
 //  GMII TX
 //-----------------------------------------------------------
 
-wire ade_tx = ~video_en && ((video_hcnt >= 11'd1504) && (video_hcnt < 11'd1510));
-wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
+wire ade_tx = ~video_en && ((video_hcnt >= 11'd1498) && (video_hcnt < 11'd1500));
+//wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
 wire fil_wr_en =  video_en & (in_hcnt > 12'd220 & in_hcnt <= 12'd1420);
 
 
@@ -954,14 +923,14 @@ gmii_tx gmii_tx(
 	.full(send_full),
 	.rd_en(rd_en),
 	.wr_en(fil_wr_en),
-	.vperi(vperi),
+	//.vperi(vperi),
 	.sw(DEBUG_SW[1]),
 
 	// AX FIFO
 	.adesig(ade_tx),
 	.ade_num(ade_num),
 	.axdout(ax_dout),
-	.ax_send_full(ax_send_full),
+	//.ax_send_full(ax_send_full),
 	.ax_send_empty(ax_send_empty),
 	.ax_send_rd_en(ax_send_rd_en),
 	
