@@ -123,20 +123,24 @@ int OpenFrameBuffer(int fd){
 
 void LoopRecvPacket(int sock, struct sockaddr_in recv, char *buf, struct fb_var_screeninfo vinfo, int line_len, int bpp){
      struct packet rec_packet;
-printf("%d at %s\n",__LINE__,__FILE__);
-     int rec;
+     int rec, acnt, i;
      int xres_screen, yres_screen;
 		 unsigned int aux_clk;
      socklen_t sin_size = sizeof(struct sockaddr_in);
-		 int acnt;
 		 int pcktnum = 0;
-		 int i;
-     while(1){
+     
+		 while(1){
 	     if((rec = recvfrom(sock, &rec_packet, sizeof(struct packet), 0,(struct sockaddr *)&recv, &sin_size)) == -1){
 	       fprintf(stderr, "cannot receive a packet \n");
 	       exit(1);
 	     }
+
 			 printf("pcknum[%d] ",pcktnum);
+			 
+			 /* Packet Processing depends on PacketInfo */
+			 // Pcktinfo 2 --> Video + Aux
+			 // Pcktinfo 1 --> Audio only
+			 // Pcktinfo 0 --> Video only
 			 if(rec_packet.packetinfo == 2){
          acnt = (rec - 1283) / 38;
 				 yres_screen = ((rec_packet.data[0] & 0xff) | ((rec_packet.data[1] & 0x0f) << 8));
