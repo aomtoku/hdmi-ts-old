@@ -62,6 +62,7 @@ always @ (posedge fifo_clk)begin
 	end
 end
 */
+wire a_wr_en = ainit & ade;
 reg ainit;
 wire txx = ainit & ~video_en & (hcnt == 11'd1447); // The count timing ADE period
 wire vadx = ainit & ({vde,vde_b} == 2'b10); // The count timing ADE periods
@@ -73,13 +74,13 @@ always @ (posedge fifo_clk)begin
 	  ade_c   <= 4'd0;
 	  ade_num <= 4'd0;
 	end else begin
-	  if(ade & cnt_32 == 5'd0)
+	  if(a_wr_en & cnt_32 == 5'd0)
 			ade_c <= ade_c + 4'd1;
 	  if(txx | vadx)begin
 	    ade_c  <= 4'd0;
 	    ade_num <= ade_c;
 	  end
-	  if(ade)begin
+	  if(a_wr_en)begin
 	    if(cnt_32 == 5'd31)begin
 	      cnt_32 <= 5'd0;
 	    end else begin
@@ -121,7 +122,6 @@ always@(posedge fifo_clk)
 	else if(video_en)
 		ainit <= 1'b1;
 
-wire a_wr_en = ainit & ade;
 wire [23:0] ax_din = {vcnt, 4'd0, adin[11:4],adin[2]};
 wire [23:0] ax_dout;
 

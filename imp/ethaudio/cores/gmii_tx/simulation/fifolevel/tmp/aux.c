@@ -3,33 +3,33 @@
 
 void HBackPorch(int aux, int vsyn){
     int cnt;
-		int aflag = 0;
-		int adata = 0;
-		if(aux){
-      for(cnt=0;cnt<110;cnt++){
-				/* data reset*/
-				if(adata == 16)
-					adata = 0;
+	int aflag = 0;
+	int adata = 0;
+	if(aux){
+        for(cnt=0;cnt<110;cnt++){
+		/* data reset*/
+            if(adata == 16)
+			    adata = 0;
 
-				/* aflag gen */
-				if(cnt == 60){
-					aflag = 1;
-				} else if(cnt == 92){
-				  aflag = 0;
-				}
+			/* aflag gen */
+			if(cnt == 60){
+				aflag = 1;
+			} else if(cnt == 92){
+			  aflag = 0;
+			}
 
-				/* output */
-				if(aflag)
-	        printf("%d_0_%d_000000_%01x%01x%01x //Horizontal Back Portch[%d]\n",vsyn,aflag,adata,adata,adata,cnt);
-			  else
-	        printf("%d_0_0_000000_000 //Horizontal Back Portch[%d]\n",vsyn,cnt);
-				adata++;
-      }
-		} else {
+			/* output */
+			if(aflag)
+	            printf("%d_0_%d_000000_%01x%01x%01x //Horizontal Back Portch[%d]\n",vsyn,aflag,adata,adata,adata,cnt);
+			else
+	            printf("%d_0_0_000000_000 //Horizontal Back Portch[%d]\n",vsyn,cnt);
+			adata++;
+        }
+	} else {
       for(cnt=0;cnt<110;cnt++){
 	      printf("%d_0_0_000000_000 //Horizontal Back Portch[%d]\n",vsyn,cnt);
       }
-		} 
+	} 
 }
 
 
@@ -41,11 +41,35 @@ void HPulseWidth(int vsyn){
 }
 
 
-void HFrontPorch(int vsyn){
+void HFrontPorch(int aux, int vsyn){
     int cnt;
-    for(cnt=0;cnt<220;cnt++){
-	printf("%d_0_0_000000_000 //Horizontal Pulse Widhth[%d]\n",vsyn,cnt);
-    }
+	int aflag = 0;
+	int adata = 0;
+	if(aux){
+        for(cnt=0;cnt<220;cnt++){
+		/* data reset*/
+            if(adata == 16)
+			    adata = 0;
+
+			/* aflag gen */
+			if(cnt == 60){
+				aflag = 1;
+			} else if(cnt == 92){
+			  aflag = 0;
+			}
+
+			/* output */
+			if(aflag)
+	            printf("%d_0_%d_000000_%01x%01x%01x //Horizontal Back Portch[%d]\n",vsyn,aflag,adata,adata,adata,cnt);
+			else
+	            printf("%d_0_0_000000_000 //Horizontal Back Portch[%d]\n",vsyn,cnt);
+			adata++;
+        }
+	} else {
+        for(cnt=0;cnt<220;cnt++){
+	        printf("%d_0_0_000000_000 //Horizontal Pulse Widhth[%d]\n",vsyn,cnt);
+        }
+	}
 }
 
 void HActiveVideo(int on, int vsyn){
@@ -62,6 +86,23 @@ void HActiveVideo(int on, int vsyn){
     }
 }
 
+void HActiveAudio(int vsyn){
+    int cnt;
+    int color = 0;
+	int aflag = 0;
+    for(cnt=0;cnt<1280;cnt++){
+		if(cnt == 0){  // No.1
+			aflag = 1;
+		} else if(cnt == 32){
+		    aflag = 0;
+		} else if(cnt == 648){ //N
+			aflag = 1;
+		} else if(cnt == 776){
+		    aflag = 0;
+		}
+	    printf("%d_0_%d_000000_000 // Horizontal No Active[%d]\n",vsyn,aflag,cnt);
+	}
+}
 
 void VBackPorch(void){
     int cnt;
@@ -69,7 +110,7 @@ void VBackPorch(void){
     for(cnt=0;cnt<5;cnt++){
         HBackPorch(1,vsyn);
         HPulseWidth(vsyn);
-        HFrontPorch(vsyn);
+        HFrontPorch(0,vsyn);
         HActiveVideo(0,vsyn);
     }
 }
@@ -81,8 +122,11 @@ void VPulseWidth(void){
     for(cnt=0;cnt<5;cnt++){
         HBackPorch(1,vsyn);
         HPulseWidth(vsyn);
-        HFrontPorch(vsyn);
-        HActiveVideo(0,vsyn);
+        HFrontPorch(0,vsyn);
+		if(cnt == 0)
+			HActiveAudio(vsyn);
+		else
+            HActiveVideo(0,vsyn);
     }
 }
 
@@ -92,7 +136,7 @@ void VFrontPorch(void){
     for(cnt=0;cnt<20;cnt++){
         HBackPorch(1,vsyn);
         HPulseWidth(vsyn);
-        HFrontPorch(vsyn);
+        HFrontPorch(0,vsyn);
         HActiveVideo(0,vsyn);
     }
 }
@@ -101,11 +145,16 @@ void VFrontPorch(void){
 void VActiveLine(void){
     int cnt;
     int vsyn = 0;
+	int auxen;
     for(cnt=0;cnt<720;cnt++){
-	HBackPorch(1,vsyn);
-	HPulseWidth(vsyn);
-	HFrontPorch(vsyn);
-	HActiveVideo(1,vsyn);
+		auxen = 720 % 16;
+	    HBackPorch(1,vsyn);
+	    HPulseWidth(vsyn);
+		if(~auxen)
+	        HFrontPorch(1,vsyn);
+	    else
+	        HFrontPorch(0,vsyn);
+		HActiveVideo(1,vsyn);
     }
 }
 
