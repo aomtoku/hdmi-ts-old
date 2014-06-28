@@ -233,7 +233,7 @@ always @(posedge tx_clk)begin
 						pcktinfo    <= vidax;
 					end
 //`endif
-				end else if(ax_send_empty == 1'b0 && adesig)begin
+				end else if(~ax_send_empty & adesig & ~vp)begin
 					txd         <= 8'h55;
 					tx_en       <= 1'b1;
 					state       <= PRE;
@@ -416,7 +416,7 @@ always @(posedge tx_clk)begin
 					  state <= FCS;
 					end else begin
 					  state <= AUXID;
-					  ax_send_rd_en <= 1'b0;
+					  ax_send_rd_en <= 1'b1;
 					end
 			 		txd   <= dout[23:16];
 					count <= 11'd0;
@@ -493,7 +493,7 @@ always @(posedge tx_clk)begin
 				end else begin
 				  ax_send_rd_en <= 1'b0;
 				  count         <= 11'd1;
-			    txd           <= axdout[19:13];
+			    txd           <= axdout[20:13];
 				end
 			end
       AUX: begin
@@ -503,7 +503,7 @@ always @(posedge tx_clk)begin
 				  ax_send_rd_en <= 1'b0;
 			   end else begin
 				  state <= AUXID;
-				  ax_send_rd_en <= 1'b0;
+				  ax_send_rd_en <= 1'b1;
 			   end
 			   txd   <= tmp;
 				 c9    <= 5'd0;

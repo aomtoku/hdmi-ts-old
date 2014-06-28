@@ -799,7 +799,7 @@ wire [11:0] index;
 wire        video_en;
 
 afifo24_recv auxfifo24_tx(
-  .rst(rx0_reset | RSTBTN),
+  .rst(rx0_reset | RSTBTN | ~init),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
