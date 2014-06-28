@@ -225,12 +225,12 @@ always @(posedge tx_clk)begin
 					//:wqpacket_size <= 12'd0;
 //`else
           if(ppl /*& ax_send_empty ade_num == 4'd0*/)begin
-						packet_size <= 12'd0;
-						pcktinfo    <= video;
-					end else begin
 					  adecnt      <= ade_num;
 						packet_size <= auxsize * ade_num;
 						pcktinfo    <= vidax;
+					end else begin
+						packet_size <= 12'd0;
+						pcktinfo    <= video;
 					end
 //`endif
 				end else if(~ax_send_empty & adesig & ~vp)begin
