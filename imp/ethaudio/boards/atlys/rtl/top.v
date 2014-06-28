@@ -748,6 +748,8 @@ reg [3:0] ade_num;
 reg [4:0] cnt_32;
 reg       vde_b;
 
+
+/* In not VDE period,  Couting ADE periods */
 wire txx = init & ~video_en & (video_hcnt == 11'd1447); // The count timing ADE period
 wire vadx = init & ({rx0_vde,vde_b} == 2'b10); // The count timing ADE periods
 
@@ -797,9 +799,12 @@ wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [11:0] index;
 wire        video_en;
+wire       afifo_rst;
+
+wire frst = ~afifo_rst & video_en;
 
 afifo24_recv auxfifo24_tx(
-  .rst(rx0_reset | RSTBTN | ~init),
+  .rst(rx0_reset | RSTBTN | ~init | frst),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
@@ -933,7 +938,7 @@ gmii_tx gmii_tx(
 	//.ax_send_full(ax_send_full),
 	.ax_send_empty(ax_send_empty),
 	.ax_send_rd_en(ax_send_rd_en),
-	
+	.vntrans(afifo_rst),
 	// Ethernet PHY GMII
 	.tx_clk(clk_125M),
 	.tx_en(TXEN),

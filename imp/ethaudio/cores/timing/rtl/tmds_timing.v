@@ -38,23 +38,29 @@ always@(posedge rx0_pclk) begin
 		// Counts Hsync and Vsync 
 		if({rx0_vsync,vsync_buf} == 2'b10)
 			vcounter <= 11'd0;
-		//else if({rx0_hsync, hsync_buf} == 2'b10)
-		//	vcounter <= vcounter + 11'd1;
-
-		if(rx0_hsync)begin
-			hscnt <= hscnt + 6'd1;
-		end else
-		  hscnt <= 6'd0;
-		
-        if(hscnt == 6'd39)begin
+		else if({rx0_hsync, hsync_buf} == 2'b10)begin
 			vcounter <= vcounter + 11'd1;
-            hcounter <= 11'd0;
-        end else begin
-            if(hcounter == 11'd1649)begin
-                hcounter <= 11'd0;
-            end else
-                hcounter <= hcounter + 11'd1;
+			hcounter <= 11'd0;
 		end
+
+		//if(rx0_hsync)begin
+		//	hscnt <= hscnt + 6'd1;
+		//end else
+		//  hscnt <= 6'd0;
+		
+    if(hcounter == 11'd1649)
+      hcounter <= 11'd0;
+    else
+      hcounter <= hcounter + 11'd1;
+    /*if(hscnt == 6'd39)begin
+      vcounter <= vcounter + 11'd1;
+      hcounter <= 11'd0;
+    end else begin
+      if(hcounter == 11'd1649)begin
+        hcounter <= 11'd0;
+      end else
+        hcounter <= hcounter + 11'd1;
+		end*/
 		// Active Verical line 
 		if(vcounter == 11'd21)   vactive <= 1'b1;
 		if(vcounter == 11'd741)  vactive <= 1'b0;
