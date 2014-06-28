@@ -16,6 +16,7 @@ module tmds_timing(
 reg        vactive;
 reg        hactive;
 reg        hsync_buf,vsync_buf;
+reg [5:0] hscnt;
 
 assign video_en = (vactive & hactive);
 
@@ -30,6 +31,7 @@ always@(posedge rx0_pclk) begin
 		hactive    <= 1'b0;
 		hsync_buf  <= 1'b0;
 		vsync_buf  <= 1'b0;
+		hscnt  <= 6'd0;
 	end else begin
 		hsync_buf <= rx0_hsync;
 		vsync_buf <= rx0_vsync;
@@ -38,7 +40,12 @@ always@(posedge rx0_pclk) begin
 			vcounter <= 11'd0;
 		else if({rx0_hsync, hsync_buf} == 2'b10)
 			vcounter <= vcounter + 11'd1;
-		if(rx0_hsync)
+		if(rx0_hsync)begin
+			hscnt <= hscnt + 6'd1;
+		end else
+		  hscnt <= 6'd0;
+		
+		if(hscnt == 6'd39)
 			hcounter <= 11'd0;
 		else
 			hcounter <= hcounter + 11'd1;
