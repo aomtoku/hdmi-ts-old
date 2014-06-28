@@ -30,7 +30,7 @@ tmds_timing timing(
   .rx0_vsync(vsync),
   .video_en(video_en),
   .video_hcnt(video_hcnt),
-  .video_vcnt(video_vcnt)
+  .video_vcnt(video_vcnt),
   .hcounter(hcnt),
   .vcounter(vcnt)
 );

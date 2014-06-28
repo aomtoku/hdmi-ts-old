@@ -46,11 +46,11 @@ always@(posedge rx0_pclk) begin
 		end else
 		  hscnt <= 6'd0;
 		
-        if(hscnt == 6'd39)
+        if(hscnt == 6'd39)begin
+			vcounter <= vcounter + 11'd1;
             hcounter <= 11'd0;
-        else begin
+        end else begin
             if(hcounter == 11'd1649)begin
-				vcounter <= vcounter + 11'd1;
                 hcounter <= 11'd0;
             end else
                 hcounter <= hcounter + 11'd1;
