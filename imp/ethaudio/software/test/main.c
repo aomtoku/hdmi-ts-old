@@ -135,25 +135,25 @@ void LoopRecvPacket(int sock, struct sockaddr_in recv, char *buf, struct fb_var_
 	       exit(1);
 	     }
 
-			 printf("pcknum[%d] ",pcktnum);
+			 printf("pcknum[%d] len=%dbyte ",pcktnum,rec);
 			 
 			 /* Packet Processing depends on PacketInfo */
 			 // Pcktinfo 2 --> Video + Aux
 			 // Pcktinfo 1 --> Audio only
 			 // Pcktinfo 0 --> Video only
 			 if(rec_packet.packetinfo == 2){
-         acnt = (rec - 1283) / 38;
+         acnt = (rec - 1203) / 38;
 				 yres_screen = ((rec_packet.data[0] & 0xff) | ((rec_packet.data[1] & 0x0f) << 8));
          xres_screen = (((rec_packet.data[1] & 0xf0) >> 4) & 1) * 640;
 				 printf("Resol: %d %d ",yres_screen,xres_screen);
-         i = 1;
-				 for(;acnt == 1; acnt--){
-					 aux_clk = ((rec_packet.data[1284+(38*i)] & 0x0f) << 8);
-					 aux_clk = (aux_clk | rec_packet.data[1283+(38*i)]);
+         i = 0;
+				 for(;acnt > 0; acnt--){
+					 aux_clk = ((rec_packet.data[1203+(38*i)] & 0x0f) << 8);
+					 aux_clk = (aux_clk | rec_packet.data[1202+(38*i)]);
 				   i++;
 					 printf("Clock: %d ",aux_clk);
 				 }
-				 i = 1;
+				 i = 0;
 				 printf("\n");
 			 } else if(rec_packet.packetinfo == 0){
 				 yres_screen = ((rec_packet.data[0] & 0xff) | ((rec_packet.data[1] & 0x0f) << 8));
@@ -161,14 +161,14 @@ void LoopRecvPacket(int sock, struct sockaddr_in recv, char *buf, struct fb_var_
 				 printf("Resol: %d %d \n",yres_screen,xres_screen);
 			 } else { // Audio Packet 
 			   acnt = (rec - 1) / 38;
-				 i = 1;
-				 for(;acnt == 1; acnt--){
+				 i = 0;
+				 for(;acnt > 0; acnt--){
 					 aux_clk = ((rec_packet.data[1+(38*i)] & 0x0f) << 8);
 					 aux_clk = (aux_clk | rec_packet.data[0+(38*i)]);
 				   i++;
 					 printf("Clock: %d ",aux_clk);
 				 }
-				 i = 1;
+				 i = 0;
 				 printf("\n");
 			 }
    	 pcktnum++;
