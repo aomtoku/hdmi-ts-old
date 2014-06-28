@@ -137,8 +137,8 @@ assign vpos_clr = ((vpos_cnt >= tc_veblnk) && vpos_ena ) || restart || vclr;
 //******************************************************************//
 
 assign hcount = hpos_cnt;
-assign hblnk = (hcount > tc_hsblnk);
-assign hsync = (hcount > tc_hssync) && (hcount <= tc_hesync);
+assign hblnk = (hcount >= 1500) || (hcount < 220) ;
+assign hsync = (hcount >= 1610) && (hcount < 1649);
 
 //******************************************************************//
 // This is the logic for the vertical outputs.  Active video is     //
