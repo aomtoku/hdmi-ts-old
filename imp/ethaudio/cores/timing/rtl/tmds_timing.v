@@ -15,8 +15,7 @@ module tmds_timing(
 //reg [10:0] hcounter;
 reg        vactive;
 reg        hactive;
-reg        hsync_buf,vsync_buf;
-reg [5:0] hscnt;
+reg        hsync_buf;
 
 assign video_en = (vactive & hactive);
 
@@ -30,37 +29,18 @@ always@(posedge rx0_pclk) begin
 		vactive    <= 1'b0;
 		hactive    <= 1'b0;
 		hsync_buf  <= 1'b0;
-		vsync_buf  <= 1'b0;
-		hscnt  <= 6'd0;
 	end else begin
 		hsync_buf <= rx0_hsync;
-		vsync_buf <= rx0_vsync;
 		// Counts Hsync and Vsync 
-		if({rx0_vsync,vsync_buf} == 2'b10)
+		if(rx0_vsync)
 			vcounter <= 11'd0;
-		else if({rx0_hsync, hsync_buf} == 2'b10)begin
+		else if({rx0_hsync, hsync_buf} == 2'b10)
 			vcounter <= vcounter + 11'd1;
+		if(rx0_hsync)
 			hcounter <= 11'd0;
-		end
+		else
+			hcounter <= hcounter + 11'd1;
 
-		//if(rx0_hsync)begin
-		//	hscnt <= hscnt + 6'd1;
-		//end else
-		//  hscnt <= 6'd0;
-		
-    if(hcounter == 11'd1649)
-      hcounter <= 11'd0;
-    else
-      hcounter <= hcounter + 11'd1;
-    /*if(hscnt == 6'd39)begin
-      vcounter <= vcounter + 11'd1;
-      hcounter <= 11'd0;
-    end else begin
-      if(hcounter == 11'd1649)begin
-        hcounter <= 11'd0;
-      end else
-        hcounter <= hcounter + 11'd1;
-		end*/
 		// Active Verical line 
 		if(vcounter == 11'd21)   vactive <= 1'b1;
 		if(vcounter == 11'd741)  vactive <= 1'b0;

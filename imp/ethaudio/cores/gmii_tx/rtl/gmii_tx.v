@@ -29,7 +29,7 @@ module gmii_tx#(
 	parameter [15:0]  ip_ver        = 16'h4500,
 `ifdef FORCE
 	parameter [15:0]  ip_len        = 16'd1232 - 16'd1, // (Pixel byte =1200) + (packet header 2) + (UDP h = 8) + (AUDIO 32)
-	parameter [15:0]  ip_alen       = 16'd43,
+	parameter [15:0]  ip_alen       = 16'd29,
 `else // DATA_YUV
 	parameter [15:0]  ip_len        = 16'd1312 - 16'd1,
 	parameter [15:0]  ip_alen       = 16'd43,
@@ -59,12 +59,13 @@ module gmii_tx#(
   /*** AUX ***/
 	input   wire        adesig,
 	input   wire [3:0]  ade_num,
-	input   wire [23:0] axdout,
+	input   wire [24:0] axdout,
 	//input   wire        ax_send_full,
 	input   wire        ax_send_empty,
 	output  reg         ax_send_rd_en,
 
 	input   wire        sw,
+	output  wire        vntrans,
 
 	
 	/*** Ethernet PHY GMII ***/
@@ -115,6 +116,8 @@ reg buf1_tx_en, buf2_tx_en;
 wire send_enable = fstate;
 reg [11:0] vcnt;
 reg vp;
+
+assign vntrans = fstate;
 
 always @(posedge fifo_clk) begin
 	if(sys_rst) begin
@@ -173,9 +176,9 @@ parameter IFG         = 4'hb;
 parameter AUDIOMAX    = 5'd20;
 
 parameter auxsize     = 12'd38;
-parameter video       = 8'b00000000;
-parameter audio       = 8'b00000001;
-parameter vidax       = 8'b00000010;
+parameter video       = 4'b0000;
+parameter audio       = 4'b0001;
+parameter vidax       = 4'b0010;
 
 reg [3:0]   state;
 reg [10:0]  count;
@@ -185,7 +188,7 @@ reg [31:0]  gap_count;
 reg [23:0]  ip_check;
 reg [15:0]  ip_length;
 reg [15:0]  udp_length;
-reg [7:0]   pcktinfo;
+reg [3:0]   pcktinfo;
 reg [11:0]  packet_size;
 
 reg [7:0]   tmp;
@@ -206,6 +209,7 @@ always @(posedge tx_clk)begin
 		ip_check  <= 24'd0;
 		ax_send_rd_en <= 1'b0;
 		packet_size <= 12'd0;
+		pcktinfo  <= 4'd0;
 		tmp       <= 8'd0;
 		c9        <= 5'd0;
 		adecnt    <= 4'd0;
@@ -237,9 +241,9 @@ always @(posedge tx_clk)begin
 					txd         <= 8'h55;
 					tx_en       <= 1'b1;
 					state       <= PRE;
-					packet_size <= auxsize * ({8'd0,ade_num} + 12'd1);
+					packet_size <= auxsize * {8'd0,ade_num};
 					adecnt      <= ade_num;
-					ip_check    <= {8'd0,ip_ver} + {8'd0,12'd43} + {8'd0,ip_iden} + {8'd0,ip_flag} + 
+					ip_check    <= {8'd0,ip_ver} + {8'd0,ip_alen} + {8'd0,ip_iden} + {8'd0,ip_flag} + 
                          {8'd0,ip_ttl,ip_prot} + {8'd0,ip_src_addr[31:16]} +               
                          {8'd0,ip_src_addr[15:0]} + {8'd0,ip_dst_addr[31:16]} + {8'd0,ip_dst_addr[15:0]};
 					pcktinfo    <= audio;
@@ -370,24 +374,24 @@ always @(posedge tx_clk)begin
 			PCKTIDNT: begin
 				case(pcktinfo)
 					audio:begin
-						txd   <= audio;
+						txd   <= {left_ade,audio};
 						state <= AUXID;
 						count <= 11'd0;
 						ax_send_rd_en <= 1'b1;
-						if(adecnt > AUDIOMAX)
+						/*if(adecnt > AUDIOMAX)
 							left_ade <= AUDIOMAX;
 						else
-							left_ade <= adecnt;
+							left_ade <= adecnt;*/
 					end
 					video:begin
 						state <= DATA_RESOL;
-						txd   <= video;
+						txd   <= {4'd0,video};
 						cnt3  <= 2'd0; //read X,Y om FIRO
 						count <= 11'd0;
 					end
 					vidax:begin
 						state <= DATA_RESOL;
-						txd   <= vidax;
+						txd   <= {left_ade,vidax};
 						cnt3  <= 2'd0; //read X,Y om FIRO
 						count <= 11'd0;
 						left_ade <= adecnt;
@@ -481,7 +485,8 @@ always @(posedge tx_clk)begin
       // 16bit AUXID : left audio ade number -> 4bit | clock 12bit
       AUXID: begin
 				if(count == 11'd1)begin
-				  txd   <= {left_ade, 1'b0,axdout[23:21]};
+				  //txd   <= {left_ade, 1'b0,axdout[23:21]};
+				  txd   <= {axdout[24:17]};
 				  if(left_ade != 4'd0)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
@@ -493,7 +498,7 @@ always @(posedge tx_clk)begin
 				end else begin
 				  ax_send_rd_en <= 1'b0;
 				  count         <= 11'd1;
-			    txd           <= axdout[20:13];
+			    txd           <= axdout[16:9];
 				end
 			end
       AUX: begin

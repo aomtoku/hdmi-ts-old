@@ -750,7 +750,7 @@ reg       vde_b;
 
 
 /* In not VDE period,  Couting ADE periods */
-wire txx = init & ~video_en & (video_hcnt == 11'd1447); // The count timing ADE period
+wire txx = init & ~video_en & (video_hcnt == 11'd1496); // The count timing ADE period
 wire vadx = init & ({rx0_vde,vde_b} == 2'b10); // The count timing ADE periods
 
 always @ (posedge rx0_pclk)begin
@@ -766,15 +766,31 @@ always @ (posedge rx0_pclk)begin
 	    ade_c  <= 4'd0;
 	    ade_num <= ade_c;
 	  end
+
 	  if(rx0_ade)begin
 	    if(cnt_32 == 5'd31)begin
 	      cnt_32 <= 5'd0;
 	    end else begin
 	      cnt_32 <= cnt_32 + 5'd1;
 	    end
+		end else begin
+		    cnt_32 <= 5'd0;
 		end
 	end
 end
+
+reg [15:0] pos;
+always @ (posedge rx0_pclk)begin
+  if(rx0_reset)begin
+		pos <= 16'd0;
+	end else begin
+	  if(rx0_vde)
+			pos <= 16'd0;
+		else
+			pos <= pos + 16'd1;
+	end
+end
+
 
 // Generate AUDIO FIFO data
 reg [11:0]ade_buf, ade_hcnt;
@@ -790,8 +806,8 @@ wire [3:0]  rx0_aux1;
 wire [3:0]  rx0_aux2;
 wire [10:0] video_hcnt;
 wire [10:0] video_vcnt;
-wire [23:0] ax_din = {video_hcnt, 4'd0, rx0_aux2, rx0_aux1, rx0_aux0[2]};
-wire [23:0] ax_dout;
+wire [24:0] ax_din = {pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+wire [24:0] ax_dout;
 wire        rx0_ade;
 
 assign   ax_send_wr_en = (init & rx0_ade) ;
@@ -803,8 +819,8 @@ wire       afifo_rst;
 
 wire frst = ~afifo_rst & video_en;
 
-afifo24_recv auxfifo24_tx(
-  .rst(rx0_reset | RSTBTN | ~init | frst),
+fifo25/*afifo24_recv*/ auxfifo24_tx(
+  .rst(rx0_reset | RSTBTN | ~init /*| frst*/),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
@@ -891,7 +907,7 @@ dvi_decoder dvi_rx0 (
 
 tmds_timing timing(
 	.rx0_pclk(rx0_pclk),
-	.rstbtn_n(RSTBTN), 
+	.rstbtn_n(RSTBTN | rx0_reset), 
 	.rx0_hsync(rx0_hsync),
 	.rx0_vsync(rx0_vsync),
 	.video_en(video_en),
@@ -913,7 +929,7 @@ always @ (posedge rx0_pclk)
 //  GMII TX
 //-----------------------------------------------------------
 
-wire ade_tx = ~video_en && ((video_hcnt >= 11'd1498) && (video_hcnt < 11'd1500));
+wire ade_tx = ~video_en && ((video_hcnt >= 11'd1497) && (video_hcnt < 11'd1500));
 //wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
 wire fil_wr_en =  video_en & (in_hcnt > 12'd220 & in_hcnt <= 12'd1420);
 
@@ -961,37 +977,38 @@ reg [7:0] data;
 reg we;
 reg [5:0]xcnt;
 wire ready;
-reg [39:0]mem;
+reg [15:0]mem;
 reg wr_en, send;
+reg test;
 
-always @ (posedge pclk)begin
+always @ (posedge rx0_pclk)begin
   if(RSTBTN) begin
 		xcnt <= 6'd0;
-		mem <= 40'd0;
+		mem <= 16'd0;
 		data <= 8'd0;
 		send <= 1'b0;
 	end else begin
-		if(astate == ADE_L)begin
-			mem[39:29] <= vcnt[10:0];
-      mem[28:18] <= hcnt[10:0];
-      mem[17:11] <= 7'd0;
-      mem[10:0]  <= axdout[23:13];
+	  test <= rx0_vsync;
+		if(rx0_ade & cnt_32 == 0) begin
+			mem[15:0] <= pos;
+      //mem[17:11] <= 7'd0;
+      //mem[10:0]  <= {rx0_aux2, rx0_aux1, rx0_aux0[2]};
 			send <= 1'b1;
 		end
 		if(send)begin
-			if(xcnt == 6'd11)begin
+			if(xcnt == 6'd5)begin
 			  wr_en <= 1'b1;
 			  data  <= 8'h0a;
 			  send  <= 1'b0;
 				xcnt  <= 6'd0;
-		  end else if(xcnt == 6'd10) begin
+		  end else if(xcnt == 6'd4) begin
 			  wr_en <= 1'b1;
 			  data  <= 8'h0d;
-				xcnt  <= 6'd11;
+				xcnt  <= 6'd7;
 		  end else begin
 		    wr_en <= 1'b1;
-			  mem  <= {mem[35:0],4'd0};
-				data <= ascii(mem[39:36]);
+			  mem  <= {mem[11:0],4'd0};
+				data <= ascii(mem[15:12]);
 				xcnt  <= xcnt + 1;
 		  end
 		end else begin
