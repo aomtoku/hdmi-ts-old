@@ -111,107 +111,75 @@ reg start;
 reg st,stc;
 
 
-assign axdin_s = ade_out;
-reg [3:0]aux0,aux1,aux2;
+reg       vblnk;
+reg [ 5:0]acnt;
+reg [ 2:0]astate;
+reg [10:0]clk_ade;
 
+parameter FIRST = 3'd0;
+parameter READY = 3'd1;
+parameter IDLE  = 3'd2;
+parameter ADE   = 3'd3;
+parameter ADE_L = 3'd4;
 
-always @ (posedge fifo_clk)begin
-	if(sys_rst)begin
-		ade_buf  <= 12'd0;
-	    ade_out  <= 24'd0;
-	    ade_hcnt <= 12'd0;
-		ade_gg   <=  1'b0;
-		start    <=  1'b0;
+wire [15:0] ctim = axdout[24:9];
+
+reg [15:0] txpos;
+always @ (posedge pclk)begin
+  if(RSTBTN | reset)
+	  txpos <= 16'd0;
+  else begin
+	  if(vde)
+		  txpos <= 16'd0;
+      else
+		  txpos <= txpos + 16'd1;
+  end
+end
+
+always@(posedge pclk)begin
+	if(RSTBTN | reset)begin
+		ax_recv_rd_en <= 1'b0;
+		astate        <= 3'd0; 
+		clk_ade       <= 11'd0;
+	  acnt          <= 6'd0;
+		vblnk         <= 1'b0;
 	end else begin
-		/*
-		ade_buf <= {rx0_aux2, rx0_aux1, rx0_aux0};
-		ade_gg <= rx0_ade;
-		if(cnt_32 == 5'd1)begin
-			ade_hcnt <= {1'b0, video_hcnt - 11'd1};
-		end
-		if(ade_gg)begin
-			ade_out <= {ade_hcnt,ade_buf};
-		end
-		*/
-		// To 
-		if(vde)begin
-			start <= 1'b1;
-			st    <= 1'b1;
-			stc   <= 1'b0;
-		end
-		if(hcnt == 11'd220)
-			st <= 1'b0;
-		if(st == 1'b1)begin
-			if(stc)begin
-				ade_buf <= {aux2, aux1, aux0};
-				ade_gg <= ade;
-				if(cnt_32 == 5'd1)begin
-					ade_hcnt <= {1'b0, hcnt - 11'd1};
-				end
-				if(ade_gg)begin
-					ade_out <= {ade_hcnt,ade_buf};
-				end
-			end else begin
-				stc <= 1'b1;
-			end
-		end else begin
-			ade_buf <= {aux2, aux1, aux0};
-			ade_gg <= ade;
-			if(cnt_32 == 5'd1)begin
-				ade_hcnt <= {1'b0, hcnt - 11'd1};
-			end
-			if(ade_gg)begin
-				ade_out <= {ade_hcnt,ade_buf};
-			end
+	  case(astate)
+          READY : begin
+                    if(vde) begin
+                       ax_recv_rd_en <= 1'b1;
+                       astate <= IDLE;
+                    end
+                  end
+          IDLE  : begin
+			         if(txpos == ctim)begin
+                        ax_recv_rd_en <= 1'b0;
+                        astate <= ADE;
+                        acnt <= 6'd0;
+                     end else
+                        ax_recv_rd_en <= 1'b0;
+                  end
+          ADE   : begin
+                     acnt <= acnt + 6'd1;
+                     ax_recv_rd_en <= 1'b1;
+                     if(acnt == 6'd30)
+                        astate <= ADE_L;
+                  end
+          ADE_L : begin
+                     if(txpos == ctim)begin
+                        astate  <= ADE;
+                        acnt    <= 6'd0;
+                     end else begin
+                        astate  <= IDLE;
+                        clk_ade <= ctim;
+                        ax_recv_rd_en <= 1'b1;
+                     end
+                  end
+		endcase
 		
-		end
 	end
 end
-/*
 
-assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
-
-always@(posedge fifo_clk)begin
-    if(sys_rst)begin
-		ade      <=  1'b0;
-		adecnt   <=  6'd0;
-		vde_h    <=  1'b0;
-		aclkc    <= 12'd0;
-		ade_q    <=  1'b0;
-		init     <=  1'b0;
-		initq    <=  1'b0;
-		initqq   <=  1'b0;
-	end else begin
-	    vde_h  <= vde;
-	    ade_q  <= ade;
-	    initq  <= init;
-		initqq <= initq; 
-        //first read signal
-        if(fifo_read) begin
-		    init <= 1'b1;
-	    end
-		if({initq,initqq}==2'b10)begin
-			aclkc <= axdout; 
-		end
-		
-	    if(init & ~vde & ~ade & hcnt == aclkc)begin
-		    ade <= 1'b1;
-	    end
-		// Aux Data Enable period 
-	    if(ade)begin
-		    if(adecnt == 6'd31)begin
-			    ade    <= 1'b0;
-		        adecnt <= 6'd0;
-		    end else begin
-			    adecnt <= adecnt + 6'd1;
-		    end
-	    end
-	    if({ade,ade_q} == 2'b01)begin
-		    aclkc <= axdout;
-	    end
-    end
-end
-*/
 
 // Generating a Number of audio enable period
 reg [3:0] ade_c;
