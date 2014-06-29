@@ -750,7 +750,7 @@ reg       vde_b;
 
 
 /* In not VDE period,  Couting ADE periods */
-wire txx = init & ~video_en & (video_hcnt == 11'd1496); // The count timing ADE period
+wire txx = init & ~video_en & (video_hcnt == 11'd1496 || video_hcnt == 11'd1497); // The count timing ADE period
 wire vadx = init & ({rx0_vde,vde_b} == 2'b10); // The count timing ADE periods
 
 always @ (posedge rx0_pclk)begin

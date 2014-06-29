@@ -374,7 +374,7 @@ always @(posedge tx_clk)begin
 			PCKTIDNT: begin
 				case(pcktinfo)
 					audio:begin
-						txd   <= {left_ade,audio};
+						txd   <= {adecnt,audio};
 						state <= AUXID;
 						count <= 11'd0;
 						ax_send_rd_en <= 1'b1;
@@ -391,7 +391,7 @@ always @(posedge tx_clk)begin
 					end
 					vidax:begin
 						state <= DATA_RESOL;
-						txd   <= {left_ade,vidax};
+						txd   <= {adecnt,vidax};
 						cnt3  <= 2'd0; //read X,Y om FIRO
 						count <= 11'd0;
 						left_ade <= adecnt;

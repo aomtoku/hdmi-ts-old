@@ -125,7 +125,7 @@ void LoopRecvPacket(int sock, struct sockaddr_in recv, char *buf, struct fb_var_
      struct packet rec_packet;
      int rec, acnt, i;
      int xres_screen, yres_screen;
-		 unsigned int aux_clk;
+		 unsigned int aux_clk, adenum, pif;
      socklen_t sin_size = sizeof(struct sockaddr_in);
 		 int pcktnum = 0;
      
@@ -136,34 +136,38 @@ void LoopRecvPacket(int sock, struct sockaddr_in recv, char *buf, struct fb_var_
 	     }
 
 			 printf("pcknum[%d] len=%dbyte ",pcktnum,rec);
-			 
+			 adenum = (rec_packet.packetinfo & 0xf0) >> 4;
+			 pif    = (rec_packet.packetinfo & 0x0f);
+
 			 /* Packet Processing depends on PacketInfo */
 			 // Pcktinfo 2 --> Video + Aux
 			 // Pcktinfo 1 --> Audio only
 			 // Pcktinfo 0 --> Video only
-			 if(rec_packet.packetinfo == 2){
+			 if(pif == 2){
          acnt = (rec - 1203) / 38;
 				 yres_screen = ((rec_packet.data[0] & 0xff) | ((rec_packet.data[1] & 0x0f) << 8));
          xres_screen = (((rec_packet.data[1] & 0xf0) >> 4) & 1) * 640;
-				 printf("Resol: %d %d ",yres_screen,xres_screen);
+				 printf("Resol: [%d %d] ",yres_screen,xres_screen);
          i = 0;
+				 printf("ade %d ",adenum);
 				 for(;acnt > 0; acnt--){
-					 aux_clk = ((rec_packet.data[1203+(38*i)] & 0x0f) << 8);
+					 aux_clk = ((rec_packet.data[1203+(38*i)]) << 8);
 					 aux_clk = (aux_clk | rec_packet.data[1202+(38*i)]);
 				   i++;
 					 printf("Clock: %d ",aux_clk);
 				 }
 				 i = 0;
 				 printf("\n");
-			 } else if(rec_packet.packetinfo == 0){
+			 } else if(pif == 0){
 				 yres_screen = ((rec_packet.data[0] & 0xff) | ((rec_packet.data[1] & 0x0f) << 8));
          xres_screen = (((rec_packet.data[1] & 0xf0) >> 4) & 1) * 640;
-				 printf("Resol: %d %d \n",yres_screen,xres_screen);
+				 printf("Resol: [%d %d] \n",yres_screen,xres_screen);
 			 } else { // Audio Packet 
 			   acnt = (rec - 1) / 38;
 				 i = 0;
+				 printf("ade %d ",adenum);
 				 for(;acnt > 0; acnt--){
-					 aux_clk = ((rec_packet.data[1+(38*i)] & 0x0f) << 8);
+					 aux_clk = ((rec_packet.data[1+(38*i)]) << 8);
 					 aux_clk = (aux_clk | rec_packet.data[0+(38*i)]);
 				   i++;
 					 printf("Clock: %d ",aux_clk);
