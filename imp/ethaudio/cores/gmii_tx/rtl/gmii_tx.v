@@ -242,7 +242,7 @@ always @(posedge tx_clk)begin
 						pcktinfo    <= video;
 					end
 //`endif
-				end else if(/*~ax_send_empty &*/ adesig /*& ~vp*/)begin
+				end else if( (ade_num != 4'd0) & adesig )begin
 					txd         <= 8'h55;
 					tx_en       <= 1'b1;
 					state       <= PRE;
@@ -383,6 +383,7 @@ always @(posedge tx_clk)begin
 						state <= AUXID;
 						count <= 11'd0;
 						ax_send_rd_en <= 1'b1;
+						left_ade <= adecnt;
 						/*if(adecnt > AUDIOMAX)
 							left_ade <= AUDIOMAX;
 						else

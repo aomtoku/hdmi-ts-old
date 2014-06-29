@@ -769,7 +769,7 @@ always @ (posedge rx0_pclk)begin
 	end else begin
 	  if(rx0_ade & cnt_32 == 5'd0)
 			ade_c <= ade_c + 4'd1;
-	  if(ade_tx | vadx)begin
+	  if({ade_tx,ax_ts_rd_en} == 2'b10 | vadx)begin
 	    ade_c  <= 4'd0;
 	    ade_num <= ade_c;
 	  end
