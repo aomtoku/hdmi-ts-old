@@ -1,0 +1,40 @@
+module uart_top(
+  input  wire       uclk, // UART CLOCK
+  input  wire       inclk, // DATA INPUT CLOCK
+  input  wire       rst_,
+  input  wire [10:0] txd,  // UART TRASPORT DATA
+  output wire       uart_tx, // UART TX WIRE
+);
+
+
+reg empty_buf;
+wire [7:0] dout;
+wire empty,full;
+wire ard_en = ~empty_buf & ready;
+
+always @ (posedge uclk)
+  empty_buf <= empty;
+
+
+uart_fifo_p u1(
+  .rst(~rst_),
+  .wr_clk(inclk),
+  .rd_clk(uclk),
+  .din(txd),
+  .wr_en(wr_en),
+  .rd_en(ard_en),
+  .dout(dout),
+  .full(full),
+  .empty(empty)
+);
+
+
+uart u0 (
+ .clk(clk),
+ .rst_(rst_),
+ .data(dout),
+ .we(ard_en),
+ .tx(UART_TX),
+ .ready(ready)
+);
+
