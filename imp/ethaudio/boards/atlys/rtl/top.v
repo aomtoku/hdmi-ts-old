@@ -820,7 +820,7 @@ wire       afifo_rst;
 wire frst = ~afifo_rst & video_en;
 
 fifo25/*afifo24_recv*/ auxfifo24_tx(
-  .rst(rx0_reset | RSTBTN | ~init /*| frst*/),
+  .rst(rx0_reset | RSTBTN | ~init | frst),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
