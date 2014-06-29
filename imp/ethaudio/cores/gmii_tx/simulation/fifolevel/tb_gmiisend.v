@@ -36,6 +36,7 @@ wire [47:0]tx_data;
 
 
 wire [10:0]hcnt,vcnt;
+wire hact,vact;
 wire video_en;
 
 // Generating a Number of audio enable period
@@ -62,8 +63,23 @@ always @ (posedge fifo_clk)begin
 	end
 end
 */
-wire a_wr_en = ainit & ade;
+
+reg [15:0] pos;
+always @ (posedge fifo_clk)begin
+  if(sys_rst)begin
+		pos <= 16'd0;
+	end else begin
+	  if(vde)
+			pos <= 16'd0;
+		else
+			pos <= pos + 16'd1;
+	end
+end
+
+
+wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
 reg ainit;
+wire a_wr_en = ainit & ade;
 wire txx = ainit & ~video_en & (hcnt == 11'd1447); // The count timing ADE period
 wire vadx = ainit & ({vde,vde_b} == 2'b10); // The count timing ADE periods
 
@@ -121,12 +137,56 @@ always@(posedge fifo_clk)
 		ainit <= 1'b0;
 	else if(video_en)
 		ainit <= 1'b1;
+`define AUXTEST
 
-wire [23:0] ax_din = {vcnt, 4'd0, adin[11:4],adin[2]};
-wire [23:0] ax_dout;
+`ifdef AUXTEST
+//reg [24:0] axbuf;
+reg [15:0] posbuf;
+reg [3:0] ax0, ax1, ax2;
+reg adebuf,auxinit;
+always @ (posedge fifo_clk)begin
+  if(sys_rst)begin
+    adebuf <= 1'b0;
+	//axbuf  <= 25'd0;
+	posbuf <= 16'd0;
+	ax0    <= 4'd0;
+	ax1    <= 4'd0;
+	ax2    <= 4'd0;
+  end else begin
+    adebuf <= ade;
+    //axbuf  <= {pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+	posbuf <= pos;
+	ax0 <= adin[3:0];
+	ax1 <= adin[7:4];
+	ax2 <= adin[11:8];
+  end 
+  if(sys_rst)
+	  auxinit <= 1'b0;
+  if(video_en)
+	  auxinit <= 1'b1;
+  if({ade,adebuf}==2'b10)
+	  auxinit <= 1'b0;
+  if(~vact)
+	  auxinit <= 1'b0;
+end
+
+wire axrst = ({ade,adebuf}==2'b10) & auxinit;
 
 
-afifo24 send_audio_fifo(
+wire [24:0] ax_din = {posbuf,ax2,ax1,ax0[2]};
+wire [24:0] ax_dout;
+assign   ax_send_wr_en = (ainit & adebuf) ;
+
+`else
+
+wire [24:0] ax_din = {pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+wire [24:0] ax_dout;
+assign   ax_send_wr_en = (ainit & ade) ;
+
+`endif
+
+
+afifo25 send_audio_fifo(
      .Data(ax_din),
      .WrClock(fifo_clk),
      .RdClock(gmii_tx_clk),
@@ -139,14 +199,14 @@ afifo24 send_audio_fifo(
      .Full(afull)
 );
 
-wire ade_tx = ~video_en && ((hcnt >= 11'd1498) && (hcnt < 11'd1500));
+wire ade_tx = ainit && ~video_en && ((hcnt >= 11'd1498) && (hcnt < 11'd1500));
 //wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
 wire fil_wr_en =  video_en & (hcnt > 12'd220 & hcnt <= 12'd1420);
 
 
 
 //wire fil_wr_en =  video_en & (hcnt >= 12'd220 & hcnt < 12'd1420);
-wire [23:0] out = ax_dout;
+wire [24:0] out = ax_dout;
 //wire ade_tx = ~video_en && ((hcnt >= 11'd1504) && (hcnt < 11'd1510));
 
 gmii_tx gmiisend(
@@ -175,7 +235,6 @@ gmii_tx gmiisend(
 );
 
 
-wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
 
 tmds_timing timing_inst (
   .rx0_pclk(fifo_clk),
@@ -186,6 +245,8 @@ tmds_timing timing_inst (
   .index(),
   .video_hcnt(),
   .video_vcnt(),
+  .vactive(vact),
+  .hactive(hact),
   .vcounter(vcnt),
   .hcounter(hcnt)
 );

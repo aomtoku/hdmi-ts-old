@@ -195,6 +195,11 @@ reg [7:0]   tmp;
 reg [4:0]   c9;
 reg [4:0]   left_ade;
 reg [3:0]   adecnt;
+
+wire [15:0] axpos  = axdout[24:9];
+wire [8:0]  axdata = axdout[8:0];
+
+
 always @(posedge tx_clk)begin
 	if(sys_rst)begin
 		txd       <= 8'd0;
@@ -486,7 +491,7 @@ always @(posedge tx_clk)begin
       AUXID: begin
 				if(count == 11'd1)begin
 				  //txd   <= {left_ade, 1'b0,axdout[23:21]};
-				  txd   <= {axdout[24:17]};
+				  txd   <= {axpos[15:8]};
 				  if(left_ade != 4'd0)begin
 				    left_ade <= left_ade - 4'd1;
 				  end
@@ -498,7 +503,7 @@ always @(posedge tx_clk)begin
 				end else begin
 				  ax_send_rd_en <= 1'b0;
 				  count         <= 11'd1;
-			    txd           <= axdout[16:9];
+			    txd           <= axpos[7:0];
 				end
 			end
       AUX: begin
@@ -523,43 +528,43 @@ always @(posedge tx_clk)begin
 					 c9 <= c9 + 5'd1;
 				 case(c9)
 				   4'd0 : begin
-					          txd <= axdout[7:0];
-										tmp[0] <= axdout[8];
+					          txd <= axdata[7:0];
+										tmp[0] <= axdata[8];
 										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd1 : begin
-					          txd <= {axdout[6:0],tmp[0]};
-										tmp[1:0] <= axdout[8:7];
+					          txd <= {axdata[6:0],tmp[0]};
+										tmp[1:0] <= axdata[8:7];
 										ax_send_rd_en <= 1'b1;
 									end
 				   4'd2 : begin
-					          txd <= {axdout[5:0],tmp[1:0]};
-										tmp[2:0] <= axdout[8:6];
+					          txd <= {axdata[5:0],tmp[1:0]};
+										tmp[2:0] <= axdata[8:6];
 										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd3 : begin
-					          txd <= {axdout[4:0],tmp[2:0]};
-										tmp[3:0] <= axdout[8:5];
+					          txd <= {axdata[4:0],tmp[2:0]};
+										tmp[3:0] <= axdata[8:5];
 										ax_send_rd_en <= 1'b1;
 									end
 				   4'd4 : begin
-					          txd <= {axdout[3:0],tmp[3:0]};
-										tmp[4:0] <= axdout[8:4];
+					          txd <= {axdata[3:0],tmp[3:0]};
+										tmp[4:0] <= axdata[8:4];
 										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd5 : begin
-					          txd <= {axdout[2:0],tmp[4:0]};
-										tmp[5:0] <= axdout[8:3];
+					          txd <= {axdata[2:0],tmp[4:0]};
+										tmp[5:0] <= axdata[8:3];
 										ax_send_rd_en <= 1'b1;
 									end
 				   4'd6 : begin
-					          txd <= {axdout[1:0],tmp[5:0]};
-										tmp[6:0] <= axdout[8:2];
+					          txd <= {axdata[1:0],tmp[5:0]};
+										tmp[6:0] <= axdata[8:2];
 										ax_send_rd_en <= 1'b1;
 				          end
 					 4'd7 : begin
-					          txd <= {axdout[0],tmp[6:0]};
-										tmp[7:0] <= axdout[8:1];
+					          txd <= {axdata[0],tmp[6:0]};
+										tmp[7:0] <= axdata[8:1];
 										ax_send_rd_en <= 1'b0;
 									end
 				   4'd8 : begin

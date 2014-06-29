@@ -753,10 +753,14 @@ reg       vde_b;
 wire      hact, vact;
 
 /* In not VDE period,  Couting ADE periods */
-wire txx = init & ~vact & ((video_hcnt == 11'd1497) ); // The count timing ADE period
+//wire txx = init & ~vact & ((video_hcnt == 11'd1497) ); // The count timing ADE period
+wire ade_tx = ~vact & (~ax_send_wr_en & rx0_hsync);
+reg ax_ts_rd_en;
+
 wire vadx = init & vact &  ({video_en,vde_b} == 2'b10); // The count timing ADE periods
 
 always @ (posedge rx0_pclk)begin
+  ax_ts_rd_en <= ade_tx;
   vde_b <= video_en;
   if(rx0_reset)begin
 	  cnt_32  <= 5'd0; 
@@ -765,7 +769,7 @@ always @ (posedge rx0_pclk)begin
 	end else begin
 	  if(rx0_ade & cnt_32 == 5'd0)
 			ade_c <= ade_c + 4'd1;
-	  if(txx | vadx)begin
+	  if(ade_tx | vadx)begin
 	    ade_c  <= 4'd0;
 	    ade_num <= ade_c;
 	  end
@@ -814,15 +818,25 @@ wire        rx0_ade;
 `define AUXTEST
 
 `ifdef AUXTEST
-reg [31:0] axbuf;
+//reg [24:0] axbuf;
+reg [15:0] posbuf;
+reg [3:0] ax0, ax1, ax2;
 reg adebuf,auxinit;
 always @ (posedge rx0_pclk)begin
   if(rx0_reset | RSTBTN)begin
     adebuf <= 1'b0;
-	axbuf  <= 25'd0;
+	//axbuf  <= 25'd0;
+	posbuf <= 16'd0;
+	ax0    <= 4'd0;
+	ax1    <= 4'd0;
+	ax2    <= 4'd0;
   end else begin
     adebuf <= rx0_ade;
-    axbuf  <= {8'd0,pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+    //axbuf  <= {pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+	//posbuf <= pos;
+	ax0 <= rx0_aux0;
+	ax1 <= rx0_aux1;
+	ax2 <= rx0_aux2;
   end 
   if(rx0_reset)
 	  auxinit <= 1'b0;
@@ -834,11 +848,12 @@ always @ (posedge rx0_pclk)begin
 	  auxinit <= 1'b0;
 end
 
-wire axrst = ({rx0_ade,adebuf}==2'b10) & auxinit;
+/* Force RESET for AUDIO FIFO */
+wire axrst = ({rx0_ade,adebuf}==2'b10) & (video_vcnt == 11'd21);
 
 
-wire [31:0] ax_din = axbuf;
-wire [31:0] ax_dout;
+wire [24:0] ax_din = {pos - 16'd1,ax2,ax1,ax0[2]};
+wire [24:0] ax_dout;
 assign   ax_send_wr_en = (init & adebuf) ;
 
 `else
@@ -857,7 +872,7 @@ wire       afifo_rst;
 
 wire frst = ~afifo_rst & video_en;
 
-fifo32/*afifo24_recv*/ auxfifo24_tx(
+fifo25/*afifo24_recv*/ auxfifo24_tx(
   .rst(rx0_reset | RSTBTN | ~init | axrst/* | ({rx0_vde,vde_b} == 2'b01)*/),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
@@ -969,8 +984,8 @@ always @ (posedge rx0_pclk)
 //  GMII TX
 //-----------------------------------------------------------
 
-wire ade_tx = ~vact
-wire ade_tx = ~video_en && ((video_hcnt >= 11'd1497) && (video_hcnt < 11'd1500));
+
+//wire ade_tx = ~video_en && ((video_hcnt >= 11'd1497) && (video_hcnt < 11'd1500));
 //wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
 wire fil_wr_en =  video_en & (in_hcnt > 12'd220 & in_hcnt <= 12'd1420);
 
@@ -989,7 +1004,7 @@ gmii_tx gmii_tx(
 	.sw(DEBUG_SW[1]),
 
 	// AX FIFO
-	.adesig(ade_tx),
+	.adesig(ax_ts_rd_en),
 	.ade_num(ade_num),
 	.axdout(ax_dout),
 	//.ax_send_full(ax_send_full),
