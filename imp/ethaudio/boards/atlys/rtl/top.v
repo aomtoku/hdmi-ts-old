@@ -28,7 +28,7 @@ module top (
 	input  wire [3:0] DEBUG_SW,
 
 	output reg  [7:0] LED,
-	output wire [5:0] JA
+	output wire [6:0] JA
 );
 
 //******************************************************************//
@@ -625,6 +625,7 @@ assign JA[2] = VGA_VSYNC;
 assign JA[3] = ax_recv_rd_en;
 assign JA[4] = ax_send_rd_en;
 assign JA[5] = fifo_read;
+assign JA[6] = init;
 ////////////////////////////////////////////////////////////////
 // DVI Encoder
 ////////////////////////////////////////////////////////////////
