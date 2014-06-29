@@ -228,7 +228,7 @@ always @(posedge tx_clk)begin
           //pcktinfo    <= video;
 					//:wqpacket_size <= 12'd0;
 //`else
-          if(ppl /*& ax_send_empty ade_num == 4'd0*/)begin
+                    if(ppl /*& ax_send_empty ade_num == 4'd0*/)begin
 					  adecnt      <= ade_num;
 						packet_size <= auxsize * ade_num;
 						pcktinfo    <= vidax;
@@ -237,7 +237,7 @@ always @(posedge tx_clk)begin
 						pcktinfo    <= video;
 					end
 //`endif
-				end else if(~ax_send_empty & adesig & ~vp)begin
+				end else if(/*~ax_send_empty &*/ adesig /*& ~vp*/)begin
 					txd         <= 8'h55;
 					tx_en       <= 1'b1;
 					state       <= PRE;
