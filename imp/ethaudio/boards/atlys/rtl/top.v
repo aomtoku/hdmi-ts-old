@@ -28,7 +28,7 @@ module top (
 	input  wire [3:0] DEBUG_SW,
 
 	output reg  [7:0] LED,
-	output wire [6:0] JA
+	output wire [7:0] JA
 );
 
 //******************************************************************//
@@ -626,6 +626,7 @@ assign JA[3] = ax_recv_rd_en;
 assign JA[4] = ax_send_rd_en;
 assign JA[5] = fifo_read;
 assign JA[6] = init;
+assign JA[7] = rx0_reset;
 ////////////////////////////////////////////////////////////////
 // DVI Encoder
 ////////////////////////////////////////////////////////////////
@@ -749,13 +750,14 @@ reg [3:0] ade_num;
 reg [4:0] cnt_32;
 reg       vde_b;
 
+wire      hact, vact;
 
 /* In not VDE period,  Couting ADE periods */
-wire txx = init & ~video_en & (video_hcnt == 11'd1496 || video_hcnt == 11'd1497); // The count timing ADE period
-wire vadx = init & ({rx0_vde,vde_b} == 2'b10); // The count timing ADE periods
+wire txx = init & ~vact & ((video_hcnt == 11'd1497) ); // The count timing ADE period
+wire vadx = init & vact &  ({video_en,vde_b} == 2'b10); // The count timing ADE periods
 
 always @ (posedge rx0_pclk)begin
-  vde_b <= rx0_vde;
+  vde_b <= video_en;
   if(rx0_reset)begin
 	  cnt_32  <= 5'd0; 
 	  ade_c   <= 4'd0;
@@ -807,11 +809,46 @@ wire [3:0]  rx0_aux1;
 wire [3:0]  rx0_aux2;
 wire [10:0] video_hcnt;
 wire [10:0] video_vcnt;
-wire [24:0] ax_din = {pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
-wire [24:0] ax_dout;
 wire        rx0_ade;
 
+`define AUXTEST
+
+`ifdef AUXTEST
+reg [31:0] axbuf;
+reg adebuf,auxinit;
+always @ (posedge rx0_pclk)begin
+  if(rx0_reset | RSTBTN)begin
+    adebuf <= 1'b0;
+	axbuf  <= 25'd0;
+  end else begin
+    adebuf <= rx0_ade;
+    axbuf  <= {8'd0,pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+  end 
+  if(rx0_reset)
+	  auxinit <= 1'b0;
+  if(video_en)
+	  auxinit <= 1'b1;
+  if({rx0_ade,adebuf}==2'b10)
+	  auxinit <= 1'b0;
+  if(~vact)
+	  auxinit <= 1'b0;
+end
+
+wire axrst = ({rx0_ade,adebuf}==2'b10) & auxinit;
+
+
+wire [31:0] ax_din = axbuf;
+wire [31:0] ax_dout;
+assign   ax_send_wr_en = (init & adebuf) ;
+
+`else
+
+wire [24:0] ax_din = {pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+wire [24:0] ax_dout;
 assign   ax_send_wr_en = (init & rx0_ade) ;
+
+`endif
+
 wire [11:0] in_hcnt = {1'b0, video_hcnt[10:0]};
 wire [11:0] in_vcnt = {1'b0, video_vcnt[10:0]};
 wire [11:0] index;
@@ -820,8 +857,8 @@ wire       afifo_rst;
 
 wire frst = ~afifo_rst & video_en;
 
-fifo25/*afifo24_recv*/ auxfifo24_tx(
-  .rst(rx0_reset | RSTBTN | ~init | frst),
+fifo32/*afifo24_recv*/ auxfifo24_tx(
+  .rst(rx0_reset | RSTBTN | ~init | axrst/* | ({rx0_vde,vde_b} == 2'b01)*/),
 	.wr_clk(rx0_pclk),
 	.rd_clk(clk_125M),
 	.din(ax_din),
@@ -915,6 +952,8 @@ tmds_timing timing(
 	.index(index),
 	.video_hcnt(),
 	.video_vcnt(),
+	.hactive(hact),
+	.vactive(vact),
 	.vcounter(video_vcnt),
 	.hcounter(video_hcnt)
 );
@@ -930,6 +969,7 @@ always @ (posedge rx0_pclk)
 //  GMII TX
 //-----------------------------------------------------------
 
+wire ade_tx = ~vact
 wire ade_tx = ~video_en && ((video_hcnt >= 11'd1497) && (video_hcnt < 11'd1500));
 //wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
 wire fil_wr_en =  video_en & (in_hcnt > 12'd220 & in_hcnt <= 12'd1420);
@@ -967,7 +1007,7 @@ always @ (*)
 	  2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full , ax_send_empty, ax_recv_full,ax_recv_empty};
     2'b01 : LED <= ctim[7:0];
     2'b10 : LED <= {ax_recv_wr_en,init,vblnk,2'd0,ctim[10:8]};
-    2'b11 : LED <= {5'd0,astate};
+    2'b11 : LED <= {4'd0,rx0_reset,astate};
 	endcase
 
 `define DEBUG

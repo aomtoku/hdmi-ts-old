@@ -7,14 +7,14 @@ module tmds_timing(
 	output reg [11:0] index,
 	output reg [10:0] video_hcnt,
 	output reg [10:0] video_vcnt,
+	output reg        hactive,
+	output reg        vactive,
   output reg [10:0] vcounter,
   output reg [10:0] hcounter
 );
 
 //reg [10:0] vcounter;
 //reg [10:0] hcounter;
-reg        vactive;
-reg        hactive;
 reg        hsync_buf;
 
 assign video_en = (vactive & hactive);
