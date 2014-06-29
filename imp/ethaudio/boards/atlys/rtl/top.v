@@ -111,7 +111,7 @@ wire recv_fifo_wr_en;
 wire ax_recv_wr_en;
 reg ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
-wire [23:0] axdin;
+wire [24:0] axdin;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(RXCLK),
@@ -142,11 +142,11 @@ fifo29_32768 asfifo_recv (
 	.empty(recv_empty)
 );
 
-wire [23:0] axdout;
+wire [24:0] axdout;
 reg init;
 wire ax_rx_rd_en ;
 wire rst;
-afifo24_recv aux_recv(
+fifo25/*afifo24_recv*/ aux_recv(
   .rst(reset| RSTBTN  ),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
@@ -644,7 +644,20 @@ parameter IDLE  = 3'd2;
 parameter ADE   = 3'd3;
 parameter ADE_L = 3'd4;
 
-wire [10:0] ctim = axdout[23:13];
+wire [15:0] ctim = axdout[24:9];
+
+reg [15:0] txpos;
+always @ (posedge pclk)begin
+  if(RSTBTN | reset)
+	  txpos <= 16'd0;
+  else begin
+	  if(vde)
+		  txpos <= 16'd0;
+      else
+		  txpos <= txpos + 16'd1;
+  end
+end
+
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
 		ax_recv_rd_en <= 1'b0;
@@ -654,38 +667,36 @@ always@(posedge pclk)begin
 		vblnk         <= 1'b0;
 	end else begin
 	  case(astate)
-		  FIRST : begin
-			          ax_recv_rd_en <= 1'b0;
-			          if(ax_recv_wr_en)begin
-                  clk_ade <= axdin[23:13];
-									astate  <= READY;
-								end
-			        end
-		  READY : if(vde)   astate <= IDLE;
-	    IDLE  : begin
-			          if(clk_ade == hcnt[10:0])begin
-									ax_recv_rd_en <= 1'b0;
-									astate <= ADE;
-									acnt <= 6'd0;
-								end else
-								  ax_recv_rd_en <= 1'b0;
-              end
-			ADE   : begin
-			          acnt <= acnt + 6'd1;
-			          ax_recv_rd_en <= 1'b1;
-								if(acnt == 6'd30)
-									astate <= ADE_L;
-			        end
-			ADE_L : begin
-			          if(hcnt[10:0] == ctim)begin
-									astate  <= ADE;
-									acnt    <= 6'd0;
-								end else begin
-									astate  <= IDLE;
-									clk_ade <= ctim;
-									ax_recv_rd_en <= 1'b0;
-								end
-			        end
+          READY : begin
+                    if(vde) begin
+                       ax_recv_rd_en <= 1'b1;
+                       astate <= IDLE;
+                    end
+                  end
+          IDLE  : begin
+			         if(txpos == ctim)begin
+                        ax_recv_rd_en <= 1'b0;
+                        astate <= ADE;
+                        acnt <= 6'd0;
+                     end else
+                        ax_recv_rd_en <= 1'b0;
+                  end
+          ADE   : begin
+                     acnt <= acnt + 6'd1;
+                     ax_recv_rd_en <= 1'b1;
+                     if(acnt == 6'd30)
+                        astate <= ADE_L;
+                  end
+          ADE_L : begin
+                     if(txpos == ctim)begin
+                        astate  <= ADE;
+                        acnt    <= 6'd0;
+                     end else begin
+                        astate  <= IDLE;
+                        clk_ade <= ctim;
+                        ax_recv_rd_en <= 1'b1;
+                     end
+                  end
 		endcase
 		
 	end
