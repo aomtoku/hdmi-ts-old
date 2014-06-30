@@ -669,13 +669,13 @@ always@(posedge pclk)begin
 	  case(astate)
           READY : begin
                     if(vde) begin
-                       ax_recv_rd_en <= 1'b1;
+                       ax_recv_rd_en <= 1'b0;
                        astate <= IDLE;
                     end
                   end
           IDLE  : begin
-			         if(txpos == ctim)begin
-                        ax_recv_rd_en <= 1'b0;
+			         if(txpos-1  == ctim)begin
+                        ax_recv_rd_en <= 1'b1;
                         astate <= ADE;
                         acnt <= 6'd0;
                      end else
@@ -688,13 +688,13 @@ always@(posedge pclk)begin
                         astate <= ADE_L;
                   end
           ADE_L : begin
-                     if(txpos == ctim)begin
+                     if(txpos-1 == ctim)begin
                         astate  <= ADE;
                         acnt    <= 6'd0;
                      end else begin
                         astate  <= IDLE;
                         clk_ade <= ctim;
-                        ax_recv_rd_en <= 1'b1;
+                        ax_recv_rd_en <= 1'b0;
                      end
                   end
 		endcase
@@ -1032,8 +1032,8 @@ always @ (*)
   case(DEBUG_SW[3:2])
 	  2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full , ax_send_empty, ax_recv_full,ax_recv_empty};
     2'b01 : LED <= ctim[7:0];
-    2'b10 : LED <= {ax_recv_wr_en,init,vblnk,2'd0,ctim[10:8]};
-    2'b11 : LED <= {4'd0,rx0_reset,astate};
+    2'b10 : LED <= ctim[15:8];
+    2'b11 : LED <= {ax_recv_wr_en,init,vblnk,1'd0,rx0_reset,astate};
 	endcase
 
 `define DEBUG
