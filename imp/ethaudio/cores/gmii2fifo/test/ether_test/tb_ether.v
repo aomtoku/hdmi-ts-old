@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 `define simulation
+`include "setup.v"
 
 module tb_ether();
 
@@ -20,88 +21,222 @@ reg fifo_clk;
 initial fifo_clk = 1'b0;
 always #6.734 fifo_clk = ~fifo_clk;
 
-// Generate Video Signal
-// for Gmii_tx
-wire vsync, hsync;
-reg [10:0]hcnt,vcnt;
-assign vsync = (vcnt >= 746 || vcnt == 0);
-assign hsync = (hcnt >= 1611 || hcnt == 0);
-always@(posedge fifo_clk)begin
+
+//
+// Test Bench
+//
+reg sys_rst;
+wire vsyn,hsyn;
+reg [23:0]tmds_data;
+wire rd_en;
+wire TXEN;
+wire [7:0]TXD;
+wire [47:0]tx_data;
+
+
+wire [10:0]hcnt,vcnt;
+wire hact,vact;
+wire video_en;
+
+// Generating a Number of audio enable period
+reg [3:0] rxade_c;
+reg [3:0] ade_num;
+reg [4:0] cnt_32;
+reg       vde_b;
+
+reg [15:0] pos;
+always @ (posedge fifo_clk)begin
   if(sys_rst)begin
-	  hcnt <= 11'd0;
-	  vcnt <= 11'd0;
-  end else begin
-    if(hcnt == 1649)begin
-	  hcnt <= 11'd0;
-	  if(vcnt == 749)
-	    vcnt <= 11'd0;
-	  else
-		vcnt <= vcnt + 11'd1;
+	   pos <= 16'd0;
 	end else begin
-      hcnt <= hcnt + 11'd1;
+	  if(vde)
+			pos <= 16'd0;
+		else
+			pos <= pos + 16'd1;
 	end
-  end
 end
 
-wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
+reg  ax_ts_rd_en;
+reg  ainit;
 
-wire fifo_read = vde;
+wire ax_send_wr_en;
+wire ade_tx  = ~vact & (~ax_send_wr_en & rx0_hsync);
+wire vde     = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
+wire a_wr_en = ainit & rxade;
+wire txx     = ainit & ~video_en & (hcnt == 11'd1447); // The count timing ADE period
+wire vadx    = ainit & ({vde,vde_b} == 2'b10); // The count timing ADE periods
 
+always @ (posedge fifo_clk)begin
+  ax_ts_rd_en <= ade_tx;
+  vde_b <= vde;
+  if(sys_rst)begin
+	  cnt_32  <= 5'd0; 
+	  rxade_c   <= 4'd0;
+	  ade_num <= 4'd0;
+	end else begin
+	  if(a_wr_en & cnt_32 == 5'd0)
+			rxade_c <= rxade_c + 4'd1;
+	  if(({ade_tx,ax_ts_rd_en} == 2'b10) | vadx)begin
+	    rxade_c  <= 4'd0;
+	    ade_num <= rxade_c;
+	  end
+	  if(a_wr_en)begin
+	    if(cnt_32 == 5'd31)begin
+	      cnt_32 <= 5'd0;
+	    end else begin
+	      cnt_32 <= cnt_32 + 5'd1;
+	    end
+		end
+	end
+end
+
+
+
+
+wire [47:0]vdin;
+assign vdin = {1'b0,vcnt,1'b0,hcnt,tmds_data};
+wire vempty,vfull;
+wire send_fifo_wr_en = video_en && (hcnt >= 12'd220 && hcnt < 12'd1420);
+
+afifo48 send_video_fifo(
+     .Data(vdin),
+     .WrClock(fifo_clk),
+     .RdClock(gmii_tx_clk),
+     .WrEn(send_fifo_wr_en),
+     .RdEn(rd_en),
+     .Reset(sys_rst),
+     .RPReset(),
+     .Q(tx_data),
+     .Empty(vempty),
+     .Full(vfull)
+);
+
+
+wire [11:0] adin;
+wire tx_aempty,tx_afull;
+wire ade;
+
+always@(posedge fifo_clk)
+  if(sys_rst)
+		ainit <= 1'b0;
+	else if(video_en)
+		ainit <= 1'b1;
+`define AUXTEST
+
+`ifdef AUXTEST
+reg [15:0] posbuf;
+reg [3:0] ax0, ax1, ax2;
+reg adebuf,auxinit;
+always @ (posedge fifo_clk)begin
+  if(sys_rst)begin
+    adebuf <= 1'b0;
+	posbuf <= 16'd0;
+	ax0    <= 4'd0;
+	ax1    <= 4'd0;
+	ax2    <= 4'd0;
+  end else begin
+    adebuf <= rxade;
+	posbuf <= pos;
+	ax0 <= adin[3:0];
+	ax1 <= adin[7:4];
+	ax2 <= adin[11:8];
+  end 
+  if(sys_rst)
+	  auxinit <= 1'b0;
+  if(video_en)
+	  auxinit <= 1'b1;
+  if({rxade,adebuf}==2'b10)
+	  auxinit <= 1'b0;
+  if(~vact)
+	  auxinit <= 1'b0;
+end
+
+wire axrst = ({rxade,adebuf}==2'b10) & auxinit;
+
+
+wire [24:0] ax_din = {posbuf,ax2,ax1,ax0[2]};
+wire [24:0] ax_dout;
+assign   ax_send_wr_en = (ainit & adebuf) ;
+
+`else
+
+wire [24:0] ax_din = {pos, rx0_aux2, rx0_aux1, rx0_aux0[2]};
+wire [24:0] ax_dout;
+assign   ax_send_wr_en = (ainit & ade) ;
+
+`endif
+
+wire ax_send_rd_en;
+
+afifo25 send_audio_fifo(
+     .Data(ax_din),
+     .WrClock(fifo_clk),
+     .RdClock(gmii_tx_clk),
+     .WrEn(ax_send_wr_en),
+     .RdEn(ax_send_rd_en),
+     .Reset(sys_rst |  axrst),
+     .RPReset(),
+     .Q(ax_dout),
+     .Empty(tx_aempty),
+     .Full(tx_afull)
+);
+
+wire fil_wr_en =  video_en & (hcnt > 12'd220 & hcnt <= 12'd1420);
+wire [24:0] out = ax_dout;
+
+gmii_tx gmiisend(
+    .id(1'b1),
+	/*** FIFO ***/
+	.fifo_clk(fifo_clk),
+	.sys_rst(sys_rst),
+	.dout(tx_data), //48bit
+	.empty(vempty),
+	.full(full),
+	.rd_en(rd_en),
+	.wr_en(fil_wr_en),
+	// AX FIFO
+	.adesig(ade_tx),
+	.ade_num(ade_num),
+	.axdout(out),
+	.ax_send_empty(tx_aempty),
+	.ax_send_rd_en(ax_send_rd_en),
+	/*** Ethernet PHY GMII ****/
+	.tx_clk(gmii_tx_clk),
+	.tx_en(TXEN),
+	.txd(TXD),
+	.sw(1'b1)
+);
+
+tmds_timing timing_inst (
+  .rx0_pclk(fifo_clk),
+  .rstbtn_n(sys_rst), 
+  .rx0_hsync(hsyn),
+  .rx0_vsync(vsyn),
+  .video_en(video_en),
+  .index(),
+  .video_hcnt(),
+  .video_vcnt(),
+  .vactive(vact),
+  .hactive(hact),
+  .vcounter(vcnt),
+  .hcounter(hcnt)
+);
+
+//--------------------------------------------
 //
 // generate Audio Enable period
 //
 
+wire txade;
 reg [4:0] adecnt;
 reg [11:0]aclkc;
-reg ade;
 reg vde_h,ade_q;
 reg init, initq,initqq;
 wire [24:0]axdout;
 
-//assign ax_recv_rd_en = ({init,initq} == 2'b10) || ade || ade_q;
-
-always@(posedge fifo_clk)begin
-    if(sys_rst)begin
-		ade      <=  1'b0;
-		adecnt   <=  6'd0;
-		vde_h    <=  1'b0;
-		aclkc    <= 12'd0;
-		ade_q    <=  1'b0;
-		init     <=  1'b0;
-		initq    <=  1'b0;
-		initqq   <=  1'b0;
-	end else begin
-	    vde_h  <= vde;
-	    ade_q  <= ade;
-	    initq  <= init;
-		initqq <= initq; 
-        //first read signal
-        if(fifo_read) begin
-		    init <= 1'b1;
-	    end
-		if({initq,initqq}==2'b10 || {ade,ade_q}==2'b01) begin
-			aclkc <= axdout[23:12]; 
-		end
-		
-	    if(init & ~vde /*& ~ade*/ & hcnt == aclkc) begin
-		    ade <= 1'b1;
-	    end
-		// Aux Data Enable period 
-	    if(ade)begin
-		    if(adecnt == 6'd31)begin
-			    ade    <= 1'b0;
-		        adecnt <= 6'd0;
-		    end else begin
-			    adecnt <= adecnt + 6'd1;
-		    end
-	    end
-    end
-end
-
-
 
 // Generate AUDIO FIFO data
-wire [23:0]axdin_s,axdout_s;
+wire [24:0]axdin_s,axdout_s;
 wire ax_s_empty, ax_s_full;
 wire ax_s_wr_en, ax_s_rd_en;
 reg [11:0]ade_buf, ade_hcnt;
@@ -109,7 +244,6 @@ reg [23:0]ade_out;
 reg ade_gg;
 reg start;
 reg st,stc;
-
 
 reg       vblnk;
 reg [ 5:0]acnt;
@@ -125,8 +259,8 @@ parameter ADE_L = 3'd4;
 wire [15:0] ctim = axdout[24:9];
 
 reg [15:0] txpos;
-always @ (posedge pclk)begin
-  if(RSTBTN | reset)
+always @ (posedge fifo_clk)begin
+  if(sys_rst)
 	  txpos <= 16'd0;
   else begin
 	  if(vde)
@@ -136,43 +270,61 @@ always @ (posedge pclk)begin
   end
 end
 
-always@(posedge pclk)begin
-	if(RSTBTN | reset)begin
-		ax_recv_rd_en <= 1'b0;
-		astate        <= 3'd0; 
+reg        adep;
+reg [15:0] start_pos;
+reg [8:0]  auxd;
+
+always@(posedge fifo_clk)begin
+	if(sys_rst)begin
+		ax_recv_rd_en <=  1'b0;
+		astate        <=  3'd0; 
 		clk_ade       <= 11'd0;
-	  acnt          <= 6'd0;
-		vblnk         <= 1'b0;
+	    acnt          <=  6'd0;
+		vblnk         <=  1'b0;
+		adep          <=  1'b0;
+		start_pos     <= 16'd0;
+		auxd          <=  9'd0;
 	end else begin
 	  case(astate)
-          READY : begin
-                    if(vde) begin
-                       ax_recv_rd_en <= 1'b1;
-                       astate <= IDLE;
+	      FIRST : if(vde) astate <= READY;
+          READY : begin  //Initial 
+		            if(txpos == 16'd0 && ~vde)
+						ax_recv_rd_en <= 1'b1;
+					if(txpos == 16'd1)begin
+						ax_recv_rd_en <= 1'b0;
+						start_pos     <= axdout[24:9];
+						auxd          <= axdout[8:0];
+						astate        <= IDLE;
                     end
                   end
           IDLE  : begin
-			         if(txpos == ctim)begin
-                        ax_recv_rd_en <= 1'b0;
-                        astate <= ADE;
+			         if(txpos+1 == start_pos)begin
+                        ax_recv_rd_en <= 1'b1;
+                        astate        <= ADE;
                         acnt <= 6'd0;
+						adep <= 1'b1;
                      end else
                         ax_recv_rd_en <= 1'b0;
                   end
           ADE   : begin
+					 auxd <= axdout[8:0];
                      acnt <= acnt + 6'd1;
+					 adep <= 1'b1;
                      ax_recv_rd_en <= 1'b1;
                      if(acnt == 6'd30)
                         astate <= ADE_L;
                   end
           ADE_L : begin
-                     if(txpos == ctim)begin
+                     if(txpos+1 == axdout[24:9])begin
+						auxd    <= axdout[8:0];
                         astate  <= ADE;
                         acnt    <= 6'd0;
+						adep    <= 1'b0;
+						ax_recv_rd_en <= 1'b1;
                      end else begin
                         astate  <= IDLE;
-                        clk_ade <= ctim;
-                        ax_recv_rd_en <= 1'b1;
+						adep <= 1'b0;
+                        ax_recv_rd_en <= 1'b0;
                      end
                   end
 		endcase
@@ -180,86 +332,76 @@ always@(posedge pclk)begin
 	end
 end
 
+reg [10:0] tc_hsblnk;
+reg [10:0] tc_hssync;
+reg [10:0] tc_hesync;
+reg [10:0] tc_heblnk;
+reg [10:0] tc_vsblnk;
+reg [10:0] tc_vssync;
+reg [10:0] tc_vesync;
+reg [10:0] tc_veblnk;
 
-// Generating a Number of audio enable period
-reg [3:0] ade_c;
-reg [3:0] ade_numd;
-reg [4:0] cnt_32;
-reg       vde_b;
-always @ (posedge fifo_clk)begin
-  vde_b <= vde;
-  if(sys_rst || {vde,vde_b}==2'b10)begin
-	  ade_c  <= 4'd0;
-	  cnt_32 <= 5'd0; 
-	  ade_numd <= ade_c;
-   end else begin
-	  if(ade)begin
-		  if(cnt_32 == 5'd31)begin
-			cnt_32 <= 5'd0;
-			ade_c  <= ade_c + 4'd1;
-		  end else begin
-		    cnt_32 <= cnt_32 + 5'd1;
-		  end
-		end
-	end
+
+//---------------------------------------------------
+// Test Bench
+//---------------------------------------------------
+
+wire [28:0] fifo_din;
+wire        recv_fifo_wr_en;
+wire [24:0] axdin;
+wire        ax_recv_wr_en;
+wire [10:0] tx_hcnt,tx_vcnt;
+wire [10:0] y_din = fifo_din[26:16];
+wire        tx_b_hsync,tx_b_vsync; 
+wire        tx_vblnk,tx_hblnk;
+
+timing_gen txtiming(
+  .tc_hsblnk(tc_hsblnk),
+  .tc_hssync(tc_hssync),
+  .tc_hesync(tc_hesync),
+  .tc_heblnk(tc_heblnk),
+
+  .hcount(tx_hcnt),
+  .hsync(tx_b_hsync),
+  .hblnk(tx_hblnk),
+
+  .tc_vsblnk(tc_vsblnk),
+  .tc_vssync(tc_vssync),
+  .tc_vesync(tc_vesync),
+  .tc_veblnk(tc_veblnk),
+
+  .vcount(tx_vcnt),
+  .vsync(tx_b_vsync),
+  .vblnk(tx_vblnk),
+
+  .restart(sys_rst),
+  .clk74m(fifo_clk),
+  .clk125m(sys_clk),
+
+  .fifo_wr_en(recv_fifo_wr_en),
+  .rst(),
+  .y_din(y_din)
+);
+
+wire active;
+reg active_q;
+reg vsync, hsync;
+reg VGA_HSYNC, VGA_VSYNC;
+reg rxvde;
+reg hvsync_polarity = 0;
+
+assign active = !tx_hblnk && !tx_vblnk;
+
+always @ (posedge fifo_clk) begin
+	hsync <= tx_b_hsync ^ hvsync_polarity ;
+	vsync <= tx_b_vsync ^ hvsync_polarity ;
+	VGA_HSYNC <= hsync;
+	VGA_VSYNC <= vsync;
+
+	active_q <= active;
+	rxvde <= active_q;
 end
 
-//
-// Test Bench
-//
-reg sys_rst;
-reg empty = 0;
-reg full  = 0;
-wire rd_en;
-wire TXEN;
-wire [7:0]TXD;
-reg [47:0]tx_data;
-
-
-wire ade_tx = ((vcnt < 11'd22) || (vcnt > 11'd741)) && ((hcnt >= 11'd1) && (hcnt < 11'd80));
-wire [3:0]ade_num = (vcnt >= 22 && vnct <= 741) ? 4'd0 : 4'd10;
-
-gmii_tx gmiisend(
-    .id(1'b1),
-	/*** FIFO ***/
-	.fifo_clk(fifo_clk),
-	.sys_rst(sys_rst),
-	.dout(tx_data), //48bit
-	.empty(empty),
-	.full(full),
-	.rd_en(rd_en),
-	.wr_en(vde),
-	// AX FIFO
-	.adesig(ade_tx),
-	.ade_num(ade_num),
-	.axdout(axdout_s),
-	.ax_send_full(ax_s_full),
-	.ax_send_empty(ax_s_empty),
-	.ax_send_rd_en(ax_s_rd_en),
-
-	/*** Ethernet PHY GMII ****/
-	.tx_clk(gmii_tx_clk),
-	.tx_en(TXEN),
-	.txd(TXD)
-);
-
-afifo24 afifo24_send (
-    .Data(axdin_s),
-    .WrClock(fifo_clk),
-    .RdClock(sys_clk),
-    .WrEn(ax_s_wr_en),
-    .RdEn(ax_s_rd_en),
-    .Reset(sys_rst),
-    .RPReset(sys_rst),
-    .Q(axdout_s),
-    .Empty(ax_s_empty),
-    .Full(ax_s_full)
-);
-
-wire [28:0]fifo_din;
-wire recv_fifo_wr_en;
-wire [24:0]axdin;
-wire ax_recv_wr_en;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(sys_clk),
@@ -273,7 +415,7 @@ gmii2fifo24 gmii2fifo24(
 	.aux_data_in(axdin),
 	.aux_wr_en(ax_recv_wr_en)
 );
-wire axempty,axfull;
+wire rx_aempty,rx_afull;
 reg ax_recv_rd_en;
 
 afifo25 afifo24_recv (
@@ -285,68 +427,13 @@ afifo25 afifo24_recv (
     .Reset(sys_rst),
     .RPReset(sys_rst),
     .Q(axdout),
-    .Empty(axempty),
-    .Full(axfull)
+    .Empty(rx_aempty),
+    .Full(rx_afull)
 );
 
 reg [3:0]b_left,bb_left;
 reg fl;
 reg flg;
-reg [5:0]acnt;
-reg vblnk;
-
-wire [10:0] ctim = axdout[24:14];
-reg initb;
-always@(posedge fifo_clk)begin
-	if(sys_rst )begin
-		init          <= 1'b0;
-		initb         <= 1'b0;
-		ax_recv_rd_en <= 1'b0;
-		b_left        <= 4'd0;
-		bb_left       <= 4'd0;
-	  acnt          <= 6'd0;
-		vblnk         <= 1'b0;
-	end else begin
-	  bb_left <= b_left;
-		initb <= vde;
-
-	  if(~axdout[13])
-	    b_left <= axdout[12:9];
-		
-		/* Intial AUX FIFO Control*/
-		if(vde & ~init)begin
-		  if({vde,initb} == 2'b10)
-			  ax_recv_rd_en <= 1'b1;
-		  else begin
-			  ax_recv_rd_en <= 1'b0;
-				init <= 1'b1;
-			end
-		end
-
-		if(~vde & ~axempty & init)
-			vblnk <= 1'b1;
-		else 
-			vblnk <= 1'b0;
-
-		if(vblnk)begin
-			if(hcnt[10:0] == ctim)begin  // ADE start point, equals Clock Timing
-				ax_recv_rd_en <= 1'b1;
-				acnt <= 6'd0;
-			end
-
-			if(ax_recv_rd_en)begin
-				if(acnt == 6'd31 && hcnt[10:0] != ctim)begin
-					ax_recv_rd_en <= 1'd0;
-					acnt <= acnt + 1;
-			  end else if(acnt == 6'd31 && hcnt[10:0] == ctim)begin
-				  acnt <= 6'd0;
-				end else
-				  acnt <= acnt + 1;
-			end
-		end
-	end
-end
-
 
 //
 // a clock
@@ -358,33 +445,39 @@ begin
 	#1;
 end
 endtask
-
 //
 // Scinario
 //
 
-reg [47:0] vrom [0:2024];
+reg [11:0] adata;
+reg [47:0] vrom [0:2475000];
 reg [11:0] arom [0:2024];
-reg [11:0]vcounter = 12'd0;
+reg [21:0]vcounter = 22'd0;
 reg [11:0]acounter = 12'd0;
+reg [3:0]vv,hh,aa;
+assign vsyn = vv[0];
+assign hsyn = hh[0];
+assign rxade  = aa[0];
+assign adin = adata;
 
-always@(posedge sys_clk)begin
-  if(rd_en)begin
-	{tx_data}  <= vrom[vcounter];
-	vcounter   <= vcounter + 12'd1;
-  end
-  {aux2, aux1, aux0}  <= arom[acounter];
-  acounter   <= acounter + 12'd1;
- 
+always@(posedge fifo_clk)begin
+  {vv,hh,aa,tmds_data,adata}     <= vrom[vcounter];
+	vcounter	<= vcounter + 22'd1;
 end
-
 
 initial begin
 	$dumpfile("./test.vcd");
 	$dumpvars(0, tb_ether);
-	$readmemh("vrequest.mem",vrom);
-	$readmemh("arequest.mem",arom);
+	$readmemh("request.mem",vrom);
 	sys_rst = 1'b1;
+	tc_hsblnk = `HPIXELS_HDTV720P - 11'd1;
+	tc_hssync = `HPIXELS_HDTV720P - 11'd1 + `HFNPRCH_HDTV720P;
+	tc_hesync = `HPIXELS_HDTV720P - 11'd1 + `HFNPRCH_HDTV720P + `HSYNCPW_HDTV720P;
+	tc_heblnk = `HPIXELS_HDTV720P - 11'd1 + `HFNPRCH_HDTV720P + `HSYNCPW_HDTV720P + `HBKPRCH_HDTV720P;
+	tc_vsblnk =  `VLINES_HDTV720P - 11'd1;
+	tc_vssync =  `VLINES_HDTV720P - 11'd1 + `VFNPRCH_HDTV720P;
+	tc_vesync =  `VLINES_HDTV720P - 11'd1 + `VFNPRCH_HDTV720P + `VSYNCPW_HDTV720P;
+	tc_veblnk =  `VLINES_HDTV720P - 11'd1 + `VFNPRCH_HDTV720P + `VSYNCPW_HDTV720P + `VBKPRCH_HDTV720P;
 	vcounter = 0;
 	acounter = 0;
 	
@@ -396,7 +489,7 @@ initial begin
 	waitclock;
 	
 	
-	#1000000;
+	#41000000;
 	$finish;
 end
 

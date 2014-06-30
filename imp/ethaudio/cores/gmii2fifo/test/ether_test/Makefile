@@ -1,4 +1,4 @@
-SRC = tb_ether.v ../../rtl/gmii_rec.v ../../../crc/rtl/crc_gen.v ../../../gmii_tx/rtl/gmii_tx.v ../../../fifo/test/afifo25.v ../../../fifo/test/asfifo.v ../../../fifo/test/graycounter.v ../../../fifo/test/afifo24.v 
+SRC = tb_ether.v ../../rtl/gmii_rec.v ../../../crc/rtl/crc_gen.v ../../../gmii_tx/rtl/gmii_tx.v ../../../fifo/test/afifo25.v ../../../fifo/test/asfifo.v ../../../fifo/test/graycounter.v ../../../fifo/test/afifo24.v ../../../timing/rtl/timing_gen.v ../../../timing/rtl/tmds_timing.v ../../../fifo/test/afifo48.v
 
 tb_system: $(SRC)
 	iverilog -o tb_system $(SRC)
