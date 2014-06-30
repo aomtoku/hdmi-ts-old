@@ -17,7 +17,7 @@ module gmii2fifo24#(
 	output reg         recv_en,
 	output wire        packet_en,
 	// AUX FIFO
-	output wire [23:0] aux_data_in,
+	output wire [24:0] aux_data_in,
 	output wire        aux_wr_en
 );
 
@@ -50,11 +50,12 @@ reg        vinvalid;
 reg        audio_en;
 reg [11:0] x_info;
 reg [11:0] y_info;
-reg [ 7:0] pcktinfo;
+reg [ 3:0] pcktinfo;
+reg [ 3:0] adenum; 
 
-parameter video = 8'b00000000;
-parameter audio = 8'b00000001;
-parameter vidax = 8'b00000010;
+parameter video = 4'b0000;
+parameter audio = 4'b0001;
+parameter vidax = 4'b0010;
 
 always@(posedge clk125) begin
 	if(sys_rst) begin
@@ -73,7 +74,8 @@ always@(posedge clk125) begin
 		pre_en      <= 1'b0;
 		audio_en    <= 1'b0;
 		vinvalid    <= 1'b0;
-		pcktinfo    <= 8'd0;
+		pcktinfo    <= 4'd0;
+		adenum      <= 4'd0;
 	end else begin
 		if(rx_dv) begin
 			rx_count <= rx_count + 11'd1;
@@ -104,12 +106,13 @@ always@(posedge clk125) begin
 						ipv4_dst  [ 7:0] == (ipv4_dst_rec[7:0] + {7'd0, id}) &&
 						dst_port  [15:0] == dst_port_rec) begin
 						// packet info byte
-						case(rxd)
+						case(rxd[3:0])
 						  video: packet_dv   <= 1'b1;
 						  vidax: packet_dv   <= 1'b1;
 						  audio: audio_en    <= 1'b1;
 					  endcase
-						pcktinfo[7:0] <= rxd;
+						pcktinfo <= rxd[3:0];
+						adenum   <= rxd[7:4];
 						//finish  <= rx_count + udp_len;
 					end
 				end
@@ -147,6 +150,8 @@ always@(posedge clk125) begin
 			pre_en      <= 1'b0;
 			vinvalid    <= 1'b0;
 			audio_en    <= 1'b0;
+			pcktinfo    <= 4'd0;
+			adenum      <= 4'd0;
 		end
 	end
 end
@@ -204,7 +209,7 @@ end
 reg [ 1:0]cnt2;
 reg [ 5:0]a_cnt;
 reg [ 3:0]left;
-reg [23:0]daux;
+reg [24:0]daux;
 reg [7:0] tmp;
 reg [3:0] c9;
 reg       ax_wr_en;
@@ -235,13 +240,12 @@ always@(posedge clk125)begin
 					  a_cnt      <= 6'd0;
 					  aux_state  <= AUX;
 					  ax_wr_en   <= 1'b0;
-					  daux[23:21] <= rxd[2:0];
-					  left       <= rxd[7:4]; //
-					  daux[12:9] <= rxd[7:4];
+					  daux[24:17] <= rxd;
+					  left       <= adenum;
 			    end else begin
 					  ax_wr_en  <= 1'b0;
 				    a_cnt     <= 6'd1;
-					  daux[20:13] <= rxd;
+					  daux[16:9] <= rxd;
 			    end
 			end
 			AUX:begin
