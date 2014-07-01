@@ -250,11 +250,12 @@ reg [ 5:0]acnt;
 reg [ 2:0]astate;
 reg [10:0]clk_ade;
 
-parameter FIRST = 3'd0;
-parameter READY = 3'd1;
-parameter IDLE  = 3'd2;
-parameter ADE   = 3'd3;
-parameter ADE_L = 3'd4;
+parameter FIRST  = 3'd0;
+parameter READY1 = 3'd1;
+parameter READY2 = 3'd2;
+parameter IDLE   = 3'd3;
+parameter ADE    = 3'd4;
+parameter ADE_L  = 3'd5;
 
 wire [15:0] ctim = axdout[24:9];
 wire fifo_read;
@@ -290,7 +291,8 @@ always @ (posedge fifo_clk)begin
   end
 end 
 
-wire vde1st = (~firstvde & vde);
+wire vde1st = (~firstvde & rxvde);
+wire [15:0]location = axdout[24:9];
 
 always@(posedge fifo_clk)begin
 	if(sys_rst)begin
@@ -307,58 +309,77 @@ always@(posedge fifo_clk)begin
 	  if(~vrx_empty & fifo_read)
 		  xinit <= 1'b1;
       /* aux recv RST logic */
-      if(vde1st && (start_pos > 16'd400))
-	    ax_recv_rd_en <= 1'b1;
-      else 
-        ax_recv_rd_en <= 1'b0;
+      /*if(vde1st)begin
+        if(start_pos > 16'd400))
+          ax_recv_rd_en <= 1'b1;
+        else 
+          ax_recv_rd_en <= 1'b0;
+      end*/
 
 	  if(vrx_empty)
 		  astate <= FIRST;
+	  if(rx_aempty)
+		  astate <= FIRST;
 
 	  case(astate)
-	      FIRST : if(rxvde & xinit) astate <= READY;
-          READY : begin  //Initial 
-		            if(txpos == 16'd0 && ~rxvde && ~rx_aempty)
-						ax_recv_rd_en <= 1'b1;
-					if(txpos == 16'd1)begin
-						ax_recv_rd_en <= 1'b0;
-						start_pos     <= axdout[24:9];
-						auxd          <= axdout[8:0];
-						astate        <= IDLE;
-                    end
+          FIRST : begin
+                    ax_recv_rd_en <= 1'b0;
+                    if(rxvde & xinit) begin
+                      astate <= READY1;
+                      ax_recv_rd_en <= 1'b0;
+				    end
+                  end
+          READY1: begin
+                    if(txpos == 16'd0 && ~rxvde && ~rx_aempty) begin
+                      ax_recv_rd_en <= 1'b1;
+                      astate        <= READY2;
+                    end else
+                      ax_recv_rd_en <= 1'b0;
+                  end 
+          READY2: begin
+                    ax_recv_rd_en <= 1'b0;
+                    start_pos     <= axdout[24:9];
+                    auxd          <= axdout[8:0];
+                    astate        <= IDLE;
                   end
           IDLE  : begin
-			         if(txpos+1 == start_pos)begin
+                    if(vde1st)begin
+                      if(start_pos > 16'd400)begin
                         ax_recv_rd_en <= 1'b1;
-                        astate        <= ADE;
-                        acnt <= 6'd0;
-						adep <= 1'b1;
-                     end else
+						start_pos     <= axdout[24:9];
+                      end else 
                         ax_recv_rd_en <= 1'b0;
+                    end else if(txpos+1 == start_pos)begin
+                      ax_recv_rd_en <= 1'b1;
+                      astate        <= ADE;
+                      acnt <= 6'd0;
+                      adep <= 1'b1;
+                    end else
+                      ax_recv_rd_en <= 1'b0;
                   end
           ADE   : begin
-					 auxd <= axdout[8:0];
-                     acnt <= acnt + 6'd1;
-					 adep <= 1'b1;
-                     ax_recv_rd_en <= 1'b1;
-                     if(acnt == 6'd30)
-                        astate <= ADE_L;
+                    auxd <= axdout[8:0];
+                    acnt <= acnt + 6'd1;
+                    adep <= 1'b1;
+                    ax_recv_rd_en <= 1'b1;
+                    if(acnt == 6'd30)
+                       astate <= ADE_L;
                   end
           ADE_L : begin
                      if(txpos+1 == axdout[24:9])begin
-						auxd    <= axdout[8:0];
+                        auxd    <= axdout[8:0];
                         astate  <= ADE;
                         acnt    <= 6'd0;
-						adep    <= 1'b0;
-						ax_recv_rd_en <= 1'b1;
+                        adep    <= 1'b0;
+                        ax_recv_rd_en <= 1'b1;
                      end else begin
                         astate  <= IDLE;
-						adep <= 1'b0;
-						start_pos <= axdout[24:9];
+                        adep <= 1'b0;
+                        start_pos <= axdout[24:9];
                         ax_recv_rd_en <= 1'b0;
                      end
                   end
-		endcase
+      endcase
 		
 	end
 end
