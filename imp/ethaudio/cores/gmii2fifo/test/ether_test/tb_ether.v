@@ -273,7 +273,7 @@ end
 reg        adep;
 reg [15:0] start_pos;
 reg [8:0]  auxd;
-
+reg xinit;
 always@(posedge fifo_clk)begin
 	if(sys_rst)begin
 		ax_recv_rd_en <=  1'b0;
@@ -284,9 +284,12 @@ always@(posedge fifo_clk)begin
 		adep          <=  1'b0;
 		start_pos     <= 16'd0;
 		auxd          <=  9'd0;
+		xinit         <=  1'b0;
 	end else begin
+	  if(recv_fifo_wr_en)
+		  xinit <= 1'b1;
 	  case(astate)
-	      FIRST : if(vde) astate <= READY;
+	      FIRST : if(vde & xinit) astate <= READY;
           READY : begin  //Initial 
 		            if(txpos == 16'd0 && ~vde)
 						ax_recv_rd_en <= 1'b1;
