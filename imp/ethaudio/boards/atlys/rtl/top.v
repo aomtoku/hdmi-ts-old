@@ -658,15 +658,105 @@ always @ (posedge pclk)begin
   end
 end
 
+reg        adep;
+reg [15:0] start_pos;
+reg [8:0]  auxd;
+reg xinit;
+
+reg firstvde, vdevde;
+always @ (posedge pclk)begin 
+  if(RSTBTN | reset)begin
+    vdevde <= 1'b0;
+	firstvde <= 1'b0;
+  end else begin
+
+    vdevde <= vde;
+    if({vde,vdevde}==2'b01)
+      firstvde <= 1'b1;
+    if(txpos == 16'd2000)
+	  firstvde <= 1'b0;
+  end
+end 
+
+wire vde1st = (~firstvde & vde);
+
+
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
-		ax_recv_rd_en <= 1'b0;
-		astate        <= 3'd0; 
-		clk_ade       <= 11'd0;
-	  acnt          <= 6'd0;
-		vblnk         <= 1'b0;
+		ax_recv_rd_en <=  1'b0;
+		astate        <=  3'd0; 
+	    acnt          <=  6'd0;
+		vblnk         <=  1'b0;
+        adep          <=  1'b0;
+		start_pos     <= 16'd0;
+		auxd          <=  9'd0;
+		xinit         <=  1'b0;
+
 	end else begin
+	  if(~recv_empty & fifo_read)
+		  xinit <= 1'b1;
+
+      /* aux recv RST logic */
+      if(vde1st && (start_pos > 16'd400))
+	    ax_recv_rd_en <= 1'b1;
+      else 
+        ax_recv_rd_en <= 1'b0;
+
+	  if(recv_empty)
+		  astate <= FIRST;
+
+	  /* State Machine of AUX  */
 	  case(astate)
+          FIRST : if(vde & xinit) astate <= READY;
+          READY : begin  //Initial 
+		            if((txpos == 16'd0) & ~vde & ~ax_recv_empty)
+						ax_recv_rd_en <= 1'b1;
+					if(txpos == 16'd1)begin
+						ax_recv_rd_en <= 1'b0;
+						start_pos     <= axdout[24:9];
+						auxd          <= axdout[8:0];
+						astate        <= IDLE;
+                    end
+                  end
+          IDLE  : begin
+		             if(~ax_recv_empty && (start_pos == 16'd0))
+						 start_pos <= 16'd60;
+			         if(~ax_recv_empty && (txpos+1 == start_pos))begin
+                        ax_recv_rd_en <= 1'b1;
+                        astate        <= ADE;
+                        acnt <= 6'd0;
+						adep <= 1'b1;
+                     end else
+                        ax_recv_rd_en <= 1'b0;
+                  end
+          ADE   : begin
+					 auxd <= axdout[8:0];
+                     acnt <= acnt + 6'd1;
+					 adep <= 1'b1;
+                     ax_recv_rd_en <= 1'b1;
+                     if(acnt == 6'd30)
+                        astate <= ADE_L;
+                  end
+          ADE_L : begin
+                     if(txpos+1 == axdout[24:9])begin
+						auxd    <= axdout[8:0];
+                        astate  <= ADE;
+                        acnt    <= 6'd0;
+						adep    <= 1'b0;
+						ax_recv_rd_en <= 1'b1;
+                     end else begin
+                        astate  <= IDLE;
+						start_pos <= axdout[24:9];
+						adep <= 1'b0;
+                        ax_recv_rd_en <= 1'b0;
+                     end
+                  end
+		endcase
+		
+	end
+end
+
+/*
           READY : begin
                     if(vde) begin
                        ax_recv_rd_en <= 1'b0;
@@ -701,11 +791,11 @@ always@(posedge pclk)begin
 		
 	end
 end
-
-wire ade = ax_recv_rd_en;
-assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
-assign out_aux1 = axdout[ 4:1];
-assign out_aux2 = axdout[ 8:5];
+*/
+wire ade = adep;
+assign out_aux0 = {1'b1, auxd[0],VGA_VSYNC,VGA_HSYNC};
+assign out_aux1 = auxd[ 4:1];
+assign out_aux2 = auxd[ 8:5];
 wire   rx0_hsync;          // hsync data
 wire   rx0_vsync;          // vsync data
 wire   rx0_vde, rx0_pclkx10, rx0_serdesstrobe, rx0_pclkx2;
@@ -1030,10 +1120,10 @@ gmii_tx gmii_tx(
 
 always @ (*)
   case(DEBUG_SW[3:2])
-	  2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full , ax_send_empty, ax_recv_full,ax_recv_empty};
-    2'b01 : LED <= ctim[7:0];
-    2'b10 : LED <= ctim[15:8];
-    2'b11 : LED <= {ax_recv_wr_en,init,vblnk,1'd0,rx0_reset,astate};
+	2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full, ax_send_empty, ax_recv_full,ax_recv_empty};
+    2'b01 : LED <= start_pos[ 7:0];
+    2'b10 : LED <= start_pos[15:8];
+    2'b11 : LED <= {ax_recv_wr_en,init,vblnk,adep,rx0_reset,astate};
 	endcase
 
 `define DEBUG
@@ -1048,7 +1138,7 @@ reg [15:0]mem;
 reg wr_en, send;
 reg test;
 
-always @ (posedge rx0_pclk)begin
+always @ (posedge pclk)begin
   if(RSTBTN) begin
 		xcnt <= 6'd0;
 		mem <= 16'd0;
@@ -1056,8 +1146,8 @@ always @ (posedge rx0_pclk)begin
 		send <= 1'b0;
 	end else begin
 	  test <= rx0_vsync;
-		if(rx0_ade & cnt_32 == 0) begin
-			mem[15:0] <= pos;
+		if(ade && (acnt == 6'd0)) begin
+			mem[15:0] <= start_pos;
       //mem[17:11] <= 7'd0;
       //mem[10:0]  <= {rx0_aux2, rx0_aux1, rx0_aux0[2]};
 			send <= 1'b1;
@@ -1067,16 +1157,16 @@ always @ (posedge rx0_pclk)begin
 			  wr_en <= 1'b1;
 			  data  <= 8'h0a;
 			  send  <= 1'b0;
-				xcnt  <= 6'd0;
+			  xcnt  <= 6'd0;
 		  end else if(xcnt == 6'd4) begin
 			  wr_en <= 1'b1;
 			  data  <= 8'h0d;
-				xcnt  <= 6'd7;
+			  xcnt  <= 6'd5;
 		  end else begin
 		    wr_en <= 1'b1;
-			  mem  <= {mem[11:0],4'd0};
-				data <= ascii(mem[15:12]);
-				xcnt  <= xcnt + 1;
+			mem  <= {mem[11:0],4'd0};
+			data <= ascii(mem[15:12]);
+			xcnt  <= xcnt + 1;
 		  end
 		end else begin
 		  wr_en <= 1'b0;
