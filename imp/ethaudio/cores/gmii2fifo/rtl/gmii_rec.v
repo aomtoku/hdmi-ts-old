@@ -17,7 +17,7 @@ module gmii2fifo24#(
 	output reg         recv_en,
 	output wire        packet_en,
 	// AUX FIFO
-	output wire [23:0] aux_data_in,
+	output wire [24:0] aux_data_in,
 	output wire        aux_wr_en
 );
 
@@ -50,11 +50,12 @@ reg        vinvalid;
 reg        audio_en;
 reg [11:0] x_info;
 reg [11:0] y_info;
-reg [ 7:0] pcktinfo;
+reg [ 3:0] pcktinfo;
+reg [ 3:0] adenum; 
 
-parameter video = 8'b00000000;
-parameter audio = 8'b00000001;
-parameter vidax = 8'b00000010;
+parameter video = 4'b0000;
+parameter audio = 4'b0001;
+parameter vidax = 4'b0010;
 
 always@(posedge clk125) begin
 	if(sys_rst) begin
@@ -73,7 +74,8 @@ always@(posedge clk125) begin
 		pre_en      <= 1'b0;
 		audio_en    <= 1'b0;
 		vinvalid    <= 1'b0;
-		pcktinfo    <= 8'd0;
+		pcktinfo    <= 4'd0;
+		adenum      <= 4'd0;
 	end else begin
 		if(rx_dv) begin
 			rx_count <= rx_count + 11'd1;
@@ -104,12 +106,13 @@ always@(posedge clk125) begin
 						ipv4_dst  [ 7:0] == (ipv4_dst_rec[7:0] + {7'd0, id}) &&
 						dst_port  [15:0] == dst_port_rec) begin
 						// packet info byte
-						case(rxd)
+						case(rxd[3:0])
 						  video: packet_dv   <= 1'b1;
 						  vidax: packet_dv   <= 1'b1;
 						  audio: audio_en    <= 1'b1;
 					  endcase
-						pcktinfo[7:0] <= rxd;
+						pcktinfo <= rxd[3:0];
+						adenum   <= rxd[7:4];
 						//finish  <= rx_count + udp_len;
 					end
 				end
@@ -132,7 +135,7 @@ always@(posedge clk125) begin
 					pre_en    <= 1'b0;
 				end
 			endcase
-			if(left == 4'd1 && a_cnt == 6'd35)
+			if(left == adenum && a_cnt == 6'd35)
 				audio_en <= 1'b0;
 		end else begin
 			rx_count    <= 11'd0;
@@ -147,6 +150,8 @@ always@(posedge clk125) begin
 			pre_en      <= 1'b0;
 			vinvalid    <= 1'b0;
 			audio_en    <= 1'b0;
+			pcktinfo    <= 4'd0;
+			adenum      <= 4'd0;
 		end
 	end
 end
@@ -204,14 +209,15 @@ end
 reg [ 1:0]cnt2;
 reg [ 5:0]a_cnt;
 reg [ 3:0]left;
-reg [23:0]daux;
+reg [8:0]daux;
+reg [15:0]pos;
 reg [7:0] tmp;
 reg [3:0] c9;
 reg       ax_wr_en;
 reg       aux_state;
 
 assign aux_wr_en   = ax_wr_en;
-assign aux_data_in = daux;
+assign aux_data_in = {pos,daux};
 
 parameter AUXID = 2'b00;
 parameter AUX   = 2'b01;
@@ -226,7 +232,8 @@ always@(posedge clk125)begin
 		ax_wr_en  <=  1'b0;
 		aux_state <=  1'b0;
 		a_cnt     <=  6'd0;
-		daux      <= 24'd0;
+		daux      <=  9'd0;
+		pos       <= 16'd0;
 	end else begin
 	  if(audio_en) begin
       case(aux_state)
@@ -235,26 +242,28 @@ always@(posedge clk125)begin
 					  a_cnt      <= 6'd0;
 					  aux_state  <= AUX;
 					  ax_wr_en   <= 1'b0;
-					  daux[23:21] <= rxd[2:0];
-					  left       <= rxd[7:4]; //
-					  daux[12:9] <= rxd[7:4];
+					  pos[15:8]  <= rxd;
+					  left       <= left + 1;
 			    end else begin
 					  ax_wr_en  <= 1'b0;
 				    a_cnt     <= 6'd1;
-					  daux[20:13] <= rxd;
+					  pos[7:0] <= rxd;
 			    end
 			end
 			AUX:begin
-			    c9 <= c9 + 4'd1;
+			    if(c9 == 4'd8)
+					c9 <= 4'd0;
+				else
+			        c9 <= c9 + 4'd1;
 			    if(a_cnt == 6'd35)begin
 				    a_cnt      <= 6'd0;
 				    cnt2       <= 2'd0;
-						daux[ 8:0] <= {rxd,tmp[0]};
+					daux[ 8:0] <= {rxd,tmp[0]};
 				    ax_wr_en   <= 1'b0;
-						if(left == 4'd1)begin
-							aux_state <=  NO;
-						end else
-			  	    aux_state  <= AUXID;
+					if(left == adenum)begin
+						aux_state <=  NO;
+					end else
+			  	        aux_state  <= AUXID;
 				 end else begin
 				    a_cnt <= a_cnt + 6'd1; // counting 32 clock cycles for audio data enable
 						//daux[12] <= 1'b0;
@@ -312,6 +321,7 @@ always@(posedge clk125)begin
 			  default : ax_wr_en <= 1'b0;
 		  endcase
 	  end else begin
+	    left <= 4'd0;
 	    ax_wr_en  <= 1'b0;
 			aux_state <= 1'b0;
 	  end

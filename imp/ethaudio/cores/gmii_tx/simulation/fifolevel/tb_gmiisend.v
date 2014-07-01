@@ -77,6 +77,8 @@ always @ (posedge fifo_clk)begin
 end
 
 
+wire ade_tx = ~vact & (~ax_send_wr_en & rx0_hsync);
+reg ax_ts_rd_en;
 wire vde = (hcnt > 220 && hcnt < 1500) && (vcnt > 20 && vcnt < 740); 
 reg ainit;
 wire a_wr_en = ainit & ade;
@@ -84,6 +86,7 @@ wire txx = ainit & ~video_en & (hcnt == 11'd1447); // The count timing ADE perio
 wire vadx = ainit & ({vde,vde_b} == 2'b10); // The count timing ADE periods
 
 always @ (posedge fifo_clk)begin
+  ax_ts_rd_en <= ade_tx;
   vde_b <= vde;
   if(sys_rst)begin
 	  cnt_32  <= 5'd0; 
@@ -92,7 +95,7 @@ always @ (posedge fifo_clk)begin
 	end else begin
 	  if(a_wr_en & cnt_32 == 5'd0)
 			ade_c <= ade_c + 4'd1;
-	  if(txx | vadx)begin
+	  if(({ade_tx,ax_ts_rd_en} == 2'b10) | vadx)begin
 	    ade_c  <= 4'd0;
 	    ade_num <= ade_c;
 	  end
@@ -192,14 +195,14 @@ afifo25 send_audio_fifo(
      .RdClock(gmii_tx_clk),
      .WrEn(a_wr_en),
      .RdEn(ax_send_rd_en),
-     .Reset(sys_rst),
+     .Reset(sys_rst |  axrst),
      .RPReset(),
      .Q(ax_dout),
      .Empty(aempty),
      .Full(afull)
 );
 
-wire ade_tx = ainit && ~video_en && ((hcnt >= 11'd1498) && (hcnt < 11'd1500));
+//wire ade_tx = ainit && ~video_en && ((hcnt >= 11'd1498) && (hcnt < 11'd1500));
 //wire vperi = ((video_vcnt >= 25) && (video_vcnt <= 745)) ? 1'b1 : 1'b0;
 wire fil_wr_en =  video_en & (hcnt > 12'd220 & hcnt <= 12'd1420);
 

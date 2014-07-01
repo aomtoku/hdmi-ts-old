@@ -111,7 +111,7 @@ wire recv_fifo_wr_en;
 wire ax_recv_wr_en;
 reg ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
-wire [23:0] axdin;
+wire [24:0] axdin;
 
 gmii2fifo24 gmii2fifo24(
 	.clk125(RXCLK),
@@ -142,11 +142,11 @@ fifo29_32768 asfifo_recv (
 	.empty(recv_empty)
 );
 
-wire [23:0] axdout;
+wire [24:0] axdout;
 reg init;
 wire ax_rx_rd_en ;
 wire rst;
-afifo24_recv aux_recv(
+fifo25/*afifo24_recv*/ aux_recv(
   .rst(reset| RSTBTN  ),
 	.wr_clk(RXCLK),
 	.rd_clk(pclk),
@@ -619,82 +619,185 @@ assign green_data = dout[15:8];
 assign blue_data  = dout[7:0];
 
 
-assign JA[0] = RXDV;
-assign JA[1] = VGA_HSYNC;
-assign JA[2] = VGA_VSYNC;
-assign JA[3] = ax_recv_rd_en;
-assign JA[4] = ax_send_rd_en;
-assign JA[5] = fifo_read;
-assign JA[6] = init;
-assign JA[7] = rx0_reset;
 ////////////////////////////////////////////////////////////////
 // DVI Encoder
 ////////////////////////////////////////////////////////////////
 wire [4:0] tmds_data0, tmds_data1, tmds_data2;
 wire serdes_rst = RSTBTN | ~bufpll_lock;
 
-reg       vblnk;
 reg [ 5:0]acnt;
 reg [ 2:0]astate;
-reg [10:0]clk_ade;
 
-parameter FIRST = 3'd0;
-parameter READY = 3'd1;
-parameter IDLE  = 3'd2;
-parameter ADE   = 3'd3;
-parameter ADE_L = 3'd4;
+parameter FIRST  = 3'd0;
+parameter READY1 = 3'd1;
+parameter READY2 = 3'd2;
+parameter IDLE   = 3'd3;
+parameter ADE    = 3'd4;
+parameter ADE_L  = 3'd5;
 
-wire [10:0] ctim = axdout[23:13];
+wire [15:0] ctim = axdout[24:9];
+
+reg [15:0] txpos;
+always @ (posedge pclk)begin
+  if(RSTBTN | reset)
+	  txpos <= 16'd0;
+  else begin
+	  if(vde)
+		  txpos <= 16'd0;
+      else
+		  txpos <= txpos + 16'd1;
+  end
+end
+
+reg        adep;
+reg [15:0] start_pos;
+reg [ 8:0]  auxd;
+reg xinit;
+
+reg firstvde, vdevde;
+always @ (posedge pclk)begin 
+  if(RSTBTN | reset)begin
+    vdevde <= 1'b0;
+    firstvde <= 1'b0;
+  end else begin
+    vdevde <= vde;
+    if({vde,vdevde}==2'b01)
+      firstvde <= 1'b1;
+    if(txpos == 16'd2000)
+	  firstvde <= 1'b0;
+  end
+end 
+
+wire vde1st = (~firstvde & vde);
+
 always@(posedge pclk)begin
 	if(RSTBTN | reset)begin
-		ax_recv_rd_en <= 1'b0;
-		astate        <= 3'd0; 
-		clk_ade       <= 11'd0;
-	  acnt          <= 6'd0;
-		vblnk         <= 1'b0;
+		ax_recv_rd_en <=  1'b0;
+		astate        <=  3'd0; 
+	    acnt          <=  6'd0;
+        adep          <=  1'b0;
+		start_pos     <= 16'd0;
+		auxd          <=  9'd0;
+		xinit         <=  1'b0;
 	end else begin
+	  if(~recv_empty & fifo_read)
+		  xinit <= 1'b1;
+      /* aux recv RST logic */
+      //if(vde1st) && (start_pos > 16'd400))
+	  //  ax_recv_rd_en <= 1'b1;
+      //else 
+      //  ax_recv_rd_en <= 1'b0;
+	  /*
+	  if(recv_empty)
+		  astate <= FIRST;
+	  if(ax_recv_empty)
+		  astate <= FIRST;*/
+	  /* State Machine of AUX  */
 	  case(astate)
-		  FIRST : begin
-			          ax_recv_rd_en <= 1'b0;
-			          if(ax_recv_wr_en)begin
-                  clk_ade <= axdin[23:13];
-									astate  <= READY;
-								end
-			        end
-		  READY : if(vde)   astate <= IDLE;
-	    IDLE  : begin
-			          if(clk_ade == hcnt[10:0])begin
-									ax_recv_rd_en <= 1'b0;
-									astate <= ADE;
-									acnt <= 6'd0;
-								end else
-								  ax_recv_rd_en <= 1'b0;
-              end
-			ADE   : begin
-			          acnt <= acnt + 6'd1;
-			          ax_recv_rd_en <= 1'b1;
-								if(acnt == 6'd30)
-									astate <= ADE_L;
-			        end
-			ADE_L : begin
-			          if(hcnt[10:0] == ctim)begin
-									astate  <= ADE;
-									acnt    <= 6'd0;
-								end else begin
-									astate  <= IDLE;
-									clk_ade <= ctim;
-									ax_recv_rd_en <= 1'b0;
-								end
-			        end
+          FIRST : begin
+                    if(vde & xinit) begin
+                      astate <= READY1;
+                      ax_recv_rd_en <= 1'b0;
+				    end
+                  end
+          READY1: begin
+		             if(txpos == 16'd0 && ~vde && ~ax_recv_empty) begin
+						 ax_recv_rd_en <= 1'b1;
+					     astate <= READY2;
+					 end else
+                      ax_recv_rd_en <= 1'b0;
+				  end
+		  READY2: begin
+						ax_recv_rd_en <= 1'b0;
+						start_pos     <= axdout[24:9];
+						auxd          <= axdout[8:0];
+						astate        <= IDLE;
+                  end
+          IDLE  : begin
+                     if(vde1st)begin
+                       if(start_pos > 16'd400)
+	                     ax_recv_rd_en <= 1'b1;
+                       else begin
+                         ax_recv_rd_en <= 1'b0;
+						 start_pos <= axdout[24:9];
+                       end
+                     end else if(~ax_recv_empty && (txpos+1 == start_pos))begin
+                        ax_recv_rd_en <= 1'b1;
+                        astate        <= ADE;
+                        acnt <= 6'd0;
+						adep <= 1'b1;
+                     end else
+                        ax_recv_rd_en <= 1'b0;
+		             if(~ax_recv_empty && (start_pos == 16'd0))
+						 start_pos <= 16'd60;
+                  end
+          ADE   : begin
+					 auxd <= axdout[8:0];
+                     acnt <= acnt + 6'd1;
+					 adep <= 1'b1;
+                     ax_recv_rd_en <= 1'b1;
+                     if(acnt == 6'd30)
+                        astate <= ADE_L;
+                  end
+          ADE_L : begin
+                     if(txpos+1 == axdout[24:9])begin
+						auxd    <= axdout[8:0];
+                        astate  <= ADE;
+                        acnt    <= 6'd0;
+						adep    <= 1'b0;
+						ax_recv_rd_en <= 1'b1;
+                     end else begin
+                        astate  <= IDLE;
+						start_pos <= axdout[24:9];
+						adep <= 1'b0;
+                        ax_recv_rd_en <= 1'b0;
+                     end
+                  end
 		endcase
 		
 	end
 end
 
-wire ade = ax_recv_rd_en;
-assign out_aux0 = {1'b1, axdout[0],VGA_VSYNC,VGA_HSYNC};
-assign out_aux1 = axdout[ 4:1];
-assign out_aux2 = axdout[ 8:5];
+/*
+          READY : begin
+                    if(vde) begin
+                       ax_recv_rd_en <= 1'b0;
+                       astate <= IDLE;
+                    end
+                  end
+          IDLE  : begin
+			         if(txpos-1  == ctim)begin
+                        ax_recv_rd_en <= 1'b1;
+                        astate <= ADE;
+                        acnt <= 6'd0;
+                     end else
+                        ax_recv_rd_en <= 1'b0;
+                  end
+          ADE   : begin
+                     acnt <= acnt + 6'd1;
+                     ax_recv_rd_en <= 1'b1;
+                     if(acnt == 6'd30)
+                        astate <= ADE_L;
+                  end
+          ADE_L : begin
+                     if(txpos-1 == ctim)begin
+                        astate  <= ADE;
+                        acnt    <= 6'd0;
+                     end else begin
+                        astate  <= IDLE;
+                        clk_ade <= ctim;
+                        ax_recv_rd_en <= 1'b0;
+                     end
+                  end
+		endcase
+		
+	end
+end
+*/
+wire ade = adep;
+assign out_aux0 = {1'b1, auxd[0],VGA_VSYNC,VGA_HSYNC};
+assign out_aux1 = auxd[ 4:1];
+assign out_aux2 = auxd[ 8:5];
 wire   rx0_hsync;          // hsync data
 wire   rx0_vsync;          // vsync data
 wire   rx0_vde, rx0_pclkx10, rx0_serdesstrobe, rx0_pclkx2;
@@ -710,9 +813,9 @@ dvi_encoder_top dvi_tx0 (
     .blue_din    (blue_data),
     .green_din   (green_data),
     .red_din     (red_data),
-	  .aux0_din	   (out_aux0),
-	  .aux1_din	   (out_aux1),
-	  .aux2_din	   (out_aux2),
+	.aux0_din	   (out_aux0),
+	.aux1_din	   (out_aux1),
+	.aux2_din	   (out_aux2),
     .hsync       (VGA_HSYNC),
     .vsync       (VGA_VSYNC),
     .vde         (vde),
@@ -1019,10 +1122,10 @@ gmii_tx gmii_tx(
 
 always @ (*)
   case(DEBUG_SW[3:2])
-	  2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full , ax_send_empty, ax_recv_full,ax_recv_empty};
-    2'b01 : LED <= ctim[7:0];
-    2'b10 : LED <= {ax_recv_wr_en,init,vblnk,2'd0,ctim[10:8]};
-    2'b11 : LED <= {4'd0,rx0_reset,astate};
+	2'b00 : LED <= {ax_recv_rd_en,ax_recv_wr_en,ax_send_rd_en,ax_send_wr_en,ax_send_full, ax_send_empty, ax_recv_full,ax_recv_empty};
+    2'b01 : LED <= start_pos[ 7:0];
+    2'b10 : LED <= start_pos[15:8];
+    2'b11 : LED <= {ax_recv_wr_en,init,reset,adep,rx0_reset,astate};
 	endcase
 
 `define DEBUG
@@ -1037,16 +1140,15 @@ reg [15:0]mem;
 reg wr_en, send;
 reg test;
 
-always @ (posedge rx0_pclk)begin
+always @ (posedge pclk)begin
   if(RSTBTN) begin
 		xcnt <= 6'd0;
 		mem <= 16'd0;
 		data <= 8'd0;
 		send <= 1'b0;
 	end else begin
-	  test <= rx0_vsync;
-		if(rx0_ade & cnt_32 == 0) begin
-			mem[15:0] <= pos;
+		if(ade && (acnt == 6'd0)) begin
+			mem[15:0] <= start_pos;
       //mem[17:11] <= 7'd0;
       //mem[10:0]  <= {rx0_aux2, rx0_aux1, rx0_aux0[2]};
 			send <= 1'b1;
@@ -1056,16 +1158,16 @@ always @ (posedge rx0_pclk)begin
 			  wr_en <= 1'b1;
 			  data  <= 8'h0a;
 			  send  <= 1'b0;
-				xcnt  <= 6'd0;
+			  xcnt  <= 6'd0;
 		  end else if(xcnt == 6'd4) begin
 			  wr_en <= 1'b1;
 			  data  <= 8'h0d;
-				xcnt  <= 6'd7;
+			  xcnt  <= 6'd5;
 		  end else begin
 		    wr_en <= 1'b1;
-			  mem  <= {mem[11:0],4'd0};
-				data <= ascii(mem[15:12]);
-				xcnt  <= xcnt + 1;
+			mem  <= {mem[11:0],4'd0};
+			data <= ascii(mem[15:12]);
+			xcnt  <= xcnt + 1;
 		  end
 		end else begin
 		  wr_en <= 1'b0;
@@ -1135,5 +1237,14 @@ uart u0 (
 
 `endif
 
+
+assign JA[0] = RXDV;
+assign JA[1] = VGA_HSYNC;
+assign JA[2] = VGA_VSYNC;
+assign JA[3] = ax_recv_rd_en;
+assign JA[4] = ax_send_rd_en;
+assign JA[5] = fifo_read;
+assign JA[6] = ade;
+assign JA[7] = rx0_reset;
 
 endmodule
