@@ -108,17 +108,18 @@ always@(posedge clk125) begin
 				end
 			endcase
 		if(~rx_dv) begin
+      data_en     <=  1'd0;
 			rx_count    <= 11'd0;
 			eth_type    <= 16'h0;
-			ip_ver      <= 8'h0;
-			ipv4_proto  <= 8'h0;
+			ip_ver      <=  8'h0;
+			ipv4_proto  <=  8'h0;
 			ipv4_src    <= 32'h0;
 			ipv4_dst    <= 32'h0;
 			src_port    <= 16'h0;
 			dst_port    <= 16'h0;
-			packet_dv   <= 1'b0;
-			pre_en      <= 1'b0;
-			invalid     <= 1'b0;
+			packet_dv   <=  1'b0;
+			pre_en      <=  1'b0;
+			invalid     <=  1'b0;
 		end
 	end
 end
