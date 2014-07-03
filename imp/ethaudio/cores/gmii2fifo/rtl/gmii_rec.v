@@ -17,7 +17,7 @@ module gmii2fifo24#(
 	output reg         recv_en,
 	output wire        packet_en,
 	// AUX FIFO
-	output wire [24:0] aux_data_in,
+	output wire [34:0] aux_data_in,
 	output wire        aux_wr_en
 );
 
@@ -215,9 +215,9 @@ reg [7:0] tmp;
 reg [3:0] c9;
 reg       ax_wr_en;
 reg       aux_state;
-
+reg [9:0] auxy;
 assign aux_wr_en   = ax_wr_en;
-assign aux_data_in = {pos,daux};
+assign aux_data_in = {auxy,pos,daux};
 
 parameter AUXID = 2'b00;
 parameter AUX   = 2'b01;
@@ -234,6 +234,7 @@ always@(posedge clk125)begin
 		a_cnt     <=  6'd0;
 		daux      <=  9'd0;
 		pos       <= 16'd0;
+		auxy      <= 10'd0;
 	end else begin
 	  if(audio_en) begin
       case(aux_state)
@@ -243,6 +244,7 @@ always@(posedge clk125)begin
 					  aux_state  <= AUX;
 					  ax_wr_en   <= 1'b0;
 					  pos[15:8]  <= rxd;
+					  auxy       <= y_info[9:0];
 					  left       <= left + 1;
 			    end else begin
 					  ax_wr_en  <= 1'b0;
@@ -272,6 +274,8 @@ always@(posedge clk125)begin
 						//daux[ 7:0] <= rxd;
 					  case(c9)
 					    4'd0 : begin
+						           if(pos == 0)
+									   pos <= 30;
 						           daux[7:0] <= rxd;
 								  		 ax_wr_en  <= 1'b0;
 								  	 end
