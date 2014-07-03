@@ -1,4 +1,4 @@
-`define SERIAL_WCNT 'd10
+`define SERIAL_WCNT 'd100
 
 module uart (
   input wire clk,
