@@ -14,6 +14,7 @@ module gmii_top (
   input  wire        vsync,
   input  wire        v
 
+  output wire        ade,
   output wire [ 8:0] aux,
   output wire [15:0] video,  
 );
@@ -33,7 +34,7 @@ wire video_fifo_wr_en;
 
 /* Aux FIFO */
 wire ax_recv_wr_en;
-reg ax_recv_rd_en;
+wire ax_recv_rd_en;
 wire ax_recv_full, ax_recv_empty;
 wire ax_rx_rd_en ;
 wire [34:0] axdin;
@@ -58,10 +59,19 @@ gmii2fifo24 gmii2fifo24(
 	.aux_wr_en(ax_recv_wr_en)
 );
 
-//------------------------------------------------------------
-// FIFO
-//------------------------------------------------------------
-fifo29_32768 asfifo_recv (
+auxcont (
+  .pclk(pclk),
+  .sysrst(sysrst),
+  .tmds_rst(tmds_rst),
+	.vde(vde),
+  .no_video_hsync(no_video_hsync),
+  .auxy(axdout[34:25]), 
+  .ctim(axdout[24:10]), 
+  .ade(ade),
+  .ax_recv_rd_en(ax_recv_rd_en)
+);
+
+fifo29_32768 asfifo_video (
 	.rst(tmds_rst),
 	.wr_clk(rxclk), // GMII RX clock 125MHz
 	.rd_clk(pclk),  // TMDS clock 74.25MHz 
@@ -73,7 +83,7 @@ fifo29_32768 asfifo_recv (
 	.empty(video_empty)
 );
 
-fifo35 aux_recv(
+fifo35 asfifo_aux (
   .rst(tmds_rst | sysrst),
 	.wr_clk(rxclk),
 	.rd_clk(pclk),

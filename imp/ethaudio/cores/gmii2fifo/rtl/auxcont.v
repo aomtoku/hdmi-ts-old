@@ -9,10 +9,11 @@ module auxcont (
   input  wire [ 9:0] auxy, 
   input  wire [15:0] ctim, 
   output wire        ade,
+  output reg         ax_recv_rd_en
 );
 
 /* system rst */ 
-wire        rst = sysrst | tmds_rst;
+wire rst = sysrst | tmds_rst;
 
 /* AUX SFM */
 parameter FIRST  = 3'd0;
@@ -22,9 +23,6 @@ parameter IDLE   = 3'd3;
 parameter ADE    = 3'd4;
 parameter ADE_L  = 3'd5;
 parameter RECV   = 3'd6;
-
-wire        vde1st = (~firstvde & vde);
-wire vadx = init & vact &  ({video_en,vde_b} == 2'b10); // The count timing ADE periods
 
 reg [ 5:0] acnt;
 reg [ 2:0] astate;
@@ -36,31 +34,31 @@ reg        xinit;
 reg        firstvde, vdevde;
 reg        ax_ts_rd_en;
 
-always @ (posedge pclk)begin
-  if(rst)
-	  txpos <= 16'd0;
-  else begin
-	  if(vde)
-		  txpos <= 16'd0;
-      else
-		  txpos <= txpos + 16'd1;
-  end
-end
+wire   vde1st = ~firstvde & vde;
+wire   vadx   = init & vact &  ({video_en,vde_b} == 2'b10); // The count timing ADE periods
+assign ade    = adep; 
 
-always @ (posedge pclk)begin 
-  if(rst)begin
+/* txpos counts no vde periods */
+always @ (posedge pclk) begin
+  if(rst) begin
+    txpos <= 16'd0;
     vdevde   <= 1'b0;
     firstvde <= 1'b0;
   end else begin
     vdevde   <= vde;
+	  if(vde)
+      txpos <= 16'd0;
+    else
+      txpos <= txpos + 16'd1;
+
     if({vde,vdevde}==2'b01)
       firstvde <= 1'b1;
     if(txpos == 16'd2000)
       firstvde <= 1'b0;
   end
-end 
+end
 
-always@(posedge pclk)begin
+always @ (posedge pclk) begin
 	if(rst)begin
 		ax_recv_rd_en <=  1'b0;
 		astate        <=  3'd0; 
