@@ -1,0 +1,14 @@
+
+HDMI-TS
+345 Samples
+max/mean/median/stddev/min 60646.0/48485.6/51158.7/4630.0/37993.0 us
+
+Skype
+294 Samples
+max/mean/median/stddev/min 252434.0/188034.8/176825.3/24496.4/143016.0 us
+
+webRTC
+129 Samples
+max/mean/median/stddev/min 843098.0/469714.0/424232.0/54858.2/394329.0 us
+
+
