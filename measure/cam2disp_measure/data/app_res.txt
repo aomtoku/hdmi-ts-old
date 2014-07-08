@@ -1,4 +1,3 @@
-
 Caribration  (Direct LED to PhotoDiord)
 108 Samples
 max/mean/median/stddev/min 8.0/7.5/8.0/0.5/7.0 us
@@ -13,14 +12,22 @@ Skype
 294 Samples
 max/mean/median/stddev/min 252434.0/188034.8/176825.3/24496.4/143016.0 us
 
-webRTC
+webRTC(MacBookProOSX --> webRTC --> webRTC --> windows)
 129 Samples
 max/mean/median/stddev/min 843098.0/469714.0/424232.0/54858.2/394329.0 us
 
 dvts(dvcam --> dvts-send --> dvts-recv --> torinitoron)
-440 Samples
-max/mean/median/stddev/min 1234672.0/305616.1/311554.9/67823.6/1055.0 us
+434 Samples
+max/mean/median/stddev/min 1234672.0/309727.6/286658.0/58511.4/274335.0 us
 
 torinitron(dvcam --> torinitron)
 467 Samples
 max/mean/median/stddev/min 128458.0/115343.5/124236.9/13479.2/2307.0 us
+
+EagleEyeIII(EagleEyeIII --> Display Sony)
+473 Samples
+max/mean/median/stddev/min 353654.0/316416.3/333694.7/14461.7/285001.0 us
+
+Polycom(EagleEye --> Polycom HDX8000 --> Polycom RealPresence Group 500 --> Display Sony)
+475 Samples
+max/mean/median/stddev/min 333880.0/284842.4/299955.2/15092.1/248426.0 us
