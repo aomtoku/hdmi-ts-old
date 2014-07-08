@@ -1,4 +1,10 @@
 
+Caribration  (Direct LED to PhotoDiord)
+108 Samples
+max/mean/median/stddev/min 8.0/7.5/8.0/0.5/7.0 us
+483 Samples
+max/mean/median/stddev/min 11.0/9.6/10.1/0.5/9.0 us
+
 HDMI-TS
 345 Samples
 max/mean/median/stddev/min 60646.0/48485.6/51158.7/4630.0/37993.0 us
@@ -11,4 +17,10 @@ webRTC
 129 Samples
 max/mean/median/stddev/min 843098.0/469714.0/424232.0/54858.2/394329.0 us
 
+dvts(dvcam --> dvts-send --> dvts-recv --> torinitoron)
+440 Samples
+max/mean/median/stddev/min 1234672.0/305616.1/311554.9/67823.6/1055.0 us
 
+torinitron(dvcam --> torinitron)
+467 Samples
+max/mean/median/stddev/min 128458.0/115343.5/124236.9/13479.2/2307.0 us
