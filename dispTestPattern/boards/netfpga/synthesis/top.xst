@@ -1,0 +1,10 @@
+run
+-ifn top.prj
+-top top
+-ifmt MIXED
+-opt_mode SPEED
+-opt_level 2
+-ofn top.ngc
+-p xc5vtx240tff1759-2
+-register_balancing yes
+-signal_encoding user
